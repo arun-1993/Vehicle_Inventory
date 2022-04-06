@@ -21,7 +21,7 @@
       <div class="col-lg-3 col-md-6">
         <div class="about-content">
 		   <h6 class="text-white">About AutoTrack</h6>
-          <p>AutoTrack is your single stop for buying  used and fresh vehicles, all over India. AutoTrack provide everything you need to Buy a car for you and your family whether it is new or old ! </p>
+         <p>AutoTrack is your single stop for buying  used and fresh vehicles, all over India. AutoTrack provide everything you need to Buy a car for you and your family whether it is new or old ! </p>
         </div>
         
       </div>
@@ -31,9 +31,9 @@
          <ul>
 			<li><a href="listing.php?carbrand=Maruti Suzuki">Maruti Suzuki</a></li>
             <li><a href="listing.php?carbrand=Hyundai">Hyundai</a></li>
-            <li><a href="listing.php?carbrand=Tata">Tata Motors</a></li>
+            <li><a href="listing.php?carbrand=Ford">Ford</a></li>
             <li><a href="listing.php?carbrand=Kia">Kia</a></li>
-            <li><a href="listing.php?carbrand=Mahindra">Mahindra</a></li>
+            <li><a href="listing.php?carbrand=Honda">Honda</a></li>
 		</ul>
         </div>
       </div>
@@ -148,8 +148,7 @@
 <!-- jquery-ui -->
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <script type = "text/javascript" src = "js/jquery.datetimepicker.full.min.js"></script>
-<!-- select -->
-<script type="text/javascript" src="js/select/jquery-select.js"></script>
+
 <!-- revolution -->
 <script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>

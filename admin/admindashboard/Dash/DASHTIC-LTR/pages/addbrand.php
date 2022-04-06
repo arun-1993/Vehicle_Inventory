@@ -42,7 +42,7 @@ if(isset($_POST["brand_name"]))
 		else
 		{
 		?>
-		<script>alert("Please enter a Brand Name");</script>
+		<script>alert("Brand name must be filled out");</script>
 		<?php
 		
 		}

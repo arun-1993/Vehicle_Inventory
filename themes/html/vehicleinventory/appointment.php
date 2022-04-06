@@ -58,22 +58,25 @@ if($Signedin == false)
     $vehicle_result = mysqli_fetch_array($result);
     $vehicle = $vehicle_result['brand_name'].' '.$vehicle_result['model_name'];
 
-    $check_query = "SELECT * FROM appointment WHERE user_id = '$user' AND date(appointment_schedule) = date('$schedule') AND appointment_status = 'Upcoming'";
+    $check_query = "SELECT * FROM appointment WHERE user_id = '$user' AND date(appointment_schedule) = date('$schedule') AND appointment_status = 'Requested'";
+    // echo $check_query;
+    // die;
     $check_result = mysqli_query($conn, $check_query);
-
-    if(mysqli_num_rows($check_result) > 0)
+    $num = mysqli_num_rows($check_result);
+    if($num > 0)
     {
-      echo "<script>alert('You already have an appointment on that day. Please select a different day')</script>";
-      echo "<div class='alert alert-danger'>You already have an appointment on that day. Please select a different day</div>";
-	  echo "<script>window.location = 'single.php?vehicle=$vehicle_id';</script>";
+      ?>
+     <script> alert("Already have Today's appointment. Please select a different day")</script>
+      <script>window.location = 'single.php?vehicle=<?php echo $vehicle_id ?> ';</script>
+      <?php
     }
 
-    elseif($date <= date('Y-m-d'))
-    {
-      echo "<script>alert('The date you have selected is in the past. Please select a date after today unless you can time travel')</script>";
-      echo "<div class='alert alert-danger'>The date you have selected is in the past. Please select a date after today unless you can time travel</div>";
-	  echo "<script>window.location = 'single.php?vehicle=$vehicle_id';</script>";
-    }
+    // elseif($date <= date('Y-m-d'))
+    // {
+    //   echo "<script>alert('The date you have selected is in the past. Please select a date after today unless you can time travel')</script>";
+    //   echo "<div class='alert alert-danger'>The date you have selected is in the past. Please select a date after today unless you can time travel</div>";
+	  // echo "<script>window.location = 'single.php?vehicle=$vehicle_id';</script>";
+    // }
 
     else
     {
@@ -85,9 +88,9 @@ if($Signedin == false)
       {
         echo "<script>alert('Appointment scheduled for $schedule')</script>";
         echo "<div class='alert alert-success'>Appointment scheduled for $schedule</div>";
-    
-        $msg = "Dear $name,<br />We have received your request for an appointment for the viewing of the vehicle $vehicle on $date at $time.<br />You will receive a confirmation email when your appointment request has been accepted";
-        
+  
+        $msg = "Dear $name,<br> Your appointment has been requested for $vehicle on $date at $time. Soon you will receive confirmation when your appointment has been accepted. If you have questions or concerns before your session, kindly contact us. <br> Regards, <br> Team Autotrack.";
+
         include_once('mail/login_credentials.php');
         
         require_once('mail/vendor/autoload.php');

@@ -21,7 +21,7 @@
 									<div class="card-header">
 										<div class="card-title">
 										<h2>Exterior Color</h2>
-										<h5><a href="addcolor.php">ADD EXTERIOR COLOR</a></h5>
+										<h5><a href="addcolor.php" style="color:blue;">ADD EXTERIOR COLOR</a></h5>
 										</div>
 									</div>
 									<div class="card-body">

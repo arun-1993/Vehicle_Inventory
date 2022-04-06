@@ -21,7 +21,7 @@
 									<div class="card-header">
 										<div class="card-title">
 										<h2>Employee</h2>
-										<h5><a href="addemployee.php">Add Employee</a></h5>
+										<h5><a href="addemployee.php" style="color:blue;">Add Employee</a></h5>
 										</div>
 									</div>
 									<div class="card-body">

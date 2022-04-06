@@ -80,7 +80,7 @@
 
 
 
- <section class="login-form page-section-ptb">
+ <section class="login-form page-section-ptb" style="background-color:white;">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -89,12 +89,12 @@
            <h2>Login To Your Account</h2>
            <div class="separator"></div>
          </div><?php if($usernotexist==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>OOPS!</strong> Seems like You are not registerd with us
+  <strong>OOPS!</strong> Seems like You are not registerd with us!
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
          } ?>
          <?php if($missmatchedpassword==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>OOPS!</strong> Invalid Credential please Re-enter
+  <strong>OOPS!</strong> Invalid Credentials, please verify them and retry.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
          } ?>

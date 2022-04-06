@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         $queryupdate = "UPDATE user SET password = '$hashedpassword' WHERE email = '$email'" ;
         if(mysqli_query($conn,$queryupdate)){
-        $msg = "Your has been reset <br> new password is '$newpassword' ";
+        $msg = "Greetings, <br> Your password has been reset, new password is '$newpassword'. <br> Kindly, change your password once you login with generated password. <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
         $mail = new PHPMailer(true);
         
         try {
@@ -66,13 +66,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $mail->addAddress('riyavora16@gmail.com');
           
           $mail->isHTML(true);
-          $mail->Subject = 'Password Resetted';
+          $mail->Subject = ' Password has been reset successfully.';
           $mail->Body    = $msg;
           
           $mail->AltBody = 'Body in plain text for non-HTML mail clients';
           $mail->send();
           ?>
-  <script>alert('password has been changed check your inbox or spam folder');
+  <script>alert('Your new password sent to your registered email. Kindly, check your inbox or spam folder.');
 window.location = "index.php";</script>
 
 <?php
@@ -103,7 +103,7 @@ window.location = "index.php";</script>
            <h2>Forgot Password?</h2>
            <div class="separator"></div>
          </div><?php if($usernotexist==true){ echo '<div class="alert alert-danger" role="alert">
-  <strong>OOPS!</strong> Seems like You are not registerd with us
+  <strong>OOPS!</strong> Seems like You are not registerd with us!
   
 </div>';
          } ?>

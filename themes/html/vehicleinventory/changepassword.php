@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
             mysqli_query($conn,$query);
             ?>
 
-            <script>alert('Password Changed Succesfully');
+            <script>alert('Password Changed Successfully');
             window.location = "index.php";
 
 

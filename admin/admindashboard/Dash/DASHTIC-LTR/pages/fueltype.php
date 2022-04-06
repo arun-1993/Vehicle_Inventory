@@ -21,7 +21,7 @@
 									<div class="card-header">
 										<div class="card-title">
 										<h2>Fuel Type</h2>
-										<h5><a href="addfuel.php">ADD FUEL TYPE</a></h5>
+										<h5><a href="addfuel.php" style="color:blue;">ADD FUEL TYPE</a></h5>
 										</div>
 									</div>
 									<div class="card-body">

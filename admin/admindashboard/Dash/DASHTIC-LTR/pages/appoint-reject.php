@@ -12,13 +12,13 @@ if(isset($_GET['id']))
 	
 	if($result)
 	{
-			$sql = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id";
+			$sql = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN brand_master b JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.brand_id=b.brand_id and a.user_id=u.user_id";
 			$res = mysqli_query($conn,$sql);
 			$row =mysqli_fetch_array($res);
 			$email = $row['email'];
 			$date=date('y-m-d');
 			$model = $row['model_name'];
-			$msg = "<h3>Your Appointment For ".$model.". is rejected. Please login to review</h3>";
+			$msg = "<h3>Greetings, <br> Your Appointment For ".$model.". is rejected. Kindly, pick another day appointment. We would like to apology for the inconvenience. <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.</h3>";
 		
 include_once('mail/login_credentials.php');
   
@@ -40,15 +40,14 @@ include_once('mail/login_credentials.php');
     $mail->addAddress('arun0306.r@gmail.com');
     $mail->addAddress('jitendrabhavsar469@gmail.com');
     $mail->addAddress('riyavora16@gmail.com');
-	$mail->addAddress($email);
+	  $mail->addAddress($email);
     
     $mail->isHTML(true);
-    $mail->Subject = 'Test';
+    $mail->Subject = 'Appointment Rejected';
     $mail->Body    = 'Regarding to Your Appointment with AutoTrack'.$msg; 
     
     $mail->AltBody = 'Body in plain text for non-HTML mail clients';
     $mail->send();
-	
 	
     //echo "Mail has been sent successfully!";
   } catch (Exception $e) {

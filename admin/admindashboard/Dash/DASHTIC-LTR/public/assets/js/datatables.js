@@ -20,7 +20,8 @@ $(function(e) {
 			sSearch: '',
 			lengthMenu: '_MENU_',
 		},
-		"ordering": false
+		"ordering": false,
+		"aaSorting": []
 	});
 	$('#example2').DataTable({
 		responsive: true,

@@ -39,7 +39,7 @@
     {
 
         ?>
-        <script> alert("Username or mail already taken choose other one!");</script> 
+        <script> alert("Email or Username already exists");</script> 
         <?php
         
     }

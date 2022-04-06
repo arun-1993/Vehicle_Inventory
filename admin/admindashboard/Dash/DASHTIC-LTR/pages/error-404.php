@@ -26,6 +26,4 @@
 		<!-- Jquery-rating js-->
 		<script src="../public/assets/plugins/rating/jquery.rating-stars.js"></script>	
 	</body>
-
-<!-- Mirrored from codeigniter.spruko.com/Dashtic/DASHTIC-LTR/pages/error404 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Mar 2022 04:29:04 GMT -->
 </html>

@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 
 		if(mysqli_query($conn,$query))
 		{
-			echo "<script> alert('Details Updated Successfully'); </script>";
+			echo "<script> alert('Successfully Updated'); </script>";
 			echo '<script> window.location = "index.php" </script>';
 		}
 	}
@@ -92,7 +92,7 @@ if(isset($_GET['id']))
 										{
 										case "old_false":
 											echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-											<strong>Holy guacamole!</strong> The old password you entered was incorrect.
+											<strong>Holy guacamole!</strong> Invalid Current Password
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 											</button>
@@ -101,7 +101,7 @@ if(isset($_GET['id']))
 										
 										case "mismatch":
 											echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-											<strong>Holy guacamole!</strong> Your new password and confirmed password did not match.
+											<strong>Holy guacamole!</strong> Passwords did not match
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 											</button>
@@ -110,7 +110,7 @@ if(isset($_GET['id']))
 										
 										case "same":
 											echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-											<strong>Holy guacamole!</strong> Your new password was the same as your old password. Please use a new one.
+											<strong>Holy guacamole!</strong>New password was the same as your Current password. Please try another one.
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 											</button>
@@ -196,7 +196,7 @@ if(isset($_GET['id']))
 										
 										<div class="card-body">
 											<div class="form-group col-md-8" >
-											<label class="form-label">Old Password</label>
+											<label class="form-label">Current Password</label>
 											<input type="password" class="form-control" name="oldpassword">
 										</div>
 										<div class="form-group col-md-8">

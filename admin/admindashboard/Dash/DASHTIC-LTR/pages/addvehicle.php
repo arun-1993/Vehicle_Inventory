@@ -80,7 +80,7 @@ if(isset($_POST["submit"]))
 		else
 		{
 		?>
-		<script>alert("All fields except image are required!");</script>
+		<script>alert("All fields are required to be filled");</script>
 		<?php
 		
 		}

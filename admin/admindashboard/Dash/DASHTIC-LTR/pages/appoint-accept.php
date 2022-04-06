@@ -18,7 +18,8 @@ if(isset($_GET['id']))
 			$email = $row['email'];
 			$date=date('y-m-d');
 			$model = $row['model_name'];
-			$msg = "<h3>Your Appointment For ".$model.". is accepted. Please login to review</h3>";
+			$msg = "<h3>Your Appointment For ".$model." has been scheduled and confirmed.  This email is to let you know that your [Service name] appointment on $date has been confirmed. If you have questions or concerns before your session, kindly let us know in the contact us. <br> Regards, <br> Team Autotrack.</h3>";
+       
 		
 include_once('mail/login_credentials.php');
   
@@ -43,7 +44,7 @@ include_once('mail/login_credentials.php');
 	$mail->addAddress($email);
     
     $mail->isHTML(true);
-    $mail->Subject = 'Test';
+    $mail->Subject = 'Appointment Confirmation';
     $mail->Body    = 'Regarding to Your Appointment with AutoTrack'.$msg; 
     
     $mail->AltBody = 'Body in plain text for non-HTML mail clients';

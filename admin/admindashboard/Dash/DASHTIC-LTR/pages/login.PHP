@@ -1,5 +1,16 @@
-<?php include 'header.php'?>
+<?php include '_dbconnect.php'?>
+<head>
+		<!-- Title -->
+		<title>AutoTrack</title>
+<!--Favicon -->
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 
+<!-- Bootstrap css -->
+<link href="../public/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+<!-- Style css -->
+<link href="../public/assets/css/style.css" rel="stylesheet" />
+</head>
 
 <?php
     $usernotexist = false;
@@ -20,7 +31,7 @@
       if(password_verify($password,$row['password'])){
         ?>
         <?php
-        
+        session_start();
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $username;
 		$_SESSION['Userid'] = $row['user_id'];
@@ -75,10 +86,10 @@
 													<p class="text-muted">Sign In to  your admin account</p>
 												</div>
 <?php if($missmatchedpassword ==true){
-	echo '<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Invalid Credentials!</div>
+	echo '<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Invalid Username or Password</div>
 	'; }
 	elseif ($usernotexist == true) {
-		echo '<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Not registerd as an admin!</div>
+		echo '<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Not registered as an admin!</div>
 		'; }
 	
 	?>
@@ -110,15 +121,14 @@
 											</div>
 										</div>
 									</div>
-									<div class="text-center pt-4">
-										
+									<div class="text-center pt-4">										
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 		<!-- Jquery js-->
 		<?php include 'footer.php'?>
 	</body>

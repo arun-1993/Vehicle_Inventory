@@ -21,7 +21,7 @@
 									<div class="card-header">
 										<div class="card-title">
 										<h2>Model</h2>
-										<h5><a href="addmodel.php">ADD MODEL</a></h5>
+										<h5><a href="addmodel.php" style="color:blue;">ADD MODEL</a></h5>
 										</div>
 									</div>
 									<div class="card-body">
@@ -53,7 +53,7 @@
 														<td><?php echo $row['model_name']; ?></td>
 														<td>
 														<!--<form action="modeledit.php" method="post">
-															<input type="hidden" name="edit_id" value="<?php// echo $row['model_id']; ?>">
+															<input type="hidden" name="edit_id" value="// echo $row['model_id']; ?>">
 															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
 														</form>-->
 														<a href="modeledit.php?id=<?php echo $mid?>&name=<?php echo $name?>" class="btn btn-success">EDIT</a>

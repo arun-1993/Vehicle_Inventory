@@ -21,7 +21,7 @@
 									<div class="card-header">
 										<div class="card-title">
 										<h2>Brand</h2>
-										<h5><a href="addbrand.php">ADD BRAND</a></h5>
+										<h5><a href="addbrand.php" style="color:blue;">ADD BRAND</a></h5>
 										</div>
 									</div>
 									<div class="card-body">
