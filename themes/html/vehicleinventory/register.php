@@ -136,6 +136,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             </div>
           </div>
           <div class="mb-3">
+            <label class="form-label">Email *</label>
+            <input  class="form-control" type="email" placeholder="Enter your email" name="Email" required>
+          </div>
+          <div class="mb-3">
             <label class="form-label">Username* </label>
             <input  class="form-control" type="text" placeholder="Choose your user name" name="Username" required>
           </div>
@@ -148,10 +152,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             <label class="form-label">Confirm Password*</label>
             <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword" required>
           </div>
-          <div class="mb-3">
-            <label class="form-label">Email *</label>
-            <input  class="form-control" type="email" placeholder="Enter your email" name="Email" required>
-          </div>
+       
           
           <label class="form-label">Address</label>
           <textarea class="form-control" placeholder="Enter your Address" name="Address" required></textarea>
