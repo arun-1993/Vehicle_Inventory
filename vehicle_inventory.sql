@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2022 at 03:02 PM
+-- Generation Time: Apr 07, 2022 at 06:37 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -41,16 +41,17 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`appointment_id`, `user_id`, `vehicle_id`, `appointment_schedule`, `appointment_status`, `appointment_comments`) VALUES
-(1, 18, 10, '2022-04-27 13:16:00', 'Requested', 'Would like to see Ford Endevour in person'),
+(1, 18, 10, '2022-04-27 13:16:00', 'Upcoming', 'Would like to see Ford Endevour in person'),
 (2, 25, 16, '2022-05-13 16:46:00', 'Cancelled', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
 (3, 25, 16, '2022-04-19 10:46:00', 'Cancelled', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
 (17, 12, 11, '2022-05-16 15:55:00', 'Completed', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
-(18, 1, 8, '2022-04-26 14:04:00', 'Upcoming', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
-(19, 1, 20, '2022-04-20 14:04:00', 'Upcoming', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
-(20, 34, 4, '2022-04-27 16:11:00', 'Cancelled', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
-(21, 34, 3, '2022-04-17 14:11:00', 'Cancelled', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
-(22, 34, 4, '2022-05-03 12:31:00', 'Cancelled', 'new appointment'),
-(23, 34, 48, '2022-04-30 12:35:00', 'Upcoming', 'here I am rescheduling my appointment.');
+(23, 34, 48, '2022-04-30 12:35:00', 'Completed', 'here I am rescheduling my appointment.'),
+(24, 14, 58, '2022-05-02 17:10:00', 'Requested', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(25, 28, 46, '2022-04-22 17:12:00', 'Requested', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(26, 23, 11, '2022-04-12 17:14:00', 'Requested', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(27, 23, 11, '2022-04-12 17:15:00', 'Upcoming', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(28, 34, 59, '2022-04-22 17:52:00', 'Requested', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'),
+(29, 34, 10, '2022-04-15 18:37:00', 'Cancelled', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit');
 
 -- --------------------------------------------------------
 
@@ -270,10 +271,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`, `user_image`) VALUES
-(1, 1, 'Riya', 'Vora', 'riyaavora16@gmail.com', 'Riya16', '$2y$10$lowoE7ZW/8BeYna90bNQPe4vGdq9LcLjrL.1T2g6Egbnum/hjCuPe', 'Ahmedabad', 'upload2203281206.jpg'),
+(1, 1, 'Riya', 'Vora', 'riyaavora16@gmail.com', 'Riya16', '$2y$10$AwNfxcFEW/isxLf7aUhOhulv.mzBkt./ElojH0HSMYlU36FYGaSjG', 'Ahmedabad', 'upload2204056642.jpg'),
 (2, 1, 'Jitendra', 'Bhavsar', 'jitendrabhavsar469@gmail.com', 'Jitendra21', '$2y$10$rFIpAckKKTgnxXeuxLZWlu3.eBRzxSJPT8Bb3SxsBDTU01hadla32', 'Mumbai', 'upload220328165.jpg'),
 (3, 1, 'Arun', 'Ravindran', 'arun0306.r@gmail.com', 'Arun03', '$2y$10$0ktgM3SVwJ8INPfdSZjfDuy9r2dLbXIpSpRBT9PtFjrJ1vVsxq0IK', 'Pune', 'upload2203303204.jpg'),
-(4, 2, 'Bryce', 'Abraham', 'bryce@gmail.com', 'Bryce04', '$2y$10$Cqufk0Q9Y8zxVAPHKSQ9B.hQgVHEKJR1kwtyFFjiQydywuTZSh8G2', 'Egypt', 'upload2204042545.jpg'),
+(4, 2, 'Bryce', 'Abraham', 'bryce@gmail.com', 'Bryce04', '$2y$10$Cqufk0Q9Y8zxVAPHKSQ9B.hQgVHEKJR1kwtyFFjiQydywuTZSh8G2', 'Winnipeg', 'upload2204042545.jpg'),
 (5, 2, 'Miles', 'Allen', 'miles@gmail.com', 'Miles05', '$2y$10$XxNsyMnaRzYTzgUND.fo4.54x.fiDmkkC4UzTFUtPhyvfcPW3b8Im', 'Leeds', NULL),
 (11, 2, 'Saloni', 'Shah', 'saloni@gmail.com', 'Saloni07', '$2y$10$nWGWUPCDaGTUYS4ihDnC/uHuuZokqIplY43MPEOU68dYluV51KOFq', 'Colorado', NULL),
 (12, 3, 'Vatsal', 'Karia', 'vatsal@gmail.com', 'Vatsal12', '$2y$10$luA7ma9TN8mgoFwL.pEhiOHv9bJnocPr24ISdfU1xW/tUv9g1UsPu', 'Rajkot', NULL),
@@ -295,7 +296,8 @@ INSERT INTO `user` (`user_id`, `user_role_id`, `first_name`, `last_name`, `email
 (30, 3, 'Aangi', 'Shah', 'aangi@gmail.com', 'Aangi12', '$2y$10$AS6WjH4Ubz2YpCNTypNK9.eBZBOeREdiMs1mNCmpdujrmoku/3DZS', 'Ahmedabad', NULL),
 (32, 3, 'Aditi', 'Upadhyay', 'aditi@gmail.com', 'Aditi16', '$2y$10$beU0vyAqcfPAIO.nbP3BNuGuVoNnM09bk1jmmlY7sFoze0ehLnfu6', 'Malbourne', NULL),
 (33, 3, 'Tirth', 'Barot', 'tirth@gmail.com', 'Tirth27', '$2y$10$giPl68PD2tBePAL0os1ElOYHiWz9/XX8A2OYiPcFtWcpdrIn4/npa', 'Ahmedabad', NULL),
-(34, 3, 'Viraj', 'Modi', 'viraj@gmail.com', 'Viraj20', '$2y$10$kAtEbJQdkxqHKvhjTq5tjeskNaiK2YKNdgRYTCUvfox5VZCQT2Acy', 'Manitobaa', NULL);
+(34, 3, 'Viraj', 'Modi', 'viraj@gmail.com', 'Viraj20', '$2y$10$YYxK3nPEnkeK/nBNCsAgIe6CEzZOstR.G.h8uIlqd64AEdCR0tJCC', 'Manitobaa', NULL),
+(39, 2, 'Krusha', 'Shah', 'krusha@gmail.com', 'Krusha25', '$2y$10$aKoB7YkcaY2DHdJNS8Be1uKf5lCekwmu3QTxlc/0AvCoGBKX4s3..', 'Gandhinagar', 'avatardefault_92824.png');
 
 -- --------------------------------------------------------
 
@@ -411,7 +413,8 @@ INSERT INTO `vehicle_audit` (`vehicle_id`, `model_id`, `model_year`, `vehicle_pr
 (29, 8, 2010, 2100000, 'KMHWF35V5YA243476', 789999, '2022-04-01 05:27:07'),
 (31, 1, 2021, 670000, '5J6RE3H36BL031368', 0, '2022-04-01 06:01:27'),
 (33, 2, 2020, 752000, '2HGFA16516H592787', 0, '2022-04-01 06:09:32'),
-(61, 17, 2022, 210000, 'KMHWF35V5YA243430', 40000, '2022-04-04 12:30:08');
+(61, 17, 2022, 210000, 'KMHWF35V5YA243430', 40000, '2022-04-04 12:30:08'),
+(67, 1, 2021, 1200000, 'KMHWF35V5YA243479', 0, '2022-04-05 11:29:31');
 
 --
 -- Indexes for dumped tables
@@ -500,7 +503,7 @@ ALTER TABLE `vehicle_audit`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `appointment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `bodycolor`
@@ -512,7 +515,7 @@ ALTER TABLE `bodycolor`
 -- AUTO_INCREMENT for table `brand_master`
 --
 ALTER TABLE `brand_master`
-  MODIFY `brand_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `brand_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -530,7 +533,7 @@ ALTER TABLE `fuel_type`
 -- AUTO_INCREMENT for table `model_master`
 --
 ALTER TABLE `model_master`
-  MODIFY `model_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `model_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `role_master`
@@ -548,19 +551,19 @@ ALTER TABLE `transmission`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `vehicle_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `vehicle_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `vehicle_audit`
 --
 ALTER TABLE `vehicle_audit`
-  MODIFY `vehicle_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `vehicle_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- Constraints for dumped tables
