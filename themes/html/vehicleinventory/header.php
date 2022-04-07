@@ -145,6 +145,7 @@ function IND_number_format($number)
              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
              <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                 
+             <!-- <li><?php if($Signedin==true){ echo "<strong>Welcome!  </strong>".$_SESSION['Username'];}?></li> -->
              <li><?php if($Signedin==true){ echo "<strong>Welcome!  </strong>".$_SESSION['name'];}?></li>
            </ul>
         </div>
@@ -189,7 +190,7 @@ function IND_number_format($number)
 
                                <li><a href="listing.php?carbrand=Maruti Suzuki">Maruti Suzuki</a></li>
                                <li><a href="listing.php?carbrand=Hyundai">Hyundai</a></li>
-                                <li><a href="listing.php?carbrand=Tata">Tata Motors</a></li>
+                                <li><a href="listing.php?carbrand=Tata">Tata</a></li>
                                   <li><a href="listing.php?carbrand=Kia">Kia</a></li>
                               <li><a href="listing.php?carbrand=Ford">Ford</a></li>
                         
