@@ -6,7 +6,7 @@
   <div class="container">
      <div class="row text-center intro-title">
            <div class="col-md-6 text-md-start d-inline-block">
-             <h1 class="text-white">My Appointment Page</h1>
+             <h1 class="text-white">Appointments</h1>
            </div>
            <div class="col-md-6 text-md-end float-end">
              <ul class="page-breadcrumb">
@@ -24,8 +24,6 @@
       <table  class = "table table-hover table-bordered" >
                         <thead style = "background-color:#a52531; ">
                             <tr style="color:#ebf3fa;font-size:17px">
-								<!-- <th>Vehicle id</th> -->
-								<!-- <th>Username</th> -->
 								<th>Vehicle</th>
 								<th>Schedule</th>								
 								<th>Comments</th>	
@@ -44,8 +42,6 @@ $id = $_SESSION['userid'];
 		$aid=$row['appointment_id'];
 ?>
                             <tr style="color:black">														
-														<!-- <td><?php echo $row['vehicle_id']; ?></td>	 -->
-														<!-- <td><?php echo $row['username']; ?></td> -->
 														<td><?php echo $row['model_name']; ?></td>
 														<td><?php echo $row['appointment_schedule']; ?></td>														
 														<td><?php echo $row['appointment_comments']; ?></td>
