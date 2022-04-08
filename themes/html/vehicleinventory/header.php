@@ -9,9 +9,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <meta name="description" content="AutoTrack The Best Car Dealer Automotive Site" />
-<meta name="author" content="jitendrabhavsar" />
+<meta name="author" content="Arun Ravindran, Jitendra Bhavsar, Riya Vora" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>AutoTrack</title>
+
+<?php
+$page = basename($_SERVER['PHP_SELF']);
+$page = ucwords(explode('.',$page)[0]);
+?>
+<title>AutoTrack | <?php echo $page; ?></title>
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="images/favicon.ico" />
@@ -193,6 +198,7 @@ function IND_number_format($number)
                                 <li><a href="listing.php?carbrand=Tata">Tata</a></li>
                                   <li><a href="listing.php?carbrand=Kia">Kia</a></li>
                               <li><a href="listing.php?carbrand=Ford">Ford</a></li>
+                              <li><a href="listing.php">All Brands</a></li>
                         
 
                         </ul>

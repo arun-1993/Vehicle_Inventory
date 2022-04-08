@@ -12,7 +12,8 @@ if(isset($_GET['id']))
 	
 	if($result)
 	{
-			$sql = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN brand_master b JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.brand_id=b.brand_id and a.user_id=u.user_id";
+			$sql = "SELECT * FROM appointment a JOIN vehicle v JOIN model_master m JOIN brand_master b JOIN user u WHERE a.vehicle_id=v.vehicle_id AND v.model_id=m.model_id AND m.brand_id=b.brand_id AND a.user_id=u.user_id AND a.appointment_id=$id";
+      echo $sql;
 			$res = mysqli_query($conn,$sql);
 			$row =mysqli_fetch_array($res);
 			$email = $row['email'];

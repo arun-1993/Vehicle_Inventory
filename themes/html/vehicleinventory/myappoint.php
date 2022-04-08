@@ -19,17 +19,17 @@
 
 
 <section class="inner-service  page-section-ptb">
-  <div class="container">
+  <div class="container mt-3 table-responsive">
    <div class="row g-0" style = "border:1px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-      <table  class = "table table-bordered table-hover" >
+      <table  class = "table table-hover table-bordered" >
                         <thead style = "background-color:#a52531; ">
                             <tr style="color:#ebf3fa;font-size:17px">
-								<th>Vehicle id</th>
-								<th>Username</th>
-								<th>Model Name</th>
-								<th>Appointment DateTime</th>								
+								<!-- <th>Vehicle id</th> -->
+								<!-- <th>Username</th> -->
+								<th>Vehicle</th>
+								<th>Schedule</th>								
 								<th>Comments</th>	
-								<th>Appointment Status</th>
+								<th>Status</th>
 								<th>Action</th>
                             </tr>
                         </thead>
@@ -44,8 +44,8 @@ $id = $_SESSION['userid'];
 		$aid=$row['appointment_id'];
 ?>
                             <tr style="color:black">														
-														<td><?php echo $row['vehicle_id']; ?></td>	
-														<td><?php echo $row['username']; ?></td>
+														<!-- <td><?php echo $row['vehicle_id']; ?></td>	 -->
+														<!-- <td><?php echo $row['username']; ?></td> -->
 														<td><?php echo $row['model_name']; ?></td>
 														<td><?php echo $row['appointment_schedule']; ?></td>														
 														<td><?php echo $row['appointment_comments']; ?></td>

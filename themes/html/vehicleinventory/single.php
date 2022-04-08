@@ -122,7 +122,7 @@ car-details -->
                       </div>
                       <input type="hidden" name="vehicle_id" id="vehicle_id" value="<?php echo $_GET['vehicle']; ?>" />
                       <div class="d-grid">
-                        <button id="" name="submit" type="submit" value="Send" class="button red btn-block"> Send your message <i class="fa fa-spinner fa-spin fa-fw btn-loader" style="display: none;"></i></button>
+                        <button id="" name="submit" type="submit" value="Send" class="button red btn-block"> Request An Appointment <i class="fa fa-spinner fa-spin fa-fw btn-loader" style="display: none;"></i></button>
                       </div>
                     </div>
                   </form>

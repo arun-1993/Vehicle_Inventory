@@ -175,12 +175,23 @@ product-listing  -->
                   $query = explode('&', $query);
                   array_pop($query);
                   $query = implode('&', $query);
+                  echo $query;
                  }
                   ?>
-                  <?php echo "<a href='listing.php?$query&page=$page'>$page</a>"; ?>
+                  <?php
+                  if($_GET['page'] == $page)
+                  {
+                    echo "<a href='#' style = 'pointer-events: none; color: red;'>$page</a>";
+                  }
+
+                  else
+                  {
+                    echo "<a href='listing.php?$query&page=$page'>$page</a>";
+                  }
+                ?>
                 </li>
                  
-                <?php }?>
+                <?php } ?>
                 
                 </ul>
           </div>

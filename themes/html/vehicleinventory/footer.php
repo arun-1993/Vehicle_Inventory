@@ -232,7 +232,7 @@
         }
       }); /*ready*/
 
-      var page = '<?php echo basename($_SERVER['PHP_SELF']) ?>'
+      var page = '<?php echo basename($_SERVER['PHP_SELF']); ?>'
       if(page != 'index.php') {
         $(document).ready(function () {
           // alert(page);
@@ -242,4 +242,16 @@
           }, 'slow');
         });
       }
+
+      links = document.querySelectorAll("a")
+  links.forEach(function (item) {
+    item.addEventListener('click', function () {
+      //reset the color of other links
+      links.forEach(function (item) {
+        item.style.backgroundColor = '#fff'
+      })
+      // apply the style to the link
+      this.style.backgroundColor = '#ffcce9'
+    });
+  })
     </script>

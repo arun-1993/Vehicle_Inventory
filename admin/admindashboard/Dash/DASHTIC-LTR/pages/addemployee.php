@@ -23,13 +23,13 @@
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
-    $username = $_POST["username"];
+    $Username = $_POST["username"];
     $password = $_POST["password"];
     $confirmPassword = $_POST["confirmPassword"];
     $address = $_POST["address"];
 	$role = $_POST['role'];
 
-    $checkUsername = "SELECT * FROM `user` WHERE username = '$username'AND user_role_id in(1,2)";
+    $checkUsername = "SELECT * FROM `user` WHERE username = '$Username'AND user_role_id in(1,2)";
     $userexists =  mysqli_query($conn,$checkUsername);
     $checkUsermail = "SELECT * FROM `user` WHERE email = '$email'AND user_role_id in(1,2)";
     $mailexists = mysqli_query($conn,$checkUsermail);
@@ -51,14 +51,14 @@
 
 
         $insertinfo = "INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` ) 
-        VALUES ($role, '$firstname', '$lastname', '$email', '$username', '$hashedpassword', '$address','avatardefault_92824.png')";
+        VALUES ($role, '$firstname', '$lastname', '$email', '$Username', '$hashedpassword', '$address','avatardefault_92824.png')";
         mysqli_query($conn,$insertinfo);
         $error = mysqli_error($conn);
-        echo "$error";
+        
         ?>
         
 		   
-        
+        <script>window.location = 'employee.php';</script>
       <?php
         
        
@@ -101,27 +101,27 @@
 												<form method="POST" action="" enctype="multipart/form-data" id ="form">
 												<div class="form-group">
 													<label class="form-label">First Name</label>
-													<input type="text" class="form-control" name="firstname" placeholder="Enter First Name" required>
+													<input type="text" class="form-control" name="firstname" placeholder="Enter First Name" value="<?php echo @$firstname; ?>" required>
 												</div>
 												<div class="form-group">
 													<label class="form-label">Last Name</label>
-													<input type="text" class="form-control" name="lastname" placeholder="Enter Lasr Name" required>
+													<input type="text" class="form-control" name="lastname" placeholder="Enter Last Name" value="<?php echo @$lastname; ?>" required>
 												</div>	
 												<div class="form-group">
 													<label class="form-label">Username</label>
-													<input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+													<input type="text" class="form-control" name="username" placeholder="Enter Username" value="<?php echo @$Username; ?>" required>
 												</div>	
 												<div class="form-group">
 													<label class="form-label">Email</label>
-													<input type="email" class="form-control" name="email" placeholder="Enter Email" required>
+													<input type="email" class="form-control" name="email" placeholder="Enter Email" value="<?php echo @$email; ?>" required>
 												</div>	
 												<div class="form-group">
 													<label class="form-label">Role</label>
-													<input type="text" class="form-control" placeholder = "1-superAdmin 2- Admin" name="role" required>
+													<input type="text" class="form-control" placeholder = "1-superAdmin 2- Admin" name="role" value="<?php echo @$role; ?>" required>
 												</div>	
 												<div class="form-group">
 													<label class="form-label">Password</label>
-													<input type="password" class="form-control" name="password" placeholder="Enter Password" required id ="password">
+													<input type="password" class="form-control" id ="password" name="password" placeholder="Enter Password" required>
 													<span style="color:red" id = "error"></span>
 												</div>
 												<div class="form-group">
@@ -130,7 +130,7 @@
 												</div>
 												<div class="form-group">
 													<label class="form-label">Address</label>
-													<textarea class="form-control" name="address" placeholder="Enter Address" required></textarea>
+													<textarea class="form-control" name="address" placeholder="Enter Address" required><?php echo @$address; ?></textarea>
 												</div>
 																									
 											</div>
