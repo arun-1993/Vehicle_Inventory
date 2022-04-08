@@ -232,18 +232,14 @@
         }
       }); /*ready*/
 
-
-      function signout(){
-        session_destroy();
-        window.location = "index.php";
-
-
+      var page = '<?php echo basename($_SERVER['PHP_SELF']) ?>'
+      if(page != 'index.php') {
+        $(document).ready(function () {
+          // alert(page);
+          // Handler for .ready() called.
+          $('html, body').animate({
+            scrollTop: $('#scroll_anchor').offset().top
+          }, 'slow');
+        });
       }
-
-      $(document).ready(function () {
-        // Handler for .ready() called.
-        $('html, body').animate({
-          scrollTop: $('#scroll_anchor').offset().top
-        }, 'slow');
-      });
     </script>

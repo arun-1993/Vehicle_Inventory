@@ -273,12 +273,12 @@ $result_year = mysqli_query($conn, $query_year);
  <!--=================================
  form -->
 
-<section class="search-block find-car bg-1 bg-overlay-black-70 page-section-pt">
+<section class="search-block find-car bg-1 bg-overlay-black-70 page-section-pt" id="vehicle_search">
   <div class="container " id = "search">
   <div class="row">
     <div class="col-md-12">
       <div class="section-title text-start">
-         <h2 class="text-white">FIND A DREAM CAR </h2>
+         <h2 class="text-white">FIND YOUR DREAM CAR </h2>
          <div class="separator"></div>
       </div>
     </div>
@@ -587,7 +587,7 @@ $result2 = mysqli_query($conn, $query2);
     {
         var brand = form.brand.options[form.brand.options.selectedIndex].value;
   
-        self.location = '?brand=' + brand + '#search_form';
+        self.location = '?brand=' + brand + '#vehicle_search';
     }
   
     function fetch_years(form)
@@ -595,7 +595,7 @@ $result2 = mysqli_query($conn, $query2);
         var brand = form.brand.options[form.brand.options.selectedIndex].value;
         var model = form.model.options[form.model.options.selectedIndex].value;
   
-        self.location = '?brand=' + brand + '&model=' + model + '#search_form';
+        self.location = '?brand=' + brand + '&model=' + model + '#vehicle_search';
     }
     </script>
   </body>
