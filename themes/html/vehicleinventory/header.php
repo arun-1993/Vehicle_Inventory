@@ -189,7 +189,7 @@ function IND_number_format($number)
 
             <li><a href="listing.php"> Cars <i class="fa fa-angle-right fa-indicator"></i> </a>
                          <ul class="drop-down-multilevel">
-                               <li><a href="#">Popular Brands <i class="fa fa-angle-right fa-indicator"></i> </a>
+                               <li><a href="#" style = "pointer-events:none">Popular Brands <i class="fa fa-angle-right fa-indicator"></i> </a>
                                <ul class="drop-down-multilevel">
 
 
@@ -202,7 +202,7 @@ function IND_number_format($number)
                         
 
                         </ul>
-                        <li><a href="#">Popular Cars<i class="fa fa-angle-right fa-indicator"></i></a>
+                        <li><a href="#" style = "pointer-events:none">Popular Cars<i class="fa fa-angle-right fa-indicator"></i></a>
                   
                     <ul class="drop-down-multilevel">
 
