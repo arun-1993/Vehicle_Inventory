@@ -203,16 +203,16 @@ car-details  -->
   
     var x = document.getElementById("appointment");
     
-        if (x.style.display === "none") {
+    if (x.style.display === "none") {
       x.style.display = "block";
     } else {
       x.style.display = "none";
     }
     x.scrollIntoView({
-          block: 'start',
-          behavior: 'smooth',
-          inline: 'start'
-        });
+      block: 'start',
+      behavior: 'smooth',
+      inline: 'start'
+    });
 
     
     <?php } ?>
