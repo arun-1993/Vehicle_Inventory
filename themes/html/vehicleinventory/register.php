@@ -85,9 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 ?>
 
 
-<!--=================================
- header -->
-
 
 <!--=================================
  inner-intro -->
@@ -108,7 +105,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 
 <!--=================================
- register-form  -->
+ register-form-start  -->
 
  <section class="register-form page-section-ptb">
   <div class="container">
@@ -168,7 +165,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
   </section>
 <!--=================================
- register-form  -->
+ register-form-end  -->
 
 <script>
  

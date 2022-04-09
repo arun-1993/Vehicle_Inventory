@@ -11,7 +11,7 @@
 <meta name="description" content="AutoTrack The Best Car Dealer Automotive Site" />
 <meta name="author" content="Arun Ravindran, Jitendra Bhavsar, Riya Vora" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
+  <!-- Getting current page title -->
 <?php
 $page = basename($_SERVER['PHP_SELF']);
 $page = ucwords(explode('.',$page)[0]);
@@ -71,6 +71,9 @@ $page = ucwords(explode('.',$page)[0]);
 
 <!--=================================
   loading -->
+
+
+  <!-- Starting session -->
 <?php
 
     session_start();
@@ -160,7 +163,7 @@ function IND_number_format($number)
 </div>
 
 <!--=================================
- mega menu -->
+    menu -->
 
 <div class="menu">
   <!-- menu start -->
@@ -178,7 +181,7 @@ function IND_number_format($number)
           </ul>
           <!-- menu links -->
           <ul class="menu-links">
-              <!-- active class -->
+              
             <li class=""><a href="index.php"> Home </a>
                 
 
@@ -231,13 +234,16 @@ function IND_number_format($number)
 			
             <li><a href="contactus.php"> Contact Us</a>            
             </li>
+
+        <!-- checking logged in or not -->
+
 <?php if (isset($_SESSION['Loggedin'])== true)
 				
 				{
 					?>
 				<li><a href="javascript:void(0)">My Account <i class="fa fa-angle-down fa-indicator"></i></a>
 				<ul class="drop-down-multilevel">
-					<li><a href="myappoint.php"> My Appointment</a></li>
+					<li><a href="myappointment.php"> My Appointment</a></li>
 					<li><a href="editprofile.php?Username=<?php echo $_SESSION['Username'];?>"> Edit Profile</a></li>
 					<li><a href="logout.php?loc='. $_SERVER['REQUEST_URI']. '" > Sign Out</a></li>
 				</ul>

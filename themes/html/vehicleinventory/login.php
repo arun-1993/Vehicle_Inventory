@@ -14,7 +14,7 @@
  inner-intro -->
 
  <?php
-    $usernotexist = false;
+    $usernotexist = false; 
     $missmatchedpassword = false;
 
     if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -24,24 +24,22 @@
       $password = $_POST["password"]; 
     
     
-      $sql = "SELECT * FROM `user` WHERE username = '$username' or email = '$username' AND  user_role_id = 3";
-      $result = mysqli_query($conn,$sql);
-      $number = mysqli_num_rows($result);
+      $selectuserquery = "SELECT * FROM `user` WHERE username = '$username' or email = '$username' AND  user_role_id = 3";
+      $result = mysqli_query($conn,$selectuserquery);
+      $number = mysqli_num_rows($result); // fetches number of row in result
       if($number==1)
       { 
         while($row = mysqli_fetch_assoc($result)){
         if(password_verify($password,$row['password'])){
-          ?>
-          <?php
-          // session_start();
+          
           $_SESSION['Loggedin'] = true;
           $_SESSION['Username'] = $row['username'];
           $_SESSION['userid'] = $row['user_id'];
           $_SESSION['email'] = $row['email'];
           $_SESSION['name'] = $row['first_name'].' '.$row['last_name'];
           ?>
+
           <script>
-         
           <?php if(isset($_GET['loc'])) : ?>
             window.location= "<?php echo $_GET['loc']; ?>";
           <?php else : ?>
@@ -75,10 +73,7 @@
   ?>
 
 <!--=================================
- login-form  -->
-
-
-
+ login-form-start  -->
 
  <section class="login-form page-section-ptb" style="background-color:white;">
   <div class="container">
@@ -89,14 +84,14 @@
            <h2>Login To Your Account</h2>
            <div class="separator"></div>
          </div><?php if($usernotexist==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>OOPS!</strong> Seems like You are not registerd with us!
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
+                                                    <strong>OOPS!</strong> Seems like You are not registerd with us!
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>';
          } ?>
          <?php if($missmatchedpassword==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>OOPS!</strong> Invalid Credentials, please verify them and retry.
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
+                                                    <strong>OOPS!</strong> Invalid Credentials, please verify them and retry.
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>';
          } ?>
          
 </div>
@@ -134,12 +129,7 @@
   </section>
 
 <!--=================================
- login-form  -->
-
-
-<!--=================================
- footer -->
-
+ login-form-end  -->
 <?php include 'footer.php';?>
 </body>
 </html>

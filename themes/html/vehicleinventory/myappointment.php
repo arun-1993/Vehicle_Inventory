@@ -32,15 +32,15 @@
                             </tr>
                         </thead>
                         <tbody>
-<?php
-$id = $_SESSION['userid'];
+					<?php
+					$id = $_SESSION['userid'];
 
-	$sql = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id AND u.user_role_id = 3 AND u.user_id = $id  ORDER BY appointment_id DESC ";
-	$result = mysqli_query($conn,$sql);
-	while($row=mysqli_fetch_assoc($result))
-	{
-		$aid=$row['appointment_id'];
-?>
+						$selectquery = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id AND u.user_role_id = 3 AND u.user_id = $id  ORDER BY appointment_id DESC ";
+						$result = mysqli_query($conn,$selectquery);
+						while($row=mysqli_fetch_assoc($result))
+						{
+							$aid=$row['appointment_id'];
+					?>
                             <tr style="color:black">														
 														<td><?php echo $row['model_name']; ?></td>
 														<td><?php echo $row['appointment_schedule']; ?></td>														
@@ -82,20 +82,17 @@ $id = $_SESSION['userid'];
 
 											</td>
 													</tr>
-<?php
-	}
-?>	
-                        </tbody>
-                    </table>
+									<?php
+										}
+									?>	
+                        		</tbody>
+                    	</table>
         
         
-       </div>
-   </div>
+       						</div>
+						</div>
 </section>
 
-
-<!--=================================
- footer -->
 
 <?php include 'footer.php' ?></body>
 </html>

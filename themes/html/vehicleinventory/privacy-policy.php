@@ -82,8 +82,6 @@ privacy-policy  -->
 privacy-policy  -->
 
 
-<!--=================================
- footer -->
 
 <?php include 'footer.php';
 ?></body>

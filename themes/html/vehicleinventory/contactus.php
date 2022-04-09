@@ -4,8 +4,6 @@ use PHPMailer\PHPMailer\Exception;
 
  ?>
 
-<!--=================================
- header -->
 
 
 <!--=================================
@@ -31,10 +29,6 @@ use PHPMailer\PHPMailer\Exception;
 
 
  <?php
-
-
- 
-//  require 'vendor/autoload.php';
 
  if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -74,7 +68,7 @@ use PHPMailer\PHPMailer\Exception;
     
     $mail->AltBody = 'Body in plain text for non-HTML mail clients';
     $mail->send();
-    //echo "Mail has been sent successfully!";
+
 	?>
 	
 	<script> window.location = 'index.php' </script>
@@ -91,7 +85,7 @@ use PHPMailer\PHPMailer\Exception;
 
 
 <!--=================================
- contact -->
+ contact-us form start  -->
 
 <section class="contact-2 page-section-ptb ">
   <div class="container">
@@ -180,11 +174,11 @@ use PHPMailer\PHPMailer\Exception;
 </section>
 
 <!--=================================
- contact -->
+ contact-us form End -->
 
 
 <!--=================================
- contact-map -->
+ contact-map-start -->
 
  <section class="contact-map">
   <div class="container-fluid">
@@ -193,12 +187,11 @@ use PHPMailer\PHPMailer\Exception;
  </section>
 
 <!--=================================
- contact-map -->
+ contact-map -end -->
 
 
-<!--=================================
- footer -->
-
-<?php include 'footer.php';?>
+ 
+  <?php include 'footer.php';?>
+  
 </body>
 </html>

@@ -6,15 +6,15 @@
 
     if(isset($_GET['id'])){
 
-        $id = $_GET['id'];
-        echo $id;
+        $appointmentid = $_GET['id'];
+        // echo $appointmentid;
         
-        $query = "update `appointment` set appointment_status='Cancelled' where appointment_id = '".$id."'";
+        $query = "update `appointment` set appointment_status='Cancelled' where appointment_id = '".$appointmentid."'";
         
         if(mysqli_query($conn,$query)){
 
             ?>
-        <script>window.location = "myappoint.php";</script>
+        <script>window.location = "myappointment.php";</script>
             <?php
         }
 

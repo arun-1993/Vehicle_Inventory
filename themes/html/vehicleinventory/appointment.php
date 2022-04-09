@@ -131,7 +131,7 @@ if($Signedin == false)
         echo "<div class='alert alert-danger'>Appointment not scheduled ".mysqli_error($conn)."</div>";
       }
     }
-    echo "<script>window.location='myappoint.php';</script>";
+    echo "<script>window.location='myappointment.php';</script>";
 }
   
 ?>

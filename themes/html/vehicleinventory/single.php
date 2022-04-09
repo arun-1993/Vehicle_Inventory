@@ -3,10 +3,10 @@
 
 $vehicleid = $_GET['vehicle'];
 
-$query1 = "SELECT * FROM vehicle LEFT JOIN model_master ON vehicle.`model_id` = model_master.`model_id` LEFT JOIN brand_master ON model_master.`brand_id` = brand_master.`brand_id` LEFT JOIN fuel_type ON fuel_type.`fuel_type_id` = vehicle.`fuel_type_id` LEFT JOIN transmission ON transmission.`transmission_id` = vehicle.`transmission_id` LEFT JOIN bodycolor ON bodycolor.`color_id` = vehicle.`exterior_color`  where `vehicle_id`=$vehicleid";  
-$result1 = mysqli_query($conn, $query1);  
-$row1 = mysqli_fetch_array($result1);
-if(!$row1){
+$selectvehiclequery = "SELECT * FROM vehicle LEFT JOIN model_master ON vehicle.`model_id` = model_master.`model_id` LEFT JOIN brand_master ON model_master.`brand_id` = brand_master.`brand_id` LEFT JOIN fuel_type ON fuel_type.`fuel_type_id` = vehicle.`fuel_type_id` LEFT JOIN transmission ON transmission.`transmission_id` = vehicle.`transmission_id` LEFT JOIN bodycolor ON bodycolor.`color_id` = vehicle.`exterior_color`  where `vehicle_id`=$vehicleid";  
+$resultvehiclequery = mysqli_query($conn, $selectvehiclequery);  
+$vehiclerow = mysqli_fetch_array($resultvehiclequery);
+if(!$vehiclerow){
 include 'error-404.php';
 die;
 }
@@ -24,7 +24,7 @@ $result2 = mysqli_query($conn, $query2);
   <div class="container">
      <div class="row text-center intro-title">
            <div class="col-md-6 text-md-start d-inline-block">
-             <h1 class="text-white"><?php echo $row1['brand_name']. '&nbsp&nbsp'. $row1['model_name']?> </h1>
+             <h1 class="text-white"><?php echo $vehiclerow['brand_name']. '&nbsp&nbsp'. $vehiclerow['model_name']?> </h1>
            </div>
            <div class="col-md-6 text-md-end float-end">
              <ul class="page-breadcrumb">
@@ -46,12 +46,12 @@ car-details -->
   <div class="container">
     <div class="row">
      <div class="col-md-9">
-       <h3><?php echo $row1['brand_name'].'&nbsp&nbsp'. $row1['model_name']?></h3>
-          <!-- <p> <?php echo $row1['vehicle_description'];?></p> -->
+       <h3><?php echo $vehiclerow['brand_name'].'&nbsp&nbsp'. $vehiclerow['model_name']?></h3>
+          <!-- <p> <?php echo $vehiclerow['vehicle_description'];?></p> -->
       </div>
      <div class="col-md-3">
       <div class="car-price text-md-end">
-         <strong><?php echo IND_money_format($row1['vehicle_price']); ?></strong>
+         <strong><?php echo IND_money_format($vehiclerow['vehicle_price']); ?></strong>
          <span>Plus Taxes & Licensing</span>
        </div>
       </div>
@@ -61,7 +61,7 @@ car-details -->
      <div class="col-md-6">
         <div class="slider-slick">
           <div class=" slider-for detail--r-gallery">
-               <img class="img-fluid" src="images/car/<?php echo $row1['vehicle_image']; ?>" alt="">
+               <img class="img-fluid" src="images/car/<?php echo $vehiclerow['vehicle_image']; ?>" alt="">
             </div>
             <button class="button red float mt-4" id="appointment_button" onclick="myfunction();">Book An Appointment</button>
          </div>
@@ -72,16 +72,16 @@ car-details -->
           <div class="details-block details-weight">
             <h5>SPECIFICATIONS</h5>
             <ul>
-              <li> <span>Make</span> <strong class="text-end"><?php echo $row1['brand_name']?></strong></li>
-              <li> <span>Model</span> <strong class="text-end"><?php echo $row1['model_name']?></strong></li>
-              <li> <span>Registration date </span> <strong class="text-end"><?php echo $row1['model_year']?></strong></li>
-              <li> <span>Condition</span> <strong class="text-end"><?php echo $row1['kms_driven'] == 0 ? 'New' : 'Used'; ?></strong></li>
-              <?php if ($row1['kms_driven'] > 0) : ?>
-              <li> <span>Distance Driven</span> <strong class="text-end"><?php echo IND_number_format($row1['kms_driven']). ' km'; ?></strong></li>
+              <li> <span>Make</span> <strong class="text-end"><?php echo $vehiclerow['brand_name']?></strong></li>
+              <li> <span>Model</span> <strong class="text-end"><?php echo $vehiclerow['model_name']?></strong></li>
+              <li> <span>Registration date </span> <strong class="text-end"><?php echo $vehiclerow['model_year']?></strong></li>
+              <li> <span>Condition</span> <strong class="text-end"><?php echo $vehiclerow['kms_driven'] == 0 ? 'New' : 'Used'; ?></strong></li>
+              <?php if ($vehiclerow['kms_driven'] > 0) : ?>
+              <li> <span>Distance Driven</span> <strong class="text-end"><?php echo IND_number_format($vehiclerow['kms_driven']). ' km'; ?></strong></li>
               <?php endif; ?>
-              <li> <span>Exterior Color</span> <strong class="text-end"><?php echo $row1['color']?></strong></li>
-              <li> <span>Seating capacity</span> <strong class="text-end"><?php echo $row1['seating_capacity']?></strong></li>
-              <li> <span>Fuel Type</span> <strong class="text-end"><?php echo $row1['fuel_type']?></strong></li>
+              <li> <span>Exterior Color</span> <strong class="text-end"><?php echo $vehiclerow['color']?></strong></li>
+              <li> <span>Seating capacity</span> <strong class="text-end"><?php echo $vehiclerow['seating_capacity']?></strong></li>
+              <li> <span>Fuel Type</span> <strong class="text-end"><?php echo $vehiclerow['fuel_type']?></strong></li>
             </ul>
            </div>
            </div>
@@ -99,7 +99,7 @@ car-details -->
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="general-information" role="tabpanel" aria-labelledby="general-information-tab">
                   <h6>General Information</h6>
-                  <p><?php echo $row1['general_description'];?>
+                  <p><?php echo $vehiclerow['general_description'];?>
                   </p>
                 </div>
               </div>
@@ -109,7 +109,7 @@ car-details -->
               <div class="col-lg-8 col-sm-12 mb-lg-0 mb-1">
                 
               
-                <div class="gray-form row">
+                <div class="gray-form row" id = ''>
                   <form class="form-horizontal" id="contactform" role="form" method="post" action="appointment.php">
                     <h6>Schedule an appointment today for an in person viewing</h6>
                     <div class="contact-form">
@@ -205,6 +205,7 @@ car-details  -->
     } else {
       x.style.display = "none";
     }
+    
     <?php } ?>
   }
 </script>

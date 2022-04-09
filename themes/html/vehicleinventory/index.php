@@ -1,5 +1,7 @@
 <?php include 'header.php'; ?>
 
+<!-- Search form queries -->
+
 <?php
 
 @$brand = $_GET['brand'];
@@ -214,15 +216,8 @@ $result_year = mysqli_query($conn, $query_year);
 <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div> </div>
 </div>
 
-<!--=================================
- rev slider -->
 
-
-<!--=================================
-
- quick-links -->
-
- 
+ <!-- Quick access links  -->
 
  <section class="quick-links white-bg">
   <div class="container  ">
@@ -266,12 +261,12 @@ $result_year = mysqli_query($conn, $query_year);
 </section>
 
 <!--=================================
- quick-links -->
+       End quick-links -->
 
  
 
  <!--=================================
- form -->
+          form start -->
 
 <section class="search-block find-car bg-1 bg-overlay-black-70 page-section-pt" id="vehicle_search">
   <div class="container " id = "search">
@@ -292,7 +287,7 @@ $result_year = mysqli_query($conn, $query_year);
               <div class="selected-box">
                 <select data-target="#search_form" class="selectpicker" name="brand" id="brand" onchange="fetch_models(this.form)">
                   <option value="0"> --Brand-- </option>
-                  <?php while($row = mysqli_fetch_array($result_brand)) : ?>
+                  <?php while($row = mysqli_fetch_array($result_brand)) : ?> <!-- stores brand result into arry  -->
                     <?php if($row['brand_id'] == $brand) : ?>
                     <option value="<?php echo $row['brand_id']; ?>" selected><?php echo $row['brand_name']; ?></option>
                     <?php else : ?>
@@ -307,7 +302,7 @@ $result_year = mysqli_query($conn, $query_year);
               <div class="selected-box">
                <select class="selectpicker" name="model" id="model" onchange="fetch_years(this.form)">
                 <option value="0"> --Model-- </option>
-                <?php while($row = mysqli_fetch_array($result_model)) : ?>
+                <?php while($row = mysqli_fetch_array($result_model)) : ?>  <!-- stores model result into arry  -->
                   <?php if($row['model_id'] == $model) : ?>
                   <option value="<?php echo $row['model_id']; ?>" selected><?php echo $row['model_name']; ?></option>
                   <?php else : ?>
@@ -322,7 +317,7 @@ $result_year = mysqli_query($conn, $query_year);
              <div class="selected-box">
                <select class="selectpicker" name="year" id="year">
                 <option value="0"> --Year-- </option>
-                <?php while($row = mysqli_fetch_array($result_year)) : ?>
+                <?php while($row = mysqli_fetch_array($result_year)) : ?>  <!-- stores year result into arry  -->
                 <option value="<?php echo $row['model_year']; ?>"><?php echo $row['model_year']; ?></option>
                 <?php endwhile; ?>
                </select>
@@ -370,16 +365,16 @@ $result_year = mysqli_query($conn, $query_year);
   </section>
 
  <!--=================================
- form -->
+          end form -->
 <?php  
 
-$query2 = "SELECT * FROM vehicle JOIN model_master USING(model_id) JOIN brand_master USING(brand_id) JOIN transmission USING(transmission_id) ORDER BY RAND() LIMIT 5";
-$result2 = mysqli_query($conn, $query2);
+$feturedcarquery = "SELECT * FROM vehicle JOIN model_master USING(model_id) JOIN brand_master USING(brand_id) JOIN transmission USING(transmission_id) ORDER BY RAND() LIMIT 5";
+$feturedcarresult = mysqli_query($conn, $feturedcarquery);
 
 ?>
 
  <!--=================================
- feature-car -->
+ feature-car section start -->
 
 <section class="feature-car white-bg page-section-ptb">
   <div class="container">
@@ -395,31 +390,31 @@ $result2 = mysqli_query($conn, $query2);
    <div class="row">
    <div class="col-md-12">
     <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="20">
-    <?php while($row2 = mysqli_fetch_array($result2)) : ?>
+    <?php while($feturedcarrow = mysqli_fetch_array($feturedcarresult)) : ?>  <!-- retrives result array -->
     <div class="item">
         <div class="car-item car-item-4 text-center">
              <div class="car-image">
-               <img class="img-fluid" src="images/car/<?php echo $row2['vehicle_image']; ?>" alt="" style = "height:200px;width:auto">
+               <img class="img-fluid" src="images/car/<?php echo $feturedcarrow['vehicle_image']; ?>" alt="" style = "height:200px;width:auto">
                <div class="car-overlay-banner">
                 <ul>
-                  <li><a href="single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"><i class="fa fa-link"></i></a></li>
+                  <li><a href="single.php?vehicle=<?php echo $feturedcarrow['vehicle_id']; ?>"><i class="fa fa-link"></i></a></li>
                   
                  </ul>
                </div>
              </div>
              <div class="car-list">
                <ul class="list-inline">
-                 <li><i class="fa fa-registered"></i> <?php echo $row2['model_year']; ?></li>
-                 <li><i class="fa fa-cog"></i> <?php echo strtok($row2['transmission_type'], " "); ?> </li>
-                 <li><i class="fa fa-shopping-cart"></i> <?php echo $row2['kms_driven'] > 0 ? 'Used' : "New"; ?></li>
+                 <li><i class="fa fa-registered"></i> <?php echo $feturedcarrow['model_year']; ?></li>
+                 <li><i class="fa fa-cog"></i> <?php echo strtok($feturedcarrow['transmission_type'], " "); ?> </li>
+                 <li><i class="fa fa-shopping-cart"></i> <?php echo $feturedcarrow['kms_driven'] > 0 ? 'Used' : "New"; ?></li>
                </ul>
             </div>
              <div class="car-content">
-                <a href="single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"> <?php echo $row2['brand_name'].'&nbsp&nbsp;'.$row2['model_name']; ?></a>
+                <a href="single.php?vehicle=<?php echo $feturedcarrow['vehicle_id']; ?>"> <?php echo $feturedcarrow['brand_name'].'&nbsp&nbsp;'.$feturedcarrow['model_name']; ?></a>
                <div class="separator"></div>
                <div class="price">
                  
-                 <span class="new-price"><?php echo IND_money_format($row2['vehicle_price']); ?></span>
+                 <span class="new-price"><?php echo IND_money_format($feturedcarrow['vehicle_price']); ?></span>
                </div>
              </div>
            </div>
@@ -432,12 +427,12 @@ $result2 = mysqli_query($conn, $query2);
   </div>
 </section>
 <!--=================================
- feature-car -->
+        feature-car section End -->
 
 
 
 <!--=================================
- form -->
+          form  start-->
 
 <section class="why-choose-us bg-2 bg-overlay-black-70 page-section-ptb">
   <div class="container">
@@ -499,10 +494,10 @@ $result2 = mysqli_query($conn, $query2);
 		$model = mysqli_query($conn,$modelquery);
 		$appointment = mysqli_query($conn,$appointmentquery);
 		$vehicle = mysqli_query($conn,$vehiclequery);
-		$numbrand = mysqli_fetch_assoc($brand);
-		$nummodel = mysqli_fetch_assoc($model);
-		$numappointment = mysqli_fetch_assoc($appointment);
-		$numvehicle = mysqli_fetch_assoc($vehicle);
+		$numbrand = mysqli_fetch_assoc($brand); // returns number of brand
+		$nummodel = mysqli_fetch_assoc($model); // returns number of model
+    $numappointment = mysqli_fetch_assoc($appointment); // returns number of appointment
+		$numvehicle = mysqli_fetch_assoc($vehicle); // returns number of vehicles in stock
 	
 	?>
 	
@@ -554,7 +549,7 @@ $result2 = mysqli_query($conn, $query2);
 </section>
 
 <!--=================================
- feature-car -->
+ feature-car end  -->
 
 <section class="testimonial-1 white-bg page page-section-ptb">
   <div class="container">
@@ -582,21 +577,6 @@ $result2 = mysqli_query($conn, $query2);
    </div>
   </section>
   <?php include 'footer.php';?>
-  <script>
-    function fetch_models(form)
-    {
-        var brand = form.brand.options[form.brand.options.selectedIndex].value;
   
-        self.location = '?brand=' + brand + '#vehicle_search';
-    }
-  
-    function fetch_years(form)
-    {
-        var brand = form.brand.options[form.brand.options.selectedIndex].value;
-        var model = form.model.options[form.model.options.selectedIndex].value;
-  
-        self.location = '?brand=' + brand + '&model=' + model + '#vehicle_search';
-    }
-    </script>
   </body>
 </html>

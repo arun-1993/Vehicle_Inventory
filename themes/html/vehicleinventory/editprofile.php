@@ -1,10 +1,7 @@
-<?php include 'header.php';?>
-<?php
+<?php include 'header.php';
 require_once '_dbconnect.php';
-?>
+$emailtaken = false; // assumes that mail id is not taken initially
 
-<?php  
-$emailtaken = false;
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['Username'])){
 	$username = $_SESSION['Username'];
 	$firstname = $_POST['firstname'];
@@ -13,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['Username'])){
 	
 	$address=$_POST['address'];
 	
-	$mailquery = "SELECT * from user where email = '$mail'";
+	$mailquery = "SELECT * from user where email = '$mail'"; // checks wether the mail id  is already existing or not
 
 	$mailresult = mysqli_query($conn, $mailquery);
 
@@ -23,17 +20,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['Username'])){
 
 		if($mailrow['username'] != $username)
 		{
-			$emailtaken = true;
+			$emailtaken = true; // mail is taken
 		}
 	}
 
 	if($emailtaken == false)
 	{
-		$query = "UPDATE user SET first_name ='$firstname', last_name = '$lastname', email = '$mail',  address= '$address' WHERE username = '$username'";
+		$mailupdatequery = "UPDATE user SET first_name ='$firstname', last_name = '$lastname', email = '$mail',  address= '$address' WHERE username = '$username'";
 		
-		mysqli_query($conn,$query);
+		mysqli_query($conn,$mailupdatequery);
 
-		if(mysqli_query($conn,$query))
+		if(mysqli_query($conn,$mailupdatequery))
 		{
 			echo "<script> alert('Successfully Updated'); </script>";
 			echo '<script> window.location = "index.php" </script>';
@@ -44,9 +41,9 @@ if(isset($_SESSION['Username']))
 {
 
 	$Username = $_SESSION['Username'];
-	$query = "SELECT * FROM user where username = '$Username'  AND user_role_id = 3";
+	$fetchuserdetails = "SELECT * FROM user where username = '$Username'  AND user_role_id = 3";
 	
-	$result = mysqli_query($conn,$query);
+	$result = mysqli_query($conn,$fetchuserdetails);
 	$row = mysqli_fetch_array($result);
 	
 }
@@ -56,12 +53,10 @@ if(isset($_SESSION['Username']))
 
 
 
-<!--=================================
- header -->
 
 
 <!--=================================
- inner-intro -->
+ inner-intro-start -->
 
  <section class="inner-intro bg-1 bg-overlay-black-70">
   <div class="container">
@@ -75,11 +70,11 @@ if(isset($_SESSION['Username']))
 </section>
 
 <!--=================================
- inner-intro -->
+ inner-intro-end -->
 
 
 <!--=================================
- register-form  -->
+ register-form-start  -->
 
  <section class="register-form page-section-ptb">
   <div class="container">
@@ -98,7 +93,7 @@ if(isset($_SESSION['Username']))
 										$error = $_GET['error'];
 										switch($error)
 										{
-										case "old_false":
+										case "old_false": // when entered old password is incorrect
 											echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 											<strong>Holy guacamole!</strong> Invalid Current Password
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -107,7 +102,7 @@ if(isset($_SESSION['Username']))
 											</div>';
 											break;
 										
-										case "mismatch":
+										case "mismatch": // when entered new password mismatches with Confirm password
 											echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 											<strong>Holy guacamole!</strong> Passwords did not match
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -116,7 +111,7 @@ if(isset($_SESSION['Username']))
 											</div>';
 											break;
 										
-										case "same":
+										case "same": // when new password is same as old password
 											echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 											<strong>Holy guacamole!</strong> New password was the same as your Current password. Please try another one.
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -232,17 +227,12 @@ if(isset($_SESSION['Username']))
 
   <?php 
 		echo "	<script>
- 
- 
- var errorElement = document.getElementById('error');
- 
-
-    if($emailtaken){ 
+ 	var errorElement = document.getElementById('error');
+ 	if($emailtaken){ 
 		errorElement.innerText = ' This email is already taken please choose other one'
 
     } 
-
-</script>"
+	</script>"
 ?>
 
 

@@ -6,9 +6,9 @@ include_once('mail/login_credentials.php');
 require_once('mail/vendor/autoload.php');
  ?>
  <?php 
-  if(isset($_SESSION['Loggedin'])==true){
+  if(isset($_SESSION['Loggedin'])==true){ // will redirect to home is user is logged in already
     ?>
-    <script>window.location = "index.php"; </script>
+    <script>window.location = "index.php"; </script> 
     <?php
   }
 
@@ -27,7 +27,7 @@ function generateRandomString($length = 10) {
     return $randomString;
  }
  
-   $newpassword = generateRandomString();
+   $newpassword = generateRandomString(); // will generate a random password
 
 
 ?>
@@ -36,9 +36,9 @@ function generateRandomString($length = 10) {
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['email'];
-    $query = "SELECT count(email) as num FROM user where email = '$email' and user_role_id = 3 ";
+    $selectuserquery = "SELECT count(email) as num FROM user where email = '$email' and user_role_id = 3 ";
     
-    $executequery = mysqli_query($conn,$query);
+    $executequery = mysqli_query($conn,$selectuserquery);
     $row = mysqli_fetch_assoc($executequery);
     
     if($row['num']==1){
@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $mail->Subject = ' Password has been reset successfully.';
           $mail->Body    = $msg;
           
-          $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+          $mail->AltBody = '';
           $mail->send();
           ?>
   <script>alert('Your new password sent to your registered email. Kindly, check your inbox or spam folder.');
@@ -112,6 +112,8 @@ window.location = "index.php";</script>
 </div>
       </div>
     </div>
+
+     <!-- forgot password form start-->
     <form action="" method = "post">
 
       <div class="row justify-content-center">
@@ -130,5 +132,6 @@ window.location = "index.php";</script>
         </div>
       </div>
     </form>
+    <!-- forgot password form End-->
     </div>
   </section>

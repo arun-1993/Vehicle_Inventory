@@ -139,12 +139,8 @@ Counter -->
   </div>
 </section>
 
- <!--=================================
- Counter -->
 
 
- <!--=================================
- service-center -->
 
 <section class="service-center  page-section-ptb">
  <div class="container">
@@ -168,16 +164,7 @@ Counter -->
   </div>
 </section>
 
-<!--=================================
- service-center -->
 
-
-<!--=================================
-service schedule -->
-
-
-<!--=================================
- footer -->
 
 <?php include 'footer.php' ?></body>
 </html>

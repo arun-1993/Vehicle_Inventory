@@ -4,17 +4,17 @@
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
     $error = false;
-    $id = $_GET['id'];
+    $userid = $_GET['id'];
 	$oldpassword = $_POST['oldpassword'];
 	$newpassword = $_POST['newpassword'];
 	$confpassword = $_POST['confpassword'];
-	$query = "SELECT password from user where user_id = $id";
+	$query = "SELECT password from user where user_id = $userid"; // finds the password of user
 	$passwordverify = mysqli_query($conn,$query);
-	$value = mysqli_fetch_assoc($passwordverify);
+	$value = mysqli_fetch_assoc($passwordverify); // stores the current password to verify
 	if(password_verify($oldpassword,$value['password'])){
         if($newpassword === $confpassword && $newpassword !== $oldpassword){
             $hashedpassword = password_hash($newpassword,PASSWORD_DEFAULT);
-            $query = "UPDATE user SET password = '$hashedpassword' where user_id = $id";
+            $query = "UPDATE user SET password = '$hashedpassword' where user_id = $userid";
             mysqli_query($conn,$query);
             ?>
 
@@ -29,17 +29,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
         }
         elseif($newpassword === $oldpassword)
         {
-            $error = "same";
+            $error = "same"; // occurs when user tries to set old password as new password
         }
 
         else
         {
-            $error = "mismatch";
+            $error = "mismatch"; // occurs when user's enterd new and confirmed password mismatches
         }
 
     }
     else {
-        $error = "old_false";
+        $error = "old_false"; // occurs when user enters false old password
     }
 
     if($error)

@@ -78,9 +78,6 @@
 terms-and-conditions  -->
 
 
-<!--=================================
- footer -->
-
 <?php include 'footer.php';?>
 </body>
 </html>
