@@ -109,8 +109,8 @@ car-details -->
               <div class="col-lg-8 col-sm-12 mb-lg-0 mb-1">
                 
               
-                <div class="gray-form row" id = ''>
-                  <form class="form-horizontal" id="contactform" role="form" method="post" action="appointment.php">
+                <div class="gray-form row" >
+                  <form class="form-horizontal" id = 'appointment_form' role="form" method="post" action="appointment.php">
                     <h6>Schedule an appointment today for an in person viewing</h6>
                     <div class="contact-form">
                       <label for="date">Select Your Prefered Date</label>
@@ -195,16 +195,25 @@ car-details  -->
     <?php if(isset($_SESSION['Loggedin'])==false) { ?>
 
       window.location = "login.php?loc=<?php echo $_SERVER['REQUEST_URI']; ?>";
+
       <?php
     } 
-    else{ ?>
-
+    else{ 
+      ?>
+  
     var x = document.getElementById("appointment");
-    if (x.style.display === "none") {
+    
+        if (x.style.display === "none") {
       x.style.display = "block";
     } else {
       x.style.display = "none";
     }
+    x.scrollIntoView({
+          block: 'start',
+          behavior: 'smooth',
+          inline: 'start'
+        });
+
     
     <?php } ?>
   }
