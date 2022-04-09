@@ -25,7 +25,7 @@
 
 <!--=================================
  inner-intro -->
-<?php  $results_per_page = 8;  
+<?php  $results_per_page = 5;  
   
   @$brand = $_GET['brand'];
   @$model = $_GET['model'];
@@ -73,7 +73,8 @@
   
 
   $result = mysqli_query($conn, $query);  
-  $number_of_result = mysqli_num_rows($result);  
+  $number_of_result = mysqli_num_rows($result);
+  $pagination = 5;
 
   //determine the total number of pages available  
   $number_of_page = ceil ($number_of_result / $results_per_page);  
@@ -166,32 +167,91 @@ product-listing  -->
       </div>
       <div class="pagination-nav d-flex justify-content-center">
                <ul class="pagination">
-                 <?php  for($page = 1; $page<= $number_of_page; $page++) { ?>
-                 <li>
-                 <?php
-                 $query = $_SERVER['QUERY_STRING'];
-                 if(isset($_GET['page']))
-                 {
-                  $query = explode('&', $query);
-                  array_pop($query);
-                  $query = implode('&', $query);
-                  
-                 }
-                  ?>
                   <?php
-                  if(isset($_GET['page']) && ($_GET['page']==$page))
+                  if(!isset($_GET['page']) || $_GET['page'] <= 1)
                   {
-                    echo "<a href='#' style = 'pointer-events: none; color: red;'>$page</a>";
+                    $current_page = 1;
+                  }
+                  
+                  elseif($_GET['page'] >= $number_of_page)
+                  {
+                    $current_page = $number_of_page;
+                  }
+                  
+                  else
+                  {
+                    $current_page = $_GET['page'];
+                  }
+
+                  if($current_page <= 3)
+                  {
+                    $lower = 1;
+                    $upper = 5;
+                  }
+
+                  elseif($current_page >= ($number_of_page - 2))
+                  {
+                    $lower = $number_of_page - 4;
+                    $upper = $number_of_page;
                   }
 
                   else
                   {
-                    echo "<a href='listing.php?$query&page=$page'>$page</a>";
+                    $lower = $current_page - 2;
+                    $upper = $current_page + 2;
                   }
-                ?>
-                </li>
-                 
-                <?php } ?>
+
+                  $query = $_SERVER['QUERY_STRING'];
+                  if(isset($_GET['page']))
+                  {
+                    $query = explode('&', $query);
+                    array_pop($query);
+                    $query = implode('&', $query);
+                    
+                  }
+
+                  if($lower > 1)
+                  {
+                    echo "<li><a href='listing.php?$query&page=1' title='First Page'><<</a></li>";
+                  }
+
+                  if($current_page > 1)
+                  {
+                    $previous_page = $current_page - 1;
+                    echo "<li><a href='listing.php?$query&page=$previous_page' title='Previous Page'><</a></li>";
+                  }
+
+                  for($page = $lower; $page<= $upper; $page++) 
+                  {
+                  ?>
+                  <li>
+                    <?php
+                    if($page == $current_page)
+                    {
+                      echo "<a href='#' style = 'pointer-events: none; color: red;'>$page</a>";
+                    }
+
+                    else
+                    {
+                      echo "<a href='listing.php?$query&page=$page'>$page</a>";
+                    }
+                  ?>
+                  </li>
+                  
+                  <?php
+                  }
+
+                  if($current_page < $number_of_page)
+                  {
+                    $next_page = $current_page + 1;
+                    echo "<li><a href='listing.php?$query&page=$next_page' title='Next Page'>></a></li>";
+                  }
+
+                  if($upper < $number_of_page)
+                  {
+                    echo "<li><a href='listing.php?$query&page=$number_of_page' title='Last Page'>>></a></li>";
+                  }
+                  ?>
                 
                 </ul>
           </div>
