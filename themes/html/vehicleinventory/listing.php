@@ -179,7 +179,7 @@ product-listing  -->
                  }
                   ?>
                   <?php
-                  if(isset($_GET['page']) == $page)
+                  if(isset($_GET['page']) && ($_GET['page']==$page))
                   {
                     echo "<a href='#' style = 'pointer-events: none; color: red;'>$page</a>";
                   }
