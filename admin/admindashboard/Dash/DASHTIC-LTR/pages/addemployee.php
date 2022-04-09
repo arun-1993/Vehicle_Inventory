@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -13,10 +13,6 @@
 				<!--app header-->
 				<?php include('pageheader.php');?>
 				<!--/app header-->
-						<!--Page header-->
-						
-						
-
 
 <?php
 	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES)){
@@ -86,9 +82,6 @@
 						<!--End Page header-->
 						<!-- End Row -->
 
-						<!-- Row -->
-						<!-- Row -->
-						<!-- End Row-->
 						<div class="row">
 							<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12">
 								<div class="card">
@@ -164,8 +157,6 @@
  })
 
 </script>
-			<!--Footer-->
 			<?php include('footer.php'); ?>
-			<!-- End Footer-->
 	</body>
 </html>

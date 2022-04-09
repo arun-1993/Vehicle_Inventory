@@ -21,7 +21,7 @@
 									<div class="card-header">
 										<div class="card-title">
 										<h2>Transmission</h2>
-										<h5><a href="addtrans.php" style="color:blue;">ADD TRANSMISSION</a></h5>
+										<h5><a href="addtransmission.php" style="color:blue;">ADD TRANSMISSION</a></h5>
 										</div>
 									</div>
 									<div class="card-body">

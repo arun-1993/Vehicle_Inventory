@@ -2,11 +2,11 @@
 
 if(isset($_GET['id']))
 {
-	$id = $_GET['id'];
-	$sql = "delete from user where user_id = $id";
-	$result = mysqli_query($conn,$sql);
+	$employeeid = $_GET['id'];
+	$deleteemployee = "delete from user where user_id = $employeeid";
+	$deleteresult = mysqli_query($conn,$deleteemployee);
 	
-	if($result)
+	if($deleteresult)
 	{
 		header("Location:employee.php?msg=success");
 	}

@@ -3,18 +3,15 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
 
 				<!--app header-->
 				<?php include('pageheader.php');?>
-						<!--End Page header-->
-
-						<!-- Row -->
 						<div class="row">
 							<div class="col-12">
 								<div class="card">
@@ -45,8 +42,8 @@
 	$idquery = mysqli_query($conn,$getid);
 	$id = mysqli_fetch_assoc($idquery);
 	$userid = $id['user_id'];
-	$sql = "select * from user where user_role_id in(1,2) AND user_id != $userid ";
-	$result = mysqli_query($conn,$sql);
+	$selectemployee = "select * from user where user_role_id in(1,2) AND user_id != $userid ";
+	$result = mysqli_query($conn,$selectemployee);
 	
 	
 	while($row=mysqli_fetch_assoc($result))
@@ -60,7 +57,7 @@
 														<td><?php echo $row['username']; ?></td>
 														<td><?php echo $row['address']; ?></td>
 														<td>		
-														<a href="employeedelete.php?id=<?php echo $uid?>" class="btn btn-danger delete-confirmation">DELETE</a>
+														<a href="deleteemployee.php?id=<?php echo $uid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 															
 														</td>
 													</tr>
@@ -72,12 +69,10 @@
 										</div>
 									</div>
 								</div>
-								<!--/div-->
 							</div>
 						</div>
-						<!-- /Row -->
 						</div>
-				</div><!-- end app-content-->
+				</div>
 			</div>
 
 			<?php include('footer.php') ?>

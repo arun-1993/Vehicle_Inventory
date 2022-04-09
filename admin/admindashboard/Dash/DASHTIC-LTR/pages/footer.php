@@ -29,6 +29,7 @@
 		<!--Othercharts js-->
 		<script src="../public/assets/plugins/othercharts/jquery.sparkline.min.js"></script>
 		
+		
 		<!-- Jquery-rating js-->
 		<script src="../public/assets/plugins/rating/jquery.rating-stars.js"></script>
 

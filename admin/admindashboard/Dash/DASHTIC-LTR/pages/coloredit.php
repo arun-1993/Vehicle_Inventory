@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -13,19 +13,12 @@
 				<!--app header-->
 				<?php include('pageheader.php');?>
 				<!--/app header-->
-						<!--Page header-->
 
 						<div class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title">Edit Form</h4>
 							</div>
 						</div>
-						<!--End Page header-->
-						<!-- End Row -->
-
-						<!-- Row -->
-						<!-- Row -->
-						<!-- End Row-->
 						<div class="row">
 							<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12">
 								<div class="card">
@@ -40,10 +33,9 @@
 
 if(isset($_POST['edit_btn']))
 {
-	$id = $_POST['edit_id'];
-	//echo $id;
-	$query = "SELECT * from bodycolor WHERE color_id= $id ";
-	$query_run = mysqli_query($conn, $query);
+	$colorid = $_POST['edit_id'];
+	$colorselect = "SELECT * from bodycolor WHERE color_id= $colorid ";
+	$query_run = mysqli_query($conn, $colorselect);
 	
 	foreach($query_run as $row)
 	{
@@ -79,11 +71,11 @@ if(isset($_POST['edit_btn']))
 
 if(isset($_POST['updatebtn']))
 {
-	$id = $_POST['edit_id'];
+	$colorid = $_POST['edit_id'];
 	$color = $_POST['color'];
 	
-	$query = "UPDATE bodycolor SET color='$color' WHERE color_id= $id";
-	$query_run = mysqli_query($conn, $query);
+	$colorupdate = "UPDATE bodycolor SET color='$color' WHERE color_id= $colorid";
+	$query_run = mysqli_query($conn, $colorupdate);
 	
 	if($query_run)
 	{

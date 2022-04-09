@@ -49,13 +49,13 @@
 														<td><?php echo $row['fuel_type_id']; ?></td>
 														<td><?php echo $row['fuel_type']; ?></td>
 														<td>
-														<form action="fueledit.php" method="post">
+														<form action="editfueltype.php" method="post">
 															<input type="hidden" name="edit_id" value="<?php echo $row['fuel_type_id']; ?>">
 															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
 														</form>
 														</td>
 														<td>		
-														<a href="fueldelete.php?id=<?php echo $fid?>" class="btn btn-danger delete-confirmation">DELETE</a>
+														<a href="deletefueltype.php?id=<?php echo $fid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 															
 														</td>
 													</tr>

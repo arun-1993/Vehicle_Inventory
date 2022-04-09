@@ -5,7 +5,7 @@
 $emailtaken= false;
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
-	$id = $_GET['id'];
+	$userid = $_GET['id'];
 	$firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
 	$mail = $_POST['email'];
@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 	{
 		$mailrow = mysqli_fetch_array($mailresult);
 
-		if($mailrow['user_id'] != $id)
+		if($mailrow['user_id'] != $userid)
 		{
 			$emailtaken = true;
 		}
@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 
 	if($emailtaken == false)
 	{
-		$query = "UPDATE user SET first_name ='$firstname', last_name = '$lastname', email = '$mail',  address= '$address' WHERE user_id = '$id'";
+		$query = "UPDATE user SET first_name ='$firstname', last_name = '$lastname', email = '$mail',  address= '$address' WHERE user_id = '$userid'";
 		
 		mysqli_query($conn,$query);
 
@@ -41,8 +41,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 if(isset($_GET['id']))
 {
 
-	$id = $_GET['id'];
-	$query = "SELECT * FROM user where user_id = $id  AND user_role_id in(1,2)";
+	$userid = $_GET['id'];
+	$query = "SELECT * FROM user where user_id = $userid  AND user_role_id in(1,2)";
 	$result = mysqli_query($conn,$query);
 	$row = mysqli_fetch_array($result);
 	
@@ -58,9 +58,9 @@ if(isset($_GET['id']))
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -75,9 +75,7 @@ if(isset($_GET['id']))
 							</div>
 							
 						</div>
-						<!--End Page header-->
 
-						<!-- Row -->
 						<div class="row">
 							
 							<div class="col-xl-8 col-lg-7">
@@ -144,12 +142,6 @@ if(isset($_GET['id']))
 												</div>
 											</div>
 											
-											<!-- <div class="col-sm-8 col-md-8">
-												<div class="form-group">
-													<label class="form-label">Username</label>
-													<input type="text" class="form-control" value = "<?php echo $row['username'];?>" name="username">
-												</div>
-											</div> -->
 											
 											<div class="col-md-8">
 												<div class="form-group">
@@ -161,10 +153,7 @@ if(isset($_GET['id']))
 										</form>
 											</div>
 											<div class="card-footer text-right">
-										<!--<a href="index.php" class="btn btn-lg btn-primary">Update Profile</a>
-										<a href="e.php" class="btn btn-lg btn-danger" type="submit">Cancel</a>-->
 										<button class="btn btn-outline-primary" type="submit"  name="submit">Update Profile</button>&nbsp;&nbsp;
-										<!-- <button class="btn btn-outline-primary" type="submit" id="btn_changepassword" style = "">Change Password</button>  &nbsp;&nbsp; -->
 										<a href="javascript:void(0)" class = "btn btn-outline-primary" id="btn_changepassword" >Change Password</a>
 										<a href="profile.php" class = "btn btn-outline-danger"  >Cancel</a>
                                         
@@ -209,8 +198,6 @@ if(isset($_GET['id']))
 											</div>								
 												</div>
 										<div class="card-footer text-right">
-										<!--<a href="index.php" class="btn btn-lg btn-primary">Update Profile</a>
-										<a href="e.php" class="btn btn-lg btn-danger" type="submit">Cancel</a>-->
 										<button class="btn btn-outline-primary" type="submit" name="submit">Update Password</button> &nbsp;&nbsp;
 											</form>
                                         <a class="btn btn-outline-danger"  id ="canceledit" type="">Cancel</a>
@@ -227,9 +214,8 @@ if(isset($_GET['id']))
 								</div>
 							</div>
 						</div>
-						<!-- End Row-->
 						</div>
-				</div><!-- end app-content-->
+				</div>
 			</div>
 <?php 
 		echo "	<script>
@@ -248,12 +234,9 @@ if(isset($_GET['id']))
 
 
 
-			<!--Footer-->
 			<?php include('footer.php') ?>
-			<!-- End Footer-->
 		</div>
 
 			</body>
 
-<!-- none-->
 </html>

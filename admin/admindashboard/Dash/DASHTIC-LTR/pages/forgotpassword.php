@@ -46,6 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
     if(mysqli_affected_rows($conn) == 0)
         $nocredentials = true;
+		
 
     else
     {

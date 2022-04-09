@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -13,27 +13,21 @@
 				<!--app header-->
 				<?php include('pageheader.php');?>
 				<!--/app header-->
-						<!--Page header-->
-						
 						
 <?php
 
 if(isset($_POST["brand_id"]) && isset($_POST["model_name"]))
 	{
-		$bid = $_POST["brand_id"];
-		$model = $_POST["model_name"];
+		$brandid = $_POST["brand_id"];
+		$modelname = $_POST["model_name"];
 		$description = $_POST["general_description"];
 		
-		if($bid!='' && $model!='')
+		if($brandid!='' && $modelname!='')
 		{			
-			$sql = "INSERT INTO model_master (brand_id, model_name, general_description) values('$bid', '$model', '$description')";
-			//echo $sql;
-			//die;
-			$result = mysqli_query($conn,$sql);
+			$modeinsert = "INSERT INTO model_master (brand_id, model_name, general_description) values('$brandid', '$modelname', '$description')";
+			$insertresult = mysqli_query($conn,$modeinsert);
 			
-		//	echo "result = " . $result;
-			
-			if($result)
+			if($insertresult)
 			{
 		
 		?>

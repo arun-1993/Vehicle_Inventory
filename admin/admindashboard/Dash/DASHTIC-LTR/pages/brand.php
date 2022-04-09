@@ -3,19 +3,18 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
 
 				<!--app header-->
 				<?php include('pageheader.php');?>
-						<!--End Page header-->
+					<!--End Page header-->
 
-						<!-- Row -->
-						<div class="row">
+					<div class="row">
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
@@ -37,11 +36,11 @@
 												</thead>
 												<tbody>
 <?php
-	$sql = "select * from brand_master ";
-	$result = mysqli_query($conn,$sql);
+	$selectbrand = "select * from brand_master ";
+	$selectresult = mysqli_query($conn,$selectbrand);
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=mysqli_fetch_assoc($selectresult))
 	{
 		$bid=$row['brand_id'];
 ?>
@@ -49,13 +48,13 @@
 														<td><?php echo $row['brand_id']; ?></td>
 														<td><?php echo $row['brand_name']; ?></td>
 														<td>
-														<form action="brandedit.php" method="post">
+														<form action="editbrand.php" method="post">
 															<input type="hidden" name="edit_id" value="<?php echo $row['brand_id']; ?>">
 															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
 														</form>
 														</td>
 														<td>		
-														<a href="branddelete.php?id=<?php echo $bid?>" class="btn btn-danger delete-confirmation">DELETE</a>
+														<a href="deletebrand.php?id=<?php echo $bid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 															
 														</td>
 													</tr>

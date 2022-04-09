@@ -64,20 +64,6 @@ include_once('mail/login_credentials.php');
 }
 ?>
 
- <?php
 
 
  
-
- if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-  $name = $_POST ['name'];
-  $email = $_POST['email'];
-  $phone = $_POST['phone'];
-  $message= $_POST['message'];
-  $msg = "Name : $name <br>Email : $email<br>Phone : $phone<br><br>$message"; 
-   
-  
-}
-  
-?>

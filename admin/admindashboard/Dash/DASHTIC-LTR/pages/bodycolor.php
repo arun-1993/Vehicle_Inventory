@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -13,8 +13,6 @@
 				<!--app header-->
 				<?php include('pageheader.php');?>
 						<!--End Page header-->
-
-						<!-- Row -->
 						<div class="row">
 							<div class="col-12">
 								<div class="card">
@@ -37,11 +35,11 @@
 												</thead>
 												<tbody>
 <?php
-	$sql = "select * from bodycolor";
-	$result = mysqli_query($conn,$sql);
+	$selectbodycolor = "select * from bodycolor";
+	$selectresult = mysqli_query($conn,$selectbodycolor);
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=mysqli_fetch_assoc($selectresult))
 	{
 		$cid=$row['color_id'];
 ?>
@@ -55,7 +53,7 @@
 														</form>
 														</td>
 														<td>		
-														<a href="colordelete.php?id=<?php echo $cid?>" class="btn btn-danger delete-confirmation">DELETE</a>
+														<a href="deletecolor.php?id=<?php echo $cid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 															
 														</td>
 													</tr>
@@ -67,12 +65,10 @@
 										</div>
 									</div>
 								</div>
-								<!--/div-->
 							</div>
 						</div>
-						<!-- /Row -->
 						</div>
-				</div><!-- end app-content-->
+				</div>
 			</div>
 
 			<?php include('footer.php') ?>

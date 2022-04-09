@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -14,7 +14,6 @@
 				<?php include('pageheader.php');?>
 						<!--End Page header-->
 
-						<!-- Row -->
 						<div class="row">
 							<div class="col-12">
 								<div class="card">
@@ -37,11 +36,11 @@
 												</thead>
 												<tbody>
 <?php
-	$sql = "select * from contact ";
-	$result = mysqli_query($conn,$sql);
+	$selectcontact = "select * from contact ";
+	$selectresult = mysqli_query($conn,$selectcontact);
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=mysqli_fetch_assoc($selectresult))
 	{		
 ?>
 													<tr>
@@ -57,17 +56,15 @@
 
 	}
 	?>
-												</tbody>
-											</table>
-										</div>
-									</div>
+							</tbody>
+						</table>
+					</div>
+				</div>
 								</div>
-								<!--/div-->
 							</div>
 						</div>
-						<!-- /Row -->
 						</div>
-				</div><!-- end app-content-->
+				</div>
 			</div>
 
 			<?php include('footer.php') ?>

@@ -2,8 +2,8 @@
 
 if(isset($_GET['id']))
 {
-	$id = $_GET['id'];
-	$sql = "delete from fuel_type where fuel_type_id = $id";
+	$fueltypeid = $_GET['id'];
+	$sql = "delete from fuel_type where fuel_type_id = $fueltypeid";
 	$result = mysqli_query($conn,$sql);
 	
 	if($result)

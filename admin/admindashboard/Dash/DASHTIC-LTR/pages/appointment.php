@@ -3,47 +3,45 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
 
 				<!--app header-->
 				<?php include('pageheader.php');?>
-						<!--End Page header-->
 
-						<!-- Row -->
-						<div class="row">
-							<div class="col-12">
-								<div class="card">
-									<div class="card-header">
-										<div class="card-title">
-										<h2>Appointment</h2>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table class="table table-bordered text-nowrap" id="example1">
-												<thead>
-													<tr>
-														<th class="wd-15p border-bottom-0">User Name</th>
-														<th class="wd-20p border-bottom-0">Vehicle id</th>
-														<th class="wd-20p border-bottom-0">Model Name</th>
-														<th class="wd-25p border-bottom-0">Appointment DateTime</th>
-														<th class="wd-15p border-bottom-0">Appointment Status</th>
-														<th class="wd-15p border-bottom-0">Comments</th>
-														<th class = "wd-15p border-bottom-0">Take Action</th>													
-													</tr>
-												</thead>
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">
+						<h2>Appointment</h2>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered text-nowrap" id="example1">
+								<thead>
+									<tr>
+										<th class="wd-15p border-bottom-0">User Name</th>
+										<th class="wd-20p border-bottom-0">Vehicle id</th>
+										<th class="wd-20p border-bottom-0">Model Name</th>
+										<th class="wd-25p border-bottom-0">Appointment DateTime</th>
+										<th class="wd-15p border-bottom-0">Appointment Status</th>
+										<th class="wd-15p border-bottom-0">Comments</th>
+										<th class = "wd-15p border-bottom-0">Take Action</th>													
+									</tr>
+								</thead>
 												<tbody>
 <?php
-	$sql = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id ORDER BY a.appointment_status,a.appointment_schedule" ;
-	$result = mysqli_query($conn,$sql);
+	$selectappointment = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id ORDER BY a.appointment_status,a.appointment_schedule" ;
+	$selectresult = mysqli_query($conn,$selectappointment);
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=mysqli_fetch_assoc($selectresult))
 	{
 		$aid=$row['appointment_id'];
 ?>
@@ -121,17 +119,16 @@
 	<?php
 	}
 	?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
+								</tbody>
+						</table>
+					</div>
+				</div>
+						</div>
 								
-							</div>
-						</div>
-						<!-- /Row -->
-						</div>
-				</div><!-- end app-content-->
+					</div>
+				</div>
+				</div>
+				</div>
 			</div>
 
 			<?php include('footer.php') ?>

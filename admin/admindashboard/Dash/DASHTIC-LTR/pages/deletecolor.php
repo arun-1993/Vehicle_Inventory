@@ -2,11 +2,11 @@
 
 if(isset($_GET['id']))
 {
-	$id = $_GET['id'];
-	$sql = "delete from bodycolor where color_id = $id";
-	$result = mysqli_query($conn,$sql);
+	$colorid = $_GET['id'];
+	$colodelete = "delete from bodycolor where color_id = $colorid";
+	$deleteresult = mysqli_query($conn,$colodelete);
 	
-	if($result)
+	if($deleteresult)
 	{
 		header("Location:bodycolor.php?msg=success");
 	}

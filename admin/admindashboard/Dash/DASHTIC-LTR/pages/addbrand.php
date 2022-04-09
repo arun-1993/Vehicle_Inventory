@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -13,25 +13,20 @@
 				<!--app header-->
 				<?php include('pageheader.php');?>
 				<!--/app header-->
-						<!--Page header-->
-						
 						
 <?php
 
 if(isset($_POST["brand_name"]))
 	{
-		$bname = $_POST["brand_name"];
+		$brandname = $_POST["brand_name"];
 		
-		if($bname!='')
-		{			
-			$sql = "insert into brand_master(brand_name) values('".$bname."')";
-			//echo $sql;
-			//die;
-			$result = mysqli_query($conn,$sql);
+		if($brandname!='')
+		{			 
+			$brandinsert = "insert into brand_master(brand_name) values('".$brandname."')"; // insert into dB
+			$brandresult = mysqli_query($conn,$brandinsert);
 			
-		//	echo "result = " . $result;
 			
-			if($result)
+			if($brandresult)
 			{
 		
 		?>
@@ -55,11 +50,7 @@ if(isset($_POST["brand_name"]))
 						</div>
 						<!--End Page header-->
 						<!-- End Row -->
-
-						<!-- Row -->
-						<!-- Row -->
-						<!-- End Row-->
-						<div class="row">
+							<div class="row">
 							<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12">
 								<div class="card">
 									<div class="card-header">

@@ -52,6 +52,8 @@ session_start();
 		<link href="../public/assets/switcher/demo.css" rel="stylesheet">
 
 		</head>
+		
 		<body class="app sidebar-mini light-mode default-sidebar">
 
 		
+

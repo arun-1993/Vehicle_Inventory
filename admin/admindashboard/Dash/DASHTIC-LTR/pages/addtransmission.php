@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -13,8 +13,6 @@
 				<!--app header-->
 				<?php include('pageheader.php');?>
 				<!--/app header-->
-						<!--Page header-->
-						
 						
 <?php
 
@@ -24,14 +22,10 @@ if(isset($_POST["transmission_type"]))
 		
 		if($ttype!='')
 		{			
-			$sql = "insert into transmission(transmission_type) values('".$ttype."')";
-			//echo $sql;
-			//die;
-			$result = mysqli_query($conn,$sql);
+			$inserttransmission = "insert into transmission(transmission_type) values('".$ttype."')"; // adds transmission to the DB
+			$insertresult = mysqli_query($conn,$inserttransmission);
 			
-		//	echo "result = " . $result;
-			
-			if($result)
+			if($insertresult)
 			{
 		
 		?>

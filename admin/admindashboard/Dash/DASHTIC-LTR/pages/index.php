@@ -17,8 +17,8 @@ if (isset($_SESSION['username'])) {
 	 
 	$username =$_SESSION['username'];
 	$query = " SELECT * FROM USER WHERE username = '$username' OR email = '$username' AND (user_role_id=1 OR user_role_id=2) ";
-	$result = mysqli_query($conn,$query);
-	$row = mysqli_fetch_assoc($result);
+	$selectresult = mysqli_query($conn,$query);
+	$row = mysqli_fetch_assoc($selectresult);
 	$userquery = "SELECT COUNT(*) as number FROM USER";
 	$user = mysqli_fetch_assoc(mysqli_query($conn,$userquery));
 	$teamquery = "SELECT COUNT(*) as number FROM USER where user_role_id = 1 OR user_role_id=2";
@@ -54,27 +54,25 @@ else{
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 
 
 		<?php include 'sidebar.php';?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
 
 				<!--app header-->
 				<?php include 'pageheader.php';?>
-				<!--/app header-->						<!--Page header-->
+				<!--/app header-->						
 						<div class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title">Dashboard</h4>
 							</div>
 							
 						</div>
-						<!--End Page header-->
 
-						<!--Row-->
 						<div class="row">
 							<div class="col-xl-6 col-md-12 col-lg-12">
 								<div class="card bg-primary text-white">
@@ -194,11 +192,11 @@ else{
 												</thead>
 												<tbody>
 <?php
-	$sql = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id ORDER BY a.appointment_status,a.appointment_schedule";
-	$result = mysqli_query($conn,$sql);
+	$selectappointment = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id ORDER BY a.appointment_status,a.appointment_schedule";
+	$selectresult = mysqli_query($conn,$selectappointment);
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=mysqli_fetch_assoc($selectresult))
 	{
 		$aid=$row['appointment_id'];
 ?>
@@ -208,7 +206,7 @@ else{
 														<td><?php echo $row['model_name']; ?></td>
 														<td><?php echo $row['appointment_schedule']; ?></td>
 														<td><?php 
-												$id=$row['appointment_id'];
+												$appointmentid=$row['appointment_id'];
 												if($row['appointment_status']=="Upcoming")
 												{
 													echo "<h6 style='color:#307FCE'>Upcoming</h6>";
@@ -237,7 +235,7 @@ else{
 <?php
 	if($row['appointment_status']=='Requested')
 	{
-		echo '<select id="action" name="action" onchange="change_appointment(this.value, '.$id.');">';
+		echo '<select id="action" name="action" onchange="change_appointment(this.value, '.$appointmentid.');">';
 		echo '<option value=""> --Action-- </option>';
 		echo '<option value="accept">Accept</option>';
 		echo '<option value="reject">Reject</option>';
@@ -246,7 +244,7 @@ else{
 
 	else if($row['appointment_status']=='Upcoming')
 	{
-		echo '<select id="action" name="action" onchange="change_appointment(this.value, '.$id.');">';
+		echo '<select id="action" name="action" onchange="change_appointment(this.value, '.$appointmentid.');">';
 		echo '<option value=""> --Action-- </option>';
 		echo '<option value="reject">Reject</option>';
 		echo '<option value="finished">Completed</option>';

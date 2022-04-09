@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -14,7 +14,6 @@
 				<?php include('pageheader.php');?>
 						<!--End Page header-->
 
-						<!-- Row -->
 						<div class="row">
 							<div class="col-12">
 								<div class="card">
@@ -38,11 +37,11 @@
 												</thead>
 												<tbody>
 <?php
-	$sql = "select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id";
-	$result = mysqli_query($conn,$sql);
+	$selectmodel = "select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id";
+	$selectresult = mysqli_query($conn,$selectmodel);
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=mysqli_fetch_assoc($selectresult))
 	{
 		$mid=$row['model_id'];
 		$name=$row['brand_name'];

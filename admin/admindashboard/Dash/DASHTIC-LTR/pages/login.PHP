@@ -129,7 +129,6 @@
 				</div>
 			</div>
 		</div>	
-		<!-- Jquery js-->
 		<?php include 'footer.php'?>
 	</body>
 </html>

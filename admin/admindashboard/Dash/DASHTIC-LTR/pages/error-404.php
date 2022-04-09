@@ -26,4 +26,5 @@
 		<!-- Jquery-rating js-->
 		<script src="../public/assets/plugins/rating/jquery.rating-stars.js"></script>	
 	</body>
-</html>
+
+

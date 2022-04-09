@@ -3,9 +3,9 @@
 <div class="page">
 	<div class="page-main">
 
-		<!--aside open-->
+		<!--sidebar open-->
 		<?php include('sidebar.php');?>
-		<!--aside closed-->
+		<!--sidebar closed-->
 
 		<div class="app-content main-content">
 			<div class="side-app">
@@ -13,8 +13,6 @@
 				<!--app header-->
 				<?php include('pageheader.php');?>
 				<!--/app header-->
-						<!--Page header-->
-						
 						
 <?php
 
@@ -24,14 +22,14 @@ if(isset($_POST["fuel_type"]))
 		
 		if($ftype!='')
 		{			
-			$sql = "insert into fuel_type(fuel_type) values('".$ftype."')";
-			//echo $sql;
+			$insertfueltype = "insert into fuel_type(fuel_type) values('".$ftype."')"; // inserts Fuel type in DB
+			//echo $insertfueltype;
 			//die;
-			$result = mysqli_query($conn,$sql);
+			$insertresult = mysqli_query($conn,$insertfueltype);
 			
-		//	echo "result = " . $result;
+		//	echo "result = " . $insertresult;
 			
-			if($result)
+			if($insertresult)
 			{
 		
 		?>

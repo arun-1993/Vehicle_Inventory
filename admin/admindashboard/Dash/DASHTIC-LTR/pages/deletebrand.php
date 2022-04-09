@@ -2,11 +2,11 @@
 
 if(isset($_GET['id']))
 {
-	$id = $_GET['id'];
-	$sql = "delete from brand_master where brand_id = $id";
-	$result = mysqli_query($conn,$sql);
+	$brandid = $_GET['id'];
+	$deletebrand = "delete from brand_master where brand_id = $brandid";
+	$deleteresult = mysqli_query($conn,$deletebrand);
 	
-	if($result)
+	if($deleteresult)
 	{
 		header("Location:brand.php?msg=success");
 	}

@@ -5,15 +5,14 @@ use PHPMailer\PHPMailer\Exception;
 
 if(isset($_GET['id']))
 {
-	$id = $_GET['id'];
-	$sql="update `appointment` set appointment_status='Cancelled' where appointment_id = '".$id."'";
+	$appointmentid = $_GET['id'];
+	$sql="update `appointment` set appointment_status='Cancelled' where appointment_id = '".$appointmentid."'";
 	
 	$result=mysqli_query($conn,$sql);
 	
 	if($result)
 	{
-			$sql = "SELECT * FROM appointment a JOIN vehicle v JOIN model_master m JOIN brand_master b JOIN user u WHERE a.vehicle_id=v.vehicle_id AND v.model_id=m.model_id AND m.brand_id=b.brand_id AND a.user_id=u.user_id AND a.appointment_id=$id";
-      echo $sql;
+			$sql = "SELECT * FROM appointment a JOIN vehicle v JOIN model_master m JOIN brand_master b JOIN user u WHERE a.vehicle_id=v.vehicle_id AND v.model_id=m.model_id AND m.brand_id=b.brand_id AND a.user_id=u.user_id AND a.appointment_id=$appointmentid";
 			$res = mysqli_query($conn,$sql);
 			$row =mysqli_fetch_array($res);
 			$email = $row['email'];

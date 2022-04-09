@@ -91,6 +91,7 @@
 
   //retrieve the selected results from database   
   $query .= "LIMIT " . $page_first_result . ',' . $results_per_page;
+  
   $result = mysqli_query($conn, $query);  
   
   if($number_of_result == 0)
