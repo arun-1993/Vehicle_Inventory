@@ -208,7 +208,8 @@ car-details  -->
     } else {
       x.style.display = "none";
     }
-    x.scrollIntoView({
+    
+    document.getElementById("tabs").scrollIntoView({
       block: 'start',
       behavior: 'smooth',
       inline: 'start'
