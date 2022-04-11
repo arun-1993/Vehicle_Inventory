@@ -89,17 +89,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <!--=================================
  inner-intro -->
 
- <section class="inner-intro bg-1 bg-overlay-black-70">
-  <div class="container">
-     <div class="row text-center intro-title">
-           <div class="col-md-6 text-md-start d-inline-block">
-             <h1 class="text-white " style= "text-align:left">Register With Us </h1>
-           </div>
-           
-     </div>
-  </div>
-</section>
-
 <!--=================================
  inner-intro -->
 
@@ -107,13 +96,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <!--=================================
  register-form-start  -->
 
- <section class="register-form page-section-ptb">
+ <section class="register-form page-section-ptb" style="background-color:white;">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-10">
          <div class="section-title">
-           <span>Welcome to </span>
-           <h2>AutoTrack</h2>
+         <h2>Register With Us</h2>
            <div class="separator"></div>
          </div>
       </div>

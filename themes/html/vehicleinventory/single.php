@@ -113,7 +113,7 @@ car-details -->
                   <form class="form-horizontal" id = 'appointment_form' role="form" method="post" action="appointment.php">
                     <h6>Schedule an appointment today for an in person viewing</h6>
                     <div class="contact-form">
-                      <label for="date">Select Your Prefered Date</label>
+                      <label for="date">Select Your Prefered Date Within 40 Days</label>
                       <div class="mb-3">
                         <input id="appointment_date" type="text" class="form-control"  name="date" required>
                       </div>

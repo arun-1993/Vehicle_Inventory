@@ -61,7 +61,7 @@ if(isset($_POST["brand_name"]))
 											<div class="">
 												<form method="POST" action="">
 												<div class="form-group">
-													<label class="form-label">Brand Name</label>
+													<label class="form-label">Brand Name*</label>
 													<input type="text" class="form-control" name="brand_name" placeholder="Enter Brand Name" required/>
 												</div>												
 											</div>

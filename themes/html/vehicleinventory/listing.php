@@ -7,8 +7,8 @@
 <!--=================================
  inner-intro -->
 
- <section class="inner-intro bg-1 bg-overlay-black-70">
-  <div class="container">
+ <section class="inner-intro bg-1 bg-overlay-black-70" id="vehicle_search">
+  <div class="container"  id = "search">
      <div class="row text-center intro-title">
            <div class="col-md-6 text-md-start d-inline-block">
              <h1 class="text-white">product listing </h1>

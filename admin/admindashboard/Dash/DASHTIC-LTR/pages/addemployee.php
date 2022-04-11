@@ -93,36 +93,36 @@
 											<div class="">
 												<form method="POST" action="" enctype="multipart/form-data" id ="form">
 												<div class="form-group">
-													<label class="form-label">First Name</label>
+													<label class="form-label">First Name*</label>
 													<input type="text" class="form-control" name="firstname" placeholder="Enter First Name" value="<?php echo @$firstname; ?>" required>
 												</div>
 												<div class="form-group">
-													<label class="form-label">Last Name</label>
+													<label class="form-label">Last Name*</label>
 													<input type="text" class="form-control" name="lastname" placeholder="Enter Last Name" value="<?php echo @$lastname; ?>" required>
 												</div>	
 												<div class="form-group">
-													<label class="form-label">Username</label>
+													<label class="form-label">Username*</label>
 													<input type="text" class="form-control" name="username" placeholder="Enter Username" value="<?php echo @$Username; ?>" required>
 												</div>	
 												<div class="form-group">
-													<label class="form-label">Email</label>
+													<label class="form-label">Email*</label>
 													<input type="email" class="form-control" name="email" placeholder="Enter Email" value="<?php echo @$email; ?>" required>
 												</div>	
 												<div class="form-group">
-													<label class="form-label">Role</label>
+													<label class="form-label">Role*</label>
 													<input type="text" class="form-control" placeholder = "1-superAdmin 2- Admin" name="role" value="<?php echo @$role; ?>" required>
 												</div>	
 												<div class="form-group">
-													<label class="form-label">Password</label>
+													<label class="form-label">Password*</label>
 													<input type="password" class="form-control" id ="password" name="password" placeholder="Enter Password" required>
 													<span style="color:red" id = "error"></span>
 												</div>
 												<div class="form-group">
-													<label class="form-label">Confirm Password</label>
+													<label class="form-label">Confirm Password*</label>
 													<input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
 												</div>
 												<div class="form-group">
-													<label class="form-label">Address</label>
+													<label class="form-label">Address*</label>
 													<textarea class="form-control" name="address" placeholder="Enter Address" required><?php echo @$address; ?></textarea>
 												</div>
 																									

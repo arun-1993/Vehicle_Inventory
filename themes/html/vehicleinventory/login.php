@@ -116,15 +116,18 @@
             </div>
           </div>
         
-        </div>
-      </div>
+        
       
     </form>
     
          <div class = "flex" style = "padding-top:1rem">
          <p class="link" style = "text-align:center;font-size:1rem"> <a href="forgotpassword.php"><strong> Forgot password?</strong> </a></p>
         </div>
-
+        <div>
+        <p class="link">Haven't Register with us? please <a href="register.php"> Register here </a></p>
+        </div>
+        </div>
+      </div>
     </div>
   </section>
 

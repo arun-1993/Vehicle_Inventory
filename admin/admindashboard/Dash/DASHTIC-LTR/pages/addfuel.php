@@ -68,7 +68,7 @@ if(isset($_POST["fuel_type"]))
 											<div class="">
 												<form method="POST" action="">
 												<div class="form-group">
-													<label class="form-label">Fuel Type</label>
+													<label class="form-label">Fuel Type*</label>
 													<input type="text" class="form-control" name="fuel_type" placeholder="Enter Fuel Type" required>
 												</div>												
 											</div>

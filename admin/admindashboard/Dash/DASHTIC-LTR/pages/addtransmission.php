@@ -64,7 +64,7 @@ if(isset($_POST["transmission_type"]))
 											<div class="">
 												<form method="POST" action="">
 												<div class="form-group">
-													<label class="form-label">Transmission Type</label>
+													<label class="form-label">Transmission Type*</label>
 													<input type="text" class="form-control" name="transmission_type" placeholder="Enter Transmission Type" required>
 												</div>												
 											</div>
