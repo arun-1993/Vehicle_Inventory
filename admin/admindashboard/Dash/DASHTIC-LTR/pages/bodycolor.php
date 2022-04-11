@@ -1,5 +1,12 @@
 <?php include('header.php');?>
 
+<?php
+
+$selectbodycolor = "select * from bodycolor";
+$selectresult = mysqli_query($conn,$selectbodycolor);
+
+?>
+
 <div class="page">
 	<div class="page-main">
 
@@ -18,8 +25,10 @@
 								<div class="card">
 									<div class="card-header">
 										<div class="card-title">
-										<h2>Exterior Color</h2>
-										<h5><a href="addcolor.php" style="color:blue;">ADD EXTERIOR COLOR</a></h5>
+											<h2>Exterior Color</h2>
+											<?php if($_SESSION['Role'] == 1) : ?>
+											<h5><a href="addcolor.php" style="color:blue;">ADD EXTERIOR COLOR</a></h5>
+											<?php endif; ?>
 										</div>
 									</div>
 									<div class="card-body">
@@ -28,12 +37,15 @@
 												<thead>
 													<tr>
 														<th class="wd-25p border-bottom-0">Color Id</th>
-														<th class="wd-25p border-bottom-0">Color</th>											
+														<th class="wd-25p border-bottom-0">Color</th>
+														<?php if($_SESSION['Role'] == 1) : ?>
 														<th class="wd-25p border-bottom-0">Edit</th>
 														<th class="wd-25p border-bottom-0">Delete</th>
+														<?php endif; ?>
 													</tr>
 												</thead>
 												<tbody>
+<<<<<<< HEAD
 <?php
 	$selectbodycolor = $mysqli->prepare("SELECT * FROM bodycolor");
 	$selectbodycolor->execute();
@@ -45,23 +57,25 @@
 	{
 		$cid=$row['color_id'];
 ?>
+=======
+												<?php while($row=mysqli_fetch_assoc($selectresult)) : ?>
+>>>>>>> 8692bed3f3b2a3523d315c24b944b99ff1f450f6
 													<tr>														
 														<td><?php echo $row['color_id']; ?></td>
 														<td><?php echo $row['color']; ?></td>
+														<?php if($_SESSION['Role'] == 1) : ?>
 														<td>
-														<form action="coloredit.php" method="post">
-															<input type="hidden" name="edit_id" value="<?php echo $row['color_id']; ?>">
-															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
-														</form>
+															<form action="coloredit.php" method="post">
+																<input type="hidden" name="edit_id" value="<?php echo $row['color_id']; ?>">
+																<button type="submit" name="edit_btn" class="btn btn-success">EDIT</button>
+															</form>
 														</td>
 														<td>		
-														<a href="deletecolor.php?id=<?php echo $cid?>" class="btn btn-danger delete-confirmation">DELETE</a>
-															
+															<a href="deletecolor.php?id=<?php echo $row['color_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
+														<?php endif; ?>
 													</tr>
-	<?php
-	}
-	?>
+												<?php endwhile; ?>
 												</tbody>
 											</table>
 										</div>

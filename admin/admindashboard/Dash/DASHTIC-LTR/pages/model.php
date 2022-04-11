@@ -1,5 +1,11 @@
 <?php include('header.php');?>
 
+<?php
+
+$selectmodel = "select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id";
+$selectresult = mysqli_query($conn,$selectmodel);
+
+?>
 <div class="page">
 	<div class="page-main">
 
@@ -19,8 +25,10 @@
 								<div class="card">
 									<div class="card-header">
 										<div class="card-title">
-										<h2>Model</h2>
-										<h5><a href="addmodel.php" style="color:blue;">ADD MODEL</a></h5>
+											<h2>Model</h2>
+											<?php if($_SESSION['Role'] == 1) : ?>
+											<h5><a href="addmodel.php" style="color:blue;">ADD MODEL</a></h5>
+											<?php endif; ?>
 										</div>
 									</div>
 									<div class="card-body">
@@ -30,27 +38,22 @@
 													<tr>
 														<th class="wd-25p border-bottom-0">Model Id</th>
 														<th class="wd-25p border-bottom-0">brand Name</th>
-														<th class="wd-25p border-bottom-0">Model Name</th>													
+														<th class="wd-25p border-bottom-0">Model Name</th>
+														<?php if($_SESSION['Role'] == 1) : ?>
 														<th class="wd-25p border-bottom-0">Edit</th>
 														<th class="wd-25p border-bottom-0">Delete</th>
+														<?php endif; ?>
 													</tr>
 												</thead>
 												<tbody>
-<?php
-	$selectmodel = "select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id";
-	$selectresult = mysqli_query($conn,$selectmodel);
-	
-	
-	while($row=mysqli_fetch_assoc($selectresult))
-	{
-		$mid=$row['model_id'];
-		$name=$row['brand_name'];
-?>
+												<?php while($row=mysqli_fetch_assoc($selectresult)) : ?>
 													<tr>														
 														<td><?php echo $row['model_id']; ?></td>
 														<td><?php echo $row['brand_name']; ?></td>
 														<td><?php echo $row['model_name']; ?></td>
+														<?php if($_SESSION['Role'] == 1) : ?>
 														<td>
+<<<<<<< HEAD
 														<!--<form action="editmodel.php" method="post">
 															<input type="hidden" name="edit_id" value="// echo $row['model_id']; ?>">
 															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
@@ -60,11 +63,16 @@
 														<td>		
 														<a href="deletemodel.php?id=<?php echo $mid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 															
+=======
+															<a href="modeledit.php?id=<?php echo $row['model_id']; ?>&name=<?php echo $row['model_name']; ?>" class="btn btn-success">EDIT</a>
 														</td>
+														<td>		
+															<a href="modeldelete.php?id=<?php echo $row['model_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
+>>>>>>> 8692bed3f3b2a3523d315c24b944b99ff1f450f6
+														</td>
+														<?php endif; ?>
 													</tr>
-	<?php
-	}
-	?>
+												<?php endwhile; ?>
 												</tbody>
 											</table>
 										</div>
