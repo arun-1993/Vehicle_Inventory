@@ -51,14 +51,14 @@
 														<td><?php echo $row['brand_name']; ?></td>
 														<td><?php echo $row['model_name']; ?></td>
 														<td>
-														<!--<form action="modeledit.php" method="post">
+														<!--<form action="editmodel.php" method="post">
 															<input type="hidden" name="edit_id" value="// echo $row['model_id']; ?>">
 															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
 														</form>-->
-														<a href="modeledit.php?id=<?php echo $mid?>&name=<?php echo $name?>" class="btn btn-success">EDIT</a>
+														<a href="editmodel.php?id=<?php echo $mid?>&name=<?php echo $name?>" class="btn btn-success">EDIT</a>
 														</td>
 														<td>		
-														<a href="modeldelete.php?id=<?php echo $mid?>" class="btn btn-danger delete-confirmation">DELETE</a>
+														<a href="deletemodel.php?id=<?php echo $mid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 															
 														</td>
 													</tr>
