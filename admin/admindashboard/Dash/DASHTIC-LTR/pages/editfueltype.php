@@ -36,8 +36,10 @@ if(isset($_POST['edit_btn']))
 {
 	$fueltypeid = $_POST['edit_id'];
 	//echo $fueltypeid;
-	$selectfueltype = "SELECT * from fuel_type  WHERE fuel_type_id= $fueltypeid ";
-	$query_run = mysqli_query($conn, $selectfueltype);
+	$selectfueltype = $mysqli->prepare("SELECT * from fuel_type  WHERE fuel_type_id= ? ");
+	$selectfueltype->bind_param('i',$fueltypeid);
+	$selectfueltype->execute();
+	$query_run = $selectfueltype->get_result();
 	
 	foreach($query_run as $row)
 	{
@@ -76,8 +78,9 @@ if(isset($_POST['updatebtn']))
 	$fueltypeid = $_POST['edit_id'];
 	$fuel = $_POST['fuel_type'];
 	
-	$updatefueltype = "UPDATE fuel_type SET fuel_type='$fuel' WHERE fuel_type_id= $fueltypeid";
-	$query_run = mysqli_query($conn, $updatefueltype);
+	$updatefueltype = $mysqli->prepare("UPDATE fuel_type SET fuel_type=? WHERE fuel_type_id= ?");
+	$updatefueltype->bind_param('si',$fuel,$fueltypeid);
+	$query_run = $updatefueltype->execute();
 	
 	if($query_run)
 	{

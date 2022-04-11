@@ -49,8 +49,10 @@ if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['color']) && isset
 	//echo $name;
 	//echo $id;
 	
-	$query = "select * from vehicle v JOIN model_master m JOIN bodycolor c JOIN fuel_type f JOIN transmission t where v.model_id=m.model_id and v.exterior_color=c.color_id and v.fuel_type_id=f.fuel_type_id and v.transmission_id=t.transmission_id and vehicle_id= $vid ";
-	$query_run = mysqli_query($conn, $query);
+	$selectvehicle = $mysqli->prepare("select * from vehicle v JOIN model_master m JOIN bodycolor c JOIN fuel_type f JOIN transmission t where v.model_id=m.model_id and v.exterior_color=c.color_id and v.fuel_type_id=f.fuel_type_id and v.transmission_id=t.transmission_id and vehicle_id= ? ") ;
+	$selectvehicle->bind_param('i',$vid);
+	$selectvehicle->execute();
+	$query_run = $selectvehicle->get_result();
 	
 	foreach($query_run as $row)
 	{
@@ -64,9 +66,10 @@ if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['color']) && isset
 													<select class="form-control" name="model_id" required>
 														<option value=""> -- Select Model -- </option>
 <?php
-	$sql1 = "SELECT * FROM model_master ORDER BY model_name";
-	$result1 = mysqli_query($conn,$sql1);
-	while($row1 = mysqli_fetch_array($result1))
+	$selectmodel = $mysqli->prepare("SELECT * FROM model_master ORDER BY model_name") ;
+	$selectmodel->execute();
+	$result1 = $selectmodel->get_result();
+	while($row1 =$result1->fetch_array())
 	{
 ?>
                                                 <option value="<?php echo $row1['model_id']?>"
@@ -85,9 +88,11 @@ if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['color']) && isset
 													<select class="form-control" name="exterior_color" required>
 														<option value=""> -- Select Body Color -- </option>
 <?php
-	$sql2 = "SELECT * FROM bodycolor ORDER BY color";
-	$result2 = mysqli_query($conn,$sql2);
-	while($row2 = mysqli_fetch_array($result2))
+	$selectbodycolor = $mysqli->prepare("SELECT * FROM bodycolor ORDER BY color") ;
+	$selectbodycolor->execute();
+
+	$result2 = $selectbodycolor->get_result();
+	while($row2 =$result2->fetch_array())
 	{
 ?>
                                                 <option value="<?php echo $row2['color_id']?>"
@@ -106,9 +111,10 @@ if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['color']) && isset
 													<select class="form-control" name="fuel_type_id" required>
 														<option value=""> -- Select Fuel Type -- </option>
 <?php
-	$sql3 = "SELECT * FROM fuel_type ORDER BY fuel_type";
-	$result3 = mysqli_query($conn,$sql3);
-	while($row3 = mysqli_fetch_array($result3))
+	$selectfueltype = $mysqli->prepare("SELECT * FROM fuel_type ORDER BY fuel_type");
+	$selectfueltype->execute();
+	$result3 = $selectfueltype->get_result();
+	while($row3 = $result3->fetch_array())
 	{
 ?>
                                                 <option value="<?php echo $row3['fuel_type_id']?>"
@@ -127,9 +133,11 @@ if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['color']) && isset
 													<select class="form-control" name="transmission_id" required>
 														<option value=""> -- Select Transmission Type -- </option>
 <?php
-	$sql4 = "SELECT * FROM transmission ORDER BY transmission_type";
-	$result4 = mysqli_query($conn,$sql4);
-	while($row4 = mysqli_fetch_array($result4))
+	$selecttransmission = $mysqli->prepare("SELECT * FROM transmission ORDER BY transmission_type");
+	$selecttransmission->execute();
+	
+	$result4 =$selecttransmission->get_result();
+	while($row4 = $result4->fetch_array())
 	{
 ?>
                                                 <option value="<?php echo $row4['transmission_id']?>"
@@ -210,17 +218,27 @@ if(isset($_POST['updatebtn']))
 	$rename = 'upload'.date('ymd'). $random;
 	$newname = $rename. '.' . $extension;
 	if(!$_FILES['image']['error'] == 4){
-	$query = "UPDATE vehicle SET model_id='$mid', exterior_color='$cid', fuel_type_id='$fid', transmission_id='$tid', model_year='$year', seating_capacity='$cap', vehicle_vin='$vin', kms_driven='$kms', vehicle_description='$desc', vehicle_image='$newname'  WHERE vehicle_id= $vid";
+	$updatevehicle = $mysqli->prepare("UPDATE vehicle SET model_id=?, exterior_color=?, fuel_type_id=?, transmission_id=?, model_year=?, seating_capacity=?, vehicle_vin=?, kms_driven=?, vehicle_description=?, vehicle_image=?  WHERE vehicle_id= ?");
+	$updatevehicle->bind_param('iiiiiisissi',$mid,$cid,$fid,$tid,$year,$cap,$vin,$kms,$desc,$newname,$vid);
+	
 	//echo $query;
 	//die;
-	$query_run = mysqli_query($conn, $query);
+	$query_run =$updatevehicle->execute();
 	move_uploaded_file($_FILES['image']['tmp_name'],'../../../../../themes/html/vehicleinventory/images/car/'.$newname);	
 	}
 	else{
-		$query = "UPDATE vehicle SET model_id='$mid', exterior_color='$cid', fuel_type_id='$fid', transmission_id='$tid', model_year='$year', seating_capacity='$cap', vehicle_vin='$vin', kms_driven='$kms', vehicle_description='$desc' WHERE vehicle_id= $vid";
+		$updatevehicle = $mysqli->prepare("UPDATE vehicle SET model_id=?, exterior_color=?, fuel_type_id=?, transmission_id=?, model_year=?, seating_capacity=?, vehicle_vin=?, kms_driven=?, vehicle_description=?  WHERE vehicle_id= ?");
+		$updatevehicle->bind_param('iiiiiisisi',$mid,$cid,$fid,$tid,$year,$cap,$vin,$kms,$desc,$vid);
+		
+		//echo $query;
+		//die;
+		$query_run =$updatevehicle->execute();
+
+		// $query = "UPDATE vehicle SET model_id='$mid', exterior_color='$cid', fuel_type_id='$fid', transmission_id='$tid', model_year='$year', seating_capacity='$cap', vehicle_vin='$vin', kms_driven='$kms', vehicle_description='$desc' WHERE vehicle_id= $vid";
 	//echo $query;
 	//die;
 	$query_run = mysqli_query($conn, $query);
+	
 		
 	}
 	

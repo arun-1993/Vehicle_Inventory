@@ -42,8 +42,10 @@ if(isset($_POST['edit_btn']))
 {
 	$id = $_POST['edit_id'];
 	//echo $id;
-	$query = "SELECT * from transmission WHERE transmission_id= $id ";
-	$query_run = mysqli_query($conn, $query);
+	$selecttransmission = $mysqli->prepare("SELECT * from transmission WHERE transmission_id= ? ") ;
+	$selecttransmission->bind_param('i',$id);
+	$selecttransmission->execute();
+	$query_run = $selecttransmission->get_result();
 	
 	foreach($query_run as $row)
 	{
@@ -82,8 +84,10 @@ if(isset($_POST['updatebtn']))
 	$id = $_POST['edit_id'];
 	$transmission = $_POST['transmission_type'];
 	
-	$query = "UPDATE transmission SET transmission_type='$transmission' WHERE transmission_id= $id";
-	$query_run = mysqli_query($conn, $query);
+	$updatetransmission = $mysqli->prepare("UPDATE transmission SET transmission_type='$transmission' WHERE transmission_id= $id") ;
+	$updatetransmission->bind_param('si',$transmission,$id);
+	
+	$query_run = $updatetransmission->execute();
 	
 	if($query_run)
 	{

@@ -59,7 +59,7 @@ $selectresult = mysqli_query($conn,$sql);
 															</form>
 														</td>
 														<td>
-															<a href="deletefueltype.php?id=<?php echo $fid?>" class="btn btn-danger delete-confirmation">DELETE</a>
+															<a href="deletefueltype.php?id=<?php echo $row['fuel_type_id']?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
 														<?php endif; ?>
 													</tr>

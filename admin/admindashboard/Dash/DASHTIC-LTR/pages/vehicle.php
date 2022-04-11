@@ -45,11 +45,13 @@
 												</thead>
 												<tbody>
 <?php
-	$sql = "select * from vehicle v JOIN model_master m JOIN bodycolor c JOIN fuel_type f JOIN transmission t where v.model_id=m.model_id and v.exterior_color=c.color_id and v.fuel_type_id=f.fuel_type_id and v.transmission_id=t.transmission_id ORDER BY model_name";
-	$result = mysqli_query($conn,$sql);
+	$selectvehicle = $mysqli->prepare("select * from vehicle v JOIN model_master m JOIN bodycolor c JOIN fuel_type f JOIN transmission t where v.model_id=m.model_id and v.exterior_color=c.color_id and v.fuel_type_id=f.fuel_type_id and v.transmission_id=t.transmission_id ORDER BY model_name") ;
+	$selectvehicle->execute();
+
+	$result = $selectvehicle->get_result();
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=$result->fetch_assoc())
 	{
 		$vid=$row['vehicle_id'];
 		$model=$row['model_name'];

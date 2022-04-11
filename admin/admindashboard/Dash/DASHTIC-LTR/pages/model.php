@@ -2,8 +2,9 @@
 
 <?php
 
-$selectmodel = "select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id";
-$selectresult = mysqli_query($conn,$selectmodel);
+$selectmodel = $mysqli->prepare("select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id");
+$selectmodel->execute();
+$selectresult = $selectmodel->get_result();
 
 ?>
 <div class="page">

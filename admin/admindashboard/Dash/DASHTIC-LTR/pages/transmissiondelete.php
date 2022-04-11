@@ -3,16 +3,18 @@
 if(isset($_GET['id']))
 {
 	$id = $_GET['id'];
-	$sql = "delete from transmission where transmission_id = $id";
-	$result = mysqli_query($conn,$sql);
+	$deletetransmission =  $mysqli->prepare("delete from transmission where transmission_id = ?");
+	$deletetransmission->bind_param('i',$id);
+	
+	$result =$deletetransmission->execute();
 	
 	if($result)
 	{
-		header("Location:transmission.php?msg=success");
+		header("Location:transmission.php");
 	}
 	else
 	{
-		header("Location:transmission.php?msg=failure");
+		header("Location:transmission.php");
 	}	
 }
 

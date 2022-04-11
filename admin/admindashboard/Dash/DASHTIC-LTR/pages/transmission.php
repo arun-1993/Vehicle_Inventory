@@ -2,8 +2,9 @@
 
 <?php
 
-$sql = "select * from transmission";
-$selectresult = mysqli_query($conn,$sql);
+$selecttransmission = $mysqli->prepare("select * from transmission") ;
+$selecttransmission->execute();
+$selectresult = $selecttransmission->get_result();
 
 ?>
 

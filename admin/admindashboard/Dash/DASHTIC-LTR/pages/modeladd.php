@@ -25,10 +25,14 @@ if(isset($_POST["brand_id"]) && isset($_POST["model_name"]))
 		
 		if($bid!='' && $model!='')
 		{			
-			$sql = "insert into model_master(brand_id,model_name) values('".$bid."','".$model."')";
+			$insertmodel = $mysqli->prepare("insert into model_master(brand_id,model_name) values(?,?)");
+			$insertmodel->bind_param('is',$bid,$model);
+			
+
+			
 			//echo $sql;
 			//die;
-			$result = mysqli_query($conn,$sql);
+			$result =$insertmodel->execute();
 			
 		//	echo "result = " . $result;
 			
@@ -74,9 +78,12 @@ if(isset($_POST["brand_id"]) && isset($_POST["model_name"]))
 													<label class="form-label">Brand Name</label>
 													<select class="form-control" id="l13" name="brand_id">
 <?php										
-	$sql1 = "select * from brand_master";
-	$result1 = mysqli_query($conn,$sql1);
-	while($row1 = mysqli_fetch_array($result1))
+	$selectbrand = $mysqli->prepare("select * from brand_master");
+	$selectbrand->execute();
+
+
+	$result1 = $selectbrand->get_result();
+	while($row1 = $result1->fetch_array())
 	{
 ?>
                                                 <option value="<?php echo $row1['brand_id']?>"><?php echo $row1['brand_name']?></option>

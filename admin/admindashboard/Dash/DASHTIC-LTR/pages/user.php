@@ -37,11 +37,15 @@
 												</thead>
 												<tbody>
 <?php
-	$sql = "select * from user where user_role_id=3";
-	$result = mysqli_query($conn,$sql);
+	$selectuser = $mysqli->prepare("select * from user where user_role_id=?");
+	$id = 3;
+	$selectuser->bind_param('i',$id);
+	$selectuser->execute();
+	
+	$result = $selectuser->get_result();
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=$result->fetch_assoc())
 	{
 		$uid=$row['user_id'];
 ?>

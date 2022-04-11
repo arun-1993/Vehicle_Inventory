@@ -38,15 +38,19 @@
 												<tbody>
 <?php
 	$username = $_SESSION['username'];
-	$getid = "SELECT user_id from user where username ='$username' ";
-	$idquery = mysqli_query($conn,$getid);
-	$id = mysqli_fetch_assoc($idquery);
+	$getid = $mysqli->prepare("SELECT user_id from user where username =? ");
+	$getid->bind_param('i',$username);
+	$getid->execute();
+	$idquery = $getid->get_result();
+	$id = $idquery->fetch_assoc();
 	$userid = $id['user_id'];
-	$selectemployee = "select * from user where user_role_id in(1,2) AND user_id != $userid ";
-	$result = mysqli_query($conn,$selectemployee);
+	$selectemployee = $mysqli->prepare("select * from user where user_role_id in(1,2) AND user_id != ? ");
+	$selectemployee -> bind_param('i',$userid);
+	$selectemployee->execute();
+	$result = $selectemployee->get_result();
 	
 	
-	while($row=mysqli_fetch_assoc($result))
+	while($row=$result->fetch_assoc())
 	{
 		$uid=$row['user_id'];
 ?>
