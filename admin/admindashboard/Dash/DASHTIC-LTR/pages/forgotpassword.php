@@ -41,10 +41,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = "UPDATE user SET password = '$hashedpassword' WHERE email = '$email' AND username = '$username' AND user_role_id IN (1,2)";
-    $result = mysqli_query($conn,$query);
+    $query = $mysqli->prepare("UPDATE user SET password = ? WHERE email = ? AND username = ? AND user_role_id IN (1,2)");
 
-    if(mysqli_affected_rows($conn) == 0)
+	$query->bind_param('sss',$hashedpassword,$email,$username);
+	
+    $result = $query->execute();
+
+    if(mysqli_affected_rows($mysqli) == 0)
         $nocredentials = true;
 		
 
@@ -107,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 if($nocredentials == true)
 {
-    echo '<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Invalid Username or Password!</div>';
+    echo '<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Invalid Username or mail!</div>';
 }	
 
 ?>

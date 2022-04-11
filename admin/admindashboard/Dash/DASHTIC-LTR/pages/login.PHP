@@ -21,8 +21,10 @@
     $username = $_POST["Username"];
     $password = $_POST["Password"]; 
   
-    $sql = "SELECT * FROM USER WHERE (username = '$username' OR email = '$username') AND  user_role_id IN(1,2)   ";
-    $result = mysqli_query($conn,$sql);
+    $selectuser = $mysqli->prepare("SELECT * FROM USER WHERE (username = ? OR email = ?) AND  user_role_id IN(1,2)   ");
+	$selectuser->bind_param('ss',$username,$username);
+	$selectuser->execute();
+    $result = $selectuser->get_result();
     $number = mysqli_num_rows($result);
     if($number==1)
     { 

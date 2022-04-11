@@ -3,8 +3,10 @@
 if(isset($_GET['id']))
 {
 	$id = $_GET['id'];
-	$sql = "delete from model_master where model_id = $id";
-	$result = mysqli_query($conn,$sql);
+	$deletemodel = $mysqli->prepare("delete from model_master where model_id = ?");
+	$deletemodel->bind_param('i',$id);
+
+	$result = $deletemodel->execute();
 	
 	if($result)
 	{

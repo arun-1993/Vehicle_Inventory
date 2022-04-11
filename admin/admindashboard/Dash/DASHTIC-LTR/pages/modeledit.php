@@ -45,8 +45,10 @@ if(isset($_GET['id']) && isset($_GET['name']))
 	
 	//echo $name;
 	//echo $id;
-	$query = "select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id and model_id= $mid ";
-	$query_run = mysqli_query($conn, $query);
+	$selectmodel = $mysqli->prepare("select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id and model_id= ? ");
+	$selectmodel->bind_param('i',$mid);
+	$selectmodel->execute();
+	$query_run = $selectmodel->get_result();
 	
 	foreach($query_run as $row)
 	{
@@ -60,9 +62,10 @@ if(isset($_GET['id']) && isset($_GET['name']))
 													<select class="form-control" name="brand_id" required>
 														<option value=""> -- Select Brand -- </option>
 <?php
-	$sql1 = "SELECT * FROM brand_master ORDER BY brand_name";
-	$result1 = mysqli_query($conn,$sql1);
-	while($row1 = mysqli_fetch_array($result1))
+	$selectbrand = $mysqli->prepare("SELECT * FROM brand_master ORDER BY brand_name") ;
+	$selectbrand->execute();
+	$result1 = $selectbrand->get_result();
+	while($row1 = $result1->fetch_array())
 	{
 ?>
                                                 <option value="<?php echo $row1['brand_id']?>"
@@ -113,8 +116,9 @@ if(isset($_POST['updatebtn']))
 	$model = $_POST['model_name'];
 	$description = $_POST["general_description"];
 	
-	$query = "UPDATE model_master SET brand_id='$bid', model_name='$model', general_description='$description' WHERE model_id=$mid";
-	$query_run = mysqli_query($conn, $query);
+	$updatemodel = $mysqli->prepare("UPDATE model_master SET  model_name=?, general_description=? WHERE model_id=?");
+	$updatemodel->bind_param('ssi',$model,$description,$mid);
+	$query_run = $updatemodel->execute();
 	
 	if($query_run)
 	{
@@ -125,13 +129,7 @@ if(isset($_POST['updatebtn']))
 		
 		
 	}
-	else
-	{
-		?>
-		<script>window.location = "model.php"</script>
-		<?php
-		
-	}
+	
 }
 
 ?>			

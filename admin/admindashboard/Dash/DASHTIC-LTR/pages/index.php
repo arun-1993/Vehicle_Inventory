@@ -192,8 +192,9 @@ else{
 												</thead>
 												<tbody>
 <?php
-	$selectappointment = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id ORDER BY a.appointment_status,a.appointment_schedule";
-	$selectresult = mysqli_query($conn,$selectappointment);
+	$selectappointment = $mysqli->prepare("select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id ORDER BY a.appointment_status,a.appointment_schedule") ;
+	$selectappointment->execute();
+	$selectresult = $selectappointment->get_result();
 	
 	
 	while($row=mysqli_fetch_assoc($selectresult))

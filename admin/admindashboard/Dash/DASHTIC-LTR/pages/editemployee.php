@@ -36,8 +36,10 @@ if(isset($_POST['edit_btn']))
 {
 	$employeeid = $_POST['edit_id'];
 	//echo $employeeid;
-	$selectemployee = "SELECT * from brand_master WHERE brand_id= $employeeid ";
-	$query_run = mysqli_query($conn, $selectemployee);
+	$selectemployee = $mysqli->prepare("SELECT * from brand_master WHERE brand_id= ? ");
+	$selectemployee->bind_param('i',$employeeid);
+	
+	$query_run =$selectemployee->execute();
 	
 	foreach($query_run as $row)
 	{
@@ -95,8 +97,10 @@ if(isset($_POST['updatebtn']))
 	$employeeid = $_POST['edit_id'];
 	$brand = $_POST['brand_name'];
 	
-	$updateemployee = "UPDATE brand_master SET brand_name='$brand' WHERE brand_id= $employeeid";
-	$query_run = mysqli_query($conn, $updateemployee);
+	$updateemployee = $mysqli->prepare("UPDATE brand_master SET brand_name=? WHERE brand_id= ?");
+
+	$updateemployee->bind_param('si',$brand,$employeeid);
+	$query_run = $updateemployee->execute();
 	
 	if($query_run)
 	{

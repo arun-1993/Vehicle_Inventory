@@ -23,9 +23,11 @@
 if (isset($_SESSION['username'])) {
 	 
 	$username =$_SESSION['username'];
-	$query = " SELECT * FROM USER WHERE username = '$username' OR email = '$username' AND (user_role_id=1 OR user_role_id=2) ";
-	$result = mysqli_query($conn,$query);
-	$row = mysqli_fetch_assoc($result);
+	$selectuser = $mysqli->prepare(" SELECT * FROM USER WHERE username = ? OR email = ? AND (user_role_id=1 OR user_role_id=2) ") ;
+	$selectuser->bind_param('ss',$username,$username);
+	$selectuser->execute();
+	$result = $selectuser->get_result();
+	$row = $result->fetch_assoc();
 }
 else{
 	

@@ -35,8 +35,10 @@ if(isset($_POST['edit_btn']))
 {
 	$brandid = $_POST['edit_id'];
 	//echo $brandid;
-	$brandselect = "SELECT * from brand_master WHERE brand_id= $brandid ";
-	$query_run = mysqli_query($conn, $brandselect);
+	$brandselect = $mysqli->prepare("SELECT * from brand_master WHERE brand_id= ? ");
+	$brandselect->bind_param('i',$brandid);
+	$brandselect->execute();
+	$query_run = $brandselect->get_result();
 	
 	foreach($query_run as $row)
 	{
@@ -75,8 +77,9 @@ if(isset($_POST['updatebtn']))
 	$brandid = $_POST['edit_id'];
 	$brand = $_POST['brand_name'];
 	
-	$brandupdate = "UPDATE brand_master SET brand_name='$brand' WHERE brand_id= $brandid";
-	$query_run = mysqli_query($conn, $brandupdate);
+	$brandupdate = $mysqli->prepare("UPDATE brand_master SET brand_name=? WHERE brand_id= ?");
+	$brandupdate->bind_param('si',$brand,$brandid);
+	$query_run = $brandupdate->execute();
 	
 	if($query_run)
 	{

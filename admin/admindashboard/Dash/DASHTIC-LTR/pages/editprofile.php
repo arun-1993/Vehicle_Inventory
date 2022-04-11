@@ -8,43 +8,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 	$userid = $_GET['id'];
 	$firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
-	$mail = $_POST['email'];
 	
 	$address=$_POST['address'];
-	$mailquery = "SELECT * from user where email = '$mail'";
+	
 
-	$mailresult = mysqli_query($conn, $mailquery);
-
-	if(mysqli_num_rows($mailresult) != 0)
-	{
-		$mailrow = mysqli_fetch_array($mailresult);
-
-		if($mailrow['user_id'] != $userid)
-		{
-			$emailtaken = true;
-		}
-	}
-
-	if($emailtaken == false)
-	{
-		$updateprofile = "UPDATE user SET first_name ='$firstname', last_name = '$lastname', email = '$mail',  address= '$address' WHERE user_id = '$userid'";
+	
+		$updateprofile = $mysqli->prepare("UPDATE user SET first_name =?, last_name = ?,  address= ? WHERE user_id = ?");
+		$updateprofile->bind_param('sssi',$firstname,$lastname,$address,$userid);
 		
-		mysqli_query($conn,$updateprofile);
+		
 
-		if(mysqli_query($conn,$updateprofile))
+		if($updateprofile->execute())
 		{
 			echo "<script> alert('Successfully Updated'); </script>";
 			echo '<script> window.location = "index.php" </script>';
 		}
-	}
+	
 }
 if(isset($_GET['id']))
 {
 
 	$userid = $_GET['id'];
-	$selectuser = "SELECT * FROM user where user_id = $userid  AND user_role_id in(1,2)";
-	$result = mysqli_query($conn,$selectuser);
-	$row = mysqli_fetch_array($result);
+	$selectuser = $mysqli->prepare("SELECT * FROM user where user_id = ?  AND user_role_id in(1,2)");
+	$selectuser->bind_param('i',$userid);
+	$selectuser->execute();
+	$result =$selectuser->get_result();
+	$row = $result->fetch_assoc();
 	
 }
 
@@ -134,13 +123,7 @@ if(isset($_GET['id']))
 														<input type="text" class="form-control" value = "<?php echo $row['last_name'];?>" name="lastname">
 													</div>
 												</div> 
-												<div class="col-sm-8 col-md-8">
-													<div class="form-group">
-													<label class="form-label">Email address</label>
-													<input type="email" class="form-control" value = "<?php echo $row['email'];?>" name="email" id = "email">
-													<span style="color:red" id = "error"></span>
-												</div>
-											</div>
+												
 											
 											
 											<div class="col-md-8">
@@ -217,20 +200,7 @@ if(isset($_GET['id']))
 						</div>
 				</div>
 			</div>
-<?php 
-		echo "	<script>
- 
- 
- var errorElement = document.getElementById('error');
- 
 
-    if($emailtaken){ 
-		errorElement.innerText = ' This email is already taken please choose other one'
-
-    } 
-
-</script>"
-?>
 
 
 

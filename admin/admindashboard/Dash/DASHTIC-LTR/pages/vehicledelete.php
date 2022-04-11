@@ -3,8 +3,10 @@
 if(isset($_GET['id']))
 {
 	$id = $_GET['id'];
-	$sql = "delete from vehicle where vehicle_id = $id";
-	$result = mysqli_query($conn,$sql);
+	$deletevehicle = $mysqli->prepare("delete from vehicle where vehicle_id = ?");
+	$deletevehicle->bind_param('i',$id);
+	
+	$result =$deletevehicle->execute();
 	
 	if($result)
 	{

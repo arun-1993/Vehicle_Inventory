@@ -45,8 +45,10 @@ if(isset($_GET['id']) && isset($_GET['name']))
 	
 	//echo $name;
 	//echo $id;
-	$query = "select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id and model_id= $mid ";
-	$query_run = mysqli_query($conn, $query);
+	$query = $mysqli->prepare("select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id and model_id= ? ");
+	$query->bind_param('i',$mid);
+	$query->execute();
+	$query_run = $query->get_result();
 	
 	foreach($query_run as $row)
 	{
@@ -113,8 +115,9 @@ if(isset($_POST['updatebtn']))
 	$model = $_POST['model_name'];
 	$description = $_POST["general_description"];
 	
-	$query = "UPDATE model_master SET brand_id='$bid', model_name='$model', general_description='$description' WHERE model_id=$mid";
-	$query_run = mysqli_query($conn, $query);
+	$updatemodel = $mysqli->prepare("UPDATE model_master SET  model_name='$model', general_description='$description' WHERE model_id=$mid");
+	$updatemodel->bind_param('ssi',$model,$description,$mid);
+	$query_run = $updatemodel->execute();
 	
 	if($query_run)
 	{
