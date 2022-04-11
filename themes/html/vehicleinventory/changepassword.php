@@ -8,17 +8,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 	$oldpassword = $_POST['oldpassword'];
 	$newpassword = $_POST['newpassword'];
 	$confpassword = $_POST['confpassword'];
-	$query = "SELECT password from user where user_id = $userid"; // finds the password of user
-	$passwordverify = mysqli_query($conn,$query);
-	$value = mysqli_fetch_assoc($passwordverify); // stores the current password to verify
+	$query = $mysqli->prepare("SELECT password from user where user_id = ?");
+    $query->bind_param('i',$userid);
+    $query->execute(); // finds the password of user
+	$passwordverify = $query->get_result();
+	$value = $passwordverify->fetch_assoc(); // stores the current password to verify
 	if(password_verify($oldpassword,$value['password'])){
         if($newpassword === $confpassword && $newpassword !== $oldpassword){
             $hashedpassword = password_hash($newpassword,PASSWORD_DEFAULT);
-            $query = "UPDATE user SET password = '$hashedpassword' where user_id = $userid";
-            mysqli_query($conn,$query);
+            $query = $mysqli->prepare("UPDATE user SET password = ? where user_id = ?");
+            $query->bind_param('si',$hashedpassword,$userid);
+            $query->execute();
             ?>
 
-            <script>alert('Password Changed Successfully');
+            <script>
             window.location = "index.php";
 
 

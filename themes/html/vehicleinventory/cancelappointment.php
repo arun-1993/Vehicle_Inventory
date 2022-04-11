@@ -9,9 +9,11 @@
         $appointmentid = $_GET['id'];
         // echo $appointmentid;
         
-        $query = "update `appointment` set appointment_status='Cancelled' where appointment_id = '".$appointmentid."'";
+        $query = $mysqli->prepare("update `appointment` set appointment_status='Cancelled' where appointment_id =? ");
+        $query->bind_param('i',$appointmentid);
+        $query->execute();
         
-        if(mysqli_query($conn,$query)){
+        if($query->execute()){
 
             ?>
         <script>window.location = "myappointment.php";</script>

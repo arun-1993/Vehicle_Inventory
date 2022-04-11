@@ -6,45 +6,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['Username'])){
 	$username = $_SESSION['Username'];
 	$firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
-	$mail = $_POST['email'];
+	// $mail = $_POST['email'];
 	
 	$address=$_POST['address'];
 	
-	$mailquery = "SELECT * from user where email = '$mail'"; // checks wether the mail id  is already existing or not
-
-	$mailresult = mysqli_query($conn, $mailquery);
-
-	if(mysqli_num_rows($mailresult) != 0)
-	{
-		$mailrow = mysqli_fetch_array($mailresult);
-
-		if($mailrow['username'] != $username)
-		{
-			$emailtaken = true; // mail is taken
-		}
-	}
-
+	
 	if($emailtaken == false)
 	{
-		$mailupdatequery = "UPDATE user SET first_name ='$firstname', last_name = '$lastname', email = '$mail',  address= '$address' WHERE username = '$username'";
+		$mailupdatequery = $mysqli->prepare("UPDATE user SET first_name =?, last_name = ?,  address= ? WHERE username = ?");
+		$mailupdatequery->bind_param('ssss',$firstname,$lastname,$address,$username);
+		$mailupdatequery->execute();
 		
-		mysqli_query($conn,$mailupdatequery);
 
-		if(mysqli_query($conn,$mailupdatequery))
+		if($mailupdatequery->execute())
 		{
-			echo "<script> alert('Successfully Updated'); </script>";
 			echo '<script> window.location = "index.php" </script>';
 		}
 	}
 }
 if(isset($_SESSION['Username']))
 {
-
+	$role=3;
 	$Username = $_SESSION['Username'];
-	$fetchuserdetails = "SELECT * FROM user where username = '$Username'  AND user_role_id = 3";
+	$fetchuserdetails = $mysqli->prepare("SELECT * FROM user where username = ?  AND user_role_id = ?");
+	$fetchuserdetails->bind_param('si',$Username,$role);
+	$fetchuserdetails->execute();
+
 	
-	$result = mysqli_query($conn,$fetchuserdetails);
-	$row = mysqli_fetch_array($result);
+	$result = $fetchuserdetails->get_result();
+	$row =$result->fetch_array();
 	
 }
 
@@ -138,11 +128,11 @@ if(isset($_SESSION['Username']))
 					<input type="text" class="form-control" value = "<?php echo $row['last_name'];?>" name="lastname">
 				</div>
 			</div>
-				<div class="mb-3">
+				<!-- <div class="mb-3">
 					<label class="form-label">Email address</label>
 					<input type="email" class="form-control" value = "<?php echo $row['email'];?>" name="email">
 					<span id="error" style= "color:red"></span>
-			</div>
+			</div> -->
 				<div class="mb-3">
 					<label class="form-label">Address</label>
 					<input type="textarea" class="form-control" value = "<?php echo $row['address'];?>" name="address">

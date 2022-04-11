@@ -3,9 +3,11 @@
 
 $vehicleid = $_GET['vehicle'];
 
-$selectvehiclequery = "SELECT * FROM vehicle LEFT JOIN model_master ON vehicle.`model_id` = model_master.`model_id` LEFT JOIN brand_master ON model_master.`brand_id` = brand_master.`brand_id` LEFT JOIN fuel_type ON fuel_type.`fuel_type_id` = vehicle.`fuel_type_id` LEFT JOIN transmission ON transmission.`transmission_id` = vehicle.`transmission_id` LEFT JOIN bodycolor ON bodycolor.`color_id` = vehicle.`exterior_color`  where `vehicle_id`=$vehicleid";  
-$resultvehiclequery = mysqli_query($conn, $selectvehiclequery);  
-$vehiclerow = mysqli_fetch_array($resultvehiclequery);
+$selectvehiclequery = $mysqli->prepare("SELECT * FROM vehicle LEFT JOIN model_master ON vehicle.`model_id` = model_master.`model_id` LEFT JOIN brand_master ON model_master.`brand_id` = brand_master.`brand_id` LEFT JOIN fuel_type ON fuel_type.`fuel_type_id` = vehicle.`fuel_type_id` LEFT JOIN transmission ON transmission.`transmission_id` = vehicle.`transmission_id` LEFT JOIN bodycolor ON bodycolor.`color_id` = vehicle.`exterior_color`  where `vehicle_id`=?");
+$selectvehiclequery->bind_param('i',$vehicleid);
+$selectvehiclequery->execute();  
+$resultvehiclequery = $selectvehiclequery->get_result();
+$vehiclerow = $resultvehiclequery->fetch_array();
 if(!$vehiclerow){
 include 'error-404.php';
 die;

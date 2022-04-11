@@ -1,18 +1,6 @@
 <?php include 'header.php';?>
 
 
-<!--=================================
- header -->
-
-
-<!--=================================
- inner-intro -->
-
-
-
-<!--=================================
- inner-intro -->
-
  <?php
     $usernotexist = false; 
     $missmatchedpassword = false;
@@ -24,8 +12,9 @@
       $password = $_POST["password"]; 
     
     
-      $selectuserquery = "SELECT * FROM `user` WHERE username = '$username' or email = '$username' AND  user_role_id = 3";
-      $result = mysqli_query($conn,$selectuserquery);
+      $selectuserquery = $mysqli->prepare("SELECT * FROM `user` WHERE username = '$username' or email = '$username' AND  user_role_id = 3");
+      $selectuserquery->execute();
+      $result = $selectuserquery->get_result();
       $number = mysqli_num_rows($result); // fetches number of row in result
       if($number==1)
       { 
