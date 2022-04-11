@@ -88,7 +88,7 @@ if(isset($_POST["submit"]))
 <?php										
 	$selectmodel = "SELECT * FROM model_master ORDER BY model_name";
 	$modelresult = mysqli_query($conn,$selectmodel);
-	while($row1 = mysqli_fetch_array($selectresult))
+	while($row1 = mysqli_fetch_array($modelresult))
 	{
 ?>
 						<option value="<?php echo $row1['model_id']?>"><?php echo $row1['model_name']?></option>
@@ -105,7 +105,7 @@ if(isset($_POST["submit"]))
 <?php										
 	$selectcolor = "SELECT * FROM bodycolor ORDER BY color";
 	$colorresult = mysqli_query($conn,$selectmodel);
-	while($row2 = mysqli_fetch_array($selectresult))
+	while($row2 = mysqli_fetch_array($colorresult))
 	{
 ?>
 						<option value="<?php echo $row2['color_id']?>"><?php echo $row2['color']?></option>
@@ -122,7 +122,7 @@ if(isset($_POST["submit"]))
 <?php										
 	$selectfueltype = "SELECT * from fuel_type ORDER BY fuel_type";
 	$fueltyperesult = mysqli_query($conn,$selectfueltype);
-	while($row3 = mysqli_fetch_array($selectresult))
+	while($row3 = mysqli_fetch_array($fueltyperesult))
 	{
 ?>
 					<option value="<?php echo $row3['fuel_type_id']?>"><?php echo $row3['fuel_type']?></option>
@@ -139,7 +139,7 @@ if(isset($_POST["submit"]))
 <?php										
 	$selecttransmission = "SELECT * FROM transmission ORDER BY transmission_type";
 	$transmissionresult = mysqli_query($conn,$selecttransmission);
-	while($row4 = mysqli_fetch_array($result4))
+	while($row4 = mysqli_fetch_array($transmissionresult))
 	{
 ?>
 			<option value="<?php echo $row4['transmission_id']?>"><?php echo $row4['transmission_type']?></option>
