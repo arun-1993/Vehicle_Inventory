@@ -3,8 +3,10 @@
 if(isset($_GET['id']))
 {
 	$brandid = $_GET['id'];
-	$deletebrand = "delete from brand_master where brand_id = $brandid";
-	$deleteresult = mysqli_query($conn,$deletebrand);
+	$deletebrand = $mysqli->prepare("delete from brand_master where brand_id = ?");
+	$deletebrand->bind_param('i',$brandid);
+	$deletebrand->execute();
+	$deleteresult = $deletebrand->get_result();
 	
 	if($deleteresult)
 	{

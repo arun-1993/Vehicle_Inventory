@@ -108,13 +108,13 @@ use PHPMailer\PHPMailer\Exception;
 			        <div id="formmessage" class="form-notice" style="display:none;">Success/Error Message Goes Here</div>
               <div class="contact-form">
                 <div class="mb-3">
-                  <input id="contactform_name" type="text" placeholder="Name*" class="form-control"  name="name">
+                  <input id="contactform_name" type="text" placeholder="Name*" class="form-control"  name="name" required>
                 </div>
                 <div class="mb-3">
-                  <input id="contactform_email" type="email" placeholder="Email*" class="form-control" name="email">
+                  <input id="contactform_email" type="email" placeholder="Email*" class="form-control" name="email" required>
                 </div>
                 <div class="mb-3">
-                  <input id="contactform_phone" type="text" placeholder="Phone*" class="form-control" name="phone">
+                  <input id="contactform_phone" type="text" placeholder="Phone*" class="form-control" name="phone" required>
                 </div>
                 <div class="mb-3">
                   <textarea id="contactform_message" class="form-control input-message" placeholder="Comment*" rows="7" name="message"></textarea>

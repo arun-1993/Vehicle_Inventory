@@ -4,17 +4,20 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if(isset($_GET['id']))
-{
+{ $status = "Cancelled";
 	$appointmentid = $_GET['id'];
-	$sql="update `appointment` set appointment_status='Cancelled' where appointment_id = '".$appointmentid."'";
+	$updateappointment = $mysqli->prepare("update `appointment` set appointment_status=? where appointment_id = ?");
+  $updateappointment->bind_param('si',$status,$appointmentid);
 	
-	$result=mysqli_query($conn,$sql);
+	$result=$updateappointment->execute();
 	
 	if($result)
 	{
-			$sql = "SELECT * FROM appointment a JOIN vehicle v JOIN model_master m JOIN brand_master b JOIN user u WHERE a.vehicle_id=v.vehicle_id AND v.model_id=m.model_id AND m.brand_id=b.brand_id AND a.user_id=u.user_id AND a.appointment_id=$appointmentid";
-			$res = mysqli_query($conn,$sql);
-			$row =mysqli_fetch_array($res);
+    $selectappointment = $mysqli->prepare("SELECT * FROM appointment a JOIN vehicle v JOIN model_master m JOIN brand_master b JOIN user u WHERE a.vehicle_id=v.vehicle_id AND v.model_id=m.model_id AND m.brand_id=b.brand_id AND a.user_id=u.user_id AND a.appointment_id=?");
+    $selectappointment->bind_param('i',$appointmentid);
+    $selectappointment->execute();
+      $result = $selectappointment->get_result();
+			$row =$result->fetch_assoc();
 			$email = $row['email'];
 			$date=date('y-m-d');
 			$model = $row['model_name'];

@@ -1,19 +1,4 @@
 <?php include('header.php');?>
-
-<div class="page">
-	<div class="page-main">
-
-		<!--sidebar open-->
-		<?php include('sidebar.php');?>
-		<!--sidebar closed-->
-
-		<div class="app-content main-content">
-			<div class="side-app">
-
-				<!--app header-->
-				<?php include('pageheader.php');?>
-				<!--/app header-->
-						
 <?php
 
 if(isset($_POST["brand_name"]))
@@ -21,9 +6,12 @@ if(isset($_POST["brand_name"]))
 		$brandname = $_POST["brand_name"];
 		
 		if($brandname!='')
-		{			 
-			$brandinsert = "insert into brand_master(brand_name) values('".$brandname."')"; // insert into dB
-			$brandresult = mysqli_query($conn,$brandinsert);
+		{	$brandinsert = $mysqli->prepare("INSERT INTO brand_master (brand_name) VALUES (?)");
+			$brandinsert->bind_param('s',$brandname);
+			$brandresult = $brandinsert->execute();
+					 
+			// $brandinsert = "insert into brand_master(brand_name) values('".$brandname."')"; // insert into dB
+			// $brandresult = mysqli_query($conn,$brandinsert);
 			
 			
 			if($brandresult)
@@ -43,6 +31,21 @@ if(isset($_POST["brand_name"]))
 		}
 	}
 ?>
+
+<div class="page">
+	<div class="page-main">
+
+		<!--sidebar open-->
+		<?php include('sidebar.php');?>
+		<!--sidebar closed-->
+
+		<div class="app-content main-content">
+			<div class="side-app">
+
+				<!--app header-->
+				<?php include('pageheader.php');?>
+				<!--/app header-->
+						
 						<div class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title">Add Brand</h4>

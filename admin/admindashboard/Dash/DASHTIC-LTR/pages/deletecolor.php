@@ -3,8 +3,10 @@
 if(isset($_GET['id']))
 {
 	$colorid = $_GET['id'];
-	$colodelete = "delete from bodycolor where color_id = $colorid";
-	$deleteresult = mysqli_query($conn,$colodelete);
+	$colordelete = $mysqli->prepare("delete from bodycolor where color_id = ?");
+	$colordelete->bind_param('i',$colorid);
+	
+	$deleteresult =$colordelete->execute();
 	
 	if($deleteresult)
 	{

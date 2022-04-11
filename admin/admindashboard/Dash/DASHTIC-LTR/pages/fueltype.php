@@ -1,5 +1,12 @@
 <?php include('header.php');?>
 
+<?php
+
+$sql = "select * from fuel_type";
+$selectresult = mysqli_query($conn,$sql);
+
+?>
+
 <div class="page">
 	<div class="page-main">
 
@@ -20,8 +27,10 @@
 								<div class="card">
 									<div class="card-header">
 										<div class="card-title">
-										<h2>Fuel Type</h2>
-										<h5><a href="addfuel.php" style="color:blue;">ADD FUEL TYPE</a></h5>
+											<h2>Fuel Type</h2>
+											<?php if($_SESSION['Role'] == 1) : ?>
+											<h5><a href="addfuel.php" style="color:blue;">ADD FUEL TYPE</a></h5>
+											<?php endif; ?>
 										</div>
 									</div>
 									<div class="card-body">
@@ -30,38 +39,31 @@
 												<thead>
 													<tr>
 														<th class="wd-25p border-bottom-0">Fuel Id</th>
-														<th class="wd-25p border-bottom-0">Fuel Type</th>											
+														<th class="wd-25p border-bottom-0">Fuel Type</th>
+														<?php if($_SESSION['Role'] == 1) : ?>
 														<th class="wd-25p border-bottom-0">EDIT</th>
 														<th class="wd-25p border-bottom-0">DELETE</th>
+														<?php endif; ?>
 													</tr>
 												</thead>
 												<tbody>
-<?php
-	$sql = "select * from fuel_type";
-	$result = mysqli_query($conn,$sql);
-	
-	
-	while($row=mysqli_fetch_assoc($result))
-	{
-		$fid=$row['fuel_type_id'];
-?>
+												<?php while($row=mysqli_fetch_assoc($selectresult)) : ?>
 													<tr>														
 														<td><?php echo $row['fuel_type_id']; ?></td>
 														<td><?php echo $row['fuel_type']; ?></td>
+														<?php if($_SESSION['Role'] == 1) : ?>
 														<td>
-														<form action="editfueltype.php" method="post">
-															<input type="hidden" name="edit_id" value="<?php echo $row['fuel_type_id']; ?>">
-															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
-														</form>
+															<form action="editfueltype.php" method="post">
+																<input type="hidden" name="edit_id" value="<?php echo $row['fuel_type_id']; ?>">
+																<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
+															</form>
 														</td>
-														<td>		
-														<a href="deletefueltype.php?id=<?php echo $fid?>" class="btn btn-danger delete-confirmation">DELETE</a>
-															
+														<td>
+															<a href="deletefueltype.php?id=<?php echo $fid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
+														<?php endif; ?>
 													</tr>
-	<?php
-	}
-	?>
+												<?php endwhile; ?>
 												</tbody>
 											</table>
 										</div>

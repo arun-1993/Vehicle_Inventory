@@ -1,19 +1,5 @@
 <?php include('header.php');?>
 
-<div class="page">
-	<div class="page-main">
-
-		<!--sidebar open-->
-		<?php include('sidebar.php');?>
-		<!--sidebar closed-->
-
-		<div class="app-content main-content">
-			<div class="side-app">
-
-				<!--app header-->
-				<?php include('pageheader.php');?>
-				<!--/app header-->
-
 <?php
 	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES)){
     $firstname = $_POST["firstname"];
@@ -24,6 +10,7 @@
     $confirmPassword = $_POST["confirmPassword"];
     $address = $_POST["address"];
 	$role = $_POST['role'];
+	$defaultimage = 'avatardefault_92824.png';
 
     $checkUsername = "SELECT * FROM `user` WHERE username = '$Username'AND user_role_id in(1,2)";
     $userexists =  mysqli_query($conn,$checkUsername);
@@ -44,12 +31,18 @@
 
       if($password == $confirmPassword ){
 		
+		$insertinfo = $mysqli->prepare("INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` ) 
+        VALUES (?, ?, ?, ?, ?, ?, ?,?)");
+		$insertinfo-> bind_param('isssssss',$role,$firstname,$lastname,$email,$Username,$hashedpassword,$address,$defaultimage);
+		$insertinfo->execute();
 
 
-        $insertinfo = "INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` ) 
-        VALUES ($role, '$firstname', '$lastname', '$email', '$Username', '$hashedpassword', '$address','avatardefault_92824.png')";
-        mysqli_query($conn,$insertinfo);
-        $error = mysqli_error($conn);
+
+        
+		// $insertinfo = "INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` ) 
+        // VALUES ($role, '$firstname', '$lastname', '$email', '$Username', '$hashedpassword', '$address','avatardefault_92824.png')";
+        // mysqli_query($conn,$insertinfo);
+        // $error = mysqli_error($conn);
         
         ?>
         
@@ -70,6 +63,20 @@
   }
 
 ?>
+
+<div class="page">
+	<div class="page-main">
+
+		<!--sidebar open-->
+		<?php include('sidebar.php');?>
+		<!--sidebar closed-->
+
+		<div class="app-content main-content">
+			<div class="side-app">
+
+				<!--app header-->
+				<?php include('pageheader.php');?>
+				<!--/app header-->
 
 
 

@@ -3,16 +3,18 @@
 if(isset($_GET['id']))
 {
 	$employeeid = $_GET['id'];
-	$deleteemployee = "delete from user where user_id = $employeeid";
-	$deleteresult = mysqli_query($conn,$deleteemployee);
+	$deleteemployee = $mysqli->prepare("delete from user where user_id = ?");
+	$deleteemployee->bind_param('i',$employeeid);
+	
+	$deleteresult = $deleteemployee->execute();
 	
 	if($deleteresult)
 	{
-		header("Location:employee.php?msg=success");
+		header("Location:employee.php");
 	}
 	else
 	{
-		header("Location:employee.php?msg=failure");
+		header("Location:employee.php");
 	}	
 }
 

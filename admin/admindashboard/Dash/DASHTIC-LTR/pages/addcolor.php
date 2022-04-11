@@ -1,19 +1,4 @@
 <?php include('header.php');?>
-
-<div class="page">
-	<div class="page-main">
-
-		<!--sidebar open-->
-		<?php include('sidebar.php');?>
-		<!--sidebar closed-->
-
-		<div class="app-content main-content">
-			<div class="side-app">
-
-				<!--app header-->
-				<?php include('pageheader.php');?>
-				<!--/app header-->
-						
 <?php
 
 if(isset($_POST["color"]))
@@ -21,9 +6,10 @@ if(isset($_POST["color"]))
 		$cname = $_POST["color"];
 		
 		if($cname!='')
-		{			
-			$colorinsert = "insert into bodycolor(color) values('".$cname."')";
-			$insertresult = mysqli_query($conn,$colorinsert);
+		{	$colorinsert =$mysqli->prepare("INSERT INTO bodycolor (color) VALUES (?)");
+			$colorinsert-> bind_param('s',$cname);
+			$insertresult=$colorinsert->execute();		
+			
 			
 			
 			if($insertresult)
@@ -43,6 +29,21 @@ if(isset($_POST["color"]))
 		}
 	}
 ?>
+
+<div class="page">
+	<div class="page-main">
+
+		<!--sidebar open-->
+		<?php include('sidebar.php');?>
+		<!--sidebar closed-->
+
+		<div class="app-content main-content">
+			<div class="side-app">
+
+				<!--app header-->
+				<?php include('pageheader.php');?>
+				<!--/app header-->
+						
 						<div class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title">Add Exterior Color</h4>

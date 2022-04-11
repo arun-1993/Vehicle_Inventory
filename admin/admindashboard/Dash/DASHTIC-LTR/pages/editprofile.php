@@ -27,11 +27,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 
 	if($emailtaken == false)
 	{
-		$query = "UPDATE user SET first_name ='$firstname', last_name = '$lastname', email = '$mail',  address= '$address' WHERE user_id = '$userid'";
+		$updateprofile = "UPDATE user SET first_name ='$firstname', last_name = '$lastname', email = '$mail',  address= '$address' WHERE user_id = '$userid'";
 		
-		mysqli_query($conn,$query);
+		mysqli_query($conn,$updateprofile);
 
-		if(mysqli_query($conn,$query))
+		if(mysqli_query($conn,$updateprofile))
 		{
 			echo "<script> alert('Successfully Updated'); </script>";
 			echo '<script> window.location = "index.php" </script>';
@@ -42,8 +42,8 @@ if(isset($_GET['id']))
 {
 
 	$userid = $_GET['id'];
-	$query = "SELECT * FROM user where user_id = $userid  AND user_role_id in(1,2)";
-	$result = mysqli_query($conn,$query);
+	$selectuser = "SELECT * FROM user where user_id = $userid  AND user_role_id in(1,2)";
+	$result = mysqli_query($conn,$selectuser);
 	$row = mysqli_fetch_array($result);
 	
 }

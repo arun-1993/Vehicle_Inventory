@@ -23,9 +23,10 @@ if(isset($_POST["brand_id"]) && isset($_POST["model_name"]))
 		$description = $_POST["general_description"];
 		
 		if($brandid!='' && $modelname!='')
-		{			
-			$modeinsert = "INSERT INTO model_master (brand_id, model_name, general_description) values('$brandid', '$modelname', '$description')";
-			$insertresult = mysqli_query($conn,$modeinsert);
+		{		
+			$modelinsert = $mysqli->prepare("INSERT INTO model_master (brand_id, model_name, general_description) values(?, ?, ?)");
+			$modelinsert->bind_param('iss',$brandid, $modelname, $description);
+			$insertresult = $modelinsert->execute();
 			
 			if($insertresult)
 			{
