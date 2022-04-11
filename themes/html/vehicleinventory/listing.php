@@ -1,6 +1,29 @@
-<?php include 'header.php';
-$results_per_page = 5;  
+<?php include 'header.php'; ?>
 
+<!--=================================
+ header -->
+
+
+<!--=================================
+ inner-intro -->
+
+ <section class="inner-intro bg-1 bg-overlay-black-70">
+  <div class="container">
+     <div class="row text-center intro-title">
+           <div class="col-md-6 text-md-start d-inline-block">
+             <h1 class="text-white">product listing </h1>
+           </div>
+           <div class="col-md-6 text-md-end float-end">
+             <ul class="page-breadcrumb">
+                
+             </ul>
+           </div>
+     </div>
+  </div>
+</section>
+
+<!--=================================
+ inner-intro -->
 <?php  $results_per_page = 5;  
   
   @$brand = $_GET['brand'];

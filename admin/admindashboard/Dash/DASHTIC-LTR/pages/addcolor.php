@@ -66,7 +66,7 @@ if(isset($_POST["color"]))
 											<div class="">
 												<form method="POST" action="">
 												<div class="form-group">
-													<label class="form-label">Color</label>
+													<label class="form-label">Color*</label>
 													<input type="text" class="form-control" name="color" placeholder="Enter a Color" required>
 												</div>												
 											</div>
