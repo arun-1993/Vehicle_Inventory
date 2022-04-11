@@ -7,32 +7,33 @@
 @$brand = $_GET['brand'];
 @$model = $_GET['model'];
 
-$query_brand = "SELECT * FROM brand_master ORDER BY brand_name";
-$result_brand = mysqli_query($conn, $query_brand);
+$query_brand = $mysqli->prepare("SELECT * FROM brand_master ORDER BY brand_name");
+$query_brand->execute();
+$result_brand = $query_brand->get_result();
 
 if($brand > 0)
 {
-    $query_model = "SELECT * FROM model_master WHERE brand_id = $brand ORDER BY model_name";
+    $query_model = $mysqli->prepare("SELECT * FROM model_master WHERE brand_id = $brand ORDER BY model_name");
 }
 
 else
 {
-    $query_model = "SELECT * FROM model_master ORDER BY model_name";
+    $query_model = $mysqli->prepare("SELECT * FROM model_master ORDER BY model_name");
 }
-
-$result_model = mysqli_query($conn, $query_model);
+$query_model->execute();
+$result_model = $query_model->get_result();
 
 if($model > 0)
 {
-    $query_year = "SELECT DISTINCT model_year FROM vehicle WHERE model_id = $model ORDER BY model_year DESC";
+    $query_year = $mysqli->prepare("SELECT DISTINCT model_year FROM vehicle WHERE model_id = $model ORDER BY model_year DESC");
 }
 
 else
 {
-    $query_year = "SELECT DISTINCT model_year FROM vehicle ORDER BY model_year DESC";
+    $query_year = $mysqli->prepare("SELECT DISTINCT model_year FROM vehicle ORDER BY model_year DESC");
 }
-
-$result_year = mysqli_query($conn, $query_year);
+$query_year->execute();
+$result_year = $query_year->get_result();
 
 ?>
 
@@ -287,7 +288,7 @@ $result_year = mysqli_query($conn, $query_year);
               <div class="selected-box">
                 <select data-target="#search_form" class="selectpicker" name="brand" id="brand" onchange="fetch_models(this.form)">
                   <option value="0"> --Brand-- </option>
-                  <?php while($row = mysqli_fetch_array($result_brand)) : ?> <!-- stores brand result into arry  -->
+                  <?php while($row = $result_brand->fetch_array()) : ?> <!-- stores brand result into arry  -->
                     <?php if($row['brand_id'] == $brand) : ?>
                     <option value="<?php echo $row['brand_id']; ?>" selected><?php echo $row['brand_name']; ?></option>
                     <?php else : ?>
@@ -302,7 +303,7 @@ $result_year = mysqli_query($conn, $query_year);
               <div class="selected-box">
                <select class="selectpicker" name="model" id="model" onchange="fetch_years(this.form)">
                 <option value="0"> --Model-- </option>
-                <?php while($row = mysqli_fetch_array($result_model)) : ?>  <!-- stores model result into arry  -->
+                <?php while($row = $result_model->fetch_array()) :?>  <!-- stores model result into arry  -->
                   <?php if($row['model_id'] == $model) : ?>
                   <option value="<?php echo $row['model_id']; ?>" selected><?php echo $row['model_name']; ?></option>
                   <?php else : ?>
@@ -317,7 +318,7 @@ $result_year = mysqli_query($conn, $query_year);
              <div class="selected-box">
                <select class="selectpicker" name="year" id="year">
                 <option value="0"> --Year-- </option>
-                <?php while($row = mysqli_fetch_array($result_year)) : ?>  <!-- stores year result into arry  -->
+                <?php while($row = $result_year->fetch_array()) : ?>  <!-- stores year result into arry  -->
                 <option value="<?php echo $row['model_year']; ?>"><?php echo $row['model_year']; ?></option>
                 <?php endwhile; ?>
                </select>
@@ -368,8 +369,9 @@ $result_year = mysqli_query($conn, $query_year);
           end form -->
 <?php  
 
-$feturedcarquery = "SELECT * FROM vehicle JOIN model_master USING(model_id) JOIN brand_master USING(brand_id) JOIN transmission USING(transmission_id) ORDER BY RAND() LIMIT 5";
-$feturedcarresult = mysqli_query($conn, $feturedcarquery);
+$feturedcarquery = $mysqli->prepare("SELECT * FROM vehicle JOIN model_master USING(model_id) JOIN brand_master USING(brand_id) JOIN transmission USING(transmission_id) ORDER BY RAND() LIMIT 5");
+$feturedcarquery->execute();
+$feturedcarresult = $feturedcarquery->get_result();
 
 ?>
 
@@ -390,7 +392,7 @@ $feturedcarresult = mysqli_query($conn, $feturedcarquery);
    <div class="row">
    <div class="col-md-12">
     <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="20">
-    <?php while($feturedcarrow = mysqli_fetch_array($feturedcarresult)) : ?>  <!-- retrives result array -->
+    <?php while($feturedcarrow = $feturedcarresult->fetch_array()) : ?>  <!-- retrives result array -->
     <div class="item">
         <div class="car-item car-item-4 text-center">
              <div class="car-image">
@@ -486,18 +488,22 @@ $feturedcarresult = mysqli_query($conn, $feturedcarquery);
 	
 	<?php 
 	
-		$brandquery = "SELECT COUNT(*) as num FROM  brand_master";
-		$modelquery = "SELECT COUNT(*)  as num FROM  model_master";
-		$appointmentquery = "SELECT COUNT(*) as num FROM  appointment";
-		$vehiclequery = "SELECT COUNT(*) as num FROM vehicle";
-		$brand = mysqli_query($conn,$brandquery);
-		$model = mysqli_query($conn,$modelquery);
-		$appointment = mysqli_query($conn,$appointmentquery);
-		$vehicle = mysqli_query($conn,$vehiclequery);
-		$numbrand = mysqli_fetch_assoc($brand); // returns number of brand
-		$nummodel = mysqli_fetch_assoc($model); // returns number of model
-    $numappointment = mysqli_fetch_assoc($appointment); // returns number of appointment
-		$numvehicle = mysqli_fetch_assoc($vehicle); // returns number of vehicles in stock
+		$brandquery = $mysqli->prepare("SELECT COUNT(*) as num FROM  brand_master");
+    $brandquery->execute();
+		$brand = $brandquery->get_result();
+		$modelquery = $mysqli->prepare("SELECT COUNT(*)  as num FROM  model_master");
+    $modelquery->execute();
+    $model =$modelquery->get_result();
+		$appointmentquery = $mysqli->prepare("SELECT COUNT(*) as num FROM  appointment");
+    $appointmentquery->execute();
+    $appointment=$appointmentquery->get_result();
+		$vehiclequery = $mysqli->prepare("SELECT COUNT(*) as num FROM vehicle");
+    $vehicle = $vehiclequery->execute();
+    $vehicle= $vehiclequery->get_result();
+		$numbrand = $brand->fetch_assoc(); // returns number of brand
+		$nummodel = $model->fetch_assoc(); // returns number of model
+    $numappointment = $appointment->fetch_assoc(); // returns number of appointment
+		$numvehicle = $vehicle->fetch_assoc(); // returns number of vehicles in stock
 	
 	?>
 	

@@ -68,8 +68,7 @@
     $query.="AND model_name = '$model_name'";
   }
 
-  echo $query;
-  die;
+  
   
 
   $result = mysqli_query($conn, $query);  

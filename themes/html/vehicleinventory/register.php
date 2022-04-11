@@ -42,11 +42,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
       $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
       if($password == $confirmPassword )
-      {
+      { 
+        $verified= "False";
+        $role=3;
+        $insertinfo = $mysqli->prepare("INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $insertinfo->bind_param('issssss',$role,$firstname,$lastname,$email,$username,$hashedpassword,$address);
+        $insertinfo->execute();
         
-        $insertinfo = "INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`) 
-        VALUES (3, '$firstname', '$lastname', '$email', '$username', '$hashedpassword', '$address')";
-        $row = mysqli_query($conn,$insertinfo);
+        $row = $insertinfo->get_result();
         
         ?>
         
@@ -59,6 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $_SESSION['name'] = $_POST['Firstname'].' '.$_POST['Lastname'];
         ?>
         <script> alert("Loggedin! <?php echo $_SESSION['Username'];?>");
+        
     
         window.location= 'index.php'; </script>
       <?php
@@ -106,7 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
          </div>
       </div>
     </div>
-    <form action="register.php" method="post" id ="form">
+    <form action="verify.php" method="post" id ="form">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
           <div class="gray-form">

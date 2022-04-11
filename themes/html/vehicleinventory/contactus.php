@@ -38,8 +38,9 @@ use PHPMailer\PHPMailer\Exception;
   $message= $_POST['message'];
   $msg = "Name : $name <br>Email : $email<br>Phone : $phone<br><br>$message"; 
 
-  $query = "INSERT INTO contact (name,email, phone, message) VALUES ('$name', '$email', '$phone', '$message')";
-  $result = mysqli_query($conn, $query);
+  $insertcontact = $mysqli->prepare("INSERT INTO contact (name,email, phone, message) VALUES (?,?,?,?)");
+  $insertcontact->bind_param('ssis',$name, $email, $phone, $message);
+  $result = $insertcontact->execute();
    
   include_once('mail/login_credentials.php');
   
