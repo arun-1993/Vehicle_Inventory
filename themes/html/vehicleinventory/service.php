@@ -1,4 +1,26 @@
 <?php include 'header.php';?>
+
+<?php 
+	
+$auditquery = "SELECT COUNT(*) as num FROM  vehicle_audit";
+$userquery = "SELECT COUNT(*)  as num FROM user";
+$appointmentquery = "SELECT COUNT(*) as num FROM  appointment";
+$vehiclequery = "SELECT COUNT(*) as num FROM vehicle";
+$audit = mysqli_query($conn,$auditquery);
+$user = mysqli_query($conn,$userquery);
+$appointment = mysqli_query($conn,$appointmentquery);
+$vehicle = mysqli_query($conn,$vehiclequery);
+$numaudit = mysqli_fetch_assoc($audit);
+$numuser = mysqli_fetch_assoc($user);
+$numappointment = mysqli_fetch_assoc($appointment);
+$numvehicle = mysqli_fetch_assoc($vehicle);
+
+$content_query = "SELECT * FROM edit_content WHERE content_id = 1";
+$content_result = mysqli_query($conn, $content_query);
+$content = mysqli_fetch_array($content_result)['content_text'];
+
+?>
+
 <!--=================================
  inner-intro -->
 
@@ -74,22 +96,6 @@
 <!--=================================
 Counter -->
 
-<?php 
-	
-		$auditquery = "SELECT COUNT(*) as num FROM  vehicle_audit";
-		$userquery = "SELECT COUNT(*)  as num FROM user";
-		$appointmentquery = "SELECT COUNT(*) as num FROM  appointment";
-		$vehiclequery = "SELECT COUNT(*) as num FROM vehicle";
-		$audit = mysqli_query($conn,$auditquery);
-		$user = mysqli_query($conn,$userquery);
-		$appointment = mysqli_query($conn,$appointmentquery);
-		$vehicle = mysqli_query($conn,$vehiclequery);
-		$numaudit = mysqli_fetch_assoc($audit);
-		$numuser = mysqli_fetch_assoc($user);
-		$numappointment = mysqli_fetch_assoc($appointment);
-		$numvehicle = mysqli_fetch_assoc($vehicle);
-	
-	?>
 
 
 <section class="counter counter-style-2 bg-red bg-1 bg-overlay-black-70 page-section-ptb">
@@ -153,9 +159,10 @@ Counter -->
       </div>
    <div class="row">
      <div class="col-lg-6">
-        <p>Before we get ahead of ourselves, we want to welcome you to AutoTrack. While nothing can replace thing on-the-lot experience.</p>
+        <?php echo nl2br($content); ?>
+        <!-- <p>Before we get ahead of ourselves, we want to welcome you to AutoTrack. While nothing can replace thing on-the-lot experience.</p>
         <p>We appreciate you taking the time today to visit our web site. Our goal is to give you an interactive tour of our new and used inventory, as well as allow you to conveniently get a quote, schedule a service appointment, or apply for financing. The search for a luxury car is filled with high expectations.</p>
-        <p>AutoTrack is your single stop for buying  used and fresh vehicles, all over India. We've brought together cutting-edge technology with country-wide partners and more importantly, deep understanding of what buyers  need. We solve all pain points associated with  purchasing a pre-loved one. Whether you're buying or selling, you get a quick, easy, fair, transparent, hassle (and haggle) free process.</p>      
+        <p>AutoTrack is your single stop for buying  used and fresh vehicles, all over India. We've brought together cutting-edge technology with country-wide partners and more importantly, deep understanding of what buyers  need. We solve all pain points associated with  purchasing a pre-loved one. Whether you're buying or selling, you get a quick, easy, fair, transparent, hassle (and haggle) free process.</p> -->
     </div>
     <div class="col-lg-6 mt-4 mt-lg-0">
       <img class="img-fluid center-block" src="images/blog/07.jpg" alt="">
