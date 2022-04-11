@@ -1,35 +1,5 @@
-<<<<<<< HEAD
 <?php include 'header.php';
 $results_per_page = 5;  
-=======
-<?php include 'header.php'; ?>
-
-<!--=================================
- header -->
-
-
-<!--=================================
- inner-intro -->
-
- <section class="inner-intro bg-1 bg-overlay-black-70" id="vehicle_search">
-  <div class="container"  id = "search">
-     <div class="row text-center intro-title">
-           <div class="col-md-6 text-md-start d-inline-block">
-             <h1 class="text-white">product listing </h1>
-           </div>
-           <div class="col-md-6 text-md-end float-end">
-             <ul class="page-breadcrumb">
-                
-             </ul>
-           </div>
-     </div>
-  </div>
-</section>
-
-<!--=================================
- inner-intro -->
-<?php  $results_per_page = 5;  
->>>>>>> 8692bed3f3b2a3523d315c24b944b99ff1f450f6
   
   @$brand = $_GET['brand'];
   @$model = $_GET['model'];
@@ -73,8 +43,8 @@ $results_per_page = 5;
     $query.="AND model_name = '$model_name'";
   }
 
-  echo $query;
-  die;
+  // echo $query;
+  // die;
   
 
   $result = mysqli_query($conn, $query);  
