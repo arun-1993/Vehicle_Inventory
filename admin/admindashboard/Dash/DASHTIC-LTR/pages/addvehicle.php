@@ -104,7 +104,7 @@ if(isset($_POST["submit"]))
 									<option value=""> -- Select Body Color -- </option>
 <?php										
 	$selectcolor = "SELECT * FROM bodycolor ORDER BY color";
-	$colorresult = mysqli_query($conn,$selectmodel);
+	$colorresult = mysqli_query($conn,$selectcolor);
 	while($row2 = mysqli_fetch_array($colorresult))
 	{
 ?>
