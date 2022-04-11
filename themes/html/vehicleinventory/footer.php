@@ -5,15 +5,7 @@
   <div class="container">
     <div class="row">
      <div class="col-md-12">
-      <div class="social">
-        <ul>
-          <li><a class="facebook" href="#">facebook <i class="fa fa-facebook"></i> </a></li>
-          <li><a class="twitter" href="#">twitter <i class="fa fa-twitter"></i> </a></li>
-          <li><a class="pinterest" href="https://pin.it/7zJanqx">pinterest <i class="fa fa-pinterest-p"></i> </a></li>
-          <li><a class="dribbble" href="https://dribbble.com/atrackinfo">dribbble <i class="fa fa-dribbble"></i> </a></li>
-         
-          <li><a class="behance" href="https://www.behance.net/autotrackindia">behance <i class="fa fa-behance"></i> </a></li>
-        </ul>
+      <div class="social">    
        </div>
       </div>
     </div>
@@ -23,7 +15,14 @@
 		   <h6 class="text-white">About AutoTrack</h6>
          <p>AutoTrack is your single stop for buying  used and fresh vehicles, all over India. AutoTrack provide everything you need to Buy a car for you and your family whether it is new or old ! </p>
         </div>
-        
+        <div class="social">
+        <ul>
+          <li><a class="facebook" href="#"><i class="fa fa-facebook"></i> </a></li>
+          <li><a class="twitter" href="#"><i class="fa fa-twitter"></i> </a></li>
+          <li><a class="dribbble" href="https://dribbble.com/atrackinfo"><i class="fa fa-dribbble"></i> </a></li>       
+          <li><a class="behance" href="https://www.behance.net/autotrackindia"><i class="fa fa-behance"></i> </a></li>
+        </ul>
+        </div>
       </div>
       <div class="col-lg-3 col-md-6">
         <div class="usefull-link">

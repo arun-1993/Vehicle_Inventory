@@ -1,19 +1,4 @@
  <?php include('header.php');?>
-
-<div class="page">
-	<div class="page-main">
-
-		<!--sidebar open-->
-		<?php include('sidebar.php');?>
-		<!--sidebar closed-->
-
-		<div class="app-content main-content">
-			<div class="side-app">
-
-				<!--app header-->
-				<?php include('pageheader.php');?>
-				<!--/app header-->
-						
 <?php
 
 if(isset($_POST["submit"]))
@@ -45,10 +30,10 @@ if(isset($_POST["submit"]))
 
 		
 		if($modelid!='' && $colorid!='' && $fueltypeid!='' && $transmissionid!='' && $modelyear!='' && $capacity!='' && $price!='' && $vin!='' && $kms!='' && $decription!='')
-		{			
-			$sql = "insert into vehicle(model_id,exterior_color,fuel_type_id,transmission_id,model_year,seating_capacity,vehicle_price,vehicle_vin,kms_driven,vehicle_description,vehicle_image) values('".$modelid."','".$colorid."','".$fueltypeid."','".$transmissionid."','".$modelyear."','".$capacity."','".$price."','".$vin."','".$kms."','".$decription."','".$newname."')";
-			$result = mysqli_query($conn,$sql);
-			
+		{	
+			$insertvehicle = $mysqli->prepare("insert into vehicle(model_id,exterior_color,fuel_type_id,transmission_id,model_year,seating_capacity,vehicle_price,vehicle_vin,kms_driven,vehicle_description,vehicle_image) values(?,?,?,?,?,?,?,?,?,?,?)");
+			$insertvehicle->bind_param('iiiiiiisiss',$modelid,$colorid,$fueltypeid,$transmissionid,$modelyear,$capacity,$price,$vin,$kms, $decription,$newname);
+			$result = $insertvehicle->execute();
 			if($result)
 			{
 		
@@ -66,6 +51,21 @@ if(isset($_POST["submit"]))
 		}
 	}
 ?>
+
+<div class="page">
+	<div class="page-main">
+
+		<!--sidebar open-->
+		<?php include('sidebar.php');?>
+		<!--sidebar closed-->
+
+		<div class="app-content main-content">
+			<div class="side-app">
+
+				<!--app header-->
+				<?php include('pageheader.php');?>
+				<!--/app header-->
+						
 						<div class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title">Add Vehicle</h4>
@@ -82,7 +82,7 @@ if(isset($_POST["submit"]))
 											<div class="">
 												<form method="POST" action="" enctype="multipart/form-data">
 												<div class="form-group">
-													<label class="form-label">Model Name</label>
+													<label class="form-label">Model Name*</label>
 													<select class="form-control" id="l13" name="model_id" required>
 														<option value=""> -- Select Model -- </option>
 <?php										
@@ -99,7 +99,7 @@ if(isset($_POST["submit"]))
 							</div>	
 							
 							<div class="form-group">
-								<label class="form-label">Color</label>
+								<label class="form-label">Color*</label>
 								<select class="form-control" id="l13" name="exterior_color" required>
 									<option value=""> -- Select Body Color -- </option>
 <?php										
@@ -116,7 +116,7 @@ if(isset($_POST["submit"]))
 					</div>	
 					
 					<div class="form-group">
-						<label class="form-label">Fuel Type</label>
+						<label class="form-label">Fuel Type*</label>
 						<select class="form-control" id="l13" name="fuel_type_id" required>
 							<option value=""> -- Select Fuel Type -- </option>
 <?php										
@@ -133,7 +133,7 @@ if(isset($_POST["submit"]))
 				</div>	
 				
 				<div class="form-group">
-					<label class="form-label">Transmission Type</label>
+					<label class="form-label">Transmission Type*</label>
 					<select class="form-control" id="l13" name="transmission_id" required>
 						<option value=""> -- Select Transmission Type -- </option>
 <?php										
@@ -150,32 +150,32 @@ if(isset($_POST["submit"]))
 						</div>	
 						
 						<div class="form-group">
-							<label class="form-label">Model Year</label>
+							<label class="form-label">Model Year*</label>
 							<input type="text" class="form-control" name="model_year" placeholder="Enter Model Year" required>
 						</div>	
 						
 						<div class="form-group">
-							<label class="form-label">Seating Capacity</label>
+							<label class="form-label">Seating Capacity*</label>
 							<input type="text" class="form-control" name="seating_capacity" placeholder="Enter Seating Capacity" required>
 						</div>	
 						
 						<div class="form-group">
-							<label class="form-label">Vehicle Price</label>
+							<label class="form-label">Vehicle Price*</label>
 							<input type="text" class="form-control" name="vehicle_price" placeholder="Enter Vehicle Price" required>
 						</div>	
 						
 						<div class="form-group">
-							<label class="form-label">Vehicle Vin</label>
+							<label class="form-label">Vehicle Vin*</label>
 							<input type="text" class="form-control" name="vehicle_vin" placeholder="Enter VIN" required>
 						</div>	
 						
 						<div class="form-group">
-							<label class="form-label">Kilometers Driven</label>
+							<label class="form-label">Kilometers Driven*</label>
 							<input type="text" class="form-control" name="kms_driven" placeholder="Enter Distance Driven" required>
 						</div>
 
 						<div class="form-group">
-							<label class="form-label">Vehicle Description</label>
+							<label class="form-label">Vehicle Description*</label>
 							<textarea class="form-control" name="vehicle_description" placeholder="Enter Vehicle Description" required></textarea>
 						</div>
 						

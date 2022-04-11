@@ -23,9 +23,10 @@ if(isset($_POST["brand_id"]) && isset($_POST["model_name"]))
 		$description = $_POST["general_description"];
 		
 		if($brandid!='' && $modelname!='')
-		{			
-			$modeinsert = "INSERT INTO model_master (brand_id, model_name, general_description) values('$brandid', '$modelname', '$description')";
-			$insertresult = mysqli_query($conn,$modeinsert);
+		{		
+			$modelinsert = $mysqli->prepare("INSERT INTO model_master (brand_id, model_name, general_description) values(?, ?, ?)");
+			$modelinsert->bind_param('iss',$brandid, $modelname, $description);
+			$insertresult = $modelinsert->execute();
 			
 			if($insertresult)
 			{
@@ -66,7 +67,7 @@ if(isset($_POST["brand_id"]) && isset($_POST["model_name"]))
 											<div class="">
 												<form method="POST" action="">
 												<div class="form-group">
-													<label class="form-label">Brand Name</label>
+													<label class="form-label">Brand Name*</label>
 													<select class="form-control" id="l13" name="brand_id" required>
 														<option value=""> -- Select Brand -- </option>
 <?php										
@@ -83,12 +84,12 @@ if(isset($_POST["brand_id"]) && isset($_POST["model_name"]))
 												</div>	
 												
 												<div class="form-group">
-													<label class="form-label">Model Name</label>
+													<label class="form-label">Model Name*</label>
 													<input type="text" class="form-control" name="model_name" placeholder="Enter Model Name" required>
 												</div>	
 
 												<div class="form-group">
-													<label class="form-label">General Description</label>
+													<label class="form-label">General Description*</label>
 													<textarea class="form-control" name="general_description" placeholder="Enter a General Description" required></textarea>
 												</div>
 												

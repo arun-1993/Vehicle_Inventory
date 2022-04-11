@@ -2,8 +2,10 @@
 
 <?php
 
-$selectbrand = "select * from brand_master ";
-$selectresult = mysqli_query($conn,$selectbrand);
+	$selectbrand = $mysqli->prepare("SELECT * FROM brand_master");
+	$selectbrand ->execute();
+	$selectresult=$selectbrand->get_result();
+	
 
 ?>
 
@@ -46,7 +48,9 @@ $selectresult = mysqli_query($conn,$selectbrand);
 													</tr>
 												</thead>
 												<tbody>
-												<?php while($row=mysqli_fetch_assoc($selectresult)) : ?>
+
+													<tr>														
+												<?php while($row=$selectresult->fetch_assoc()) : ?>
 													<tr>
 														<td><?php echo $row['brand_id']; ?></td>
 														<td><?php echo $row['brand_name']; ?></td>

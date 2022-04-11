@@ -1,19 +1,4 @@
 <?php include('header.php');?>
-
-<div class="page">
-	<div class="page-main">
-
-		<!--sidebar open-->
-		<?php include('sidebar.php');?>
-		<!--sidebar closed-->
-
-		<div class="app-content main-content">
-			<div class="side-app">
-
-				<!--app header-->
-				<?php include('pageheader.php');?>
-				<!--/app header-->
-						
 <?php
 
 if(isset($_POST["fuel_type"]))
@@ -21,11 +6,18 @@ if(isset($_POST["fuel_type"]))
 		$ftype = $_POST["fuel_type"];
 		
 		if($ftype!='')
-		{			
-			$insertfueltype = "insert into fuel_type(fuel_type) values('".$ftype."')"; // inserts Fuel type in DB
+		{	
+			$insertfueltype = $mysqli->prepare("INSERT INTO fuel_type(fuel_type) VALUES(?)");
+			$insertfueltype-> bind_param('s',$ftype);
+			$insertresult = $insertfueltype ->execute();
+
+			
+
+
+			// $insertfueltype = "insert into fuel_type(fuel_type) values('".$ftype."')"; // inserts Fuel type in DB
 			//echo $insertfueltype;
-			//die;
-			$insertresult = mysqli_query($conn,$insertfueltype);
+			// die;
+			// $insertresult = mysqli_query($conn,$insertfueltype);
 			
 		//	echo "result = " . $insertresult;
 			
@@ -46,6 +38,21 @@ if(isset($_POST["fuel_type"]))
 		}
 	}
 ?>
+
+<div class="page">
+	<div class="page-main">
+
+		<!--sidebar open-->
+		<?php include('sidebar.php');?>
+		<!--sidebar closed-->
+
+		<div class="app-content main-content">
+			<div class="side-app">
+
+				<!--app header-->
+				<?php include('pageheader.php');?>
+				<!--/app header-->
+						
 						<div class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title">Add Fuel Type</h4>
@@ -68,7 +75,7 @@ if(isset($_POST["fuel_type"]))
 											<div class="">
 												<form method="POST" action="">
 												<div class="form-group">
-													<label class="form-label">Fuel Type</label>
+													<label class="form-label">Fuel Type*</label>
 													<input type="text" class="form-control" name="fuel_type" placeholder="Enter Fuel Type" required>
 												</div>												
 											</div>

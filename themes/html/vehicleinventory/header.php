@@ -256,8 +256,8 @@ function IND_number_format($number)
 				}
 				else{
 
-                    echo '<li><a href="register.php?loc='. $_SERVER['REQUEST_URI']. '" > Sign Up</a></li>';
-                    echo'<li><a href="login.php?loc='. $_SERVER['REQUEST_URI']. '" > Sign In</a></li>';
+                    echo '<li><a href="register.php?loc='. $_SERVER['REQUEST_URI']. '" > Register</a></li>';
+                    echo'<li><a href="login.php?loc='. $_SERVER['REQUEST_URI']. '" > Login</a></li>';
 			?>
 
             <?php if( $Signedin == true){

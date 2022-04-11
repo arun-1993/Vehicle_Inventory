@@ -34,13 +34,8 @@
 if(isset($_POST['edit_btn']))
 {
 	$colorid = $_POST['edit_id'];
-
-
-	$colorselect = $mysqli->prepare("SELECT * from bodycolor WHERE color_id= ? ");
-	$colorselect->bind_param('i',$colorid);
-	$colorselect->execute();
-	
-	$query_run = $colorselect->get_result();
+	$colorselect = "SELECT * from bodycolor WHERE color_id= $colorid ";
+	$query_run = mysqli_query($conn, $colorselect);
 	
 	foreach($query_run as $row)
 	{
@@ -79,9 +74,8 @@ if(isset($_POST['updatebtn']))
 	$colorid = $_POST['edit_id'];
 	$color = $_POST['color'];
 	
-	$colorupdate = $mysqli->prepare("UPDATE bodycolor SET color=? WHERE color_id= ?");
-	$colorupdate->bind_param('si',$color,$colorid);
-	$query_run = $colorupdate->execute();
+	$colorupdate = "UPDATE bodycolor SET color='$color' WHERE color_id= $colorid";
+	$query_run = mysqli_query($conn, $colorupdate);
 	
 	if($query_run)
 	{

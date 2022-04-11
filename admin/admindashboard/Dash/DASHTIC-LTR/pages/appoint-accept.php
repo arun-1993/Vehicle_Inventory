@@ -4,17 +4,19 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if(isset($_GET['id']))
-{
+{ $status ='Upcoming';
 	$id = $_GET['id'];
-	$sql="update `appointment` set appointment_status='Upcoming' where appointment_id = '".$id."'";
+  $updateappointment = $mysqli->prepare("update `appointment` set appointment_status=? where appointment_id = ?");
+  $updateappointment->bind_param('si',$status,$id);
+  $result = $updateappointment->execute();
 	
-	$result=mysqli_query($conn,$sql);
 	
 	if($result)
-	{
-			$sql = "select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id";
-			$res = mysqli_query($conn,$sql);
-			$row =mysqli_fetch_array($res);
+	{   $selectappointment = $mysqli->prepare("select * from appointment a JOIN vehicle v JOIN model_master m JOIN user u where a.vehicle_id=v.vehicle_id and v.model_id=m.model_id and a.user_id=u.user_id AND a.appointment_id =?");
+    $selectappointment->bind_param('i',$id);
+    $selectappointment->execute();
+      $result = $selectappointment->get_result();
+			$row =$result->fetch_assoc();
 			$email = $row['email'];
 			$date=date('y-m-d');
 			$model = $row['model_name'];
@@ -51,12 +53,12 @@ include_once('mail/login_credentials.php');
     $mail->send();
 	
 	
-    //echo "Mail has been sent successfully!";
   } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
   }
-	
+
 ?>
+
 <script>window.location= 'appointment.php';</script>
 <?php
 				

@@ -1,19 +1,4 @@
 <?php include('header.php');?>
-
-<div class="page">
-	<div class="page-main">
-
-		<!--sidebar open-->
-		<?php include('sidebar.php');?>
-		<!--sidebar closed-->
-
-		<div class="app-content main-content">
-			<div class="side-app">
-
-				<!--app header-->
-				<?php include('pageheader.php');?>
-				<!--/app header-->
-						
 <?php
 
 if(isset($_POST["transmission_type"]))
@@ -21,9 +6,10 @@ if(isset($_POST["transmission_type"]))
 		$ttype = $_POST["transmission_type"];
 		
 		if($ttype!='')
-		{			
-			$inserttransmission = "insert into transmission(transmission_type) values('".$ttype."')"; // adds transmission to the DB
-			$insertresult = mysqli_query($conn,$inserttransmission);
+		{	
+			$inserttransmission = $mysqli->prepare("insert into transmission(transmission_type) values(?)");
+			$inserttransmission->bind_param('s',$ttype);
+			$insertresult = $inserttransmission->execute();
 			
 			if($insertresult)
 			{
@@ -42,6 +28,21 @@ if(isset($_POST["transmission_type"]))
 		}
 	}
 ?>
+
+<div class="page">
+	<div class="page-main">
+
+		<!--sidebar open-->
+		<?php include('sidebar.php');?>
+		<!--sidebar closed-->
+
+		<div class="app-content main-content">
+			<div class="side-app">
+
+				<!--app header-->
+				<?php include('pageheader.php');?>
+				<!--/app header-->
+						
 						<div class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title">Add Transmission</h4>
@@ -64,7 +65,7 @@ if(isset($_POST["transmission_type"]))
 											<div class="">
 												<form method="POST" action="">
 												<div class="form-group">
-													<label class="form-label">Transmission Type</label>
+													<label class="form-label">Transmission Type*</label>
 													<input type="text" class="form-control" name="transmission_type" placeholder="Enter Transmission Type" required>
 												</div>												
 											</div>

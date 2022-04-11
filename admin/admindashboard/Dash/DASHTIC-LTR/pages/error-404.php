@@ -1,7 +1,11 @@
 <?php include_once 'header.php'?>
+
 	<body class="h-100vh light-mode default-sidebar">
+
 		<div class="page">
+
 			<div class="page-content">
+
 				<div class="container text-center ">
 					<img src="https://codeigniter.spruko.com/Dashtic/DASHTIC-LTR/public/assets/images/svgs/404.svg" alt="img" class="w-30 mb-6">
 					<h1 class="h3  mb-3 font-weight-bold">Sorry, an error has occured, Requested Page not found!</h1>
@@ -10,6 +14,8 @@
 				</div>
 			</div>
 		</div>
+
+		
 		<!-- Jquery js-->
 		<!-- <script src="../public/assets/js/vendors/jquery-3.5.1.min.js"></script> -->
 
