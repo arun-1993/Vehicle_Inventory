@@ -1,5 +1,12 @@
 <?php include('header.php');?>
 
+<?php
+
+$sql = "select * from transmission";
+$selectresult = mysqli_query($conn,$sql);
+
+?>
+
 <div class="page">
 	<div class="page-main">
 
@@ -20,8 +27,10 @@
 								<div class="card">
 									<div class="card-header">
 										<div class="card-title">
-										<h2>Transmission</h2>
-										<h5><a href="addtransmission.php" style="color:blue;">ADD TRANSMISSION</a></h5>
+											<h2>Transmission</h2>
+											<?php if($_SESSION['Role'] == 1) : ?>
+											<h5><a href="addtransmission.php" style="color:blue;">ADD TRANSMISSION</a></h5>
+											<?php endif; ?>
 										</div>
 									</div>
 									<div class="card-body">
@@ -30,38 +39,31 @@
 												<thead>
 													<tr>
 														<th class="wd-25p border-bottom-0">Transmission Id</th>
-														<th class="wd-25p border-bottom-0">Transmission Type</th>											
+														<th class="wd-25p border-bottom-0">Transmission Type</th>
+														<?php if($_SESSION['Role'] == 1) : ?>
 														<th class="wd-25p border-bottom-0">EDIT</th>
 														<th class="wd-25p border-bottom-0">DELETE</th>
+														<?php endif; ?>
 													</tr>
 												</thead>
 												<tbody>
-<?php
-	$sql = "select * from transmission";
-	$result = mysqli_query($conn,$sql);
-	
-	
-	while($row=mysqli_fetch_assoc($result))
-	{
-		$tid=$row['transmission_id'];
-?>
+												<?php while($row=mysqli_fetch_assoc($selectresult)) : ?>
 													<tr>														
 														<td><?php echo $row['transmission_id']; ?></td>
 														<td><?php echo $row['transmission_type']; ?></td>
 														<td>
+														<?php if($_SESSION['Role'] == 1) : ?>
 														<form action="transmissionedit.php" method="post">
 															<input type="hidden" name="edit_id" value="<?php echo $row['transmission_id']; ?>">
-															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
+														<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
 														</form>
 														</td>
 														<td>		
-														<a href="transmissiondelete.php?id=<?php echo $tid?>" class="btn btn-danger delete-confirmation">DELETE</a>
-															
+															<a href="transmissiondelete.php?id=<?php echo $row['transmission_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>			
 														</td>
+														<?php endif; ?>
 													</tr>
-	<?php
-	}
-	?>
+												<?php endwhile; ?>
 												</tbody>
 											</table>
 										</div>
