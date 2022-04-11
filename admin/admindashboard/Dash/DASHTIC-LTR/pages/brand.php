@@ -2,8 +2,10 @@
 
 <?php
 
-$selectbrand = "select * from brand_master ";
-$selectresult = mysqli_query($conn,$selectbrand);
+	$selectbrand = $mysqli->prepare("SELECT * FROM brand_master");
+	$selectbrand ->execute();
+	$selectresult=$selectbrand->get_result();
+	
 
 ?>
 
@@ -46,24 +48,10 @@ $selectresult = mysqli_query($conn,$selectbrand);
 													</tr>
 												</thead>
 												<tbody>
-<<<<<<< HEAD
-<?php
-	$selectbrand = $mysqli->prepare("SELECT * FROM brand_master");
-	$selectbrand ->execute();
-	$result=$selectbrand->get_result();
-	
-	// $selectresult = mysqli_query($conn,$selectbrand);
-	
-	
-	while($row=$result->fetch_assoc())
-	{
-		$bid=$row['brand_id'];
-?>
+
 													<tr>														
-=======
-												<?php while($row=mysqli_fetch_assoc($selectresult)) : ?>
+												<?php while($row=$selectresult->fetch_assoc()) : ?>
 													<tr>
->>>>>>> 8692bed3f3b2a3523d315c24b944b99ff1f450f6
 														<td><?php echo $row['brand_id']; ?></td>
 														<td><?php echo $row['brand_name']; ?></td>
 														<?php if($_SESSION['Role'] == 1) : ?>

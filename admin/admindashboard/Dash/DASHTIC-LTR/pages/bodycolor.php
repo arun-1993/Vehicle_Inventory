@@ -2,8 +2,9 @@
 
 <?php
 
-$selectbodycolor = "select * from bodycolor";
-$selectresult = mysqli_query($conn,$selectbodycolor);
+	$selectbodycolor = $mysqli->prepare("SELECT * FROM bodycolor");
+	$selectbodycolor->execute();
+	$selectresult = $selectbodycolor->get_result();
 
 ?>
 
@@ -45,21 +46,8 @@ $selectresult = mysqli_query($conn,$selectbodycolor);
 													</tr>
 												</thead>
 												<tbody>
-<<<<<<< HEAD
-<?php
-	$selectbodycolor = $mysqli->prepare("SELECT * FROM bodycolor");
-	$selectbodycolor->execute();
-	$selectresult = $selectbodycolor->get_result();
-	// $selectresult = mysqli_query($conn,$selectbodycolor);
-	
-	
-	while($row=$selectresult->fetch_assoc())
-	{
-		$cid=$row['color_id'];
-?>
-=======
-												<?php while($row=mysqli_fetch_assoc($selectresult)) : ?>
->>>>>>> 8692bed3f3b2a3523d315c24b944b99ff1f450f6
+
+												<?php while($row=$selectresult->fetch_assoc()) : ?>
 													<tr>														
 														<td><?php echo $row['color_id']; ?></td>
 														<td><?php echo $row['color']; ?></td>
