@@ -210,7 +210,7 @@ $result_year = mysqli_query($conn, $query_year);
       data-responsive_offset="on"
       data-responsive="off"
 
-      style="z-index: 8; white-space: nowrap; font-size: 17px; line-height: 17px; font-weight: 500; color: rgba(255,255,255,1);font-family:Roboto;text-transform:uppercase;background-color:rgba(0, 0, 0, 1.00);padding:12px 35px 12px 35px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href = "#search" style = "">  Search now </a> </div>
+      style="z-index: 8; white-space: nowrap; font-size: 17px; line-height: 17px; font-weight: 500; color: rgba(255,255,255,1);font-family:Roboto;text-transform:uppercase;background-color:rgba(0, 0, 0, 1.00);padding:12px 35px 12px 35px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href = "#search" >  Search now </a> </div>
   </li>
 </ul>
 <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div> </div>
