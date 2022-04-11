@@ -53,22 +53,10 @@ $selectresult = mysqli_query($conn,$selectmodel);
 														<td><?php echo $row['model_name']; ?></td>
 														<?php if($_SESSION['Role'] == 1) : ?>
 														<td>
-<<<<<<< HEAD
-														<!--<form action="editmodel.php" method="post">
-															<input type="hidden" name="edit_id" value="// echo $row['model_id']; ?>">
-															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
-														</form>-->
-														<a href="editmodel.php?id=<?php echo $mid?>&name=<?php echo $name?>" class="btn btn-success">EDIT</a>
-														</td>
-														<td>		
-														<a href="deletemodel.php?id=<?php echo $mid?>" class="btn btn-danger delete-confirmation">DELETE</a>
-															
-=======
 															<a href="modeledit.php?id=<?php echo $row['model_id']; ?>&name=<?php echo $row['model_name']; ?>" class="btn btn-success">EDIT</a>
 														</td>
 														<td>		
 															<a href="modeldelete.php?id=<?php echo $row['model_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
->>>>>>> 8692bed3f3b2a3523d315c24b944b99ff1f450f6
 														</td>
 														<?php endif; ?>
 													</tr>
