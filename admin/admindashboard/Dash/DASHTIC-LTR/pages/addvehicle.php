@@ -1,19 +1,4 @@
  <?php include('header.php');?>
-
-<div class="page">
-	<div class="page-main">
-
-		<!--sidebar open-->
-		<?php include('sidebar.php');?>
-		<!--sidebar closed-->
-
-		<div class="app-content main-content">
-			<div class="side-app">
-
-				<!--app header-->
-				<?php include('pageheader.php');?>
-				<!--/app header-->
-						
 <?php
 
 if(isset($_POST["submit"]))
@@ -45,10 +30,10 @@ if(isset($_POST["submit"]))
 
 		
 		if($modelid!='' && $colorid!='' && $fueltypeid!='' && $transmissionid!='' && $modelyear!='' && $capacity!='' && $price!='' && $vin!='' && $kms!='' && $decription!='')
-		{			
-			$sql = "insert into vehicle(model_id,exterior_color,fuel_type_id,transmission_id,model_year,seating_capacity,vehicle_price,vehicle_vin,kms_driven,vehicle_description,vehicle_image) values('".$modelid."','".$colorid."','".$fueltypeid."','".$transmissionid."','".$modelyear."','".$capacity."','".$price."','".$vin."','".$kms."','".$decription."','".$newname."')";
-			$result = mysqli_query($conn,$sql);
-			
+		{	
+			$insertvehicle = $mysqli->prepare("insert into vehicle(model_id,exterior_color,fuel_type_id,transmission_id,model_year,seating_capacity,vehicle_price,vehicle_vin,kms_driven,vehicle_description,vehicle_image) values(?,?,?,?,?,?,?,?,?,?,?)");
+			$insertvehicle->bind_param('iiiiiiisiss',$modelid,$colorid,$fueltypeid,$transmissionid,$modelyear,$capacity,$price,$vin,$kms, $decription,$newname);
+			$result = $insertvehicle->execute();
 			if($result)
 			{
 		
@@ -66,6 +51,21 @@ if(isset($_POST["submit"]))
 		}
 	}
 ?>
+
+<div class="page">
+	<div class="page-main">
+
+		<!--sidebar open-->
+		<?php include('sidebar.php');?>
+		<!--sidebar closed-->
+
+		<div class="app-content main-content">
+			<div class="side-app">
+
+				<!--app header-->
+				<?php include('pageheader.php');?>
+				<!--/app header-->
+						
 						<div class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title">Add Vehicle</h4>

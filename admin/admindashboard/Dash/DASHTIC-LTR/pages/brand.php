@@ -36,11 +36,14 @@
 												</thead>
 												<tbody>
 <?php
-	$selectbrand = "select * from brand_master ";
-	$selectresult = mysqli_query($conn,$selectbrand);
+	$selectbrand = $mysqli->prepare("SELECT * FROM brand_master");
+	$selectbrand ->execute();
+	$result=$selectbrand->get_result();
+	
+	// $selectresult = mysqli_query($conn,$selectbrand);
 	
 	
-	while($row=mysqli_fetch_assoc($selectresult))
+	while($row=$result->fetch_assoc())
 	{
 		$bid=$row['brand_id'];
 ?>

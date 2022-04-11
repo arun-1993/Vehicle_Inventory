@@ -3,16 +3,18 @@
 if(isset($_GET['id']))
 {
 	$fueltypeid = $_GET['id'];
-	$sql = "delete from fuel_type where fuel_type_id = $fueltypeid";
-	$result = mysqli_query($conn,$sql);
+	$deletefueltype = $mysqli->prepare("delete from fuel_type where fuel_type_id = ?");
+	$deletefueltype->bind_param('i',$fueltypeid);
+	$deletefueltype->execute();
+	$result = $deletefueltype->get_result();
 	
 	if($result)
 	{
-		header("Location:fueltype.php?msg=success");
+		header("Location:fueltype.php");
 	}
 	else
 	{
-		header("Location:fueltype.php?msg=failure");
+		header("Location:fueltype.php");
 	}	
 }
 

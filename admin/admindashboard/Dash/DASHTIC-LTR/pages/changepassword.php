@@ -14,11 +14,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 	if(password_verify($oldpassword,$value['password'])){
         if($newpassword === $confpassword && $newpassword !== $oldpassword){
             $hashedpassword = password_hash($newpassword,PASSWORD_DEFAULT);
-            $query = "UPDATE user SET password = '$hashedpassword' where user_id = $id";
-            mysqli_query($conn,$query);
+
+            $updatepassword = $mysqli->prepare("UPDATE user SET password = ? where user_id = ?");
+            $updatepassword->bind_param('si',$hashedpassword,$id);
+            $updatepassword->execute();
+
+            // $query = "UPDATE user SET password = '$hashedpassword' where user_id = $id";
+            // mysqli_query($conn,$query);
+            
             ?>
 
             <script>alert('Password Changed Succesfully');
+
             window.location = "profile.php";
 
 

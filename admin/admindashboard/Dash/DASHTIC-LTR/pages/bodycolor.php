@@ -35,11 +35,13 @@
 												</thead>
 												<tbody>
 <?php
-	$selectbodycolor = "select * from bodycolor";
-	$selectresult = mysqli_query($conn,$selectbodycolor);
+	$selectbodycolor = $mysqli->prepare("SELECT * FROM bodycolor");
+	$selectbodycolor->execute();
+	$selectresult = $selectbodycolor->get_result();
+	// $selectresult = mysqli_query($conn,$selectbodycolor);
 	
 	
-	while($row=mysqli_fetch_assoc($selectresult))
+	while($row=$selectresult->fetch_assoc())
 	{
 		$cid=$row['color_id'];
 ?>
@@ -47,7 +49,7 @@
 														<td><?php echo $row['color_id']; ?></td>
 														<td><?php echo $row['color']; ?></td>
 														<td>
-														<form action="editcolor.php" method="post">
+														<form action="coloredit.php" method="post">
 															<input type="hidden" name="edit_id" value="<?php echo $row['color_id']; ?>">
 															<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
 														</form>

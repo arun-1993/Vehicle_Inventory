@@ -36,8 +36,9 @@
 												</thead>
 												<tbody>
 <?php
-	$selectcontact = "select * from contact ";
-	$selectresult = mysqli_query($conn,$selectcontact);
+	$selectcontact = $mysqli->prepare("select * from contact ");
+	$selectcontact->execute();
+	$selectresult = $selectcontact->get_result();
 	
 	
 	while($row=mysqli_fetch_assoc($selectresult))
