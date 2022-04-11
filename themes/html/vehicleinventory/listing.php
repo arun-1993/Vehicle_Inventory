@@ -1,5 +1,4 @@
-<?php include 'header.php';
-?>
+<?php include 'header.php'; ?>
 
 <!--=================================
  header -->
@@ -25,8 +24,7 @@
 
 <!--=================================
  inner-intro -->
-<?php
-  $results_per_page = 5;  
+<?php  $results_per_page = 5;  
   
   @$brand = $_GET['brand'];
   @$model = $_GET['model'];
@@ -92,16 +90,13 @@
 
   //retrieve the selected results from database   
   $query .= "LIMIT " . $page_first_result . ',' . $results_per_page;
-
-  echo $query;
-  die;
   
   $result = mysqli_query($conn, $query);  
   
   if($number_of_result == 0)
   {
-	  include 'error-404.php';
-    die;
+	 include 'error-404.php';
+die;
   }
   
     

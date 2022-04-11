@@ -1,4 +1,7 @@
-<?php include '_dbconnect.php' ;
+<?php 
+
+ob_start();
+include '_dbconnect.php' ;
 
 ?>
 
