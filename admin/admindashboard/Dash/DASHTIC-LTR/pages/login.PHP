@@ -21,7 +21,6 @@
     $username = $_POST["Username"];
     $password = $_POST["Password"]; 
   
-  
     $sql = "SELECT * FROM USER WHERE (username = '$username' OR email = '$username') AND  user_role_id IN(1,2)   ";
     $result = mysqli_query($conn,$sql);
     $number = mysqli_num_rows($result);
@@ -37,6 +36,7 @@
 		$_SESSION['Userid'] = $row['user_id'];
 		$_SESSION['Email'] = $row['email'];
 		$_SESSION['Name'] = $row['first_name'].' '.$row['last_name'];
+		$_SESSION['Role'] = $row['user_role_id'];
 		?>
         <script> 
 		
