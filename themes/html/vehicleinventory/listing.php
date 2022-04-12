@@ -120,7 +120,7 @@ $result_year = $query_year->get_result();
               </div>
             </div>
             <div class="col-md-12 mt-4">
-              <input class="button" type="submit" value="Filter" />
+              <button class="button" type="submit"><i class="bi fa fa-search"></i> Search Car</button>
             </div>
           </div>
           </form>
