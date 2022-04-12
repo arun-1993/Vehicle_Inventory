@@ -24,7 +24,7 @@ $root= "http://" . $_SERVER['SERVER_NAME'].substr(str_replace('\\', '/', realpat
 
 		<link href="../public/assets/css/bootstrap-datetimepicker.css" rel="stylesheet" />
 
-		
+		<link href="../public/assets/css/jquery.datetimepicker.min.css" rel="stylesheet" />
  
 		<!--Favicon -->
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>

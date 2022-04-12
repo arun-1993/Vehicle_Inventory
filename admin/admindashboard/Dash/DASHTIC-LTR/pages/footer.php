@@ -32,14 +32,16 @@
 
 		
 		<script src="../public/assets/js/vendors/jquery-3.5.1.min.js"></script>
-
+		<script src="../public/assets/js/jquery.datetimepicker.full.js"></script>
+		<script src="../public/assets/js/jquery.datetimepicker.full.min.js"></script>
+		<script src="../public/assets/js/jquery.datetimepicker.min.js"></script>
 		<!-- Bootstrap4 js-->
 		<script src="../public/assets/plugins/bootstrap/popper.min.js"></script>
 		<script src="../public/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 		<!--Othercharts js-->
 		<script src="../public/assets/plugins/othercharts/jquery.sparkline.min.js"></script>
-		<script src="../public/assets/js/jquery.datetimepicker.full.min.js"></script>	
+		<!-- <script src="../public/assets/js/jquery.datetimepicker.full.min.js"></script>	 -->
 		<script src="../public/assets/js/jquery-ui.js"></script>
 		
 		
@@ -48,7 +50,7 @@
 		<script src="../public/assets/plugins/rating/jquery.rating-stars.js"></script>
 		
 		<script src="../public/assets/js/moment.min.js"></script>
-		<script src="../public/assets/js/bootstrap-datetimepicker.js"></script>
+		<!-- <script src="../public/assets/js/bootstrap-datetimepicker.js"></script> -->
 		
 		<script src="../public/assets/js/custom.js"></script>
 		<!-- Circle-progress js-->

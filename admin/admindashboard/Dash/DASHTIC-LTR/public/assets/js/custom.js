@@ -83,11 +83,14 @@
 		});
 
 		
+		var startDate = new Date();
+		startDate.setDate(startDate.getDate()+1) // Now
+var endDate = new Date();
+endDate.setDate(startDate.getDate() + 40);
 		$("#appointment_date").datetimepicker({
-			minDate:moment(),
-			maxDate: moment().add(40, 'days'),
-			format:'DD-MM-YYYY hh:mm A'
-			// timepicker:true
+		inline:true,
+		minDate: startDate,
+        maxDate: endDate
 		
 	  });
  
