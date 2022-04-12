@@ -1,22 +1,135 @@
 <?php include 'header.php'; ?>
+<?php
+
+@$brand = $_GET['brand'];
+@$model = $_GET['model'];
+
+$query_brand = $mysqli->prepare("SELECT * FROM brand_master ORDER BY brand_name");
+$query_brand->execute();
+$result_brand = $query_brand->get_result();
+
+if($brand > 0)
+{
+    $query_model = $mysqli->prepare("SELECT * FROM model_master WHERE brand_id = $brand ORDER BY model_name");
+}
+
+else
+{
+    $query_model = $mysqli->prepare("SELECT * FROM model_master ORDER BY model_name");
+}
+$query_model->execute();
+$result_model = $query_model->get_result();
+
+if($model > 0)
+{
+    $query_year = $mysqli->prepare("SELECT DISTINCT model_year FROM vehicle WHERE model_id = $model ORDER BY model_year DESC");
+}
+
+else
+{
+    $query_year = $mysqli->prepare("SELECT DISTINCT model_year FROM vehicle ORDER BY model_year DESC");
+}
+$query_year->execute();
+$result_year = $query_year->get_result();
+
+?>
 
 <!--=================================
  inner-intro -->
 
- <section class="inner-intro bg-1 bg-overlay-black-70">
-  <div class="container">
-     <div class="row text-center intro-title">
-           <div class="col-md-6 text-md-start d-inline-block">
-             <h1 class="text-white">product listing </h1>
-           </div>
-           <div class="col-md-6 text-md-end float-end">
-             <ul class="page-breadcrumb">
+ <section class="search-block find-car bg-1 bg-overlay-black-70 page-section-pt" id="vehicle_search">
+  <div class="container " id = "search">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="section-title text-start">
+         <h2 class="text-white">FIND YOUR DREAM CAR </h2>
+         <div class="separator"></div>
+      </div>
+    </div>
+   </div>
+    <div class="row" id="search_form">
+       <div class="container">
+       <form method="GET" action="listing.php" id="form">
+          <div class="row">
+           <div class="col-sm">
+            <span>Select brand</span>
+              <div class="selected-box">
+                <select data-target="#search_form" class="selectpicker" name="brand" id="brand" onchange="fetch_models(this.form)">
+                  <option value="0"> --Brand-- </option>
+                  <?php while($row = $result_brand->fetch_array()) : ?> <!-- stores brand result into arry  -->
+                    <?php if($row['brand_id'] == $brand) : ?>
+                    <option value="<?php echo $row['brand_id']; ?>" selected><?php echo $row['brand_name']; ?></option>
+                    <?php else : ?>
+                    <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brand_name']; ?></option>
+                    <?php endif; ?>
+                  <?php endwhile; ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm">
+            <span>Select model</span>
+              <div class="selected-box">
+               <select class="selectpicker" name="model" id="model" onchange="fetch_years(this.form)">
+                <option value="0"> --Model-- </option>
+                <?php while($row = $result_model->fetch_array()) :?>  <!-- stores model result into arry  -->
+                  <?php if($row['model_id'] == $model) : ?>
+                  <option value="<?php echo $row['model_id']; ?>" selected><?php echo $row['model_name']; ?></option>
+                  <?php else : ?>
+                  <option value="<?php echo $row['model_id']; ?>"><?php echo $row['model_name']; ?></option>
+                  <?php endif; ?>
+                <?php endwhile; ?>
+               </select>
+             </div>
+            </div>
+            <div class="col-sm">
+            <span>Select year</span>
+             <div class="selected-box">
+               <select class="selectpicker" name="year" id="year">
+                <option value="0"> --Year-- </option>
+                <?php while($row = $result_year->fetch_array()) : ?>  <!-- stores year result into arry  -->
+                <option value="<?php echo $row['model_year']; ?>"><?php echo $row['model_year']; ?></option>
+                <?php endwhile; ?>
+               </select>
+              </div>
+            </div>
+            <div class="col-sm">
+            <span>Select vehicle Condition</span>
+              <div class="selected-box">
+                <select class="selectpicker" name="condition" id="condition">
+                  <option value="0"> --Vehicle Condition-- </option>
+                  <option value="1">New</option>
+                  <option value="2">Used</option>
+               </select>
+             </div>
+            </div>
+            <div class="col-sm">
+              <div class="price-search">
+                <span class="mb-2">Minimum price <i class="fa fa-rupee"></i></span>
                 
-             </ul>
-           </div>
-     </div>
-  </div>
-</section>
+                <div class="search">
+                  <input type="number" class="form-control placeholder" name="minPrice" placeholder=" --Minimum Price-- " style="background-color: #fff;">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="price-search">
+                <span class="mb-2">Maximum price <i class="fa fa-rupee"></i></span>
+                <div class="search">
+                  <input type="number" class="form-control placeholder" name="maxPrice" placeholder=" --Maximum Price-- " style="background-color: #fff;">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-4">
+              <input class="button" type="submit" value="Filter" />
+            </div>
+          </div>
+          </form>
+         </div>
+         <div class="col-md-5 align-self-end">
+         </div>
+      </div>
+    </div>
+  </section>
 
 <!--=================================
  inner-intro -->
