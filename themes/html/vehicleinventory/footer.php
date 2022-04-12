@@ -40,7 +40,7 @@
           <h6 class="text-white">Popular Cars</h6>
           <ul>
             <?php foreach($cars as $car) : ?>
-			      <li><a href="<?php echo "listing.php?brand=$car[0]"; ?>"><?php echo $car[1]; ?></a></li>
+			      <li><a href="<?php echo "listing.php?car=$car[0]"; ?>"><?php echo $car[1]; ?></a></li>
             <?php endforeach; ?>
             <li><a href="listing.php">All Cars</a></li>
 		      </ul>
