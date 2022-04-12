@@ -81,7 +81,7 @@
 
               if($insert_result)
               {
-              echo "<script>alert('Appointment scheduled for $schedule')</script>";
+            //   echo "<script>alert('Appointment scheduled for $schedule')</script>";
               echo "<div class='alert alert-success'>Appointment scheduled for $schedule</div>";
 
               $msg = "Dear $name,<br> Your appointment has been requested for $vehicle on $date at $time. Soon you will receive confirmation when your appointment has been accepted. If you have questions or concerns before your session, kindly contact us. <br> Regards, <br> Team Autotrack.";
@@ -122,7 +122,7 @@
 
               else
               {
-              echo "<script>alert('Appointment not scheduled ".mysqli_error($conn)."')</script>";
+            //   echo "<script>alert('Appointment not scheduled ".mysqli_error($conn)."')</script>";
               echo "<div class='alert alert-danger'>Appointment not scheduled ".mysqli_error($conn)."</div>";
               }
               }

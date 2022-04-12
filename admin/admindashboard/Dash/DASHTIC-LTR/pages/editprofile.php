@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])){
 
 		if($updateprofile->execute())
 		{
-			echo "<script> alert('Successfully Updated'); </script>";
+			// echo "<script> alert('Successfully Updated'); </script>";
 			echo '<script> window.location = "index.php" </script>';
 		}
 	

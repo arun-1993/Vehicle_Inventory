@@ -93,7 +93,7 @@ if(isset($_POST['updatebtn']))
 	else
 	{
 		?>
-		<script>alert("Error! Please try again.");</script>
+		<!-- <script>alert("Error! Please try again.");</script> -->
 		<?php
 		
 	}
