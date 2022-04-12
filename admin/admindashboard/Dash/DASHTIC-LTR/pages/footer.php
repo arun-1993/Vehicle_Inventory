@@ -18,7 +18,18 @@
 
 		<!-- Jquery js-->
 		
-		
+		<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
+    </script>
+    <script src=
+                        "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+    </script>
+ 
+    <!-- Include Moment.js CDN -->
+    <script type="text/javascript" src=
+                    "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js">
+    </script>
+
 		
 		<script src="../public/assets/js/vendors/jquery-3.5.1.min.js"></script>
 
@@ -28,53 +39,59 @@
 
 		<!--Othercharts js-->
 		<script src="../public/assets/plugins/othercharts/jquery.sparkline.min.js"></script>
+		<script src="../public/assets/js/jquery.datetimepicker.full.min.js"></script>	
+		<script src="../public/assets/js/jquery-ui.js"></script>
+		
 		
 		
 		<!-- Jquery-rating js-->
 		<script src="../public/assets/plugins/rating/jquery.rating-stars.js"></script>
-
-		<!-- Circle-progress js-->
+		
+		<script src="../public/assets/js/moment.min.js"></script>
+		<script src="../public/assets/js/bootstrap-datetimepicker.js"></script>
+		
 		<script src="../public/assets/js/custom.js"></script>
+		<!-- Circle-progress js-->
 		<script src="../public/assets/js/vendors/circle-progress.min.js"></script>
-
+		
 		<!-- Jquery-rating js-->
 		<script src="../public/assets/plugins/rating/jquery.rating-stars.js"></script>
 		<script src="../public/assets/js/vendors/jquery-3.5.1.min.js"></script>
-
+		
 		<!-- Bootstrap4 js-->
 		<script src="../public/assets/plugins/bootstrap/popper.min.js"></script>
 		<script src="../public/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+		
 		<!-- Circle-progress js-->
 		<script src="../public/assets/js/vendors/circle-progress.min.js"></script>
-
 		
-
+		
+		
 		<!--Sidemenu js-->
 		<script src="../public/assets/plugins/sidemenu/sidemenu.js"></script>
-
+		
 		<!-- P-scroll js-->
 		<script src="../public/assets/plugins/p-scrollbar/p-scrollbar.js"></script>
 		<script src="../public/assets/plugins/p-scrollbar/p-scroll1.js"></script>
-
-
+		
+		
 		<!-- INTERNAL JS INDEX2 START -->
 		<!--Moment js-->
 		<script src="../public/assets/plugins/moment/moment.js"></script>
-
+		
 		<!-- Daterangepicker js-->
 		<script src="../public/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 		<script src="../public/assets/js/daterange.js"></script>
-
+		
 		<!-- INTERNAL JS INDEX2 END -->
 		
 		
-			<!-- INTERNAL JS START -->
+		<!-- INTERNAL JS START -->
 		<!--Select2 js -->
 		<script src="../public/assets/plugins/select2/select2.full.min.js"></script>
 		<script src="../public/assets/js/select2.js"></script>
-
-
+		
+		
 		<!-- INTERNAL JS START -->
 		<!-- Data tables -->
 		<script src="../public/assets/plugins/datatable/js/jquery.dataTables.js"></script>

@@ -19,6 +19,7 @@
 					<div class="card-header">
 						<div class="card-title">
 						<h2>Appointment</h2>
+						<h5><a href="addappointment.php" style="color:blue;">ADD Appointment</a></h5>
 						</div>
 					</div>
 					<div class="card-body">

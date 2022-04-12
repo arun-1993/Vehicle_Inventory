@@ -81,6 +81,15 @@
 				$(this).parent().parent().prev().click(); // click the item to make it drop
 			}
 		});
+
+		
+		$("#appointment_date").datetimepicker({
+			minDate:moment(),
+			maxDate: moment().add(40, 'days'),
+			format: 'DD MMMM YYYY'
+		
+	  });
+ 
 	});
 	
 	// ___________TOOLTIP	
@@ -580,6 +589,8 @@
 	//$('body').addClass('color-horizontal');
 	
 	//$('body').addClass('dark-horizontal');
+
+	
 	
 })(jQuery);
 
