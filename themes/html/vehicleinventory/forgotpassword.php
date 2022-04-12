@@ -72,7 +72,7 @@
       $mail->AltBody = '';
       $mail->send();
       ?>
-      <script>alert('Your new password sent to your registered email. Kindly, check your inbox or spam folder.');
+      <script>
       window.location = "index.php";</script>
 
       <?php

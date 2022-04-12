@@ -202,7 +202,7 @@
             </div>
             <div class="col-sm">
             <div class="price-search">
-            <span class="mb-2">Minimum price <i class="fa fa-rupee"></i></span>
+            <span class="mb-2" style= "color:#fff">Minimum price <i class="fa fa-rupee"></i></span>
 
             <div class="search">
             <input type="number" class="form-control placeholder" name="minPrice" placeholder=" --Minimum Price-- " style="background-color: #fff;">
@@ -211,7 +211,7 @@
             </div>
             <div class="col-sm">
             <div class="price-search">
-            <span class="mb-2">Maximum price <i class="fa fa-rupee"></i></span>
+            <span class="mb-2" style= "color:#fff">Maximum price <i class="fa fa-rupee"></i></span>
             <div class="search">
             <input type="number" class="form-control placeholder" name="maxPrice" placeholder=" --Maximum Price-- " style="background-color: #fff;">
             </div>
@@ -229,8 +229,9 @@
             </div>
             </div>
             </section>
+            <br>
             <img class="img-fluid center-block" src="images/banner-2.jpg" alt="">
-            </div>
+          </div>
             </div>
 
             </div>
