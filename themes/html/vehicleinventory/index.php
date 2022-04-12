@@ -224,7 +224,7 @@ $feturedcarresult = $feturedcarquery->get_result();
     <div class="item">
         <div class="car-item car-item-4 text-center">
              <div class="car-image">
-               <img class="img-fluid" src="images/car/<?php echo $feturedcarrow['vehicle_image']; ?>" alt="" style = "height:200px;width:auto">
+               <img class="img-fluid" src="<?php echo $root;?>/images/car/<?php echo $feturedcarrow['vehicle_image']; ?>" alt="" style = "height:200px;width:auto">
                <div class="car-overlay-banner">
                 <ul>
                   <li><a href="single.php?vehicle=<?php echo $feturedcarrow['vehicle_id']; ?>"><i class="fa fa-link"></i></a></li>

@@ -3,8 +3,11 @@
 session_start();
 ob_start();
 include '_dbconnect.php' ;
-$root = $_SERVER["DOCUMENT_ROOT"];
-echo $root;
+ $root= "http://" . $_SERVER['SERVER_NAME'].substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])))); 
+// $root =substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
+// echo $root;
+// $dir = dirname(__FILE__);
+//echo $dir;
 
 
 $Signedin = false;

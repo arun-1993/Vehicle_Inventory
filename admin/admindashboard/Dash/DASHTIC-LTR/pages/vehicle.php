@@ -61,7 +61,7 @@
 		$trans=$row['transmission_type'];
 ?>
 													<tr>
-														<td><img src="../../../../../themes/html/vehicleinventory/images/car/<?php echo $row['vehicle_image']?>" height="100" width="350" style="border-radius:12%"></td>
+														<td><img src="<?php echo $root?>/../../../../../themes/html/vehicleinventory/images/car/<?php echo $row['vehicle_image']?>" height="100" width="350" style="border-radius:12%"></td>
 														<td><?php echo $row['model_name']; ?></td>
 														<td><?php echo $row['color']; ?></td>
 														<td><?php echo $row['fuel_type']; ?></td>

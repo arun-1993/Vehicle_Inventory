@@ -88,7 +88,7 @@ else{
 												
 											</div>
 											<div class="col-xl-5 col-md-12 col-lg-6">
-												<img class="mx-auto text-center w-90" alt="img" src="../public/assets/images/photos/award.png">
+												<img class="mx-auto text-center w-90" alt="img" src="<?php echo $root?>/../public/assets/images/photos/award.png">
 											</div>
 										</div>
 									</div>

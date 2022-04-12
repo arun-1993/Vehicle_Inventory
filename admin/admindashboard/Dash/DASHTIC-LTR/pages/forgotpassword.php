@@ -135,7 +135,7 @@ if($nocredentials == true)
 										</div>
 										<div class="card text-white bg-primary py-5 d-md-down-none page-content mt-0">
 											<div class="card-body text-center justify-content-center page-single-content">
-												<img src="../public/assets/images/pattern/login.png" alt="img">
+												<img src="<?php echo $dir?>../public/assets/images/pattern/login.png" alt="img">
 											</div>
 										</div>
 									</div>
