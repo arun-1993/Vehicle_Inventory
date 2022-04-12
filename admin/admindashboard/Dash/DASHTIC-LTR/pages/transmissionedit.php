@@ -59,7 +59,7 @@ if(isset($_POST['edit_btn']))
 													<input type="text" class="form-control" name="transmission_type" value="<?php echo $row['transmission_type']?>" placeholder="Enter Transmission Type" required>
 												</div>												
 											</div>
-											<a href="transmission.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
+											<a href="<?php echo $root;?>/transmission.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
 											<button type="submit" name="updatebtn" class="btn btn-primary mt-4 mb-0">Update</button>
 											</form>
 		<?php		

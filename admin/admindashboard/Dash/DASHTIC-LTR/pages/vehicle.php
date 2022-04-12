@@ -21,7 +21,7 @@
 									<div class="card-header">
 										<div class="card-title">
 										<h2>Vehicle</h2>
-										<h5><a href="addvehicle.php" style="color:blue;">ADD VEHICLE</a></h5>
+										<h5><a href="<?php echo $root;?>/addvehicle.php" style="color:blue;">ADD VEHICLE</a></h5>
 										</div>
 									</div>
 									<div class="card-body">
@@ -72,13 +72,13 @@
 														<td><?php echo $row['vehicle_vin']; ?></td>
 														<td><?php echo $row['kms_driven']; ?></td>														
 														<td>
-														<a href="vehicleedit.php?id=<?php echo $vid?>&model=<?php echo $model?>&color=<?php echo $color?>&fuel=<?php echo $fuel?>&trans=<?php echo $trans?>" class="btn btn-success">EDIT</a>
+														<a href="<?php echo $root;?>/vehicleedit.php?id=<?php echo $vid?>&model=<?php echo $model?>&color=<?php echo $color?>&fuel=<?php echo $fuel?>&trans=<?php echo $trans?>" class="btn btn-success">EDIT</a>
 														</td>
 														<td>		
-														<a href="vehiclesold.php?id=<?php echo $vid?>" class="btn btn-primary audit-confirmation">MARK SOLD</a>
+														<a href="<?php echo $root;?>/vehiclesold.php?id=<?php echo $vid?>" class="btn btn-primary audit-confirmation">MARK SOLD</a>
 														</td>
 														<td>
-														<a href="vehicledelete.php?id=<?php echo $vid?>" class="btn btn-danger delete-confirmation">DELETE</a>
+														<a href="<?php echo $root;?>/vehicledelete.php?id=<?php echo $vid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
 													</tr>
 	<?php

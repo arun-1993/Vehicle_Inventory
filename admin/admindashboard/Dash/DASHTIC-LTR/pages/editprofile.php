@@ -137,8 +137,8 @@ if(isset($_GET['id']))
 											</div>
 											<div class="card-footer text-right">
 										<button class="btn btn-outline-primary" type="submit"  name="submit">Update Profile</button>&nbsp;&nbsp;
-										<a href="javascript:void(0)" class = "btn btn-outline-primary" id="btn_changepassword" >Change Password</a>
-										<a href="profile.php" class = "btn btn-outline-danger"  >Cancel</a>
+										<a href="<?php echo $root;?>/javascript:void(0)" class = "btn btn-outline-primary" id="btn_changepassword" >Change Password</a>
+										<a href="<?php echo $root;?>/profile.php" class = "btn btn-outline-danger"  >Cancel</a>
                                         
 
 										

@@ -30,7 +30,7 @@
 										<div class="card-title">
 										<h2>Brand</h2>
 										<?php if($_SESSION['Role'] == 1) : ?>
-										<h5><a href="addbrand.php" style="color:blue;">ADD BRAND</a></h5>
+										<h5><a href="<?php echo $root;?>/addbrand.php" style="color:blue;">ADD BRAND</a></h5>
 										<?php endif; ?>
 										</div>
 									</div>
@@ -62,7 +62,7 @@
 															</form>
 														</td>
 														<td>		
-															<a href="deletebrand.php?id=<?php echo $row['brand_id']?>" class="btn btn-danger delete-confirmation">DELETE</a>	
+															<a href="<?php echo $root;?>/deletebrand.php?id=<?php echo $row['brand_id']?>" class="btn btn-danger delete-confirmation">DELETE</a>	
 														</td>
 														<?php endif; ?>
 													</tr>

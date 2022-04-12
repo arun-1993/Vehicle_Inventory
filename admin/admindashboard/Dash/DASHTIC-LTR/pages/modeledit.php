@@ -89,7 +89,7 @@ if(isset($_GET['id']) && isset($_GET['name']))
 													<textarea class="form-control" name="general_description" placeholder="Enter a General Description" required><?php echo $row['general_description']; ?></textarea>
 												</div>
 											</div>
-											<a href="model.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
+											<a href="<?php echo $root;?>/model.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
 											<button type="submit" name="updatebtn" class="btn btn-primary mt-4 mb-0">Update</button>
 											</form>
 		<?php		

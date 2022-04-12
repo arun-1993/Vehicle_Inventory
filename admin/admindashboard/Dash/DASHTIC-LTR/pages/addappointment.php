@@ -119,7 +119,7 @@ if(isset($_POST["brand_id"]) && isset($_POST["model_name"]))
 												</div>
 												
 											</div>
-											<button type="submit" name="submit" class="btn btn-primary mt-4 mb-0">Save Model</button>
+											<button type="submit" name="submit" class="btn btn-primary mt-4 mb-0">Save Appointment</button>
 											</form>
 									
 									</div>

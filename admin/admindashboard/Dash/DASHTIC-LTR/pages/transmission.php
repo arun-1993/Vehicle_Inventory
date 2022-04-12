@@ -30,7 +30,7 @@ $selectresult = $selecttransmission->get_result();
 										<div class="card-title">
 											<h2>Transmission</h2>
 											<?php if($_SESSION['Role'] == 1) : ?>
-											<h5><a href="addtransmission.php" style="color:blue;">ADD TRANSMISSION</a></h5>
+											<h5><a href="<?php echo $root;?>/addtransmission.php" style="color:blue;">ADD TRANSMISSION</a></h5>
 											<?php endif; ?>
 										</div>
 									</div>
@@ -60,7 +60,7 @@ $selectresult = $selecttransmission->get_result();
 														</form>
 														</td>
 														<td>		
-															<a href="transmissiondelete.php?id=<?php echo $row['transmission_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>			
+															<a href="<?php echo $root;?>/transmissiondelete.php?id=<?php echo $row['transmission_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>			
 														</td>
 														<?php endif; ?>
 													</tr>

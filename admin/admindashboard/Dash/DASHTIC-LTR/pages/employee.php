@@ -18,7 +18,7 @@
 									<div class="card-header">
 										<div class="card-title">
 										<h2>Employee</h2>
-										<h5><a href="addemployee.php" style="color:blue;">Add Employee</a></h5>
+										<h5><a href="<?php echo $root;?>/addemployee.php" style="color:blue;">Add Employee</a></h5>
 										</div>
 									</div>
 									<div class="card-body">
@@ -61,7 +61,7 @@
 														<td><?php echo $row['username']; ?></td>
 														<td><?php echo $row['address']; ?></td>
 														<td>		
-														<a href="deleteemployee.php?id=<?php echo $uid?>" class="btn btn-danger delete-confirmation">DELETE</a>
+														<a href="<?php echo $root;?>/deleteemployee.php?id=<?php echo $uid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 															
 														</td>
 													</tr>
