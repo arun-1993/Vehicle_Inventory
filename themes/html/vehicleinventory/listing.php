@@ -298,7 +298,7 @@ product-listing  -->
                   if($current_page <= 3)
                   {
                     $lower = 1;
-                    $upper = 5;
+                    $upper = min(5, $number_of_page);
                   }
 
                   elseif($current_page >= ($number_of_page - 2))
@@ -312,6 +312,8 @@ product-listing  -->
                     $lower = $current_page - 2;
                     $upper = $current_page + 2;
                   }
+
+                  // echo "Lower: $lower - Upper:  $upper";
 
                   $query = $_SERVER['QUERY_STRING'];
                   if(isset($_GET['page']))
