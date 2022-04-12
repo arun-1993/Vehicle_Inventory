@@ -37,99 +37,7 @@
             <!--=================================
             inner-intro -->
 
-            <section class="search-block find-car bg-1 bg-overlay-black-70 page-section-pt" id="vehicle_search">
-            <div class="container " id = "search">
-            <div class="row">
-            <div class="col-md-12">
-            <div class="section-title text-start">
-            <h2 class="text-white">FIND YOUR DREAM CAR </h2>
-            <div class="separator"></div>
-            </div>
-            </div>
-            </div>
-            <div class="row" id="search_form">
-            <div class="container">
-            <form method="GET" action="listing.php" id="form">
-            <div class="row">
-            <div class="col-sm">
-            <span>Select brand</span>
-            <div class="selected-box">
-            <select data-target="#search_form" class="selectpicker" name="brand" id="brand" onchange="fetch_models(this.form)">
-            <option value="0"> --Brand-- </option>
-            <?php while($row = $result_brand->fetch_array()) : ?> <!-- stores brand result into arry  -->
-            <?php if($row['brand_id'] == $brand) : ?>
-            <option value="<?php echo $row['brand_id']; ?>" selected><?php echo $row['brand_name']; ?></option>
-            <?php else : ?>
-            <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brand_name']; ?></option>
-            <?php endif; ?>
-            <?php endwhile; ?>
-            </select>
-            </div>
-            </div>
-            <div class="col-sm">
-            <span>Select model</span>
-            <div class="selected-box">
-            <select class="selectpicker" name="model" id="model" onchange="fetch_years(this.form)">
-            <option value="0"> --Model-- </option>
-            <?php while($row = $result_model->fetch_array()) :?>  <!-- stores model result into arry  -->
-            <?php if($row['model_id'] == $model) : ?>
-            <option value="<?php echo $row['model_id']; ?>" selected><?php echo $row['model_name']; ?></option>
-            <?php else : ?>
-            <option value="<?php echo $row['model_id']; ?>"><?php echo $row['model_name']; ?></option>
-            <?php endif; ?>
-            <?php endwhile; ?>
-            </select>
-            </div>
-            </div>
-            <div class="col-sm">
-            <span>Select year</span>
-            <div class="selected-box">
-            <select class="selectpicker" name="year" id="year">
-            <option value="0"> --Year-- </option>
-            <?php while($row = $result_year->fetch_array()) : ?>  <!-- stores year result into arry  -->
-            <option value="<?php echo $row['model_year']; ?>"><?php echo $row['model_year']; ?></option>
-            <?php endwhile; ?>
-            </select>
-            </div>
-            </div>
-            <div class="col-sm">
-            <span>Select vehicle Condition</span>
-            <div class="selected-box">
-            <select class="selectpicker" name="condition" id="condition">
-            <option value="0"> --Vehicle Condition-- </option>
-            <option value="1">New</option>
-            <option value="2">Used</option>
-            </select>
-            </div>
-            </div>
-            <div class="col-sm">
-            <div class="price-search">
-            <span class="mb-2">Minimum price <i class="fa fa-rupee"></i></span>
-
-            <div class="search">
-            <input type="number" class="form-control placeholder" name="minPrice" placeholder=" --Minimum Price-- " style="background-color: #fff;">
-            </div>
-            </div>
-            </div>
-            <div class="col-sm">
-            <div class="price-search">
-            <span class="mb-2">Maximum price <i class="fa fa-rupee"></i></span>
-            <div class="search">
-            <input type="number" class="form-control placeholder" name="maxPrice" placeholder=" --Maximum Price-- " style="background-color: #fff;">
-            </div>
-            </div>
-            </div>
-            <div class="col-md-12 mt-4">
-            <button class="button" type="submit"><i class="bi fa fa-search"></i> Search Car</button>
-            </div>
-            </div>
-            </form>
-            </div>
-            <div class="col-md-5 align-self-end">
-            </div>
-            </div>
-            </div>
-            </section>
+            
 
             <!--=================================
             inner-intro -->
@@ -226,7 +134,101 @@
             <div class="row">
             <div class="col-lg-3 col-md-4">
             <div class="listing-sidebar">
-            <div class="widget-banner">
+            <div class="widget-banner" style="position:sticky;top:2em">
+            <section class="search-block find-car  bg-overlay-black-70 page-section-pt" id="vehicle_search">
+            <div class="container " id = "search">
+            <div class="row">
+            <div class="col-md-12">
+            <div class="section-title text-start">
+            <h2 class="text-white">FIND YOUR DREAM CAR </h2>
+            <div class="separator"></div>
+            </div>
+            </div>
+            </div>
+            <div class="row" id="search_form">
+            <div class="container">
+            <form method="GET" action="listing.php" id="form">
+            <div class="row">
+            <div class="col-sm">
+            <span>Select brand</span>
+            <div class="selected-box">
+            <select data-target="#search_form" class="selectpicker" name="brand" id="brand" onchange="fetch_models(this.form)">
+            <option value="0"> --Brand-- </option>
+            <?php while($row = $result_brand->fetch_array()) : ?> <!-- stores brand result into arry  -->
+            <?php if($row['brand_id'] == $brand) : ?>
+            <option value="<?php echo $row['brand_id']; ?>" selected><?php echo $row['brand_name']; ?></option>
+            <?php else : ?>
+            <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brand_name']; ?></option>
+            <?php endif; ?>
+            <?php endwhile; ?>
+            </select>
+            </div>
+            </div>
+            <div class="col-sm">
+            <span>Select model</span>
+            <div class="selected-box">
+            <select class="selectpicker" name="model" id="model" onchange="fetch_years(this.form)">
+            <option value="0"> --Model-- </option>
+            <?php while($row = $result_model->fetch_array()) :?>  <!-- stores model result into arry  -->
+            <?php if($row['model_id'] == $model) : ?>
+            <option value="<?php echo $row['model_id']; ?>" selected><?php echo $row['model_name']; ?></option>
+            <?php else : ?>
+            <option value="<?php echo $row['model_id']; ?>"><?php echo $row['model_name']; ?></option>
+            <?php endif; ?>
+            <?php endwhile; ?>
+            </select>
+            </div>
+            </div>
+            <div class="col-sm">
+            <span>Select year</span>
+            <div class="selected-box">
+            <select class="selectpicker" name="year" id="year">
+            <option value="0"> --Year-- </option>
+            <?php while($row = $result_year->fetch_array()) : ?>  <!-- stores year result into arry  -->
+            <option value="<?php echo $row['model_year']; ?>"><?php echo $row['model_year']; ?></option>
+            <?php endwhile; ?>
+            </select>
+            </div>
+            </div>
+            <div class="col-sm">
+            <span>Select vehicle Condition</span>
+            <div class="selected-box">
+            <select class="selectpicker" name="condition" id="condition">
+            <option value="0"> --Vehicle Condition-- </option>
+            <option value="1">New</option>
+            <option value="2">Used</option>
+            </select>
+            </div>
+            </div>
+            <div class="col-sm">
+            <div class="price-search">
+            <span class="mb-2">Minimum price <i class="fa fa-rupee"></i></span>
+
+            <div class="search">
+            <input type="number" class="form-control placeholder" name="minPrice" placeholder=" --Minimum Price-- " style="background-color: #fff;">
+            </div>
+            </div>
+            </div>
+            <div class="col-sm">
+            <div class="price-search">
+            <span class="mb-2">Maximum price <i class="fa fa-rupee"></i></span>
+            <div class="search">
+            <input type="number" class="form-control placeholder" name="maxPrice" placeholder=" --Maximum Price-- " style="background-color: #fff;">
+            </div>
+            </div>
+            </div>
+            <div class="col-md-12 mt-4">
+            <button class="button" type="submit"><i class="bi fa fa-search"></i> Search Car</button>
+            <br>
+            </div>
+            </div>
+            </form>
+            </div>
+            <div class="col-md-5 align-self-end">
+            </div>
+            </div>
+            </div>
+            </section>
             <img class="img-fluid center-block" src="images/banner-2.jpg" alt="">
             </div>
             </div>
