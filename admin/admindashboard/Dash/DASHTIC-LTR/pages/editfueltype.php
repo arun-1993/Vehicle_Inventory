@@ -53,7 +53,7 @@ if(isset($_POST['edit_btn']))
 													<input type="text" class="form-control" name="fuel_type" value="<?php echo $row['fuel_type']?>" placeholder="Enter Fuel Type" required>
 												</div>												
 											</div>
-											<a href="fueltype.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
+											<a href="<?php echo $root;?>/fueltype.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
 											<button type="submit" name="updatebtn" class="btn btn-primary mt-4 mb-0">Update</button>
 											</form>
 		<?php		

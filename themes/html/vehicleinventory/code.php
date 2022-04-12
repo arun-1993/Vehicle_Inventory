@@ -29,7 +29,7 @@
                 <img class="img-fluid" src="images/car/<?php echo $row2['vehicle_image']; ?>" alt="" style = "height:200px;width:auto">
                 <div class="car-overlay-banner">
                  <ul>
-                   <li><a href="single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"><i class="fa fa-link"></i></a></li>
+                   <li><a href="<?php echo $root;?>/single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"><i class="fa fa-link"></i></a></li>
                    
                   </ul>
                 </div>
@@ -42,7 +42,7 @@
                 </ul>
              </div>
               <div class="car-content">
-                 <a href="single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"> <?php echo $row2['brand_name'].'&nbsp&nbsp;'.$row2['model_name']; ?></a>
+                 <a href="<?php echo $root;?>/single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"> <?php echo $row2['brand_name'].'&nbsp&nbsp;'.$row2['model_name']; ?></a>
                 <div class="separator"></div>
                 <div class="price">
                   

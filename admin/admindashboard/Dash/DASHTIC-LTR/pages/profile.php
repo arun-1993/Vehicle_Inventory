@@ -152,8 +152,8 @@ else{
 														
 										<div class="card-body border-top">			
 													<div class="logout" style ="padding-top:10px">
-														<a href="editprofile.php?id=<?php echo $row['user_id'];?>" class="btn btn-gray">Edit Profile</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<a href="signout.php" class="btn btn-gray">Sign Out</a>
+														<a href="<?php echo $root;?>/editprofile.php?id=<?php echo $row['user_id'];?>" class="btn btn-gray">Edit Profile</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<a href="<?php echo $root;?>/signout.php" class="btn btn-gray">Sign Out</a>
 													</div>
 														</div>
 													</div><!-- main-profile-contact-list -->

@@ -29,7 +29,7 @@ $selectresult = mysqli_query($conn,$sql);
 										<div class="card-title">
 											<h2>Fuel Type</h2>
 											<?php if($_SESSION['Role'] == 1) : ?>
-											<h5><a href="addfuel.php" style="color:blue;">ADD FUEL TYPE</a></h5>
+											<h5><a href="<?php echo $root;?>/addfuel.php" style="color:blue;">ADD FUEL TYPE</a></h5>
 											<?php endif; ?>
 										</div>
 									</div>
@@ -59,7 +59,7 @@ $selectresult = mysqli_query($conn,$sql);
 															</form>
 														</td>
 														<td>
-															<a href="deletefueltype.php?id=<?php echo $row['fuel_type_id']?>" class="btn btn-danger delete-confirmation">DELETE</a>
+															<a href="<?php echo $root;?>/deletefueltype.php?id=<?php echo $row['fuel_type_id']?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
 														<?php endif; ?>
 													</tr>

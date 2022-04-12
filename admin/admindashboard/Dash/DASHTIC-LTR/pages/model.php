@@ -28,7 +28,7 @@ $selectresult = $selectmodel->get_result();
 										<div class="card-title">
 											<h2>Model</h2>
 											<?php if($_SESSION['Role'] == 1) : ?>
-											<h5><a href="addmodel.php" style="color:blue;">ADD MODEL</a></h5>
+											<h5><a href="<?php echo $root;?>/addmodel.php" style="color:blue;">ADD MODEL</a></h5>
 											<?php endif; ?>
 										</div>
 									</div>
@@ -54,10 +54,10 @@ $selectresult = $selectmodel->get_result();
 														<td><?php echo $row['model_name']; ?></td>
 														<?php if($_SESSION['Role'] == 1) : ?>
 														<td>
-															<a href="modeledit.php?id=<?php echo $row['model_id']; ?>&name=<?php echo $row['model_name']; ?>" class="btn btn-success">EDIT</a>
+															<a href="<?php echo $root;?>/modeledit.php?id=<?php echo $row['model_id']; ?>&name=<?php echo $row['model_name']; ?>" class="btn btn-success">EDIT</a>
 														</td>
 														<td>		
-															<a href="modeldelete.php?id=<?php echo $row['model_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
+															<a href="<?php echo $root;?>/modeldelete.php?id=<?php echo $row['model_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
 														<?php endif; ?>
 													</tr>
