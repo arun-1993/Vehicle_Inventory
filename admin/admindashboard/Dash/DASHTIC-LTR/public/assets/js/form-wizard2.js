@@ -15,8 +15,8 @@ $(function() {
 			if (currentIndex < newIndex) {
 				// Step 1 form validation
 				if (currentIndex === 0) {
-					var fname = $('#firstname').parsley();
-					var lname = $('#lastname').parsley();
+					var fname = $('#Firstname').parsley();
+					var lname = $('#Lastname').parsley();
 					if (fname.isValid() && lname.isValid()) {
 						return true;
 					} else {

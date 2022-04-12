@@ -159,27 +159,27 @@
         </div>
         </div>
         </div>
-        <form action="" method="post" id ="form">
+        <form action="" method="post" id ="registrationForm">
         <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
         <div class="gray-form">
         <div class="row">
         <div class="mb-3 col-md-6">
         <label class="form-label">First Name*</label>
-        <input class="form-control" type="text" placeholder="Your Name" name="Firstname" required>
+        <input class="form-control" type="text" placeholder="Your Name" id = "firstname" name="Firstname" required>
         </div>
         <div class="mb-3 col-md-6">
         <label class="form-label">Last Name*</label>
-        <input class="form-control" type="text" placeholder="Last Name" name="Lastname" required>
+        <input class="form-control" type="text" placeholder="Last Name" id = "lastname" name="Lastname" required>
         </div>
         </div>
         <div class="mb-3">
         <label class="form-label">Email *</label>
-        <input  class="form-control" type="email" placeholder="Enter your email" name="Email" required>
+        <input  class="form-control" type="email"  id = "email" placeholder="Enter your email" name="Email" required>
         </div>
         <div class="mb-3">
         <label class="form-label">Username* </label>
-        <input  class="form-control" type="text" placeholder="Choose your user name" name="Username" required>
+        <input  class="form-control" type="text" placeholder="Choose your user name"  id = "Username"name="Username" required>
         </div>
         <div class="mb-3">
         <label class="form-label">Password* </label>
@@ -193,7 +193,7 @@
 
 
         <label class="form-label">Address</label>
-        <textarea class="form-control" placeholder="Enter your Address" name="Address" required></textarea>
+        <textarea class="form-control" id = "Address" placeholder="Enter your Address" name="Address" required></textarea>
         <br />
         <button type  = "submit" class="button red">Register an account</button>
 
@@ -208,7 +208,7 @@
         <!--=================================
         register-form-end  -->
 
-        <script>
+        <!-- <script>
 
         var password = document.getElementById("Password");
         var form = document.getElementById("form");
@@ -224,11 +224,21 @@
         }
         })
 
-        </script>
+        </script> -->
 
 
+       
 
         <?php include 'footer.php';?>
 
         </body>
         </html>
+        <!-- <script> 
+
+$(document).ready(function() {
+
+
+});
+
+
+</script> -->
