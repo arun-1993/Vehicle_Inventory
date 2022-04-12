@@ -29,26 +29,18 @@
           <ul>
             <?php foreach($brands as $brand) : ?>
 			      <li><a href="<?php echo "listing.php?brand=$brand[0]"; ?>"><?php echo $brand[1]; ?></a></li>
-            <!-- <li><a href="listing.php?carbrand=Hyundai">Hyundai</a></li>
-            <li><a href="listing.php?carbrand=Ford">Ford</a></li>
-            <li><a href="listing.php?carbrand=Kia">Kia</a></li>
-            <li><a href="listing.php?carbrand=Honda">Honda</a></li> -->
             <?php endforeach; ?>
             <li><a href="listing.php">All Brands</a></li>
 		      </ul>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-6">	  
+      <div class="col-lg-3 col-md-6">
         <div class="usefull-link">
           <h6 class="text-white">Popular Cars</h6>
           <ul>
             <?php foreach($cars as $car) : ?>
 			      <li><a href="<?php echo "listing.php?brand=$car[0]"; ?>"><?php echo $car[1]; ?></a></li>
-            <!-- <li><a href="listing.php?carbrand=Hyundai">Hyundai</a></li>
-            <li><a href="listing.php?carbrand=Ford">Ford</a></li>
-            <li><a href="listing.php?carbrand=Kia">Kia</a></li>
-            <li><a href="listing.php?carbrand=Honda">Honda</a></li> -->
             <?php endforeach; ?>
             <li><a href="listing.php">All Cars</a></li>
 		      </ul>
