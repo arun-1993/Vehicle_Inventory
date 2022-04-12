@@ -245,7 +245,7 @@ product-listing  -->
             <div class="col-lg-4 col-md-12">
               <div class="car-item gray-bg text-center">
                <div class="car-image">
-                 <img class="img-fluid" src="images/car/<?php echo $row['vehicle_image'];?>" alt="">
+                 <img class="img-fluid" src="<?php echo $dir?>.'images/car/<?php echo $row['vehicle_image'];?>" alt="">
                </div>
               </div>
              </div>

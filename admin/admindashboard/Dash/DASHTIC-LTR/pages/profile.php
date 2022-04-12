@@ -79,7 +79,7 @@ else{
 								<div class="col-lg-7">
 									<div class="box-widget widget-user">
 										<div class="widget-user-image d-sm-flex">
-											<img alt="User Avatar" id = "output" class="rounded-circle border p-0" src="../public/assets/images/users/<?php echo $row['user_image'];?>" style ="height:25%;width:20%">
+											<img alt="User Avatar" id = "output" class="rounded-circle border p-0" src="<?php echo $root?>/../public/assets/images/users/<?php echo $row['user_image'];?>" style ="height:25%;width:20%">
 											
 											<div class="ml-sm-4 mt-4">
 												<h4 class="pro-user-username mb-3 font-weight-bold">&nbsp;&nbsp;<?php echo $row['first_name'] . '&nbsp'. $row['last_name']?>&nbsp;<i class="fa fa-check-circle text-success"></i></h4>

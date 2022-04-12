@@ -21,10 +21,10 @@ else{
 					<div class="container-fluid">
 						<div class="d-flex">
 							<a class="header-brand" href="index.php">
-								<img src="logoopt4.png" class="header-brand-img desktop-lgo" alt="logo">
-								<img src="logoopt4.png" class="header-brand-img dark-logo" alt="logo">
-								<img src="logo-icon.png" class="header-brand-img mobile-logo" alt="logo">
-								<img src="logo-icon.png" class="header-brand-img darkmobile-logo" alt="logo">
+								<img src="<?php echo $root?>/logoopt4.png" class="header-brand-img desktop-lgo" alt="logo">
+								<img src="<?php echo $root?>/logoopt4.png" class="header-brand-img dark-logo" alt="logo">
+								<img src="<?php echo $root?>/logo-icon.png" class="header-brand-img mobile-logo" alt="logo">
+								<img src="<?php echo $root?>/logo-icon.png" class="header-brand-img darkmobile-logo" alt="logo">
 							</a>
 							<div class="dropdown side-nav">
 								<div class="app-sidebar__toggle" data-toggle="sidebar">
@@ -60,7 +60,7 @@ else{
 				<div class="dropdown profile-dropdown">
 									<a href="profile.php" class="nav-link pr-0 leading-none"  >
 										<span>
-											<img src="../public/assets/images/users/<?php echo $row['user_image'];?>" alt="img" class="avatar avatar-md brround">
+											<img src="<?php echo $root?>/../public/assets/images/users/<?php echo $row['user_image'];?>" alt="img" class="avatar avatar-md brround">
 										</span>
 									</a>
 									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow animated">

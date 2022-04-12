@@ -154,7 +154,7 @@ car-details -->
               <div class="item">
                 <div class="car-item gray-bg text-center">
                   <div class="car-image">
-                    <img class="img-fluid" src="images/car/<?php echo $row2['vehicle_image']; ?>" alt="" style = "height:200px;width:auto">
+                    <img class="img-fluid" src="<?php echo $root?>/images/car/<?php echo $row2['vehicle_image']; ?>" alt="" style = "height:200px;width:auto">
                     <div class="car-overlay-banner">
                       <ul>
                         <li><a href="single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"><i class="fa fa-link"></i></a></li>

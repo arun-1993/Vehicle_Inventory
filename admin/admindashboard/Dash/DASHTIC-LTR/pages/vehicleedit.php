@@ -224,7 +224,7 @@ if(isset($_POST['updatebtn']))
 	//echo $query;
 	//die;
 	$query_run =$updatevehicle->execute();
-	move_uploaded_file($_FILES['image']['tmp_name'],'../../../../../themes/html/vehicleinventory/images/car/'.$newname);	
+	move_uploaded_file($_FILES['image']['tmp_name'],'../../../../../themes/html/vehicleinventory/images/car/'.$newname); // image with new name is moved to a folder
 	}
 	else{
 		$updatevehicle = $mysqli->prepare("UPDATE vehicle SET model_id=?, exterior_color=?, fuel_type_id=?, transmission_id=?, model_year=?, seating_capacity=?, vehicle_vin=?, kms_driven=?, vehicle_description=?  WHERE vehicle_id= ?");

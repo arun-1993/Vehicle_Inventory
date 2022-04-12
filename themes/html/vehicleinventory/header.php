@@ -3,6 +3,11 @@
 session_start();
 ob_start();
 include '_dbconnect.php' ;
+ $root= "http://" . $_SERVER['SERVER_NAME'].substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])))); 
+// $root =substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
+// echo $root;
+// $dir = dirname(__FILE__);
+//echo $dir;
 
 
 $Signedin = false;
@@ -76,11 +81,7 @@ $cars = array();
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<meta name="description" content="AutoTrack The Best Car Dealer Automotive Site" />
-<meta name="author" content="Arun Ravindran, Jitendra Bhavsar, Riya Vora" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <!-- Getting current page title -->
 <title>AutoTrack | <?php echo $page; ?></title>
 
@@ -264,7 +265,7 @@ $cars = array();
 				}
 				else{
 
-                    echo '<li><a href="register.php?loc='. $_SERVER['REQUEST_URI']. '" > Register</a></li>';
+                    echo '<li><a href="register.php" > Register</a></li>';
                     echo'<li><a href="login.php?loc='. $_SERVER['REQUEST_URI']. '" > Login</a></li>';
 			?>
 

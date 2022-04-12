@@ -4,6 +4,7 @@
  <?php
     $usernotexist = false; 
     $missmatchedpassword = false;
+    $notverified = false;
 
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -19,6 +20,7 @@
       if($number==1)
       { 
         while($row = mysqli_fetch_assoc($result)){
+          if($row['user_status']=='Verified'){
         if(password_verify($password,$row['password'])){
           
           $_SESSION['Loggedin'] = true;
@@ -46,6 +48,10 @@
           <?php
     
         }
+      }
+      else{
+        $notverified=true;
+      }
       }
       }
   
@@ -79,6 +85,11 @@
          } ?>
          <?php if($missmatchedpassword==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                                     <strong>OOPS!</strong> Invalid Credentials, please verify them and retry.
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>';
+         } ?>
+         <?php if($notverified==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    <strong>OOPS!</strong> Seems like you have not verified yor mail yet !
                                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                     </div>';
          } ?>

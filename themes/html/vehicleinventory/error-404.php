@@ -20,10 +20,5 @@
    </div>
 </section>
 
-<!--=================================
- error -->
 
 
-<?php include 'footer.php'; ?>
-</body>
-</html>
