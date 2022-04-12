@@ -148,7 +148,7 @@ $result_year = $query_year->get_result();
    <div class="row no-gutter justify-content-center">
     <div class="col-lg-3 col-md-4 col-sm-6 px-2">
       <div class="link text-center">
-       <a href="http://localhost/project/themes/html/vehicleinventory/listing.php?brand=0&model=0&year=0&condition=1&minPrice=&maxPrice=">
+       <a href="listing.php?condition=1">
         <i class="fa fa-car"></i>
         <h6>New Vehicles</h6>
         </a>
@@ -156,7 +156,7 @@ $result_year = $query_year->get_result();
     </div>
     <div class="col-lg-3 col-md-4 col-sm-6  ">
       <div class="link text-center">
-       <a href="http://localhost/project/themes/html/vehicleinventory/listing.php?brand=0&model=0&year=0&condition=2&minPrice=&maxPrice=">
+       <a href="listing.php?condition=2">
         <i class="fa fa-car"></i>
         <h6>Used Vehicles</h6>
         </a>
