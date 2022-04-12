@@ -52,7 +52,7 @@ if(isset($_POST['edit_btn']))
 													<input type="text" class="form-control" name="brand_name" placeholder="Enter Brand Name" value="<?php echo $row['brand_name']?>" required>
 												</div>												
 											</div>
-											<a href="brand.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
+											<a href="<?php echo $root;?>/brand.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
 											<button type="submit" name="updatebtn" class="btn btn-primary mt-4 mb-0">Update</button>
 											</form>
 		<?php		
@@ -93,7 +93,7 @@ if(isset($_POST['updatebtn']))
 	else
 	{
 		?>
-		<script>alert("Error! Please try again.");</script>
+		<!-- <script>alert("Error! Please try again.");</script> -->
 		<?php
 		
 	}

@@ -82,7 +82,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
 
-        echo "<script>alert('Password Reset Successfully');</script>";
         echo "<script>window.location='login.php'</script>";
     }
 }

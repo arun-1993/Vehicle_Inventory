@@ -180,7 +180,7 @@ if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['color']) && isset
 													<input type="file" name="image">
 												</div>	
 											</div>
-											<a href="vehicle.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
+											<a href="<?php echo $root;?>/vehicle.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
 											<button type="submit" name="updatebtn" class="btn btn-primary mt-4 mb-0">Update</button>
 											</form>
 		<?php		

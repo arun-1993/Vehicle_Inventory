@@ -28,7 +28,7 @@
 										<div class="card-title">
 											<h2>Exterior Color</h2>
 											<?php if($_SESSION['Role'] == 1) : ?>
-											<h5><a href="addcolor.php" style="color:blue;">ADD EXTERIOR COLOR</a></h5>
+											<h5><a href="<?php echo $root;?>/addcolor.php" style="color:blue;">ADD EXTERIOR COLOR</a></h5>
 											<?php endif; ?>
 										</div>
 									</div>
@@ -59,7 +59,7 @@
 															</form>
 														</td>
 														<td>		
-															<a href="deletecolor.php?id=<?php echo $row['color_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
+															<a href="<?php echo $root;?>/deletecolor.php?id=<?php echo $row['color_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
 														<?php endif; ?>
 													</tr>

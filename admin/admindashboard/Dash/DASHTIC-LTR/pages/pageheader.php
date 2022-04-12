@@ -52,13 +52,13 @@ else{
 										Back-End Projects
 									</a>
 									<div class="text-left pr-5 pl-5 p-2 border-top">
-										<a href="" class="">View Projects</a>
+										<a href="<?php echo $root;?>/" class="">View Projects</a>
 									</div>
 								</div>
 							</div>
 							<div class="d-flex order-lg-2 ml-auto">
 				<div class="dropdown profile-dropdown">
-									<a href="profile.php" class="nav-link pr-0 leading-none"  >
+									<a href="<?php echo $root;?>/profile.php" class="nav-link pr-0 leading-none"  >
 										<span>
 											<img src="<?php echo $root?>/../public/assets/images/users/<?php echo $row['user_image'];?>" alt="img" class="avatar avatar-md brround">
 										</span>

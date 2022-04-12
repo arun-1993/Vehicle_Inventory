@@ -1,0 +1,31 @@
+# Query: alert(
+# Including: .php
+
+13 results - 8 files
+
+admin\admindashboard\Dash\DASHTIC-LTR\pages\addbrand.php:
+  28: 		<script>alert("Brand name must be filled out");</script>
+
+admin\admindashboard\Dash\DASHTIC-LTR\pages\addemployee.php:
+  25:         <script> alert("Email or Username already exists");</script> 
+  58:         ?><script> alert("Password Must match with confirmed password");</script> 
+
+admin\admindashboard\Dash\DASHTIC-LTR\pages\addvehicle.php:
+  48: 		<script>alert("All fields are required to be filled");</script>
+
+admin\admindashboard\Dash\DASHTIC-LTR\pages\editbrand.php:
+  96: 		<script>alert("Error! Please try again.");</script>
+
+admin\admindashboard\Dash\DASHTIC-LTR\pages\editprofile.php:
+  23: 			echo "<script> alert('Successfully Updated'); </script>";
+
+themes\html\vehicleinventory\appointment.php:
+   69:               <script> alert("Already have Today's appointment. Please select a different day")</script>
+
+themes\html\vehicleinventory\footer.php:
+  220:           // alert(page);
+
+themes\html\vehicleinventory\register.php:
+   40:         <script> alert("Username or Email already exists, please try another one.");</script> 
+  125:         <script> alert("Password must match with confirm password");</script> 
+  134:         echo '<script>alert("Check missing fields")</script>';

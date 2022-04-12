@@ -51,7 +51,7 @@ if(isset($_POST['edit_btn']))
 													<input type="text" class="form-control" name="color" value="<?php echo $row['color']?>" placeholder="Enter a Color" required>
 												</div>												
 											</div>
-											<a href="bodycolor.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
+											<a href="<?php echo $root;?>/bodycolor.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
 											<button type="submit" name="updatebtn" class="btn btn-primary mt-4 mb-0">Update</button>
 											</form>
 		<?php		
