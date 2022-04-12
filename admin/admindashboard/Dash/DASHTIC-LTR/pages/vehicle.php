@@ -40,6 +40,7 @@
 														<th class="wd-25p border-bottom-0">Vehicle Vin</th>
 														<th class="wd-25p border-bottom-0">Kms-driven</th>														
 														<th class="wd-25p border-bottom-0">Edit</th>
+														<th class="wd-25p border-bottom-0">Mark As Sold</th>
 														<th class="wd-25p border-bottom-0">Delete</th>
 													</tr>
 												</thead>
@@ -74,7 +75,11 @@
 														<a href="vehicleedit.php?id=<?php echo $vid?>&model=<?php echo $model?>&color=<?php echo $color?>&fuel=<?php echo $fuel?>&trans=<?php echo $trans?>" class="btn btn-success">EDIT</a>
 														</td>
 														<td>		
+														<a href="vehiclesold.php?id=<?php echo $vid?>" class="btn btn-primary audit-confirmation">MARK SOLD</a>
+														</td>
+														<td>
 														<a href="vehicledelete.php?id=<?php echo $vid?>" class="btn btn-danger audit-confirmation">DELETE</a>
+														</td>
 													</tr>
 	<?php
 	}
