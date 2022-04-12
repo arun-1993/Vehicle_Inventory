@@ -86,7 +86,8 @@
 		$("#appointment_date").datetimepicker({
 			minDate:moment(),
 			maxDate: moment().add(40, 'days'),
-			format: 'DD MMMM YYYY'
+			format: 'DD MMMM YYYY hh:mm '
+			// timepicker:true
 		
 	  });
  
