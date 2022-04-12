@@ -102,7 +102,7 @@
 
         $mail->AltBody = '';
         $mail->send();
-        header("Location:verify.php?username=$username&?msg=sent")
+        header("Location:verify.php?username=$username&msg=sent");
         ?>
 
 
