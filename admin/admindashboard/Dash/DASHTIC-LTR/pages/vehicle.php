@@ -78,7 +78,7 @@
 														<a href="vehiclesold.php?id=<?php echo $vid?>" class="btn btn-primary audit-confirmation">MARK SOLD</a>
 														</td>
 														<td>
-														<a href="vehicledelete.php?id=<?php echo $vid?>" class="btn btn-danger audit-confirmation">DELETE</a>
+														<a href="vehicledelete.php?id=<?php echo $vid?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
 													</tr>
 	<?php
@@ -101,7 +101,7 @@
 	<script>
 			var elems = document.getElementsByClassName('audit-confirmation');
 			var confirmIt = function (e) {
-				var dialog = 'Only use the delete function if the vehicle has been sold.\nIf you are trying to delete it due to an error in the information,\nplease use the edit function or contact the administrator.\nARE YOU SURE THE CAR HAS BEEN SOLD?'
+				var dialog = 'Are you sure you want to mark this car as sold?'
 				if (!confirm(dialog)) e.preventDefault();
 			};
 			for (var i = 0, l = elems.length; i < l; i++) {

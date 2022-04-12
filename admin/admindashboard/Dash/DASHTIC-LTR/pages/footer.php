@@ -112,7 +112,7 @@
 		<script>
 			var elems = document.getElementsByClassName('delete-confirmation');
 			var confirmIt = function (e) {
-				var dialog = 'Are you sure you want to delete it?'
+				var dialog = 'Are you sure you want to delete this?'
 				if (!confirm(dialog)) e.preventDefault();
 			};
 			for (var i = 0, l = elems.length; i < l; i++) {
