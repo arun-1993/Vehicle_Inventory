@@ -3,6 +3,8 @@
 session_start();
 ob_start();
 include '_dbconnect.php' ;
+$root = $_SERVER["DOCUMENT_ROOT"];
+echo $root;
 
 
 $Signedin = false;
@@ -74,11 +76,7 @@ $car_result = mysqli_query($conn, $car_query);
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<meta name="description" content="AutoTrack The Best Car Dealer Automotive Site" />
-<meta name="author" content="Arun Ravindran, Jitendra Bhavsar, Riya Vora" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <!-- Getting current page title -->
 <title>AutoTrack | <?php echo $page; ?></title>
 
@@ -264,7 +262,7 @@ $car_result = mysqli_query($conn, $car_query);
 				}
 				else{
 
-                    echo '<li><a href="register.php?loc='. $_SERVER['REQUEST_URI']. '" > Register</a></li>';
+                    echo '<li><a href="register.php" > Register</a></li>';
                     echo'<li><a href="login.php?loc='. $_SERVER['REQUEST_URI']. '" > Login</a></li>';
 			?>
 

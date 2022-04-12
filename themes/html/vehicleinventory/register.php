@@ -1,4 +1,9 @@
-<?php include 'header.php';?>
+<?php include 'header.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+include_once('mail/login_credentials.php');
+  
+  require 'mail/vendor/autoload.php';?>
 <?php
 require_once '_dbconnect.php';
 
@@ -72,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
         if($email!=NULL){
         
-          $msg = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username= $username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
+          $msg = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username=$username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
           $mail = new PHPMailer(true);
           
           try {
@@ -92,13 +97,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             $mail->addAddress('riyavora16@gmail.com');
             
             $mail->isHTML(true);
-            $mail->Subject = ' Password has been reset successfully.';
+            $mail->Subject = ' Email Verification.';
             $mail->Body    = $msg;
             
             $mail->AltBody = '';
             $mail->send();
+            header("Location:verify.php?username=$username&?msg=sent")
             ?>
-            <script> window.location:'index.php?msg=success'</script>
+            
     
   
   <?php
@@ -110,7 +116,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
   
       }
   }
-            }
+            
 
       else
       {
@@ -121,7 +127,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     
       }
     }
-  }
+}
  
   else
   {
@@ -153,7 +159,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
          </div>
       </div>
     </div>
-    <form action="verify.php" method="post" id ="form">
+    <form action="" method="post" id ="form">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
           <div class="gray-form">
