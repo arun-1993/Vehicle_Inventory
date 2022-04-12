@@ -1,6 +1,5 @@
 <!--=================================
  footer -->
-
  <footer class="footer footer-black bg-2 bg-overlay-black-90">
   <div class="container">
     <div class="row">
@@ -27,41 +26,33 @@
       <div class="col-lg-3 col-md-6">
         <div class="usefull-link">
         <h6 class="text-white">Popular Brands</h6>
-         <ul>
-			<li><a href="listing.php?carbrand=Maruti Suzuki">Maruti Suzuki</a></li>
-            <li><a href="listing.php?carbrand=Hyundai">Hyundai</a></li>
+          <ul>
+            <?php foreach($brands as $brand) : ?>
+			      <li><a href="<?php echo "listing.php?brand=$brand[0]"; ?>"><?php echo $brand[1]; ?></a></li>
+            <!-- <li><a href="listing.php?carbrand=Hyundai">Hyundai</a></li>
             <li><a href="listing.php?carbrand=Ford">Ford</a></li>
             <li><a href="listing.php?carbrand=Kia">Kia</a></li>
-            <li><a href="listing.php?carbrand=Honda">Honda</a></li>
-		</ul>
+            <li><a href="listing.php?carbrand=Honda">Honda</a></li> -->
+            <?php endforeach; ?>
+            <li><a href="listing.php">All Brands</a></li>
+		      </ul>
         </div>
       </div>
 
- <?php  
- 
- $query2 = "SELECT * FROM vehicle JOIN model_master USING(model_id) JOIN brand_master USING(brand_id) JOIN transmission USING(transmission_id) ORDER BY RAND() LIMIT 3";
- $result2 = mysqli_query($conn, $query2);
- 
- ?>
-
       <div class="col-lg-3 col-md-6">	  
-       <div class="recent-post-block">
-        <h6 class="text-white">Recommended Cars</h6>
-		<?php while($row2 = mysqli_fetch_array($result2)) : ?>
-          <div class="recent-post">
-            <div class="recent-post-image">
-			<a href = "single.php?vehicle=<?php echo $row2['vehicle_id']?>">
-              <img class="img-fluid" src="images/car/<?php echo $row2['vehicle_image']; ?>" alt="">
-			  </a>
-            </div>
-            <div class="recent-post-info">
-                <a href="single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"></a>
-                <span class="post-date"><?php echo $row2['brand_name'].'&nbsp;'.$row2['model_name']; ?></span>
-				<span class="post-date"><?php echo $row2['kms_driven'] > 0 ? 'Used ' : "New"; ?></span>
-            </div>
-         </div>
-		  <?php endwhile; ?>
-       </div>	 
+        <div class="usefull-link">
+          <h6 class="text-white">Popular Cars</h6>
+          <ul>
+            <?php foreach($cars as $car) : ?>
+			      <li><a href="<?php echo "listing.php?brand=$car[0]"; ?>"><?php echo $car[1]; ?></a></li>
+            <!-- <li><a href="listing.php?carbrand=Hyundai">Hyundai</a></li>
+            <li><a href="listing.php?carbrand=Ford">Ford</a></li>
+            <li><a href="listing.php?carbrand=Kia">Kia</a></li>
+            <li><a href="listing.php?carbrand=Honda">Honda</a></li> -->
+            <?php endforeach; ?>
+            <li><a href="listing.php">All Cars</a></li>
+		      </ul>
+        </div>	 
       </div>
       <div class="col-lg-3 col-md-6">
         <div class="news-letter">

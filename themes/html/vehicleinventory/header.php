@@ -70,6 +70,8 @@ $popular_cars_array = explode(',', $popular_cars);
 $car_query = "SELECT * FROM model_master JOIN brand_master USING(brand_id) WHERE model_id IN ($popular_cars) ORDER BY model_name";
 $car_result = mysqli_query($conn, $car_query);
 
+$brands = array();
+$cars = array();
 ?>
 
 <!DOCTYPE html>
@@ -208,7 +210,8 @@ $car_result = mysqli_query($conn, $car_query);
                     <ul class="drop-down-multilevel">
 
                       <?php while($row = mysqli_fetch_array($brand_result)) : ?>
-                      <li><a href="<?php echo 'listing.php?brand='. $row['brand_id']; ?>"><?php echo $row['brand_name']; ?></a></li>
+                        <?php array_push($brands,[$row['brand_id'], $row['brand_name']]); ?>
+                        <li><a href="<?php echo 'listing.php?brand='. end($brands)[0]; ?>"><?php echo end($brands)[1]; ?></a></li>
                       <?php endwhile; ?>
                       <li><a href="listing.php">All Brands</a></li>
 
@@ -218,11 +221,8 @@ $car_result = mysqli_query($conn, $car_query);
                     <ul class="drop-down-multilevel">
 
                       <?php while($row = mysqli_fetch_array($car_result)) : ?>
-                        <li><a href="<?php echo 'listing.php?model='. $row['model_id']; ?>"><?php echo $row['brand_name'].' '.$row['model_name']; ?></a></li>
-                        <!-- <li><a href="listing.php?car=city">Honda City</a></li>
-                        <li><a href="listing.php?car=Kwid">Renault kwid</a></li>
-                        <li><a href="listing.php?car=nexon">Tata Nexon</a></li>
-                        <li><a href="listing.php?car=harrier">Tata Harrier</a></li> -->
+                        <?php array_push($cars,[$row['model_id'], $row['brand_name'].' '.$row['model_name']]); ?>
+                        <li><a href="<?php echo 'listing.php?model='. end($cars)[0]; ?>"><?php echo end($cars)[1]; ?></a></li>
                       <?php endwhile; ?>
                         <li><a href="listing.php">All Cars</a></li>
 
