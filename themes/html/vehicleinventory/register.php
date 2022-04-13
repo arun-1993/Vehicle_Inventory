@@ -20,7 +20,6 @@
         {
         if(isset($_POST['Username']) && isset($_POST['Firstname'])&&  isset($_POST['Lastname']) && isset($_POST['Password'])&& isset($_POST['Email']))
         {
-                die;
         $firstname = $_POST["Firstname"];
         $lastname = $_POST["Lastname"];
         $email = $_POST["Email"];

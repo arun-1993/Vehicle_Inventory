@@ -1,6 +1,8 @@
     <?php include 'header.php';
     $sent = false;
-    if(isset($_GET['username']) & isset($_GET['msg'])){
+    if(isset($_GET['username']) & isset($_GET['msg']))
+    if($_GET['username']!=NULL & $_GET['msg']!=NULL){
+    {
     $sent = true;
     $username = $_GET['username'];
     $mailselect = $mysqli->prepare("SELECT * FROM user where username=?");
@@ -38,6 +40,7 @@
     }
 
     }
+}
     else{
     header("Location:error-404.php");
     }
@@ -68,6 +71,7 @@
     <div class="row justify-content-center">
     <div class="col-lg-6 col-md-12">
     <div class="gray-form clearfix">
+        
 
     <?php if($sent==true){ echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                   <strong>OTP</strong> Sent successfully!

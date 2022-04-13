@@ -54,7 +54,8 @@
 
         $mail->AltBody = '';
         $mail->send();
-        header("Location:verify.php?username=$usrname&msg=success");
+        
+        header("Location:verify.php?username=$username&msg=success");
         ?>
 
 
