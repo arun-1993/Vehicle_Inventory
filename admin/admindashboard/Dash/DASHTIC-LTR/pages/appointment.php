@@ -77,9 +77,9 @@ $selectresult = $selectappointment->get_result();
 													</select>
 													<?php else: ?>
 														<?php if ('Cancelled' == $row['appointment_status']): ?>
-														Cancelled
+														<h6 style='color:#D12D2D'>Cancelled</h6>
 														<?php elseif ("Completed" == $row['appointment_status']): ?>
-														Completed
+														<h6 style='color:#317B31'>Completed</h6>
 														<?php endif; ?>
 													<?php endif; ?>
 												</td>

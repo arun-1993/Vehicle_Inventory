@@ -6,8 +6,11 @@ $schedule_changed = 0;
 
 if (isset($_POST["submit"]))
 {
-    $schedule = $_POST['schedule'];
-    $id       = $_POST['appointment_id'];
+    $schedule     = $_POST['schedule'];
+    $id           = $_POST['appointment_id'];
+    $first_name   = $_POST['firstname'];
+    $last_name    = $_POST['lastname'];
+    $old_schedule = $_POST['oldschedule'];
 
     $change_query  = "UPDATE appointment SET appointment_schedule = '$schedule' WHERE appointment_id = $id";
     $change_result = mysqli_query($conn, $change_query);
@@ -15,6 +18,12 @@ if (isset($_POST["submit"]))
     if (mysqli_affected_rows($conn) == 1)
     {
         $schedule_changed = 1;
+
+        $subject = "Appointment Rescheduled";
+
+        $mail_text = "Greetings $first_name $last_name,<br /><br />Due to unavoidable circumstances, your appointment on $old_schedule has been rescheduled to $schedule.<br />We apologize for any inconvenience caused.<br />You can login to your account to view your appointment and edit your information.<br /><br />Kind regards,<br />AutoTrack Team";
+
+        send_mail($subject, $mail_text);
     }
     
     else
@@ -110,6 +119,7 @@ $appoint        = mysqli_fetch_array($appoint_result);
                                             <textarea class="form-control" name="comments" disabled><?=$appoint['appointment_comments'];?></textarea>
                                         </div>
                                         <input type="hidden" name="appointment_id" value="<?=$appoint['appointment_id'];?>" />
+                                        <input type="hidden" name="oldschedule" value="<?=$appoint['appointment_schedule'];?>" />
                                         <button type="submit" name="submit" class="btn btn-block btn-primary mt-4 mb-0">Add Appointment</button>
                                     </form>
                                 </div>
