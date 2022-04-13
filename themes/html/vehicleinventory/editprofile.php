@@ -113,7 +113,7 @@
 			}
 				
 				?>
-			<form action="" method = "post">
+			<form action="" method = "post" id ="editprofile">
 
 		<div class="row justify-content-center">
 		<div class="col-lg-8 col-md-12">
@@ -121,11 +121,11 @@
 		<div class="row">
 		<div class="mb-3 col-md-6">
 		<label class="form-label">First Name</label>
-		<input type="text" class="form-control" value = "<?php echo $row['first_name'];?>" name="firstname">
+		<input type="text" class="form-control" value = "<?php echo $row['first_name'];?>" name="firstname" required>
 		</div>
 		<div class="mb-3 col-md-6">
 		<label class="form-label">Last Name</label>
-		<input type="text" class="form-control" value = "<?php echo $row['last_name'];?>" name="lastname">
+		<input type="text" class="form-control" value = "<?php echo $row['last_name'];?>" name="lastname" required>
 		</div>
 		</div>
 		<!-- <div class="mb-3">
@@ -135,13 +135,13 @@
 		</div> -->
 		<div class="mb-3">
 		<label class="form-label">Address</label>
-		<input type="textarea" class="form-control" value = "<?php echo $row['address'];?>" name="address">
+		<input type="textarea" class="form-control" value = "<?php echo $row['address'];?>" name="address" required>
 		</div>  
 		<div>				
 		<button type="submit" class="button red">Edit Profile</button> 
 		</div>						
 		</form>
-		<p class="link">Want to Change your password? please <a href="<?php echo $root;?>/javascript:void(0)" id="btn_changepassword"> click here </a></p>
+		<p class="link">Want to Change your password? please <a href="javascript:void(0)" id="btn_changepassword"> click here </a></p>
 		</div>
 		<script>
 
@@ -171,7 +171,7 @@
 		</div>
 		</div>
 		</div>
-		<form action="changepassword.php?id=<?php echo $row['user_id'];?>" method = "post">
+		<form action="changepassword.php?id=<?php echo $row['user_id'];?>" method = "post" id="editpassword">
 		<div class="row justify-content-center">
 		<div class="col-lg-8 col-md-12">
 		<div class="gray-form">
@@ -182,7 +182,7 @@
 		</div>
 		<div class="mb-3">
 		<label class="form-label">New Password</label>
-		<input type="password" class="form-control" name="newpassword">
+		<input type="password" class="form-control" id="newpassword" name="newpassword">
 		</div>
 
 		<div class="mb-3">
@@ -194,7 +194,7 @@
 		<button type="submit" class="button red">Update Password</button>
 		</div>
 		<div class="mb-3 col-md-6">
-		<a  id ="canceledit" class="button red" style= "margin-left: 24px;">Cancel</a> 		
+		<a   href = "javascript:void(0)" id ="canceledit" class="button red" style= "margin-left: 24px;" style ="color:black">Cancel</a> 		
 		</div>
 		</div>	
 
@@ -212,22 +212,12 @@
 		</div>
 		</div>	
 
-		</section>
-
-
-		<?php 
-		echo "	<script>
-		var errorElement = document.getElementById('error');
-		if($emailtaken){ 
-		errorElement.innerText = ' This email is already taken please choose other one'
-
-		} 
-		</script>"
-		?>
-
+		
 
 
 		<?php include 'footer.php';?>
 
 		</body>
 		</html>
+
+		

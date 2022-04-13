@@ -99,30 +99,34 @@ login-form-start  -->
                 <?php endif; ?>
             </div>
         </div>
-    
+
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-12">
-                <form action="" method = "post" id="loginform">
+                <form action="" method="post" id="loginform">
                     <div class="gray-form clearfix">
                         <div class="mb-3">
                             <label class="form-label" for="name">Username* </label>
-                            <input id="name" class="form-control" type="text" placeholder="Username" name="username" required>
+                            <input id="name" class="form-control" type="text" placeholder="Username" name="username"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="Password">Password* </label>
-                            <input id="Password" class="form-control" type="password" placeholder="Password" name="password" required>
+                            <input id="Password" class="form-control" type="password" placeholder="Password"
+                                name="password" required>
                         </div>
                         <div class="d-grid">
-                            <input type="submit" class="button red"  placeholder="Log in" style = "background:red"> 
+                            <input type="submit" class="button red" placeholder="Log in" style="background:red">
                         </div>
                     </div>
                 </form>
             </div>
-            <div class = "flex" style = "padding-top:1rem">
-                <p class="link" style = "text-align:center;font-size:1rem"> <a href="<?php echo $root;?>/forgotpassword.php"><strong> Forgot password?</strong> </a></p>
+            <div class="flex" style="padding-top:1rem">
+                <p class="link" style="text-align:center;font-size:1rem"> <a
+                        href="<?php echo $root;?>/forgotpassword.php"><strong> Forgot password?</strong> </a></p>
             </div>
             <div>
-                <p class="link text-center">Haven't Registered with us? please <a href="<?php echo $root;?>/register.php"> Register here </a></p>
+                <p class="link text-center">Haven't Registered with us? please <a
+                        href="<?php echo $root;?>/register.php"> Register here </a></p>
             </div>
         </div>
     </div>
@@ -132,4 +136,5 @@ login-form-start  -->
 login-form-end  -->
 <?php include 'footer.php';?>
 </body>
+
 </html>
