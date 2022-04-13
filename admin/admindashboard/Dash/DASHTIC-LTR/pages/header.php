@@ -4,8 +4,63 @@ session_start();
 ob_start();
 $root= "http://" . $_SERVER['SERVER_NAME'].substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])))); 
 
+include_once '_dbconnect.php';
+include_once 'mail/login_credentials.php';  
+include_once 'mail/vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+function send_mail(string $subject, string $html_content) : ?string
+{
+	$mail = new PHPMailer(true);
+	
+	try
+	{
+		$mail->SMTPDebug = 0;
+		$mail->isSMTP();
+		$mail->Host       = 'smtp.gmail.com;';
+		$mail->SMTPAuth   = true;
+		$mail->Username   = Username;
+		$mail->Password   = Password;
+		$mail->SMTPSecure = 'tls';
+		$mail->Port       = 587;
+		
+		$mail->setFrom('info.autotrackindia@gmail.com', 'AutoTrack');
+		$mail->addAddress('arun0306.r@gmail.com');
+		$mail->addAddress('jitendrabhavsar469@gmail.com');
+		$mail->addAddress('riyavora16@gmail.com');
+		
+		$mail->isHTML(true);
+		$mail->Subject = $subject;
+		$mail->Body    = $html_content; 
+		
+		$mail->AltBody = strip_tags($html_content);
+		$mail->send();
+		//echo "Mail has been sent successfully!";
+
+	} catch (Exception $e) {
+		return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+	}
+
+	return null;
+}
+
+function create_password(int $password_length) : string
+{
+	$character_set = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$characters_length = strlen($character_set);
+	$password = '';
+	
+	for ($i = 0; $i < $password_length; $i++)
+	{
+		$password .= $character_set[random_int(0, $characters_length - 1)];
+	}
+	
+	return $password;
+}
+
 ?>
-<?php include '_dbconnect.php'?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

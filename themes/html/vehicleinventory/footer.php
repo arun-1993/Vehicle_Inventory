@@ -242,18 +242,18 @@
           })
 
 
-          function fetch_models(form)
-          {
-          var brand = form.brand.options[form.brand.options.selectedIndex].value;
+  function fetch_models(form)
+  {
+    var brand = form.brand.options[form.brand.options.selectedIndex].value;
 
-          self.location = '?brand=' + brand + '#vehicle_search';
-          }
+    self.location = '?brand=' + brand + '#vehicle_search';
+  }
+  
+  function fetch_years(form)
+  {
+      var brand = form.brand.options[form.brand.options.selectedIndex].value;
+      var model = form.model.options[form.model.options.selectedIndex].value;
 
-          function fetch_years(form)
-          {
-          var brand = form.brand.options[form.brand.options.selectedIndex].value;
-          var model = form.model.options[form.model.options.selectedIndex].value;
-
-          self.location = '?brand=' + brand + '&model=' + model + '#vehicle_search';
-          }
-          </script>
+      self.location = '?brand=' + brand + '&model=' + model + '#vehicle_search';
+  }
+</script>

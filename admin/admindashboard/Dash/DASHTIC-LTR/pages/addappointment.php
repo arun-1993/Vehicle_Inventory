@@ -2,12 +2,6 @@
 
 include('header.php');
 
-include_once('mail/login_credentials.php');  
-require 'mail/vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 $appointment_created = false;
 $user_created = false;
 $user_found = false;
@@ -39,6 +33,12 @@ if(isset($_POST["submit"]))
 		if($appointment_result = mysqli_query($conn, $appointment_query))
 		{
 			$appointment_created = true;
+
+			$subject = 'AutoTrack Appointment';
+				
+			$mail_text = "Greetings $first_name $last_name,<br /><br />The appointment has been set for $schedule.<br />You can login to your account to view your appointment and edit your information.<br /><br />Kind regards,<br />AutoTrack Team";
+
+			send_mail($subject, $mail_text);
 		}
 	}
 	
@@ -46,23 +46,13 @@ if(isset($_POST["submit"]))
 	{
 		$username = explode('@', $email)[0];
 
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$charactersLength = strlen($characters);
-		$password = '';
-		$length = 10;
-		
-		for ($i = 0; $i < $length; $i++)
-		{
-			$password .= $characters[random_int(0, $charactersLength - 1)];
-		}
+		$password = create_password(10);
 
 		$hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
 		$create_query = "INSERT INTO user (user_role_id, first_name, last_name, email, username, password, address, user_status) VALUES (3, '$first_name', '$last_name', '$email', '$username', '$hashedpassword', 'Ahmedabad', 'Verified')";
 
 		$user_created = true;
-
-		$mail_text = "Greetings $first_name,<br /><br />A new user has been created for you with the following credentials:<br />Username: $username<br />Password: $password<br />The appointment has been set for $schedule.<br />You can login to view your appointment and edit your information.<br /><br />Kind regards,<br />AutoTrack Team";
 
 		if($create_result = mysqli_query($conn, $create_query))
 		{
@@ -75,36 +65,14 @@ if(isset($_POST["submit"]))
 			if($appointment_result = mysqli_query($conn, $appointment_query))
 			{
 				$appointment_created = true;
-			}
 
-			$mail = new PHPMailer(true);
+				$subject = 'AutoTrack Appointment';
+				
+				$mail_text = "Greetings $first_name $last_name,<br /><br />A new user has been created for you with the following credentials:<br />Username: $username<br />Password: $password<br />The appointment has been set for $schedule.<br />You can login to your account using the above credentials to view your appointment and edit your information.<br /><br />Kind regards,<br />AutoTrack Team";
 	
-			try {
-				$mail->SMTPDebug = 0;
-				$mail->isSMTP();
-				$mail->Host       = 'smtp.gmail.com;';
-				$mail->SMTPAuth   = true;
-				$mail->Username   = Username;
-				$mail->Password   = Password;
-				$mail->SMTPSecure = 'tls';
-				$mail->Port       = 587;
-				
-				$mail->setFrom('info.autotrackinida@gmail.com', 'AutoTrack');
-				$mail->addAddress('arun0306.r@gmail.com');
-				$mail->addAddress('jitendrabhavsar469@gmail.com');
-				$mail->addAddress('riyavora16@gmail.com');
-				
-				$mail->isHTML(true);
-				$mail->Subject = 'Appointment';
-				$mail->Body    = $mail_text; 
-				
-				$mail->AltBody = "Greetings, your new password is $password";
-				$mail->send();
-				//echo "Mail has been sent successfully!";
-
-			} catch (Exception $e) {
-				echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+				send_mail($subject, $mail_text);
 			}
+
 		}
 	}
 }
