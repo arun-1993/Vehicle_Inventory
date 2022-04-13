@@ -93,58 +93,8 @@ endDate.setDate(startDate.getDate() + 40);
         maxDate: endDate
 		
 	  });
-	  $("#registrationForm").validate();
+	 
 
-	  $("resistrationForm").validate({
-		rules: {
-		firstname : {
-		required: true,
-		minlength: 3
-		},
-		lastname: {
-		required: true,
-		
-		minlength: 3
-		},
-		email: {
-		required: true,
-		email: true
-		},
-		username: {
-		required: true,
-		minlength:4
-		},
-		Password: {
-		required: true,
-		minlength:8
-		},
-		Address: {
-		required: true,
-		},
-		},
-		messages : {
-		firstname: {
-		minlength: "Name should be at least 3 characters"
-		},
-		lastname: {
-		minlength: "Name should be at least 3 characters"
-		},
-		email: {
-		required: "Please enter mail",
-		
-		},
-		Username: {
-				minlength: "Name should be at least 4 characters"
-		},
-		Password: {
-		
-		minlength:"Password must be minimum 8 characters long"
-		},
-		Address: {
-		required:"Please fill out this fild"
-		},
-		}
-		});
  
 	});
 	

@@ -20,6 +20,7 @@
         {
         if(isset($_POST['Username']) && isset($_POST['Firstname'])&&  isset($_POST['Lastname']) && isset($_POST['Password'])&& isset($_POST['Email']))
         {
+                die;
         $firstname = $_POST["Firstname"];
         $lastname = $_POST["Lastname"];
         $email = $_POST["Email"];
@@ -159,43 +160,43 @@
         </div>
         </div>
         </div>
-        <form action="" method="post" id ="registrationForm">
+        <form action="" method="post" id ="form">
         <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
         <div class="gray-form">
         <div class="row">
         <div class="mb-3 col-md-6">
         <label class="form-label">First Name*</label>
-        <input class="form-control" type="text" placeholder="Your Name" id = "firstname" name="Firstname" required>
+        <input class="form-control" type="text" placeholder="Your Name" id ="Firstname" name="Firstname">
         </div>
         <div class="mb-3 col-md-6">
         <label class="form-label">Last Name*</label>
-        <input class="form-control" type="text" placeholder="Last Name" id = "lastname" name="Lastname" required>
+        <input class="form-control" type="text" placeholder="Last Name" id ="Lastname" name="Lastname" >
         </div>
         </div>
         <div class="mb-3">
         <label class="form-label">Email *</label>
-        <input  class="form-control" type="email"  id = "email" placeholder="Enter your email" name="Email" required>
+        <input  class="form-control" type="email"  id ="Email" placeholder="Enter your email" name="Email" >
         </div>
         <div class="mb-3">
         <label class="form-label">Username* </label>
-        <input  class="form-control" type="text" placeholder="Choose your user name"  id = "Username"name="Username" required>
+        <input  class="form-control" type="text" placeholder="Choose your user name"  id ="Username"name="Username" >
         </div>
         <div class="mb-3">
         <label class="form-label">Password* </label>
-        <input class="form-control" type="password" placeholder="Enter Password" id ="Password" name="Password" required>
+        <input class="form-control" type="password" placeholder="Enter Password" id ="Password" name="Password" >
         <span id ="error" style = "color:red"></span>
         </div>
         <div class="mb-3">
         <label class="form-label">Confirm Password*</label>
-        <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword" required>
+        <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword" >
         </div>
 
 
         <label class="form-label">Address</label>
-        <textarea class="form-control" id = "Address" placeholder="Enter your Address" name="Address" required></textarea>
-        <br />
-        <button type  = "submit" class="button red">Register an account</button>
+        <textarea class="form-control" id ="Address" placeholder="Enter your Address" name="Address" ></textarea>
+        <br/>
+        <button type  ="submit" class="button red">Register an account</button>
 
 
         </form>
@@ -205,40 +206,11 @@
         </div>
         </div>
         </section>
-        <!--=================================
-        register-form-end  -->
-
-        <!-- <script>
-
-        var password = document.getElementById("Password");
-        var form = document.getElementById("form");
-        var errorElement = document.getElementById("error");
-        form.addEventListener('submit', (e)=>{
-        let message = [];
-        if(password.value.length<8){
-        message.push('Password must have minimum 8 characters')
-        }
-        if(message.length>0){
-        e.preventDefault()
-        errorElement.innerText = message.join(',')
-        }
-        })
-
-        </script> -->
+     
 
 
-       
-
+        
         <?php include 'footer.php';?>
 
         </body>
         </html>
-        <!-- <script> 
-
-$(document).ready(function() {
-
-
-});
-
-
-</script> -->

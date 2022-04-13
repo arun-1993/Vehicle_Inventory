@@ -97,22 +97,22 @@
           </div>
           </div>
           </div>
-          <form action="" method = "post">
+          <form action="" method = "post" id="loginform">
 
           <div class="row justify-content-center">
           <div class="col-lg-6 col-md-12">
           <div class="gray-form clearfix">
           <div class="mb-3">
           <label class="form-label" for="name">Username* </label>
-          <input id="name" class="form-control" type="text" placeholder="Username" name="username">
+          <input id="name" class="form-control" type="text" placeholder="Username" name="username" required>
           </div>
           <div class="mb-3">
           <label class="form-label" for="Password">Password* </label>
-          <input id="Password" class="form-control" type="password" placeholder="Password" name="password">
+          <input id="Password" class="form-control" type="password" placeholder="Password" name="password" required>
           </div>
 
           <div class="d-grid">
-          <button  class="button red btn-block">Log in</button> 
+          <input type="submit" class="button red" name = "Login" placeholder="Log in"> 
           </div>
           </div>
 
@@ -136,4 +136,4 @@
           <?php include 'footer.php';?>
           </body>
           </html>
-          4
+          

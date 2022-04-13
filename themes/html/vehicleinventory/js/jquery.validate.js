@@ -1414,14 +1414,14 @@ $.extend( $.validator, {
 		},
 
 		// https://jqueryvalidation.org/email-method/
-		email: function( value, element ) {
+		// email: function( value, element ) {
 
-			// From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
-			// Retrieved 2014-01-14
-			// If you have a problem with this implementation, report a bug against the above spec
-			// Or use custom methods to implement your own email validation
-			return this.optional( element ) || /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test( value ) && /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)([\w-]+\.)+[\w-]{2,4})?$/.test( value );
-		},
+		// 	// From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
+		// 	// Retrieved 2014-01-14
+		// 	// If you have a problem with this implementation, report a bug against the above spec
+		// 	// Or use custom methods to implement your own email validation
+		// 	return this.optional( element ) || /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test( value ) && /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)([\w-]+\.)+[\w-]{2,4})?$/.test( value );
+		// },
 
 		// https://jqueryvalidation.org/url-method/
 		url: function( value, element ) {
@@ -1655,3 +1655,4 @@ if ( $.ajaxPrefilter ) {
 }
 return $;
 }));
+

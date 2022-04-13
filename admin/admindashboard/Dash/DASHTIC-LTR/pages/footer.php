@@ -68,7 +68,6 @@
 		<script src="../public/assets/js/vendors/circle-progress.min.js"></script>
 		
 		
-		
 		<!--Sidemenu js-->
 		<script src="../public/assets/plugins/sidemenu/sidemenu.js"></script>
 		

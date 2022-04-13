@@ -605,7 +605,135 @@ var POTENZA = {};
 
           
         });
+        $.validator.addMethod("noSpace", function(value, element) { 
+          return value.indexOf(" ") < 0 && value != ""; 
+        }, "Cannot use whitespace");
+        $.validator.addMethod("validate_email", function(value, element) {
+        
+        if (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value)) {
+        return true;
+        } else {
+        return false;
+        }
+        
+        }, "Please enter a valid Email.");
+        
+        
+        $.validator.addMethod("alphabets", function(value, element) {
+        return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
+        },"You only can use letters");
+          $("#form").validate({
+                  
+        rules: {
+        Firstname: {
+                required:true,
+                minlength:3,
+                noSpace: true,
+                alphabets:true,
+        },
+        Lastname: {
+        required: true,
+        noSpace: true,
+        alphabets:true,
+        
+        minlength: 3,
+        },
+        Email: {
+        required: true,
+        validate_email: true,
+        noSpace: true,
+        
+        
+        },
+        Username: {
+        required: true,
+        noSpace: true,
+        minlength:4,
+        },
+        Password: {
+        required: true,
+        noSpace: true,
+          minlength:8,
+        },
+        confirmPassword:{
+          required:true,
+          minlength:8,
+          noSpace: true,
+        
+          equalTo: "#Password",
+        
+        },
+        
+        Address: {
+          alphabets:true,
+        
+        required: true,
+        },
+        },
+        
+        
+        messages : {
+         Firstname: {
+         minlength: "Name should be at least 3 characters long"
+         },
+        Lastname: {
+        minlength: "Lastname should be at least 3 characters long"
+        },
+        Email: {
+        required: "Please enter valid mail",
+        
+        },
+        Username: {
+            minlength: "Name should be at least 4 characters"
+        },
+        Password: {
+        
+        minlength:"Password must be minimum 8 characters long"
+        },
+        confirmPassword:{
+                equalTo:"Password must match Confirmed Password"
+        },
+        Address: {
+        required:"Please fill out this fild"
+        },
+        },
+        
+        submitHandler:function(form){
+                form.submit();
+        }
+        
+      }); 
+      jQuery('#contactform').validate({
+                rules:{
+                        name:{
+                                alphabets:true,
+                                noSpace:true,
+                                minlength:3,
+                        },
+                        email:{
+                          required: true,
+                          validate_email: true,
+                          noSpace: true,
+                                
+                        },
+                        phone:{
+                          required: true,
+		  number: true,
+		  minlength: 10,
+		  maxlength: 10
+                        }
+                }
+
+        })
+
+
+     
+
+
+
     });
+    
+   
 
     
     
