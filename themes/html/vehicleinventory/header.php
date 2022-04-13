@@ -4,7 +4,8 @@
             ob_start();
             include '_dbconnect.php' ;
             $root= "http://" . $_SERVER['SERVER_NAME'].substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])))); 
-
+            echo $root;
+            die;
             $Signedin = false;
             if (isset($_SESSION['Username']))
             {
