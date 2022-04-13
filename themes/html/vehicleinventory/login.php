@@ -112,7 +112,7 @@
           </div>
 
           <div class="d-grid">
-          <input type="submit" class="button red"  placeholder="Log in"> 
+          <input type="submit" class="button red"  placeholder="Log in" style = "background:red"> 
           </div>
           </div>
 
