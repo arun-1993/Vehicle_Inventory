@@ -601,7 +601,17 @@ var POTENZA = {};
           $("#appointment_date").datetimepicker({
           inline:true,
           minDate: date,
-          maxDate: maxdate
+          maxDate: maxdate,
+          allowTimes:[
+            '09:00','10:00','11:00',
+            '12:00', '13:00','14:00', '15:00',
+            '16:00', '17:00', '18:00', '19:00', '20:00'
+           ],
+           beforeShowDay:
+                   function (date) {
+                       return [date.getDay() == 0  ? false : true];
+                   }
+           
 
           
         });
@@ -734,9 +744,90 @@ var POTENZA = {};
             form.submit();
     }
 
-  })
+  });
+ jQuery('#contactform').validate({
+                rules:{
+                        name:{
+                                alphabets:true,
+                                noSpace:true,
+                                minlength:3,
+                        },
+                        email:{
+                          required: true,
+                          validate_email: true,
+                          noSpace: true,
+                                
+                        },
+                        phone:{
+                          required: true,
+		  number: true,
+		  minlength: 10,
+		  maxlength: 10
+                        }
+                }
 
+        });
+        jQuery('#loginform').validate({
+          rules:{
+                 username:{required:true},
+                 password:{required:true},
+          },
+          submitHandler:function(form){
+            form.submit();
+    }
 
+  });
+  jQuery('#editprofile').validate({
+    rules:{
+      firstname:{
+		  required:true,
+      minlength:3,
+      noSpace: true,
+      alphabets:true,
+    },
+
+           lastname:{required:true,
+          minlength:3,
+          noSpace: true,
+          alphabets:true,
+          },
+          address:{
+            required:true,
+          
+          noSpace: true,
+          alphabets:true,
+          }
+    },
+    submitHandler:function(form){
+      form.submit();
+}
+
+});
+
+jQuery('#editpassword').validate({
+    rules:{
+		oldpassword:{
+		  required:true,
+      noSpace: true,
+     
+    },
+
+	newpassword:{required:true,
+          minlength:8,
+          noSpace: true,
+          },
+		  confpassword:{
+			  required:8,
+        noSpace: true,
+			  equalTo:"#newpassword",
+		  },
+
+    },
+    submitHandler:function(form){
+      form.submit();
+}
+
+});
 
      
 

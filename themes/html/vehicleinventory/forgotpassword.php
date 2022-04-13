@@ -121,7 +121,7 @@
       <div class="gray-form clearfix">
       <div class="mb-3">
       <label class="form-label" for="email">Email* </label>
-      <input id="name" class="form-control" type="text" placeholder="Enter registered Email" name="email">
+      <input id="name" class="form-control" type="mail" placeholder="Enter registered Email" name="email" required>
       </div>
 
       <div class="d-grid">

@@ -2,70 +2,61 @@
 
 
           <?php
-          $usernotexist = false; 
-          $missmatchedpassword = false;
-          $notverified = false;
+$usernotexist        = false;
+$missmatchedpassword = false;
+$notverified         = false;
 
-          if($_SERVER["REQUEST_METHOD"] == "POST")
-          {
+if ("POST" == $_SERVER["REQUEST_METHOD"]) {
 
           $username = $_POST["username"];
-          $password = $_POST["password"]; 
-
+          $password = $_POST["password"];
 
           $selectuserquery = $mysqli->prepare("SELECT * FROM `user` WHERE username = '$username' or email = '$username' AND  user_role_id = 3");
           $selectuserquery->execute();
           $result = $selectuserquery->get_result();
           $number = mysqli_num_rows($result); // fetches number of row in result
-          if($number==1)
-          { 
-          while($row = mysqli_fetch_assoc($result)){
-          if($row['user_status']=='Verified'){
-          if(password_verify($password,$row['password'])){
+          if (1 == $number) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                              if ('Verified' == $row['user_status']) {
+                                        if (password_verify($password, $row['password'])) {
 
-          $_SESSION['Loggedin'] = true;
-          $_SESSION['Username'] = $row['username'];
-          $_SESSION['userid'] = $row['user_id'];
-          $_SESSION['email'] = $row['email'];
-          $_SESSION['name'] = $row['first_name'].' '.$row['last_name'];
-          ?>
+                                                  $_SESSION['Loggedin'] = true;
+                                                  $_SESSION['Username'] = $row['username'];
+                                                  $_SESSION['userid']   = $row['user_id'];
+                                                  $_SESSION['email']    = $row['email'];
+                                                  $_SESSION['name']     = $row['first_name'] . ' ' . $row['last_name'];
+                                                  ?>
 
           <script>
-          <?php if(isset($_GET['loc'])) : ?>
+          <?php if (isset($_GET['loc'])): ?>
           window.location= "<?php echo $_GET['loc']; ?>";
-          <?php else : ?>
+          <?php else: ?>
           window.location= "index.php";
-          <?php endif; ?>
+          <?php endif;?>
           </script>
 
           <?php
 
-          }
-          else
-          {
-          $missmatchedpassword = true;
-          ?>
+                                        } else {
+                                                  $missmatchedpassword = true;
+                                                  ?>
+          <?php
+
+                                        }
+                              } else {
+                                        $notverified = true;
+                              }
+                    }
+          } else {
+
+                    $usernotexist = true;
+                    ?>
           <?php
 
           }
-          }
-          else{
-          $notverified=true;
-          }
-          }
-          }
+}
 
-          else{
-
-          $usernotexist = true;
-          ?>
-          <?php
-
-
-          }
-          }
-
-          ?>
+?>
 
           <!--=================================
           login-form-start  -->
@@ -78,21 +69,24 @@
 
           <h2>Login To Your Account</h2>
           <div class="separator"></div>
-          </div><?php if($usernotexist==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+          </div><?php if (true == $usernotexist) {
+          echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                       <strong>OOPS!</strong> Seems like You are not registerd with us!
                                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                       </div>';
-          } ?>
-          <?php if($missmatchedpassword==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+}?>
+          <?php if (true == $missmatchedpassword) {
+          echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                       <strong>OOPS!</strong> Invalid Credentials, please verify them and retry.
                                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                       </div>';
-          } ?>
-          <?php if($notverified==true){ echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+}?>
+          <?php if (true == $notverified) {
+          echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                       <strong>OOPS!</strong> Seems like you have not verified yor mail yet !
                                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                       </div>';
-          } ?>
+}?>
 
           </div>
           </div>
@@ -112,7 +106,7 @@
           </div>
 
           <div class="d-grid">
-          <input type="submit" class="button red"  placeholder="Log in" style = "background:red"> 
+          <input type="submit" class="button red"  placeholder="Log in" style = "background:red">
           </div>
           </div>
 
@@ -121,10 +115,10 @@
           </form>
 
           <div class = "flex" style = "padding-top:1rem">
-          <p class="link" style = "text-align:center;font-size:1rem"> <a href="<?php echo $root;?>/forgotpassword.php"><strong> Forgot password?</strong> </a></p>
+          <p class="link" style = "text-align:center;font-size:1rem"> <a href="<?php echo $root; ?>/forgotpassword.php"><strong> Forgot password?</strong> </a></p>
           </div>
           <div>
-          <p class="link">Haven't Register with us? please <a href="<?php echo $root;?>/register.php"> Register here </a></p>
+          <p class="link">Haven't Register with us? please <a href="<?php echo $root; ?>/register.php"> Register here </a></p>
           </div>
           </div>
           </div>
@@ -136,4 +130,3 @@
           <?php include 'footer.php';?>
           </body>
           </html>
-          

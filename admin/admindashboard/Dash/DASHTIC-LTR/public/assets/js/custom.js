@@ -90,7 +90,16 @@ endDate.setDate(startDate.getDate() + 40);
 		$("#appointment_date").datetimepicker({
 		inline:true,
 		minDate: startDate,
-        maxDate: endDate
+        maxDate: endDate,
+		allowTimes:[
+            '09:00','10:00','11:00',
+            '12:00', '13:00','14:00', '15:00',
+            '16:00', '17:00', '18:00', '19:00', '20:00'
+           ],
+           beforeShowDay:
+                   function (date) {
+                       return [date.getDay() == 0  ? false : true];
+                   }
 		
 	  });
 	 
