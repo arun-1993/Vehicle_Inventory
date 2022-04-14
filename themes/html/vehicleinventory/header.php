@@ -1,76 +1,72 @@
-            <?php 
+            <?php
 
-            session_start();
-            ob_start();
-            include '_dbconnect.php' ;
-            $root= "http://" . $_SERVER['SERVER_NAME'].substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])))); 
+session_start();
+ob_start();
+include '_dbconnect.php';
 
-            $Signedin = false;
-            if (isset($_SESSION['Username']))
-            {
-            $Signedin = true;    
-            }
+$root = "http://" . $_SERVER['SERVER_NAME'] . substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
 
-            function IND_money_format($money)
-            {
-            $len = strlen($money);
-            $m = '';
-            $money = strrev($money);
+$Signedin = false;
+if (isset($_SESSION['Username'])) {
+ $Signedin = true;
+}
 
-            for($i=0;$i<$len;$i++)
-            {
-            if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i!=$len)
-            {
-            $m .=',';
-            }
+function indMoneyFormat($money)
+{
+ $len   = strlen($money);
+ $m     = '';
+ $money = strrev($money);
 
-            $m .=$money[$i];
-            }
-            return '&#8377; '. strrev($m);
-            }
+ for ($i = 0; $i < $len; $i++) {
+  if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
+   $m .= ',';
+  }
 
-            function IND_number_format($number)
-            {
-            $len = strlen($number);
-            $m = '';
-            $money = strrev($number);
+  $m .= $money[$i];
+ }
+ return '&#8377; ' . strrev($m);
+}
 
-            for($i=0;$i<$len;$i++)
-            {
-            if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i!=$len)
-            {
-            $m .=',';
-            }
+function indNumberFormat($number)
+{
+ $len   = strlen($number);
+ $m     = '';
+ $money = strrev($number);
 
-            $m .=$money[$i];
-            }
-            return strrev($m);
-            }
+ for ($i = 0; $i < $len; $i++) {
+  if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
+   $m .= ',';
+  }
 
-            $page = basename($_SERVER['PHP_SELF']);
-            $page = ucwords(explode('.',$page)[0]);
+  $m .= $money[$i];
+ }
+ return strrev($m);
+}
 
-            $popular_brands_query = "SELECT * FROM popular_list WHERE list_id = 1";
-            $popular_brands_result = mysqli_query($conn, $popular_brands_query);
+$page = basename($_SERVER['PHP_SELF']);
+$page = ucwords(explode('.', $page)[0]);
 
-            $popular_brands = mysqli_fetch_array($popular_brands_result)['list_values'];
-            $popular_brands_array = explode(',', $popular_brands);
+$popular_brands_query  = "SELECT * FROM popular_list WHERE list_id = 1";
+$popular_brands_result = mysqli_query($conn, $popular_brands_query);
 
-            $brand_query = "SELECT * FROM brand_master WHERE brand_id IN ($popular_brands) ORDER BY brand_name";
-            $brand_result = mysqli_query($conn, $brand_query);
+$popular_brands       = mysqli_fetch_array($popular_brands_result)['list_values'];
+$popular_brands_array = explode(',', $popular_brands);
 
-            $popular_cars_query = "SELECT * FROM popular_list WHERE list_id = 2";
-            $popular_cars_result = mysqli_query($conn, $popular_cars_query);
+$brand_query  = "SELECT * FROM brand_master WHERE brand_id IN ($popular_brands) ORDER BY brand_name";
+$brand_result = mysqli_query($conn, $brand_query);
 
-            $popular_cars = mysqli_fetch_array($popular_cars_result)['list_values'];
-            $popular_cars_array = explode(',', $popular_cars);
+$popular_cars_query  = "SELECT * FROM popular_list WHERE list_id = 2";
+$popular_cars_result = mysqli_query($conn, $popular_cars_query);
 
-            $car_query = "SELECT * FROM model_master JOIN brand_master USING(brand_id) WHERE model_id IN ($popular_cars) ORDER BY model_name";
-            $car_result = mysqli_query($conn, $car_query);
+$popular_cars       = mysqli_fetch_array($popular_cars_result)['list_values'];
+$popular_cars_array = explode(',', $popular_cars);
 
-            $brands = array();
-            $cars = array();
-            ?>
+$car_query  = "SELECT * FROM model_master JOIN brand_master USING(brand_id) WHERE model_id IN ($popular_cars) ORDER BY model_name";
+$car_result = mysqli_query($conn, $car_query);
+
+$brands = array();
+$cars   = array();
+?>
 
             <!DOCTYPE html>
             <html lang="en">
@@ -82,46 +78,46 @@
                 <title>AutoTrack | <?php echo $page; ?></title>
 
                 <!-- Favicon -->
-                <link rel="shortcut icon" href="<?php echo $root?>/images/favicon.ico" />
+                <link rel="shortcut icon" href="<?php echo $root; ?>/images/favicon.ico" />
 
                 <!-- bootstrap -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/bootstrap.min.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/bootstrap.min.css" />
 
                 <!-- flaticon -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/flaticon.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/flaticon.css" />
 
                 <!-- mega menu -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/mega-menu/mega_menu.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/mega-menu/mega_menu.css" />
 
                 <!-- mega menu -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/font-awesome.min.css" />
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/jquery.datetimepicker.min.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/font-awesome.min.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/jquery.datetimepicker.min.css" />
 
                 <!-- owl-carousel -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/owl-carousel/owl.carousel.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/owl-carousel/owl.carousel.css" />
 
                 <!-- magnific-popup -->
                 <link rel="stylesheet" type="text/css"
-                    href="<?php echo $root?>/css/magnific-popup/magnific-popup.css" />
+                    href="<?php echo $root; ?>/css/magnific-popup/magnific-popup.css" />
 
                 <!-- jquery-ui -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/jquery-ui.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/jquery-ui.css" />
 
                 <!-- revolution -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/revolution/css/settings.css">
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/revolution/css/settings.css">
 
                 <!-- main style -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/style.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/style.css" />
 
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/custom.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/custom.css" />
 
                 <!-- responsive -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/responsive.css" />
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/bootstrap-datetimepicker.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/responsive.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/bootstrap-datetimepicker.css" />
 
                 <!-- Slick css -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/slick/slick.css" />
-                <link rel="stylesheet" type="text/css" href="<?php echo $root?>/css/slick/slick-theme.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/slick/slick.css" />
+                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/slick/slick-theme.css" />
 
             </head>
             <!--=================================
@@ -163,12 +159,12 @@
                                 <div class="topbar-right text-md-end text-center">
                                     <ul class="list-inline">
                                         <li> <i class="fa fa-phone"></i> +91 7984856432</li>
-                                        <li><a href="<?php echo $root;?>/#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="<?php echo $root;?>/#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="<?php echo $root;?>/#"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="<?php echo $root; ?>/#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="<?php echo $root; ?>/#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="<?php echo $root; ?>/#"><i class="fa fa-instagram"></i></a></li>
 
-                                        <!-- <li><?php if($Signedin==true){ echo "<strong>Welcome!  </strong>".$_SESSION['Username'];}?></li> -->
-                                        <li><?php if($Signedin==true){ echo "<strong>Welcome!  </strong>".$_SESSION['name'];}?>
+                                        <!-- <li><?php if (true == $Signedin) {echo "<strong>Welcome!  </strong>" . $_SESSION['Username'];} ?></li> -->
+                                        <li><?php if (true == $Signedin) {echo "<strong>Welcome!  </strong>" . $_SESSION['name'];} ?>
                                         </li>
                                     </ul>
                                 </div>
@@ -191,7 +187,7 @@
                                         <!-- menu logo -->
                                         <ul class="menu-logo" style="padding:0px">
                                             <li>
-                                                <a href="<?php echo $root;?>/index.php"><img id=""
+                                                <a href="<?php echo $root; ?>/index.php"><img id=""
                                                         src="images/logoopt4.png" alt="logo"
                                                         style="width:auto; height:auto;padding-top:20px;"> </a>
                                             </li>
@@ -199,7 +195,7 @@
                                         <!-- menu links -->
                                         <ul class="menu-links">
 
-                                            <li class=""><a href="<?php echo $root;?>/index.php"> Home </a>
+                                            <li class=""><a href="<?php echo $root; ?>/index.php"> Home </a>
 
 
                                             </li>
@@ -209,20 +205,20 @@
                                                 <ul class="drop-down-multilevel ">
 
                                                     <li>
-                                                        <a href="<?php echo $root;?>/listing.php"> Cars <i
+                                                        <a href="<?php echo $root; ?>/listing.php"> Cars <i
                                                                 class="fa fa-angle-right fa-indicator"></i> </a>
                                                         <ul class="drop-down-multilevel">
                                                             <li><a href="#">Popular Brands <i
                                                                         class="fa fa-angle-right fa-indicator"></i></a>
                                                                 <ul class="drop-down-multilevel">
 
-                                                                    <?php while($row = mysqli_fetch_array($brand_result)) : ?>
-                                                                    <?php array_push($brands,[$row['brand_id'], $row['brand_name']]); ?>
+                                                                    <?php while ($row = mysqli_fetch_array($brand_result)): ?>
+                                                                    <?php array_push($brands, [$row['brand_id'], $row['brand_name']]); ?>
                                                                     <li><a
-                                                                            href="<?php echo $root;?>/<?php echo 'listing.php?brand='. end($brands)[0]; ?>"><?php echo end($brands)[1]; ?></a>
+                                                                            href="<?php echo $root; ?>/<?php echo 'listing.php?brand=' . end($brands)[0]; ?>"><?php echo end($brands)[1]; ?></a>
                                                                     </li>
                                                                     <?php endwhile; ?>
-                                                                    <li><a href="<?php echo $root;?>/listing.php">All
+                                                                    <li><a href="<?php echo $root; ?>/listing.php">All
                                                                             Brands</a></li>
 
                                                                 </ul>
@@ -231,13 +227,13 @@
 
                                                                 <ul class="drop-down-multilevel">
 
-                                                                    <?php while($row = mysqli_fetch_array($car_result)) : ?>
-                                                                    <?php array_push($cars,[$row['model_id'], $row['brand_name'].' '.$row['model_name']]); ?>
+                                                                    <?php while ($row = mysqli_fetch_array($car_result)): ?>
+                                                                    <?php array_push($cars, [$row['model_id'], $row['brand_name'] . ' ' . $row['model_name']]); ?>
                                                                     <li><a
-                                                                            href="<?php echo $root;?>/<?php echo 'listing.php?model='. end($cars)[0]; ?>"><?php echo end($cars)[1]; ?></a>
+                                                                            href="<?php echo $root; ?>/<?php echo 'listing.php?model=' . end($cars)[0]; ?>"><?php echo end($cars)[1]; ?></a>
                                                                     </li>
                                                                     <?php endwhile; ?>
-                                                                    <li><a href="<?php echo $root;?>/listing.php">All
+                                                                    <li><a href="<?php echo $root; ?>/listing.php">All
                                                                             Cars</a></li>
 
                                                                 </ul>
@@ -252,46 +248,43 @@
 
 
                                             </li>
-                                            <li><a href="<?php echo $root;?>/service.php">About Us </a>
+                                            <li><a href="<?php echo $root; ?>/service.php">About Us </a>
                                             </li>
 
-                                            <li><a href="<?php echo $root;?>/contactus.php"> Contact Us</a>
+                                            <li><a href="<?php echo $root; ?>/contactus.php"> Contact Us</a>
                                             </li>
 
                                             <!-- checking logged in or not -->
 
-                                            <?php if (isset($_SESSION['Loggedin'])== true)
-
-            {
-            ?>
+                                            <?php if (isset($_SESSION['Loggedin']) == true) {
+ ?>
                                             <li><a href="javascript:void(0)">My Account <i
                                                         class="fa fa-angle-down fa-indicator"></i></a>
                                                 <ul class="drop-down-multilevel">
-                                                    <li><a href="<?php echo $root;?>/myappointment.php"> My
+                                                    <li><a href="<?php echo $root; ?>/myappointment.php"> My
                                                             Appointment</a></li>
                                                     <li><a
-                                                            href="<?php echo $root;?>/editprofile.php?Username=<?php echo $_SESSION['Username'];?>">
+                                                            href="<?php echo $root; ?>/editprofile.php?Username=<?php echo $_SESSION['Username']; ?>">
                                                             Edit Profile</a></li>
                                                     <li><a
-                                                            href="<?php echo $root;?>/logout.php?loc='. $_SERVER['REQUEST_URI']. '">
+                                                            href="<?php echo $root; ?>/logout.php?loc='. $_SERVER['REQUEST_URI']. '">
                                                             Sign Out</a></li>
                                                 </ul>
                                             </li>
 
                                             <?php
-            }
-            else{
+} else {
 
-                echo "<li><a href=' $root/register.php' > Register</a></li>";
-                echo"<li><a href='$root/login.php?loc=". $_SERVER['REQUEST_URI']. "'> Login</a></li>";
-            ?>
+ echo "<li><a href=' $root/register.php' > Register</a></li>";
+ echo "<li><a href='$root/login.php?loc=" . $_SERVER['REQUEST_URI'] . "'> Login</a></li>";
+ ?>
 
-                                            <?php if( $Signedin == true){
-            echo '';}
-              
-            }
+                                            <?php if (true == $Signedin) {
+  echo '';}
 
-            ?>
+}
+
+?>
                                         </ul>
 
 
