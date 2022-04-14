@@ -38,7 +38,7 @@ if(isset($_POST["submit"]))
 				
 			$mail_text = "Greetings $first_name $last_name,<br /><br />The appointment has been set for $schedule.<br />You can login to your account to view your appointment and edit your information.<br /><br />Kind regards,<br />AutoTrack Team";
 
-			send_mail($subject, $mail_text);
+			sendMail($subject, $mail_text);
 		}
 	}
 	
@@ -46,7 +46,7 @@ if(isset($_POST["submit"]))
 	{
 		$username = explode('@', $email)[0];
 
-		$password = create_password(10);
+		$password = createPassword(10);
 
 		$hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -70,7 +70,7 @@ if(isset($_POST["submit"]))
 				
 				$mail_text = "Greetings $first_name $last_name,<br /><br />A new user has been created for you with the following credentials:<br />Username: $username<br />Password: $password<br />The appointment has been set for $schedule.<br />You can login to your account using the above credentials to view your appointment and edit your information.<br /><br />Kind regards,<br />AutoTrack Team";
 	
-				send_mail($subject, $mail_text);
+				sendMail($subject, $mail_text);
 			}
 
 		}

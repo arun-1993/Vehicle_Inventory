@@ -21,7 +21,7 @@ if(isset($_GET['id']))
       $subject = 'Appointment Confirmation';
       $msg = "<h3>Your Appointment For ".$model." has been scheduled and confirmed.  This email is to let you know that your appointment on $date has been confirmed. If you have questions or concerns before your session, kindly let us know in the contact us. <br> Regards, <br> Team Autotrack.</h3>";
       $content = 'Regarding to Your Appointment with AutoTrack '.$msg;
-      send_mail($subject, $content);
+      sendMail($subject, $content);
       header("Location: appointment.php");
 	}
 }

@@ -23,7 +23,7 @@ if (isset($_POST["submit"]))
 
         $mail_text = "Greetings $first_name $last_name,<br /><br />Due to unavoidable circumstances, your appointment on $old_schedule has been rescheduled to $schedule.<br />We apologize for any inconvenience caused.<br />You can login to your account to view your appointment and edit your information.<br /><br />Kind regards,<br />AutoTrack Team";
 
-        send_mail($subject, $mail_text);
+        sendMail($subject, $mail_text);
     }
     
     else

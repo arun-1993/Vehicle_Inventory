@@ -4,24 +4,87 @@ session_start();
 ob_start();
 
 include '_dbconnect.php';
+include_once 'mail/login_credentials.php';
+include_once 'mail/vendor/autoload.php';
 
-$root = "http://" . $_SERVER['SERVER_NAME'] . substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
-$Signedin = false;
-if (isset($_SESSION['Username']))
+/**
+ * Sends an email to info.autotrackindia@gmail.com with the subject and content passed to the function
+ *
+ * @param string $subject The subject of the email to be sent.
+ * @param string $html_content The content of the email to be sent along with the html tags needed for formatting the email.
+ * @return string|null Null indicates the email has been successfully sent. Returns the error message if unsuccessful.
+ */
+function sendMail(string $subject, string $html_content): ?string
 {
-    $Signedin = true;
+    $mail = new PHPMailer(true);
+
+    try
+    {
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com;';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = Username;
+        $mail->Password   = Password;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port       = 587;
+
+        $mail->setFrom('info.autotrackindia@gmail.com', 'AutoTrack');
+        $mail->addAddress('arun0306.r@gmail.com');
+        $mail->addAddress('jitendrabhavsar469@gmail.com');
+        $mail->addAddress('riyavora16@gmail.com');
+
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body    = $html_content;
+
+        $mail->AltBody = strip_tags($html_content);
+        $mail->send();
+        //echo "Mail has been sent successfully!";
+
+    } catch (Exception $e) {
+        return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+    return null;
 }
 
-function indMoneyFormat($money)
+/**
+ * Generates a cryptographically secure password of given length from an alphanumeric character set.
+ *
+ * @param integer $password_length Length of the password to be generated.
+ * @return string The generated password.
+ */
+function createPassword(int $password_length): string
+{
+    $character_set     = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters_length = strlen($character_set);
+    $password          = '';
+
+    for ($i = 0; $i < $password_length; $i++) {
+        $password .= $character_set[random_int(0, $characters_length - 1)];
+    }
+
+    return $password;
+}
+
+/**
+ * Converts a given number into Indian Currency format.
+ *
+ * @param string $money The number to be converted.
+ * @return string The converted number prepended with INR symbol.
+ */
+function indMoneyFormat(string $money)
 {
     $len   = strlen($money);
     $m     = '';
     $money = strrev($money);
 
     for ($i = 0; $i < $len; $i++) {
-        if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len)
-        {
+        if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
             $m .= ',';
         }
 
@@ -30,22 +93,33 @@ function indMoneyFormat($money)
     return '&#8377; ' . strrev($m);
 }
 
-function indNumberFormat($number)
+/**
+ * Converts a given number into Indian Number System format.
+ *
+ * @param string $money The number to be converted.
+ * @return string The converted number.
+ */
+function indNumberFormat(string $number)
 {
-    $len   = strlen($number);
-    $m     = '';
-    $money = strrev($number);
+    $len    = strlen($number);
+    $n      = '';
+    $number = strrev($number);
 
-    for ($i = 0; $i < $len; $i++)
-    {
-        if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len)
-        {
-            $m .= ',';
+    for ($i = 0; $i < $len; $i++) {
+        if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
+            $n .= ',';
         }
 
-        $m .= $money[$i];
+        $n .= $number[$i];
     }
-    return strrev($m);
+    return strrev($n);
+}
+
+$root = "http://" . $_SERVER['SERVER_NAME'] . substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
+
+$Signedin = false;
+if (isset($_SESSION['Username'])) {
+    $Signedin = true;
 }
 
 $page = basename($_SERVER['PHP_SELF']);
@@ -166,7 +240,7 @@ $cars   = array();
                             <li><a href="<?=$root;?>/#"><i class="fa fa-instagram"></i></a></li>
                             <li>
                                 <?php if (true == $Signedin): ?>
-                                <strong>Welcome!  </strong>"<?=$_SESSION['name'];?>
+                                <strong>Welcome! </strong><?=$_SESSION['name'];?>
                                 <?php endif;?>
                             </li>
                         </ul>
