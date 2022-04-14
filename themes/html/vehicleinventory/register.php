@@ -2,6 +2,10 @@
 
 include_once 'header.php';
 
+if (isset($_SESSION['Loggedin']) == true) {
+    header("Location:$root/index.php");
+}
+
 if ("POST" == $_SERVER["REQUEST_METHOD"]) {
     if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Lastname']) && isset($_POST['Password']) && isset($_POST['Email'])) {
         $firstname       = $_POST["Firstname"];
@@ -56,14 +60,10 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
 
                 if (null != $email) {
 
-                    $msg = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username=$username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
-
                     $subject = 'Email Verification';
-                    $content = $msg;
+                    $content = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username=$username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
                     sendMail($subject, $content);
-
                     header("Location:verify.php?username=$username&msg=sent");
-
                 }
             }
         }
