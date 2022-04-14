@@ -53,7 +53,7 @@
           </div>
           <div class="col-md-3">
           <div class="car-price text-md-end">
-          <strong><?php echo IND_money_format($vehiclerow['vehicle_price']); ?></strong>
+          <strong><?php echo indMoneyFormat($vehiclerow['vehicle_price']); ?></strong>
           <span>Plus Taxes & Licensing</span>
           </div>
           </div>
@@ -79,7 +79,7 @@
           <li> <span>Registration date </span> <strong class="text-end"><?php echo $vehiclerow['model_year']?></strong></li>
           <li> <span>Condition</span> <strong class="text-end"><?php echo $vehiclerow['kms_driven'] == 0 ? 'New' : 'Used'; ?></strong></li>
           <?php if ($vehiclerow['kms_driven'] > 0) : ?>
-          <li> <span>Distance Driven</span> <strong class="text-end"><?php echo IND_number_format($vehiclerow['kms_driven']). ' km'; ?></strong></li>
+          <li> <span>Distance Driven</span> <strong class="text-end"><?php echo indNumberFormat($vehiclerow['kms_driven']). ' km'; ?></strong></li>
           <?php endif; ?>
           <li> <span>Exterior Color</span> <strong class="text-end"><?php echo $vehiclerow['color']?></strong></li>
           <li> <span>Seating capacity</span> <strong class="text-end"><?php echo $vehiclerow['seating_capacity']?></strong></li>
@@ -165,12 +165,12 @@
           <ul class="list-inline">
           <li><i class="fa fa-registered" title="Model Year"></i> <?php echo $row2['model_year']; ?></li>
           <li><i class="fa fa-cog" title="Transmission Type"></i> <?php echo strtok($row2['transmission_type'], " "); ?> </li>
-          <li><i class="fa fa-dashboard" title="Distance Driven"></i> <?php echo $row2['kms_driven'] > 0 ? IND_number_format($row2['kms_driven']). ' km' : "New"; ?></li>
+          <li><i class="fa fa-dashboard" title="Distance Driven"></i> <?php echo $row2['kms_driven'] > 0 ? indNumberFormat($row2['kms_driven']). ' km' : "New"; ?></li>
           </ul>
           <a href="<?php echo $root;?>/single.php?vehicle=<?php echo $row2['vehicle_id']; ?>"> <?php echo $row2['brand_name'].'&nbsp&nbsp;'.$row2['model_name']; ?></a>
           <div class="separator"></div>
           <div class="price">
-          <span class="new-price"><?php echo IND_money_format($row2['vehicle_price']); ?> </span>
+          <span class="new-price"><?php echo indMoneyFormat($row2['vehicle_price']); ?> </span>
           </div>
           </div>
           </div>

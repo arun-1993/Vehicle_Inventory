@@ -46,7 +46,7 @@
                 <div class="separator"></div>
                 <div class="price">
                   
-                  <span class="new-price"><?php echo IND_money_format($row2['vehicle_price']); ?></span>
+                  <span class="new-price"><?php echo indMoneyFormat($row2['vehicle_price']); ?></span>
                 </div>
               </div>
             </div>

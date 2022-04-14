@@ -1,3 +1,4 @@
-<?php ?>
+<?php
 
-<script>window.location='admindashboard/Dash/DASHTIC-LTR/pages/login.php';</script>
+header('HTTP/1.1 307 Temporary Redirect');
+header("Location: admindashboard/Dash/DASHTIC-LTR/pages/login.php");

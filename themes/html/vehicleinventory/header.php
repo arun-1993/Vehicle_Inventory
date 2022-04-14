@@ -1,46 +1,47 @@
-            <?php
+<?php
 
 session_start();
 ob_start();
+
 include '_dbconnect.php';
 
 $root = "http://" . $_SERVER['SERVER_NAME'] . substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
 
 $Signedin = false;
 if (isset($_SESSION['Username'])) {
- $Signedin = true;
+    $Signedin = true;
 }
 
 function indMoneyFormat($money)
 {
- $len   = strlen($money);
- $m     = '';
- $money = strrev($money);
+    $len   = strlen($money);
+    $m     = '';
+    $money = strrev($money);
 
- for ($i = 0; $i < $len; $i++) {
-  if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
-   $m .= ',';
-  }
+    for ($i = 0; $i < $len; $i++) {
+        if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
+            $m .= ',';
+        }
 
-  $m .= $money[$i];
- }
- return '&#8377; ' . strrev($m);
+        $m .= $money[$i];
+    }
+    return '&#8377; ' . strrev($m);
 }
 
 function indNumberFormat($number)
 {
- $len   = strlen($number);
- $m     = '';
- $money = strrev($number);
+    $len   = strlen($number);
+    $m     = '';
+    $money = strrev($number);
 
- for ($i = 0; $i < $len; $i++) {
-  if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
-   $m .= ',';
-  }
+    for ($i = 0; $i < $len; $i++) {
+        if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
+            $m .= ',';
+        }
 
-  $m .= $money[$i];
- }
- return strrev($m);
+        $m .= $money[$i];
+    }
+    return strrev($m);
 }
 
 $page = basename($_SERVER['PHP_SELF']);
@@ -66,235 +67,234 @@ $car_result = mysqli_query($conn, $car_query);
 
 $brands = array();
 $cars   = array();
+
 ?>
 
-            <!DOCTYPE html>
-            <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-            <head>
-                <meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
 
-                <!-- Getting current page title -->
-                <title>AutoTrack | <?php echo $page; ?></title>
+    <!-- Getting current page title -->
+    <title>AutoTrack | <?=$page; ?></title>
 
-                <!-- Favicon -->
-                <link rel="shortcut icon" href="<?php echo $root; ?>/images/favicon.ico" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?=$root; ?>/images/favicon.ico" />
 
-                <!-- bootstrap -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/bootstrap.min.css" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/bootstrap.min.css" />
 
-                <!-- flaticon -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/flaticon.css" />
+    <!-- flaticon -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/flaticon.css" />
 
-                <!-- mega menu -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/mega-menu/mega_menu.css" />
+    <!-- mega menu -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/mega-menu/mega_menu.css" />
 
-                <!-- mega menu -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/font-awesome.min.css" />
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/jquery.datetimepicker.min.css" />
+    <!-- mega menu -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/jquery.datetimepicker.min.css" />
 
-                <!-- owl-carousel -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/owl-carousel/owl.carousel.css" />
+    <!-- owl-carousel -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/owl-carousel/owl.carousel.css" />
 
-                <!-- magnific-popup -->
-                <link rel="stylesheet" type="text/css"
-                    href="<?php echo $root; ?>/css/magnific-popup/magnific-popup.css" />
+    <!-- magnific-popup -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/magnific-popup/magnific-popup.css" />
 
-                <!-- jquery-ui -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/jquery-ui.css" />
+    <!-- jquery-ui -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/jquery-ui.css" />
 
-                <!-- revolution -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/revolution/css/settings.css">
+    <!-- revolution -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/revolution/css/settings.css">
 
-                <!-- main style -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/style.css" />
+    <!-- main style -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/style.css" />
 
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/custom.css" />
 
-                <!-- responsive -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/responsive.css" />
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/bootstrap-datetimepicker.css" />
+    <!-- responsive -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/bootstrap-datetimepicker.css" />
 
-                <!-- Slick css -->
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/slick/slick.css" />
-                <link rel="stylesheet" type="text/css" href="<?php echo $root; ?>/css/slick/slick-theme.css" />
+    <!-- Slick css -->
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$root; ?>/css/slick/slick-theme.css" />
 
-            </head>
-            <!--=================================
+</head>
+<!--=================================
             loading -->
 
-            <!-- <div id="loading">
+<!-- <div id="loading">
             <div id="loading-center">
             <img src="images/loader4.gif" alt="">
             </div>
             </div> -->
 
-            <!--=================================
+<!--=================================
             loading -->
 
 
-            <!-- Starting session -->
+<!-- Starting session -->
 
 
-            <!--=================================
+<!--=================================
             header -->
 
-            <header id="header" class="topbar-dark logo-center" style="background-color:#ebf3fa">
-                <div class="topbar">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="topbar-left text-md-start text-center">
-                                    <ul class="list-inline">
-                                        <li> <i class="fa fa-envelope-o"> </i>info.autotrackindia@gmail.com</li>
-                                        <li> <i class="fa fa-clock-o"></i> Mon - Sat 9.00 A.M - 9.00 P.M Sunday CLOSED
+<header id="header" class="topbar-dark logo-center" style="background-color:#ebf3fa">
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="topbar-left text-md-start text-center">
+                        <ul class="list-inline">
+                            <li> <i class="fa fa-envelope-o"> </i>info.autotrackindia@gmail.com</li>
+                            <li> <i class="fa fa-clock-o"></i> Mon - Sat 9.00 A.M - 9.00 P.M Sunday CLOSED
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="topbar-right text-md-end text-center">
+                        <ul class="list-inline">
+                            <li> <i class="fa fa-phone"></i> +91 7984856432</li>
+                            <li><a href="<?=$root; ?>/#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="<?=$root; ?>/#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="<?=$root; ?>/#"><i class="fa fa-instagram"></i></a></li>
+                            <li>
+                                <?php if (true == $Signedin): ?>
+                                <strong>Welcome! </strong>"<?=$_SESSION['name']; ?>
+                                <?php endif; ?>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--=================================
+            menu -->
+
+    <div class="menu">
+        <!-- menu start -->
+        <nav id="menu" class="mega-menu">
+            <!-- menu list items container -->
+            <section class="menu-list-items">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center position-relative">
+                            <!-- menu logo -->
+                            <ul class="menu-logo" style="padding:0px">
+                                <li>
+                                    <a href="<?=$root; ?>/index.php"><img id="" src="images/logoopt4.png" alt="logo"
+                                            style="width:auto; height:auto;padding-top:20px;"> </a>
+                                </li>
+                            </ul>
+                            <!-- menu links -->
+                            <ul class="menu-links">
+                                <li class="">
+                                    <a href="<?=$root; ?>/index.php"> Home </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        Vehicles <i class="fa fa-angle-down fa-indicator"></i>
+                                    </a>
+                                    <ul class="drop-down-multilevel ">
+                                        <li>
+                                            <a href="<?=$root; ?>/listing.php">
+                                                Cars <i class="fa fa-angle-right fa-indicator"></i>
+                                            </a>
+                                            <ul class="drop-down-multilevel">
+                                                <li>
+                                                    <a href="#">
+                                                        Popular Brands <i class="fa fa-angle-right fa-indicator"></i>
+                                                    </a>
+                                                    <ul class="drop-down-multilevel">
+                                                        <?php while ($row = mysqli_fetch_array($brand_result)): ?>
+                                                        <?php array_push($brands, [$row['brand_id'], $row['brand_name']]); ?>
+                                                        <li>
+                                                            <a
+                                                                href="<?=$root . '/listing.php?brand=' . end($brands)[0]; ?>"><?=end($brands)[1]; ?></a>
+                                                        </li>
+                                                        <?php endwhile; ?>
+                                                        <li>
+                                                            <a href="<?=$root; ?>/listing.php">All Brands</a>
+                                                        </li>
+                                                    </ul>
+                                                <li>
+                                                    <a href="#">
+                                                        Popular Cars<i class="fa fa-angle-right fa-indicator"></i>
+                                                    </a>
+                                                    <ul class="drop-down-multilevel">
+                                                        <?php while ($row = mysqli_fetch_array($car_result)): ?>
+                                                        <?php array_push($cars, [$row['model_id'], $row['brand_name'] . ' ' . $row['model_name']]); ?>
+                                                        <li>
+                                                            <a
+                                                                href="<?=$root . '/listing.php?model=' . end($cars)[0]; ?>"><?=end($cars)[1]; ?></a>
+                                                        </li>
+                                                        <?php endwhile; ?>
+                                                        <li>
+                                                            <a href="<?=$root; ?>/listing.php">All Cars</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
                                         </li>
-
-
                                     </ul>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="topbar-right text-md-end text-center">
-                                    <ul class="list-inline">
-                                        <li> <i class="fa fa-phone"></i> +91 7984856432</li>
-                                        <li><a href="<?php echo $root; ?>/#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="<?php echo $root; ?>/#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="<?php echo $root; ?>/#"><i class="fa fa-instagram"></i></a></li>
-
-                                        <!-- <li><?php if (true == $Signedin) {echo "<strong>Welcome!  </strong>" . $_SESSION['Username'];} ?></li> -->
-                                        <li><?php if (true == $Signedin) {echo "<strong>Welcome!  </strong>" . $_SESSION['name'];} ?>
+                                </li>
+                                <li>
+                                    <a href="<?=$root; ?>/service.php">About Us </a>
+                                </li>
+                                <li>
+                                    <a href="<?=$root; ?>/contactus.php"> Contact Us</a>
+                                </li>
+                                <!-- checking logged in or not -->
+                                <?php if (isset($_SESSION['Loggedin']) == true): ?>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        My Account <i class="fa fa-angle-down fa-indicator"></i>
+                                    </a>
+                                    <ul class="drop-down-multilevel">
+                                        <li>
+                                            <a href="<?=$root; ?>/myappointment.php">
+                                                My Appointment
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="<?=$root; ?>/editprofile.php?Username=<?=$_SESSION['Username']; ?>">
+                                                Edit Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?=$root . '/logout.php?loc=' . $_SERVER['REQUEST_URI']; ?>">
+                                                Sign Out
+                                            </a>
                                         </li>
                                     </ul>
-                                </div>
-                            </div>
+                                </li>
+                                <?php else: ?>
+                                <li>
+                                    <a href="<?=$root . '/register.php'; ?>">
+                                        Register
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?=$root . '/login.php?loc=' . $_SERVER['REQUEST_URI']; ?>">
+                                        Login
+                                    </a>
+                                </li>
+                                <?php if (true == $Signedin): ?>
+                                <?=''; ?>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <!--=================================
-            menu -->
-
-                <div class="menu">
-                    <!-- menu start -->
-                    <nav id="menu" class="mega-menu">
-                        <!-- menu list items container -->
-                        <section class="menu-list-items">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12 text-center position-relative">
-                                        <!-- menu logo -->
-                                        <ul class="menu-logo" style="padding:0px">
-                                            <li>
-                                                <a href="<?php echo $root; ?>/index.php"><img id=""
-                                                        src="images/logoopt4.png" alt="logo"
-                                                        style="width:auto; height:auto;padding-top:20px;"> </a>
-                                            </li>
-                                        </ul>
-                                        <!-- menu links -->
-                                        <ul class="menu-links">
-
-                                            <li class=""><a href="<?php echo $root; ?>/index.php"> Home </a>
-
-
-                                            </li>
-
-                                            <li><a href="javascript:void(0)">Vehicles <i
-                                                        class="fa fa-angle-down fa-indicator"></i></a>
-                                                <ul class="drop-down-multilevel ">
-
-                                                    <li>
-                                                        <a href="<?php echo $root; ?>/listing.php"> Cars <i
-                                                                class="fa fa-angle-right fa-indicator"></i> </a>
-                                                        <ul class="drop-down-multilevel">
-                                                            <li><a href="#">Popular Brands <i
-                                                                        class="fa fa-angle-right fa-indicator"></i></a>
-                                                                <ul class="drop-down-multilevel">
-
-                                                                    <?php while ($row = mysqli_fetch_array($brand_result)): ?>
-                                                                    <?php array_push($brands, [$row['brand_id'], $row['brand_name']]); ?>
-                                                                    <li><a
-                                                                            href="<?php echo $root; ?>/<?php echo 'listing.php?brand=' . end($brands)[0]; ?>"><?php echo end($brands)[1]; ?></a>
-                                                                    </li>
-                                                                    <?php endwhile; ?>
-                                                                    <li><a href="<?php echo $root; ?>/listing.php">All
-                                                                            Brands</a></li>
-
-                                                                </ul>
-                                                            <li><a href="#">Popular Cars<i
-                                                                        class="fa fa-angle-right fa-indicator"></i></a>
-
-                                                                <ul class="drop-down-multilevel">
-
-                                                                    <?php while ($row = mysqli_fetch_array($car_result)): ?>
-                                                                    <?php array_push($cars, [$row['model_id'], $row['brand_name'] . ' ' . $row['model_name']]); ?>
-                                                                    <li><a
-                                                                            href="<?php echo $root; ?>/<?php echo 'listing.php?model=' . end($cars)[0]; ?>"><?php echo end($cars)[1]; ?></a>
-                                                                    </li>
-                                                                    <?php endwhile; ?>
-                                                                    <li><a href="<?php echo $root; ?>/listing.php">All
-                                                                            Cars</a></li>
-
-                                                                </ul>
-                                                        </ul>
-
-
-
-
-                                                    </li>
-
-                                                </ul>
-
-
-                                            </li>
-                                            <li><a href="<?php echo $root; ?>/service.php">About Us </a>
-                                            </li>
-
-                                            <li><a href="<?php echo $root; ?>/contactus.php"> Contact Us</a>
-                                            </li>
-
-                                            <!-- checking logged in or not -->
-
-                                            <?php if (isset($_SESSION['Loggedin']) == true) {
- ?>
-                                            <li><a href="javascript:void(0)">My Account <i
-                                                        class="fa fa-angle-down fa-indicator"></i></a>
-                                                <ul class="drop-down-multilevel">
-                                                    <li><a href="<?php echo $root; ?>/myappointment.php"> My
-                                                            Appointment</a></li>
-                                                    <li><a
-                                                            href="<?php echo $root; ?>/editprofile.php?Username=<?php echo $_SESSION['Username']; ?>">
-                                                            Edit Profile</a></li>
-                                                    <li><a
-                                                            href="<?php echo $root; ?>/logout.php?loc='. $_SERVER['REQUEST_URI']. '">
-                                                            Sign Out</a></li>
-                                                </ul>
-                                            </li>
-
-                                            <?php
-} else {
-
- echo "<li><a href=' $root/register.php' > Register</a></li>";
- echo "<li><a href='$root/login.php?loc=" . $_SERVER['REQUEST_URI'] . "'> Login</a></li>";
- ?>
-
-                                            <?php if (true == $Signedin) {
-  echo '';}
-
-}
-
-?>
-                                        </ul>
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </nav>
-                    <!-- menu end -->
-                </div>
-            </header>
-            <div id="scroll_anchor"></div>
+            </section>
+        </nav>
+        <!-- menu end -->
+    </div>
+</header>
+<div id="scroll_anchor"></div>
