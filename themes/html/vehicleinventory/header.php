@@ -102,17 +102,17 @@ function indMoneyFormat(string $money)
 function indNumberFormat(string $number)
 {
     $len    = strlen($number);
-    $n      = '';
+    $m      = '';
     $number = strrev($number);
 
     for ($i = 0; $i < $len; $i++) {
         if ((3 == $i || ($i > 3 && ($i - 1) % 2 == 0)) && $i != $len) {
-            $n .= ',';
+            $m .= ',';
         }
 
-        $n .= $number[$i];
+        $m .= $number[$i];
     }
-    return strrev($n);
+    return strrev($m);
 }
 
 $root = "http://" . $_SERVER['SERVER_NAME'] . substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));

@@ -102,7 +102,7 @@ $numvehicle     = $vehicle->fetch_assoc(); // returns number of vehicles in stoc
                                         <option value="<?=$row['model_id'];?>" selected>
                                             <?=$row['model_name'];?></option>
                                         <?php else: ?>
-                                        <option value="<?=$row['model_id']; ?>">
+                                        <option value="<?=$row['model_id'];?>">
                                             <?=$row['model_name'];?></option>
                                         <?php endif;?>
                                         <?php endwhile;?>
@@ -200,7 +200,7 @@ $numvehicle     = $vehicle->fetch_assoc(); // returns number of vehicles in stoc
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 px-2">
                     <div class="link text-center">
-                        <a href="<?=$root; ?>/contactus.php">
+                        <a href="<?=$root;?>/contactus.php">
                             <i class="fa fa-phone"></i>
                             <h6>Contact Us</h6>
                         </a>
@@ -247,12 +247,12 @@ feature-car section start -->
                             <div class="car-item car-item-4 text-center">
                                 <div class="car-image">
                                     <img class="img-fluid"
-                                        src="<?=$root; ?>/images/car/<?=$feturedcarrow['vehicle_image']; ?>"
-                                        alt="" style="height:200px;width:auto">
+                                        src="<?=$root;?>/images/car/<?=$feturedcarrow['vehicle_image'];?>" alt=""
+                                        style="height:200px;width:auto">
                                     <div class="car-overlay-banner">
                                         <ul>
                                             <li><a
-                                                    href="<?=$root; ?>/single.php?vehicle=<?=$feturedcarrow['vehicle_id']; ?>"><i
+                                                    href="<?=$root;?>/single.php?vehicle=<?=$feturedcarrow['vehicle_id'];?>"><i
                                                         class="fa fa-link"></i></a></li>
 
                                         </ul>
@@ -260,23 +260,22 @@ feature-car section start -->
                                 </div>
                                 <div class="car-list">
                                     <ul class="list-inline">
-                                        <li><i class="fa fa-registered"></i> <?=$feturedcarrow['model_year']; ?>
+                                        <li><i class="fa fa-registered"></i> <?=$feturedcarrow['model_year'];?>
                                         </li>
                                         <li><i class="fa fa-cog"></i>
-                                            <?=strtok($feturedcarrow['transmission_type'], " "); ?> </li>
+                                            <?=strtok($feturedcarrow['transmission_type'], " ");?> </li>
                                         <li><i class="fa fa-shopping-cart"></i>
-                                            <?=$feturedcarrow['kms_driven'] > 0 ? 'Used' : "New"; ?></li>
+                                            <?=$feturedcarrow['kms_driven'] > 0 ? 'Used' : "New";?></li>
                                     </ul>
                                 </div>
                                 <div class="car-content">
-                                    <a
-                                        href="<?=$root; ?>/single.php?vehicle=<?=$feturedcarrow['vehicle_id']; ?>">
-                                        <?=$feturedcarrow['brand_name'] . '&nbsp&nbsp;' . $feturedcarrow['model_name']; ?></a>
+                                    <a href="<?=$root;?>/single.php?vehicle=<?=$feturedcarrow['vehicle_id'];?>">
+                                        <?=$feturedcarrow['brand_name'] . '&nbsp&nbsp;' . $feturedcarrow['model_name'];?></a>
                                     <div class="separator"></div>
                                     <div class="price">
 
                                         <span
-                                            class="new-price"><?=indMoneyFormat($feturedcarrow['vehicle_price']); ?></span>
+                                            class="new-price"><?=indMoneyFormat($feturedcarrow['vehicle_price']);?></span>
                                     </div>
                                 </div>
                             </div>
@@ -357,8 +356,7 @@ form  start-->
                             <div class="info">
                                 <h6 class="text-white">Total Brands</h6>
                                 <i class="glyph-icon flaticon-interface"></i>
-                                <b class="timer text-white" data-to="<?=$numbrand['num']; ?>"
-                                    data-speed="3000"></b>
+                                <b class="timer text-white" data-to="<?=$numbrand['num'];?>" data-speed="3000"></b>
                             </div>
                         </div>
                     </div>
@@ -368,8 +366,7 @@ form  start-->
                             <div class="info">
                                 <h6 class="text-white">Total Models</h6>
                                 <i class="glyph-icon flaticon-circle"></i>
-                                <b class="timer text-white" data-to="<?=$nummodel['num']; ?>"
-                                    data-speed="3000"></b>
+                                <b class="timer text-white" data-to="<?=$nummodel['num'];?>" data-speed="3000"></b>
                             </div>
                         </div>
                     </div>
@@ -379,7 +376,7 @@ form  start-->
                             <div class="info">
                                 <h6 class="text-white">Your Appointments</h6>
                                 <i class="glyph-icon flaticon-cup"></i>
-                                <b class="timer text-white" data-to="<?=$numappointment['num']; ?>"
+                                <b class="timer text-white" data-to="<?=$numappointment['num'];?>"
                                     data-speed="3000"></b>
                             </div>
                         </div>
@@ -390,8 +387,7 @@ form  start-->
                             <div class="info">
                                 <h6 class="text-white">Vehicles in Stock</h6>
                                 <i class="glyph-icon flaticon-beetle"></i>
-                                <b class="timer text-white" data-to="<?=$numvehicle['num']; ?>"
-                                    data-speed="3000"></b>
+                                <b class="timer text-white" data-to="<?=$numvehicle['num'];?>" data-speed="3000"></b>
                             </div>
                         </div>
                     </div>

@@ -6,18 +6,10 @@ include_once 'mail/login_credentials.php';
 require_once 'mail/vendor/autoload.php';
 require_once '_dbconnect.php';
 
-use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
-if (isset($_SESSION['Loggedin']) == true)
-{
-        header("Location: index.php");
-}
-
-if ("POST" == $_SERVER["REQUEST_METHOD"])
-{
-    if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Lastname']) && isset($_POST['Password']) && isset($_POST['Email']))
-    {
+if ("POST" == $_SERVER["REQUEST_METHOD"]) {
+    if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Lastname']) && isset($_POST['Password']) && isset($_POST['Email'])) {
         $firstname       = $_POST["Firstname"];
         $lastname        = $_POST["Lastname"];
         $email           = $_POST["Email"];
@@ -30,15 +22,14 @@ if ("POST" == $_SERVER["REQUEST_METHOD"])
         $checkUsermail   = "SELECT * FROM `user` WHERE email = '$email'";
         $mailexists      = mysqli_query($conn, $checkUsermail);
 
-        if (mysqli_num_rows($userexists) >= 1 || mysqli_num_rows($mailexists) >= 1)
-        {
+        if (mysqli_num_rows($userexists) >= 1 && mysqli_num_rows($mailexists) >= 1) {
+            header("Location:$root/register.php?msg=invalidboth");
 
-            ?>
-        <script>
-alert("Username or Email already exists, please try another one.");
-        </script>
-        <?php
+        } elseif (mysqli_num_rows($mailexists) >= 1) {
+            header("Location:$root/register.php?msg=invalidmail");
+        } elseif (mysqli_num_rows($userexists) >= 1) {
 
+            header("Location:$root/register.php?msg=invalidusername");
         } else {
             $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -74,52 +65,14 @@ alert("Username or Email already exists, please try another one.");
                     $msg  = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username=$username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
                     $mail = new PHPMailer(true);
 
-                    try {
-                        $mail->SMTPDebug = 0;
-                        $mail->isSMTP();
-                        $mail->Host       = 'smtp.gmail.com;';
-                        $mail->SMTPAuth   = true;
-                        $mail->Username   = Username;
-                        $mail->Password   = Password;
-                        $mail->SMTPSecure = 'tls';
-                        $mail->Port       = 587;
-
-                        $mail->setFrom('info.autotrackinida@gmail.com', 'AutoTrack');
-                        $mail->addAddress($email);
-                        $mail->addAddress('arun0306.r@gmail.com');
-                        $mail->addAddress('jitendrabhavsar469@gmail.com');
-                        $mail->addAddress('riyavora16@gmail.com');
-
-                        $mail->isHTML(true);
-                        $mail->Subject = ' Email Verification.';
-                        $mail->Body    = $msg;
-
-                        $mail->AltBody = '';
-                        $mail->send();
-                        header("Location:verify.php?username=$username&msg=sent");
-                        ?>
-
-
-
-        <?php
-// echo "Mail has been sent successfully!";
-                    } catch (Exception $e) {
-                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                    }
+                    $subject = 'Email Verification';
+                    $content = $msg;
+                    sendMail($subject, $content);
+                    header("Location:verify.php?username=$username&msg=sent");
 
                 }
-            } else {
-
-                ?>
-        <script>
-alert("Password must match with confirm password");
-        </script>
-        <?php
-
             }
         }
-    } else {
-        echo '<script>alert("Check missing fields")</script>';
     }
 }
 
@@ -127,86 +80,115 @@ alert("Password must match with confirm password");
 
 
 
-        <!--=================================
+<!--=================================
         inner-intro -->
 
-        <!--=================================
+<!--=================================
         inner-intro -->
 
 
-        <!--=================================
+<!--=================================
         register-form-start  -->
 
-        <section class="register-form page-section-ptb" style="background-color:white;">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        <div class="section-title">
-                            <h2>Register With Us</h2>
-                            <div class="separator"></div>
-                        </div>
-                    </div>
+<section class="register-form page-section-ptb" style="background-color:white;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="section-title">
+                    <h2>Register With Us</h2>
+                    <div class="separator"></div>
                 </div>
-                <form action="" method="post" id="form">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 col-md-12">
-                            <div class="gray-form">
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label class="form-label">First Name*</label>
-                                        <input class="form-control" type="text" placeholder="Your Name" id="Firstname"
-                                            name="Firstname">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label class="form-label">Last Name*</label>
-                                        <input class="form-control" type="text" placeholder="Last Name" id="Lastname"
-                                            name="Lastname">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Email *</label>
-                                    <input class="form-control" type="email" id="Email" placeholder="Enter your email"
-                                        name="Email">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Username* </label>
-                                    <input class="form-control" type="text" placeholder="Choose your user name"
-                                        id="Username" name="Username">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Password* </label>
-                                    <input class="form-control" type="password" placeholder="Enter Password"
-                                        id="Password" name="Password">
-                                    <span id="error" style="color:red"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Confirm Password*</label>
-                                    <input class="form-control" type="password" placeholder="Confirm Password"
-                                        name="confirmPassword">
-                                </div>
-
-
-                                <label class="form-label">Address</label>
-                                <textarea class="form-control" id="Address" placeholder="Enter your Address"
-                                    name="Address"></textarea>
-                                <br />
-                                <button type="submit" class="button red">Register an account</button>
-
-
-                </form>
-                <p class="link">Already have an account? please <a href="<?php echo $root; ?>/login.php"> login here
-                    </a></p>
             </div>
-            </div>
-            </div>
-            </div>
-        </section>
+        </div>
+        <form action="" method="post" id="form">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12">
+                    <div class="gray-form">
+                        <div class="row">
+                            <?php if (isset($_GET['msg'])) {
+    if ('invalidusername' == $_GET['msg']) {?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>OOPS!</strong> Seems like this username is already taken please choose
+                                another one!
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            <?php
+} elseif ('invalidusername' == $_GET['msg']) {?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>OOPS!</strong> Seems like this email is already taken please choose
+                                another one
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            <?php
+} elseif ('invalidboth' == $_GET['msg']) {?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>OOPS!</strong> Seems like this username and mail is already taken please
+                                choose
+                                another one!
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            <?php
+}
+}
+
+?>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">First Name*</label>
+                                <input class="form-control" type="text" placeholder="Your Name" id="Firstname"
+                                    name="Firstname">
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Last Name*</label>
+                                <input class="form-control" type="text" placeholder="Last Name" id="Lastname"
+                                    name="Lastname">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email *</label>
+                            <input class="form-control" type="email" id="Email" placeholder="Enter your email"
+                                name="Email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Username* </label>
+                            <input class="form-control" type="text" placeholder="Choose your user name" id="Username"
+                                name="Username">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password* </label>
+                            <input class="form-control" type="password" placeholder="Enter Password" id="Password"
+                                name="Password">
+                            <span id="error" style="color:red"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password*</label>
+                            <input class="form-control" type="password" placeholder="Confirm Password"
+                                name="confirmPassword">
+                        </div>
+
+
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" id="Address" placeholder="Enter your Address"
+                            name="Address"></textarea>
+                        <br />
+                        <button type="submit" class="button red">Register an account</button>
+
+
+        </form>
+        <p class="link">Already have an account? please <a href="<?php echo $root; ?>/login.php"> login here
+            </a></p>
+    </div>
+    </div>
+    </div>
+    </div>
+</section>
 
 
 
 
-        <?php include 'footer.php';?>
+<?php include 'footer.php';?>
+</body>
 
-        </body>
-
-        </html>
+</html>
