@@ -38,10 +38,9 @@
 
 <?php
 
-if(isset($_GET['id']) && isset($_GET['name']))
+if(isset($_GET['id']))
 {
 	$mid = $_GET['id'];
-	$name = $_GET['name'];
 	
 	//echo $name;
 	//echo $id;
@@ -49,6 +48,8 @@ if(isset($_GET['id']) && isset($_GET['name']))
 	$query->bind_param('i',$mid);
 	$query->execute();
 	$query_run = $query->get_result();
+	$result = $query_run->fetch_assoc();
+	$name = $result['model_name'];
 	
 	foreach($query_run as $row)
 	{

@@ -11,11 +11,11 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
- * Sends an email to info.autotrackindia@gmail.com with the subject and content passed to the function
+ * Sends an email using the email id info.autotrackindia@gmail.com with the subject and content passed to the function.
  *
  * @param string $subject The subject of the email to be sent.
  * @param string $html_content The content of the email to be sent along with the html tags needed for formatting the email.
- * @return string|null Null indicates the email has been successfully sent. Returns the error message if unsuccessful.
+ * @return string|null Null indicates the email has been successfully sent. Returns an error message if unsuccessful.
  */
 function sendMail(string $subject, string $html_content): ?string
 {

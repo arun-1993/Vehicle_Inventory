@@ -54,10 +54,10 @@ $selectresult = $selectmodel->get_result();
 														<td><?php echo $row['model_name']; ?></td>
 														<?php if($_SESSION['Role'] == 1) : ?>
 														<td>
-															<a href="<?php echo $root;?>/modeledit.php?id=<?php echo $row['model_id']; ?>&name=<?php echo $row['model_name']; ?>" class="btn btn-success">EDIT</a>
+															<a href="<?php echo $root;?>/editmodel.php?id=<?php echo $row['model_id']; ?>" class="btn btn-success">EDIT</a>
 														</td>
 														<td>		
-															<a href="<?php echo $root;?>/modeldelete.php?id=<?php echo $row['model_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
+															<a href="<?php echo $root;?>/deletemodel.php?id=<?php echo $row['model_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>
 														</td>
 														<?php endif; ?>
 													</tr>

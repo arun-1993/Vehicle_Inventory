@@ -219,11 +219,9 @@ $selectresult = $selectappointment->get_result();
 																<option value="reject">Reject</option>
 															</select>
 															<?php else: ?>
-																<?php if ('Cancelled' == $row['appointment_status']): ?>
-																<h6 style='color:#D12D2D'>Cancelled</h6>
-																<?php elseif ("Completed" == $row['appointment_status']): ?>
-																<h6 style='color:#317B31'>Completed</h6>
-																<?php endif;?>
+															<select disabled>
+																<option value=""> --Action-- </option>
+															</select>
 															<?php endif;?>
 														</td>
 													</tr>
