@@ -1,12 +1,6 @@
 <?php
 
 include_once 'header.php';
-include_once 'mail/login_credentials.php';
-
-require_once 'mail/vendor/autoload.php';
-require_once '_dbconnect.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
 
 if ("POST" == $_SERVER["REQUEST_METHOD"]) {
     if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Lastname']) && isset($_POST['Password']) && isset($_POST['Email'])) {
@@ -62,12 +56,12 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
 
                 if (null != $email) {
 
-                    $msg  = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username=$username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
-                    $mail = new PHPMailer(true);
+                    $msg = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username=$username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
 
                     $subject = 'Email Verification';
                     $content = $msg;
                     sendMail($subject, $content);
+
                     header("Location:verify.php?username=$username&msg=sent");
 
                 }
@@ -78,14 +72,11 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
 
 ?>
 
-
-
 <!--=================================
         inner-intro -->
 
 <!--=================================
         inner-intro -->
-
 
 <!--=================================
         register-form-start  -->
@@ -105,24 +96,22 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                 <div class="col-lg-8 col-md-12">
                     <div class="gray-form">
                         <div class="row">
-                            <?php if (isset($_GET['msg'])) {
-    if ('invalidusername' == $_GET['msg']) {?>
+                            <?php if (isset($_GET['msg'])): ?>
+                            <?php if ('invalidusername' == $_GET['msg']): ?>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>OOPS!</strong> Seems like this username is already taken please choose
                                 another one!
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            <?php
-} elseif ('invalidusername' == $_GET['msg']) {?>
+                            <?php elseif ('invalidusername' == $_GET['msg']): ?>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>OOPS!</strong> Seems like this email is already taken please choose
                                 another one
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            <?php
-} elseif ('invalidboth' == $_GET['msg']) {?>
+                            <?php elseif ('invalidboth' == $_GET['msg']): ?>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>OOPS!</strong> Seems like this username and mail is already taken please
                                 choose
@@ -130,11 +119,8 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            <?php
-}
-}
-
-?>
+                            <?php endif;?>
+                            <?php endif;?>
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">First Name*</label>
                                 <input class="form-control" type="text" placeholder="Your Name" id="Firstname"
@@ -174,19 +160,16 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                             name="Address"></textarea>
                         <br />
                         <button type="submit" class="button red">Register an account</button>
-
-
+                    </div>
+                    <p class="link text-center">
+                        Already have an account?
+                        Please <a href="<?=$root;?>/login.php">login here</a>
+                    </p>
+                </div>
+            </div>
         </form>
-        <p class="link">Already have an account? please <a href="<?php echo $root; ?>/login.php"> login here
-            </a></p>
-    </div>
-    </div>
-    </div>
     </div>
 </section>
-
-
-
 
 <?php include 'footer.php';?>
 </body>

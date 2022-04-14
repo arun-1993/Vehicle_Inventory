@@ -55,10 +55,10 @@ function sendMail(string $subject, string $html_content): ?string
 /**
  * Generates a cryptographically secure password of given length from an alphanumeric character set.
  *
- * @param integer $password_length Length of the password to be generated.
+ * @param integer $password_length Length of the password to be generated. Default length 10.
  * @return string The generated password.
  */
-function createPassword(int $password_length): string
+function createPassword(int $password_length = 10): string
 {
     $character_set     = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $characters_length = strlen($character_set);
