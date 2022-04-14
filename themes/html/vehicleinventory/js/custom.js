@@ -615,6 +615,16 @@ var POTENZA = {};
 
           
         });
+
+        $.validator.addMethod(
+  "regex",
+  function(value, element, regexp) {
+    var re = new RegExp(regexp);
+    return this.optional(element) || re.test(value);
+  },
+  "Misplaced space please check."
+);
+
         $.validator.addMethod("noSpace", function(value, element) { 
           return value.indexOf(" ") < 0 && value != ""; 
         }, "Cannot use whitespace");
@@ -641,7 +651,7 @@ var POTENZA = {};
         Firstname: {
                 required:true,
                 minlength:3,
-                noSpace: true,
+                regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
                 alphabets:true,
         },
         Lastname: {
@@ -679,7 +689,7 @@ var POTENZA = {};
         
         Address: {
           alphabets:true,
-        
+          regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
         required: true,
         },
         },
@@ -716,28 +726,28 @@ var POTENZA = {};
         }
         
       }); 
-      jQuery('#contactform').validate({
-                rules:{
-                        name:{
-                                alphabets:true,
-                                noSpace:true,
-                                minlength:3,
-                        },
-                        email:{
-                          required: true,
-                          validate_email: true,
-                          noSpace: true,
+      // jQuery('#contactform').validate({
+      //           rules:{
+      //                   name:{
+      //                           alphabets:true,
+      //                           noSpace:true,
+      //                           minlength:3,
+      //                   },
+      //                   email:{
+      //                     required: true,
+      //                     validate_email: true,
+      //                     noSpace: true,
                                 
-                        },
-                        phone:{
-                          required: true,
-		  number: true,
-		  minlength: 10,
-		  maxlength: 10
-                        }
-                }
+      //                   },
+      //                   phone:{
+      //                     required: true,
+		  // number: true,
+		  // minlength: 10,
+		  // maxlength: 10
+      //                   }
+      //           }
 
-        });
+      //   });
         jQuery('#loginform').validate({
           rules:{
                  username:{required:true},
@@ -750,9 +760,9 @@ var POTENZA = {};
   });
  jQuery('#contactform').validate({
                 rules:{
-                        name:{
+                        name:{  required:true,
                                 alphabets:true,
-                                noSpace:true,
+                                regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
                                 minlength:3,
                         },
                         email:{
