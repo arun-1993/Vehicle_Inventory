@@ -26,7 +26,7 @@ if(isset($_GET['id']))
     $msg = "<h3>Greetings, <br> Your Appointment For ".$model.". is rejected. Kindly, pick another day appointment. We would like to apology for the inconvenience. <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.</h3>";
 		$content = 'Regarding to Your Appointment with AutoTrack'.$msg;
 
-    send_mail($subject, $content);
+    sendMail($subject, $content);
 	
     header("Location: appointment.php");
 	}

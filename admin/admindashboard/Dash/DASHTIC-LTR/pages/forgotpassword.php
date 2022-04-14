@@ -1,26 +1,6 @@
-<?php include '_dbconnect.php'?>
-
-<head>
-		<!-- Title -->
-		<title>AutoTrack</title>
-<!--Favicon -->
-<link rel="icon" href="favicon.ico" type="image/x-icon"/>
-
-<!-- Bootstrap css -->
-<link href="../public/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
-
-<!-- Style css -->
-<link href="../public/assets/css/style.css" rel="stylesheet" />
-</head>
-
-
 <?php
 
-include_once('mail/login_credentials.php');  
-require 'mail/vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+include_once '_dbconnect.php';
 
 $nocredentials = false;
 
@@ -29,15 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $email = $_POST["email"]; 
     $username = $_POST["username"];
 
-    $length = 10;
-
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $password = '';
-    for ($i = 0; $i < $length; $i++)
-    {
-        $password .= $characters[random_int(0, $charactersLength - 1)];
-    }
+    $password = createPassword(10);
 
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -53,37 +25,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
     else
     {
-        $mail = new PHPMailer(true);
-  
-        try {
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com;';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = Username;
-            $mail->Password   = Password;
-            $mail->SMTPSecure = 'tls';
-            $mail->Port       = 587;
-            
-            $mail->setFrom('info.autotrackinida@gmail.com', 'AutoTrack');
-            $mail->addAddress('arun0306.r@gmail.com');
-            $mail->addAddress('jitendrabhavsar469@gmail.com');
-            $mail->addAddress('riyavora16@gmail.com');
-            
-            $mail->isHTML(true);
-            $mail->Subject = 'Password reset';
-            $mail->Body    = "Greetings,<br />Your new password is $password <br>"; 
-            
-            $mail->AltBody = "Greetings, your new password is $password";
-            $mail->send();
-            //echo "Mail has been sent successfully!";
+		$subject = 'Password reset';
+		$content    = "Greetings,<br />Your new password is $password <br>"; 
+        sendMail($subject, $content);
 
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-
-        echo "<script>window.location='login.php'</script>";
+        header("Location: login.php");
     }
+	sendMail($subject, $content);
 }
 
 ?>
