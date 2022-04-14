@@ -218,6 +218,12 @@ $selectresult = $selectappointment->get_result();
 																<option value="reschedule">Reschedule</option>
 																<option value="reject">Reject</option>
 															</select>
+															<?php elseif ('Cancelled' == $row['appointment_status']): ?>
+															<select id="action" name="action"
+																onchange="change_appointment(this.value, <?=$row['appointment_id']; ?>);">
+																<option value=""> --Action-- </option>
+																<option value="reschedule">Rechedule</option>
+															</select>
 															<?php else: ?>
 															<select disabled>
 																<option value=""> --Action-- </option>
