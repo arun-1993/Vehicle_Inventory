@@ -627,6 +627,9 @@ var POTENZA = {};
         }
         
         }, "Please enter a valid Email.");
+        jQuery.validator.addMethod("notEqual", function(value, element, param) {
+          return this.optional(element) || value != param;
+        }, "Both fields can not be same");
         
         
         $.validator.addMethod("alphabets", function(value, element) {
@@ -815,6 +818,7 @@ jQuery('#editpassword').validate({
 	newpassword:{required:true,
           minlength:8,
           noSpace: true,
+          notEqual:"oldpassword",
           },
 		  confpassword:{
 			  required:8,
@@ -836,7 +840,18 @@ jQuery('#editpassword').validate({
     });
     
    
+$("a").click(function(){
+  
+  setTimeout(
+    function() 
+    {
+      $("a").removeAttr("style");
+    }, 10);
 
+
+  
+
+});
     
     
 
