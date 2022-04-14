@@ -1,94 +1,82 @@
 <?php
 
 include_once 'header.php';
-include_once 'mail/login_credentials.php';
+
 if (isset($_SESSION['Loggedin']) == true) {
- header("Location:$root/index.php");
+    header("Location:$root/index.php");
 }
 
-require_once 'mail/vendor/autoload.php';
-require_once '_dbconnect.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-
 if ("POST" == $_SERVER["REQUEST_METHOD"]) {
- if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Lastname']) && isset($_POST['Password']) && isset($_POST['Email'])) {
-  $firstname       = $_POST["Firstname"];
-  $lastname        = $_POST["Lastname"];
-  $email           = $_POST["Email"];
-  $username        = $_POST["Username"];
-  $password        = $_POST["Password"];
-  $confirmPassword = $_POST["confirmPassword"];
-  $address         = $_POST["Address"];
-  $checkUsername   = "SELECT * FROM `user` WHERE username = '$username'";
-  $userexists      = mysqli_query($conn, $checkUsername);
-  $checkUsermail   = "SELECT * FROM `user` WHERE email = '$email'";
-  $mailexists      = mysqli_query($conn, $checkUsermail);
+    if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Lastname']) && isset($_POST['Password']) && isset($_POST['Email'])) {
+        $firstname       = $_POST["Firstname"];
+        $lastname        = $_POST["Lastname"];
+        $email           = $_POST["Email"];
+        $username        = $_POST["Username"];
+        $password        = $_POST["Password"];
+        $confirmPassword = $_POST["confirmPassword"];
+        $address         = $_POST["Address"];
+        $checkUsername   = "SELECT * FROM `user` WHERE username = '$username'";
+        $userexists      = mysqli_query($conn, $checkUsername);
+        $checkUsermail   = "SELECT * FROM `user` WHERE email = '$email'";
+        $mailexists      = mysqli_query($conn, $checkUsermail);
 
-  if (mysqli_num_rows($userexists) >= 1 && mysqli_num_rows($mailexists) >= 1) {
-   header("Location:$root/register.php?msg=invalidboth");
+        if (mysqli_num_rows($userexists) >= 1 && mysqli_num_rows($mailexists) >= 1) {
+            header("Location:$root/register.php?msg=invalidboth");
 
-  } elseif (mysqli_num_rows($mailexists) >= 1) {
-   header("Location:$root/register.php?msg=invalidmail");
-  } elseif (mysqli_num_rows($userexists) >= 1) {
+        } elseif (mysqli_num_rows($mailexists) >= 1) {
+            header("Location:$root/register.php?msg=invalidmail");
+        } elseif (mysqli_num_rows($userexists) >= 1) {
 
-   header("Location:$root/register.php?msg=invalidusername");
-  } else {
-   $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+            header("Location:$root/register.php?msg=invalidusername");
+        } else {
+            $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
-   if ($password == $confirmPassword) {
-    $verified   = "False";
-    $role       = 3;
-    $insertinfo = $mysqli->prepare("INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`)
+            if ($password == $confirmPassword) {
+                $verified   = "False";
+                $role       = 3;
+                $insertinfo = $mysqli->prepare("INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`)
         VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $insertinfo->bind_param('issssss', $role, $firstname, $lastname, $email, $username, $hashedpassword, $address);
-    $insertinfo->execute();
+                $insertinfo->bind_param('issssss', $role, $firstname, $lastname, $email, $username, $hashedpassword, $address);
+                $insertinfo->execute();
 
-    $row = $insertinfo->get_result();
+                $row = $insertinfo->get_result();
 
-    function generateRandomString($length = 5)
-    {
-     $characters       = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-     $charactersLength = strlen($characters);
-     $randomString     = '';
-     for ($i = 0; $i < $length; $i++) {
-      $randomString .= $characters[rand(0, $charactersLength - 1)];
-     }
-     return $randomString;
+                function generateRandomString($length = 5)
+                {
+                    $characters       = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $charactersLength = strlen($characters);
+                    $randomString     = '';
+                    for ($i = 0; $i < $length; $i++) {
+                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                    }
+                    return $randomString;
+                }
+
+                $otp = generateRandomString(); // will generate a random password
+
+                $inserttoken = $mysqli->prepare("INSERT INTO email_verification(verification_mail,verification_token) VALUES(?,?)");
+                $inserttoken->bind_param('ss', $email, $otp);
+                $inserttoken->execute();
+
+                if (null != $email) {
+
+                    $subject = 'Email Verification';
+                    $content = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username=$username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
+                    sendMail($subject, $content);
+                    header("Location:verify.php?username=$username&msg=sent");
+                }
+            }
+        }
     }
-
-    $otp = generateRandomString(); // will generate a random password
-
-    $inserttoken = $mysqli->prepare("INSERT INTO email_verification(verification_mail,verification_token) VALUES(?,?)");
-    $inserttoken->bind_param('ss', $email, $otp);
-    $inserttoken->execute();
-
-    if (null != $email) {
-
-     $msg  = "Greetings, <br> Your verification OTP is '$otp'. <br> <a href='localhost/vehicle_inventory/themes/html/vehicleinventory/verify.php?username=$username'>Click Here</a> To verify <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
-     $mail = new PHPMailer(true);
-
-     $subject = 'Email Verification';
-     $content = $msg;
-     sendMail($subject, $content);
-     header("Location:verify.php?username=$username&msg=sent");
-
-    }
-   }
-  }
- }
 }
 
 ?>
 
-
-
 <!--=================================
         inner-intro -->
 
 <!--=================================
         inner-intro -->
-
 
 <!--=================================
         register-form-start  -->
@@ -108,24 +96,22 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                 <div class="col-lg-8 col-md-12">
                     <div class="gray-form">
                         <div class="row">
-                            <?php if (isset($_GET['msg'])) {
- if ('invalidusername' == $_GET['msg']) { ?>
+                            <?php if (isset($_GET['msg'])): ?>
+                            <?php if ('invalidusername' == $_GET['msg']): ?>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>OOPS!</strong> Seems like this username is already taken please choose
                                 another one!
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            <?php
-} elseif ('invalidusername' == $_GET['msg']) { ?>
+                            <?php elseif ('invalidusername' == $_GET['msg']): ?>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>OOPS!</strong> Seems like this email is already taken please choose
                                 another one
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            <?php
-} elseif ('invalidboth' == $_GET['msg']) { ?>
+                            <?php elseif ('invalidboth' == $_GET['msg']): ?>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>OOPS!</strong> Seems like this username and mail is already taken please
                                 choose
@@ -133,11 +119,8 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            <?php
-}
-}
-
-?>
+                            <?php endif;?>
+                            <?php endif;?>
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">First Name*</label>
                                 <input class="form-control" type="text" placeholder="Your Name" id="Firstname"
@@ -177,21 +160,18 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                             name="Address"></textarea>
                         <br />
                         <button type="submit" class="button red">Register an account</button>
-
-
+                    </div>
+                    <p class="link text-center">
+                        Already have an account?
+                        Please <a href="<?=$root;?>/login.php">login here</a>
+                    </p>
+                </div>
+            </div>
         </form>
-        <p class="link">Already have an account? please <a href="<?php echo $root; ?>/login.php"> login here
-            </a></p>
-    </div>
-    </div>
-    </div>
     </div>
 </section>
 
-
-
-
-<?php include 'footer.php'; ?>
+<?php include 'footer.php';?>
 </body>
 
 </html>
