@@ -260,14 +260,14 @@
             </div>
             <div class="price">
 
-            <span class="new-price"><?php echo IND_money_format($row['vehicle_price']); ?> </span>
+            <span class="new-price"><?php echo indMoneyFormat($row['vehicle_price']); ?> </span>
             <a class="button red float-end" href="single.php?vehicle=<?php echo $row['vehicle_id'];?>">Get Details</a>
             </div>
             <div class="car-list">
             <ul class="list-inline">
             <li><i class="fa fa-registered" title="Model Year"></i> <?php echo $row['model_year'];?></li>
             <li><i class="fa fa-cog" title="Transmission Type"></i> <?php echo $row['transmission_type']?> </li>
-            <li><i class="fa fa-dashboard" title="Distance Driven"></i> <?php echo $row['kms_driven'] > 0 ? IND_number_format($row['kms_driven']). ' km' : "New"; ?></li>
+            <li><i class="fa fa-dashboard" title="Distance Driven"></i> <?php echo $row['kms_driven'] > 0 ? indNumberFormat($row['kms_driven']). ' km' : "New"; ?></li>
             </ul>
             </div>
             </div>

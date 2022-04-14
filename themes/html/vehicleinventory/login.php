@@ -38,12 +38,12 @@ if ("POST" == $_SERVER["REQUEST_METHOD"])
 
                     if (isset($_GET['loc']))
                     {
-                        echo $_GET['loc'];
+                        header("Location: ". $_GET['loc']);
                     }
                     
                     else
                     {
-                        echo "index.php";
+                        header("Location: index.php");
                     }
                 }
                 
