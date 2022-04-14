@@ -30,10 +30,10 @@ $vehicle = $selectvehicle->get_result();
                                 <div class="card-title">
                                     <h2>Vehicle</h2>
                                     <h5>
-										<a href="<?=$root;?>/addvehicle.php" style="color:blue;">
-											ADD VEHICLE
-										</a>
-									</h5>
+                                        <a href="<?=$root;?>/addvehicle.php" style="color:blue;">
+                                            ADD VEHICLE
+                                        </a>
+                                    </h5>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -57,33 +57,34 @@ $vehicle = $selectvehicle->get_result();
                                             </tr>
                                         </thead>
                                         <tbody>
-											<?php while ($row = $vehicle->fetch_assoc()): ?>
-											<tr>
-												<td><img src="<?=$root;?>/../../../../../themes/html/vehicleinventory/images/car/<?=$row['vehicle_image'];?>"
-														height="100" width="350" style="border-radius:12%"></td>
-												<td><?=$row['model_name'];?></td>
-												<td><?=$row['color'];?></td>
-												<td><?=$row['fuel_type'];?></td>
-												<td><?=$row['transmission_type'];?></td>
-												<td><?=$row['model_year'];?></td>
-												<td><?=$row['seating_capacity'];?></td>
-												<td><?=indMoneyFormat($row['vehicle_price']);?></td>
-												<td><?=$row['vehicle_vin'];?></td>
-												<td><?=$row['kms_driven'] == 0 ? 'New' : indNumberFormat($row['kms_driven']) . ' km';?></td>
-												<td>
-													<a href="<?=$root;?>/vehicleedit.php?id=<?=$row['vehicle_id'];?>&model=<?=$row['model_name'];?>&color=<?=$row['color'];?>&fuel=<?=$row['fuel_type'];?>&trans=<?=$row['transmission_type'];?>"
-														class="btn btn-success">EDIT</a>
-												</td>
-												<td>
-													<a href="<?=$root;?>/vehiclesold.php?id=<?=$row['vehicle_id'];?>"
-														class="btn btn-primary audit-confirmation">MARK SOLD</a>
-												</td>
-												<td>
-													<a href="<?=$root;?>/vehicledelete.php?id=<?=$row['vehicle_id'];?>"
-														class="btn btn-danger delete-confirmation">DELETE</a>
-												</td>
-											</tr>
-											<?php endwhile;?>
+                                            <?php while ($row = $vehicle->fetch_assoc()): ?>
+                                            <tr>
+                                                <td><img src="<?=$root;?>/../../../../../themes/html/vehicleinventory/images/car/<?=$row['vehicle_image'];?>"
+                                                        height="100" width="350" style="border-radius:12%"></td>
+                                                <td><?=$row['model_name'];?></td>
+                                                <td><?=$row['color'];?></td>
+                                                <td><?=$row['fuel_type'];?></td>
+                                                <td><?=$row['transmission_type'];?></td>
+                                                <td><?=$row['model_year'];?></td>
+                                                <td><?=$row['seating_capacity'];?></td>
+                                                <td><?=indMoneyFormat($row['vehicle_price']);?></td>
+                                                <td><?=$row['vehicle_vin'];?></td>
+                                                <td><?=$row['kms_driven'] == 0 ? 'New' : indNumberFormat($row['kms_driven']) . ' km';?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?=$root;?>/vehicleedit.php?id=<?=$row['vehicle_id'];?>"
+                                                        class="btn btn-success">EDIT</a>
+                                                </td>
+                                                <td>
+                                                    <a href="<?=$root;?>/vehiclesold.php?id=<?=$row['vehicle_id'];?>"
+                                                        class="btn btn-primary audit-confirmation">MARK SOLD</a>
+                                                </td>
+                                                <td>
+                                                    <a href="<?=$root;?>/vehicledelete.php?id=<?=$row['vehicle_id'];?>"
+                                                        class="btn btn-danger delete-confirmation">DELETE</a>
+                                                </td>
+                                            </tr>
+                                            <?php endwhile;?>
                                         </tbody>
                                     </table>
                                 </div>
