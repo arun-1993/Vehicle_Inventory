@@ -1,88 +1,85 @@
-<?php include('header.php');?>
+<?php include 'header.php'; ?>
 <?php
 
-if(isset($_POST["brand_name"]))
-	{
-		$brandname = $_POST["brand_name"];
-		
-		if($brandname!='')
-		{	$brandinsert = $mysqli->prepare("INSERT INTO brand_master (brand_name) VALUES (?)");
-			$brandinsert->bind_param('s',$brandname);
-			$brandresult = $brandinsert->execute();
-					 
-			// $brandinsert = "insert into brand_master(brand_name) values('".$brandname."')"; // insert into dB
-			// $brandresult = mysqli_query($conn,$brandinsert);
-			
-			
-			if($brandresult)
-			{
-		
-		?>
-		<script>window.location = "brand.php"</script>
-		<?php	
-	}	
-		}
-		else
-		{
-		?>
-		<script>alert("Brand name must be filled out");</script>
-		<?php
-		
-		}
-	}
+if (isset($_POST["brand_name"])) {
+    $brandname = $_POST["brand_name"];
+
+    if ('' != $brandname) {
+        $brandinsert = $mysqli->prepare("INSERT INTO brand_master (brand_name) VALUES (?)");
+        $brandinsert->bind_param('s', $brandname);
+        $brandresult = $brandinsert->execute();
+
+        // $brandinsert = "insert into brand_master(brand_name) values('".$brandname."')"; // insert into dB
+        // $brandresult = mysqli_query($conn,$brandinsert);
+
+        if ($brandresult) {
+
+            ?>
+<script>
+window.location = "brand.php"
+</script>
+<?php
+
+        }
+    }
+
+}
 ?>
 
 <div class="page">
-	<div class="page-main">
+    <div class="page-main">
 
-		<!--sidebar open-->
-		<?php include('sidebar.php');?>
-		<!--sidebar closed-->
+        <!--sidebar open-->
+        <?php include 'sidebar.php'; ?>
+        <!--sidebar closed-->
 
-		<div class="app-content main-content">
-			<div class="side-app">
+        <div class="app-content main-content">
+            <div class="side-app">
 
-				<!--app header-->
-				<?php include('pageheader.php');?>
-				<!--/app header-->
-						
-						<div class="page-header">
-							<div class="page-leftheader">
-								<h4 class="page-title">Add Brand</h4>
-							</div>
-						</div>
-						<!--End Page header-->
-						<!-- End Row -->
-							<div class="row">
-							<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12">
-								<div class="card">
-									<div class="card-header">
-										<h4 class="card-title">Add Brand</h4>
-									</div>
-									<div class="card-body">
-										
-											<div class="">
-												<form method="POST" action="">
-												<div class="form-group">
-													<label class="form-label">Brand Name*</label>
-													<input type="text" class="form-control" name="brand_name" placeholder="Enter Brand Name" required/>
-												</div>												
-											</div>
-											<button type="submit" name="submit" class="btn btn-primary mt-4 mb-0">Save Brand</button>
-											</form>
-									
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Row -->
-						</div>
-				</div><!-- end app-content-->
-			</div>		
-		</div>
-		
-			<!--Footer-->
-			<?php include('footer.php'); ?>
-			<!-- End Footer-->
-	</body>
+                <!--app header-->
+                <?php include 'pageheader.php'; ?>
+                <!--/app header-->
+
+                <div class="page-header">
+                    <div class="page-leftheader">
+                        <h4 class="page-title">Add Brand</h4>
+                    </div>
+                </div>
+                <!--End Page header-->
+                <!-- End Row -->
+                <div class="row">
+                    <div class="col-lg-12 col-xl-6 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Add Brand</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="">
+                                    <form method="POST" action="">
+                                        <div class="form-group">
+                                            <label class="form-label">Brand Name*</label>
+                                            <input type="text" class="form-control" name="brand_name"
+                                                placeholder="Enter Brand Name" required />
+                                        </div>
+                                </div>
+                                <button type="submit" name="submit" class="btn btn-primary mt-4 mb-0">Save
+                                    Brand</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+            </div>
+        </div><!-- end app-content-->
+    </div>
+</div>
+
+<!--Footer-->
+<?php include 'footer.php'; ?>
+<!-- End Footer-->
+</body>
+
 </html>
