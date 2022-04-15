@@ -649,22 +649,22 @@ var POTENZA = {};
                   
         rules: {
         Firstname: {
-                required:true,
-                minlength:3,
+                
+                minlength:2,
                 regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
                 alphabets:true,
-                maxlength: 10,
+                maxlength: 20,
         },
         Lastname: {
-        required: true,
+        
         noSpace: true,
         alphabets:true,
-        maxlength: 10,
+        maxlength: 20,
         
-        minlength: 3,
+        minlength: 2,
         },
         Email: {
-        required: true,
+        
         validate_email: true,
         noSpace: true,
         maxlength: 50,
@@ -672,7 +672,7 @@ var POTENZA = {};
         
         },
         Username: {
-        required: true,
+        
         noSpace: true,
         minlength:4,
         maxlength: 20,
@@ -681,13 +681,13 @@ var POTENZA = {};
         required: true,
         noSpace: true,
           minlength:8,
-          maxlength: 15,
+          
         },
         confirmPassword:{
-          required:true,
+          
           minlength:8,
           noSpace: true,
-          maxlength: 15,
+          
         
           equalTo: "#Password",
         
@@ -696,7 +696,7 @@ var POTENZA = {};
         Address: {
           alphabets:true,
           regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
-        required: true,
+        required:true,
         maxlength: 100,
         },
         },
@@ -767,10 +767,10 @@ var POTENZA = {};
   });
  jQuery('#contactform').validate({
                 rules:{
-                        name:{  required:true,
+                        name:{  
                                 alphabets:true,
                                 regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
-                                minlength:3,
+                                minlength:2,
                                 maxlength:20,
                         },
                         email:{
@@ -797,17 +797,17 @@ var POTENZA = {};
     rules:{
       firstname:{
 		  required:true,
-      minlength:3,
+      minlength:2,
       noSpace: true,
       alphabets:true,
-      maxlength: 10,
+      maxlength: 20,
     },
 
            lastname:{required:true,
-          minlength:3,
+          minlength:2,
           noSpace: true,
           alphabets:true,
-          maxlength: 10,
+          maxlength: 20,
           },
           address:{
             required:true,
@@ -836,13 +836,13 @@ jQuery('#editpassword').validate({
           minlength:8,
           noSpace: true,
           notEqual:"oldpassword",
-          maxlength: 15,
+          
           },
 		  confpassword:{
 			  required:8,
         noSpace: true,
 			  equalTo:"#newpassword",
-        maxlength: 15,
+        
 		  },
 
     },
