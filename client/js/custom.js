@@ -732,7 +732,7 @@ var POTENZA = {};
                 required:"",
         },
         Address: {
-        required:"Please fill out this fild"
+        required:""
         },
         },
         
@@ -768,6 +768,7 @@ var POTENZA = {};
                  username:{required:true, maxlength: 20,},
                  password:{required:true, maxlength: 15},
           },
+          message:{required:""},
           submitHandler:function(form){
             form.submit();
     }
