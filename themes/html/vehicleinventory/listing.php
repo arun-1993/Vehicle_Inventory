@@ -1,5 +1,6 @@
             <?php include 'header.php'; ?>
             <?php
+$notfound = false;
 
 @$brand = $_GET['brand'];
 @$model = $_GET['model'];
@@ -104,8 +105,7 @@ $query .= "LIMIT " . $page_first_result . ',' . $results_per_page;
 $result = mysqli_query($conn, $query);
 
 if (0 == $number_of_result) {
- include 'error-404.php';
- die;
+ $notfound = true;
 }
 ; //display the retrieved result on the webpage
 
@@ -252,7 +252,14 @@ if (0 == $number_of_result) {
                         </div>
 
                         <div class="col-lg-9 col-md-8">
-
+                            <?php if (true == $notfound) {
+ ?>
+                            <dv class="flex text-center mt-4">
+                                <h2 class="text-danger mt-4">Sorry! No items found</h2>
+                            </dv>
+                            <?php
+}
+; ?>
 
                             <?php while ($row = mysqli_fetch_array($result)) { ?>
 
