@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
 
 
                                     <form method="POST" action="" enctype="multipart/form-data">
-                                        <!--<input type="hidden" name="edit_id" value="<?php //echo $row['model_id'];; ; ; ; ; ; ; ; ; ; ; ; ; ?>">-->
+                                        <!--<input type="hidden" name="edit_id" value="<?php //echo $row['model_id'];; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ?>">-->
                                         <div class="form-group">
                                             <label class="form-label">Model Name</label>
                                             <select class="form-control" name="model_id" required>
@@ -235,7 +235,7 @@ if (isset($_POST['updatebtn'])) {
   //echo $query;
   //die;
   $query_run = $updatevehicle->execute();
-  move_uploaded_file($_FILES['image']['tmp_name'], '../../../../../themes/html/vehicleinventory/images/car/' . $newname); // image with new name is moved to a folder
+  move_uploaded_file($_FILES['image']['tmp_name'], '../../../client/images/car/' . $newname); // image with new name is moved to a folder
  } else {
   $updatevehicle = $mysqli->prepare("UPDATE vehicle SET model_id=?, exterior_color=?, fuel_type_id=?, transmission_id=?, model_year=?, seating_capacity=?, vehicle_vin=?, kms_driven=?, vehicle_description=?  WHERE vehicle_id= ?");
   $updatevehicle->bind_param('iiiiiisisi', $mid, $cid, $fid, $tid, $year, $cap, $vin, $kms, $desc, $vid);

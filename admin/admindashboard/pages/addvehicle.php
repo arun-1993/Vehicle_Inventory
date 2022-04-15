@@ -2,48 +2,48 @@
  <?php
 
 if (isset($_POST["submit"])) {
- $modelid        = $_POST["model_id"];
- $colorid        = $_POST["exterior_color"];
- $fueltypeid     = $_POST["fuel_type_id"];
- $transmissionid = $_POST["transmission_id"];
- $modelyear      = $_POST["model_year"];
- $capacity       = $_POST["seating_capacity"];
- $price          = $_POST["vehicle_price"];
- $vin            = $_POST["vehicle_vin"];
- $kms            = $_POST["kms_driven"];
- $decription     = $_POST["vehicle_description"];
- if (0 == $_FILES["image"]["error"]) {
-  $image     = $_FILES["image"]["name"];
-  $extension = pathinfo($image, PATHINFO_EXTENSION);
-  $random    = rand(0, 10000);
-  $rename    = 'upload' . date('ymd') . $random;
-  $newname   = $rename . '.' . $extension; // new name is assigned to an uploaded image here
-  move_uploaded_file($_FILES['image']['tmp_name'], '../../../../../themes/html/vehicleinventory/images/car/' . $newname); // image with new name is moved to a folder
- } else {
-  $newname = "ghost.png";
- }
+    $modelid        = $_POST["model_id"];
+    $colorid        = $_POST["exterior_color"];
+    $fueltypeid     = $_POST["fuel_type_id"];
+    $transmissionid = $_POST["transmission_id"];
+    $modelyear      = $_POST["model_year"];
+    $capacity       = $_POST["seating_capacity"];
+    $price          = $_POST["vehicle_price"];
+    $vin            = $_POST["vehicle_vin"];
+    $kms            = $_POST["kms_driven"];
+    $decription     = $_POST["vehicle_description"];
+    if (0 == $_FILES["image"]["error"]) {
+        $image     = $_FILES["image"]["name"];
+        $extension = pathinfo($image, PATHINFO_EXTENSION);
+        $random    = rand(0, 10000);
+        $rename    = 'upload' . date('ymd') . $random;
+        $newname   = $rename . '.' . $extension; // new name is assigned to an uploaded image here
+        move_uploaded_file($_FILES['image']['tmp_name'], '../../../client/images/car/' . $newname); // image with new name is moved to a folder
+    } else {
+        $newname = "ghost.png";
+    }
 
- if ('' != $modelid && '' != $colorid && '' != $fueltypeid && '' != $transmissionid && '' != $modelyear && '' != $capacity && '' != $price && '' != $vin && '' != $kms && '' != $decription) {
-  $insertvehicle = $mysqli->prepare("insert into vehicle(model_id,exterior_color,fuel_type_id,transmission_id,model_year,seating_capacity,vehicle_price,vehicle_vin,kms_driven,vehicle_description,vehicle_image) values(?,?,?,?,?,?,?,?,?,?,?)");
-  $insertvehicle->bind_param('iiiiiiisiss', $modelid, $colorid, $fueltypeid, $transmissionid, $modelyear, $capacity, $price, $vin, $kms, $decription, $newname);
-  $result = $insertvehicle->execute();
-  if ($result) {
+    if ('' != $modelid && '' != $colorid && '' != $fueltypeid && '' != $transmissionid && '' != $modelyear && '' != $capacity && '' != $price && '' != $vin && '' != $kms && '' != $decription) {
+        $insertvehicle = $mysqli->prepare("insert into vehicle(model_id,exterior_color,fuel_type_id,transmission_id,model_year,seating_capacity,vehicle_price,vehicle_vin,kms_driven,vehicle_description,vehicle_image) values(?,?,?,?,?,?,?,?,?,?,?)");
+        $insertvehicle->bind_param('iiiiiiisiss', $modelid, $colorid, $fueltypeid, $transmissionid, $modelyear, $capacity, $price, $vin, $kms, $decription, $newname);
+        $result = $insertvehicle->execute();
+        if ($result) {
 
-   ?>
+            ?>
  <script>
 window.location = "vehicle.php"
  </script>
  <?php
 
-  }
- } else {
-  ?>
+        }
+    } else {
+        ?>
  <script>
 alert("All fields are required to be filled");
  </script>
  <?php
 
- }
+    }
 }
 ?>
 
@@ -85,7 +85,7 @@ alert("All fields are required to be filled");
 $selectmodel = "SELECT * FROM model_master ORDER BY model_name";
 $modelresult = mysqli_query($conn, $selectmodel);
 while ($row1 = mysqli_fetch_array($modelresult)) {
- ?>
+    ?>
                                                  <option value="<?php echo $row1['model_id']; ?>">
                                                      <?php echo $row1['model_name']; ?></option>
                                                  <?php
@@ -103,7 +103,7 @@ while ($row1 = mysqli_fetch_array($modelresult)) {
 $selectcolor = "SELECT * FROM bodycolor ORDER BY color";
 $colorresult = mysqli_query($conn, $selectcolor);
 while ($row2 = mysqli_fetch_array($colorresult)) {
- ?>
+    ?>
                                                  <option value="<?php echo $row2['color_id']; ?>">
                                                      <?php echo $row2['color']; ?></option>
                                                  <?php
@@ -121,7 +121,7 @@ while ($row2 = mysqli_fetch_array($colorresult)) {
 $selectfueltype = "SELECT * from fuel_type ORDER BY fuel_type";
 $fueltyperesult = mysqli_query($conn, $selectfueltype);
 while ($row3 = mysqli_fetch_array($fueltyperesult)) {
- ?>
+    ?>
                                                  <option value="<?php echo $row3['fuel_type_id']; ?>">
                                                      <?php echo $row3['fuel_type']; ?></option>
                                                  <?php
@@ -139,7 +139,7 @@ while ($row3 = mysqli_fetch_array($fueltyperesult)) {
 $selecttransmission = "SELECT * FROM transmission ORDER BY transmission_type";
 $transmissionresult = mysqli_query($conn, $selecttransmission);
 while ($row4 = mysqli_fetch_array($transmissionresult)) {
- ?>
+    ?>
                                                  <option value="<?php echo $row4['transmission_id']; ?>">
                                                      <?php echo $row4['transmission_type']; ?></option>
                                                  <?php
