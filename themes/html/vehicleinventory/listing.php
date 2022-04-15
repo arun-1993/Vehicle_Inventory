@@ -254,9 +254,9 @@ if (0 == $number_of_result) {
                         <div class="col-lg-9 col-md-8">
                             <?php if (true == $notfound) {
  ?>
-                            <dv class="flex text-center mt-4">
-                                <h2 class="text-danger mt-4">Sorry! No items found</h2>
-                            </dv>
+
+                            <h2 class="text-danger text-center mt-4">Sorry! No items found</h2>
+
                             <?php
 }
 ; ?>
