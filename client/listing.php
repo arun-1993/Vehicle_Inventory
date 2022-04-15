@@ -206,7 +206,7 @@ if (0 == $number_of_result) {
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm">
+                                                <div class="row-sm">
                                                     <div class="price-search">
                                                         <span class="mb-2" style="color:#fff">Minimum price
                                                             <i class="fa fa-rupee"></i></span>
@@ -219,7 +219,7 @@ if (0 == $number_of_result) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm">
+                                                <div class="row-sm">
                                                     <div class="price-search">
                                                         <span class="mb-2" style="color:#fff">Maximum price
                                                             <i class="fa fa-rupee"></i></span>
