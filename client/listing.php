@@ -10,17 +10,17 @@ $query_brand->execute();
 $result_brand = $query_brand->get_result();
 
 if ($brand > 0) {
-    $query_model = $mysqli->prepare("SELECT * FROM model_master WHERE brand_id = $brand ORDER BY model_name");
+ $query_model = $mysqli->prepare("SELECT * FROM model_master WHERE brand_id = $brand ORDER BY model_name");
 } else {
-    $query_model = $mysqli->prepare("SELECT * FROM model_master ORDER BY model_name");
+ $query_model = $mysqli->prepare("SELECT * FROM model_master ORDER BY model_name");
 }
 $query_model->execute();
 $result_model = $query_model->get_result();
 
 if ($model > 0) {
-    $query_year = $mysqli->prepare("SELECT DISTINCT model_year FROM vehicle WHERE model_id = $model ORDER BY model_year DESC");
+ $query_year = $mysqli->prepare("SELECT DISTINCT model_year FROM vehicle WHERE model_id = $model ORDER BY model_year DESC");
 } else {
-    $query_year = $mysqli->prepare("SELECT DISTINCT model_year FROM vehicle ORDER BY model_year DESC");
+ $query_year = $mysqli->prepare("SELECT DISTINCT model_year FROM vehicle ORDER BY model_year DESC");
 }
 $query_year->execute();
 $result_year = $query_year->get_result();
@@ -47,39 +47,39 @@ $result_year = $query_year->get_result();
 $query = "SELECT * FROM vehicle JOIN model_master USING (model_id) JOIN brand_master USING (brand_id) JOIN fuel_type USING (fuel_type_id) JOIN transmission USING (transmission_id) JOIN bodycolor ON bodycolor.color_id = vehicle.exterior_color ";
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) {
-    $query .= "WHERE vehicle_price >= $min_price ";
+ $query .= "WHERE vehicle_price >= $min_price ";
 
-    if (0 != $max_price) {
-        $query .= "AND vehicle_price <= $max_price ";
-    }
+ if (0 != $max_price) {
+  $query .= "AND vehicle_price <= $max_price ";
+ }
 
-    if (0 != $brand) {
-        $query .= "AND brand_master.brand_id = $brand ";
-    }
+ if (0 != $brand) {
+  $query .= "AND brand_master.brand_id = $brand ";
+ }
 
-    if (0 != $model) {
-        $query .= "AND model_master.model_id = $model ";
-    }
+ if (0 != $model) {
+  $query .= "AND model_master.model_id = $model ";
+ }
 
-    if (0 != $year) {
-        $query .= "AND model_year = $year ";
-    }
+ if (0 != $year) {
+  $query .= "AND model_year = $year ";
+ }
 
-    if (0 != $condition) {
-        $query .= (1 == $condition) ? "AND kms_driven = 0 " : "AND kms_driven > 0 ";
-    }
+ if (0 != $condition) {
+  $query .= (1 == $condition) ? "AND kms_driven = 0 " : "AND kms_driven > 0 ";
+ }
 
 }
 
 if (isset($_GET['carbrand'])) {
-    $carbrand = $_GET['carbrand'];
-    $query .= "AND brand_name = '$carbrand'";
+ $carbrand = $_GET['carbrand'];
+ $query .= "AND brand_name = '$carbrand'";
 }
 
 if (isset($_GET['car'])) {
 
-    $model_name = $_GET['car'];
-    $query .= "AND model_name = '$model_name'";
+ $model_name = $_GET['car'];
+ $query .= "AND model_name = '$model_name'";
 }
 
 $result           = mysqli_query($conn, $query);
@@ -91,9 +91,9 @@ $number_of_page = ceil($number_of_result / $results_per_page);
 
 //determine which page number visitor is currently on
 if (!isset($_GET['page'])) {
-    $page = 1;
+ $page = 1;
 } else {
-    $page = $_GET['page'];
+ $page = $_GET['page'];
 }
 
 //determine the sql LIMIT starting number for the results on the displaying page
@@ -105,7 +105,7 @@ $query .= "LIMIT " . $page_first_result . ',' . $results_per_page;
 $result = mysqli_query($conn, $query);
 
 if (0 == $number_of_result) {
-    $notfound = true;
+ $notfound = true;
 }
 ; //display the retrieved result on the webpage
 
@@ -158,7 +158,6 @@ if (0 == $number_of_result) {
                                                                     </select>
                                                                 </div>
                                                             </div>
-
                                                             <div class="col-sm">
                                                                 <span>Select model</span>
                                                                 <div class="selected-box">
@@ -254,7 +253,7 @@ if (0 == $number_of_result) {
 
                         <div class="col-lg-9 col-md-8">
                             <?php if (true == $notfound) {
-    ?>
+ ?>
 
                             <h2 class="text-danger text-center mt-4">Sorry! No items found</h2>
 
@@ -318,65 +317,65 @@ if (0 == $number_of_result) {
                     <ul class="pagination">
                         <?php
 if (!isset($_GET['page']) || $_GET['page'] <= 1) {
-    $current_page = 1;
+ $current_page = 1;
 } elseif ($_GET['page'] >= $number_of_page) {
-    $current_page = $number_of_page;
+ $current_page = $number_of_page;
 } else {
-    $current_page = $_GET['page'];
+ $current_page = $_GET['page'];
 }
 
 if ($current_page <= 3) {
-    $lower = 1;
-    $upper = min(5, $number_of_page);
+ $lower = 1;
+ $upper = min(5, $number_of_page);
 } elseif ($current_page >= ($number_of_page - 2)) {
-    $lower = $number_of_page - 4;
-    $upper = $number_of_page;
+ $lower = $number_of_page - 4;
+ $upper = $number_of_page;
 } else {
-    $lower = $current_page - 2;
-    $upper = $current_page + 2;
+ $lower = $current_page - 2;
+ $upper = $current_page + 2;
 }
 
 // echo "Lower: $lower - Upper:  $upper";
 
 $query = $_SERVER['QUERY_STRING'];
 if (isset($_GET['page'])) {
-    $query = explode('&', $query);
-    array_pop($query);
-    $query = implode('&', $query);
+ $query = explode('&', $query);
+ array_pop($query);
+ $query = implode('&', $query);
 
 }
 
 if ($lower > 1) {
-    echo "<li><a href='listing.php?$query&page=1' title='First Page'><<</a></li>";
+ echo "<li><a href='listing.php?$query&page=1' title='First Page'><<</a></li>";
 }
 
 if ($current_page > 1) {
-    $previous_page = $current_page - 1;
-    echo "<li><a href='listing.php?$query&page=$previous_page' title='Previous Page'><</a></li>";
+ $previous_page = $current_page - 1;
+ echo "<li><a href='listing.php?$query&page=$previous_page' title='Previous Page'><</a></li>";
 }
 
 for ($page = $lower; $page <= $upper; $page++) {
-    ?>
+ ?>
                         <li>
                             <?php
 if ($page == $current_page) {
-        echo "<a href='#' style = 'pointer-events: none; color: red;'>$page</a>";
-    } else {
-        echo "<a href='listing.php?$query&page=$page'>$page</a>";
-    }
-    ?>
+  echo "<a href='#' style = 'pointer-events: none; color: red;'>$page</a>";
+ } else {
+  echo "<a href='listing.php?$query&page=$page'>$page</a>";
+ }
+ ?>
                         </li>
 
                         <?php
 }
 
 if ($current_page < $number_of_page) {
-    $next_page = $current_page + 1;
-    echo "<li><a href='listing.php?$query&page=$next_page' title='Next Page'>></a></li>";
+ $next_page = $current_page + 1;
+ echo "<li><a href='listing.php?$query&page=$next_page' title='Next Page'>></a></li>";
 }
 
 if ($upper < $number_of_page) {
-    echo "<li><a href='listing.php?$query&page=$number_of_page' title='Last Page'>>></a></li>";
+ echo "<li><a href='listing.php?$query&page=$number_of_page' title='Last Page'>>></a></li>";
 }
 ?>
 
