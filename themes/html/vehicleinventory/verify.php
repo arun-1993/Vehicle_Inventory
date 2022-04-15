@@ -3,7 +3,9 @@ if (isset($_SESSION['Loggedin']) == true) {
  header("Location:$root/index.php");
 }
 
-$sent = false;
+$sent       = false;
+$invalidotp = false;
+
 if (isset($_GET['username']) & isset($_GET['msg'])) {
  if (null != $_GET['username'] & null != $_GET['msg']) {
   {
@@ -25,21 +27,24 @@ if (isset($_GET['username']) & isset($_GET['msg'])) {
     die;
    }
 
-   @$OTP = $_POST['otp'];
-   if ($OTP == $result['verification_token']) {
-    $status      = "Verified";
-    $setverified = $mysqli->prepare('UPDATE user set user_status= ? WHERE email=?');
-    $setverified->bind_param('ss', $status, $email);
-    $setverified->execute();
-    if ($setverified->execute()) {
-     $deleteused = $mysqli->prepare("DELETE FROM email_verification WHERE verification_mail = ?");
-     $deleteused->bind_param('s', $email);
-     $deleteused->execute();
-    }
-    header("Location:$root/login.php");
+   if ("POST" == $_SERVER["REQUEST_METHOD"]) {
 
-   } else {
-    echo "<script>alert(1)</script>";
+    @$OTP = $_POST['otp'];
+    if ($OTP == $result['verification_token']) {
+     $status      = "Verified";
+     $setverified = $mysqli->prepare('UPDATE user set user_status= ? WHERE email=?');
+     $setverified->bind_param('ss', $status, $email);
+     $setverified->execute();
+     if ($setverified->execute()) {
+      $deleteused = $mysqli->prepare("DELETE FROM email_verification WHERE verification_mail = ?");
+      $deleteused->bind_param('s', $email);
+      $deleteused->execute();
+     }
+     header("Location:$root/login.php");
+
+    } else {
+     $invalidotp = true;
+    }
    }
 
   }
@@ -75,9 +80,15 @@ if (isset($_GET['username']) & isset($_GET['msg'])) {
                         <div class="gray-form clearfix">
 
 
-                            <?php if (true == $sent) {
+                            <?php if (true == $sent && false == $invalidotp) {
  echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                   <strong>OTP</strong> Sent successfully!
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>';
+}
+if (true == $invalidotp) {
+ echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                  <strong>OTP</strong> is invalid!
                                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                   </div>';
 } ?>

@@ -33,11 +33,11 @@ $feturedcarresult = $feturedcarquery->get_result();
 
 $brandquery = $mysqli->prepare("SELECT COUNT(*) as num FROM  brand_master");
 $brandquery->execute();
-$brand = $brandquery->get_result();
+$brandcount = $brandquery->get_result();
 
 $modelquery = $mysqli->prepare("SELECT COUNT(*)  as num FROM  model_master");
 $modelquery->execute();
-$model = $modelquery->get_result();
+$modelcount = $modelquery->get_result();
 
 $appointmentquery = $mysqli->prepare("SELECT COUNT(*) as num FROM  appointment");
 $appointmentquery->execute();
@@ -47,8 +47,8 @@ $vehiclequery = $mysqli->prepare("SELECT COUNT(*) as num FROM vehicle");
 $vehicle      = $vehiclequery->execute();
 $vehicle      = $vehiclequery->get_result();
 
-$numbrand       = $brand->fetch_assoc(); // returns number of brand
-$nummodel       = $model->fetch_assoc(); // returns number of model
+$numbrand       = $brandcount->fetch_assoc(); // returns number of brand
+$nummodel       = $modelcount->fetch_assoc(); // returns number of model
 $numappointment = $appointment->fetch_assoc(); // returns number of appointment
 $numvehicle     = $vehicle->fetch_assoc(); // returns number of vehicles in stock
 

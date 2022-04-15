@@ -653,11 +653,13 @@ var POTENZA = {};
                 minlength:3,
                 regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
                 alphabets:true,
+                maxlength: 10,
         },
         Lastname: {
         required: true,
         noSpace: true,
         alphabets:true,
+        maxlength: 10,
         
         minlength: 3,
         },
@@ -665,6 +667,7 @@ var POTENZA = {};
         required: true,
         validate_email: true,
         noSpace: true,
+        maxlength: 50,
         
         
         },
@@ -672,16 +675,19 @@ var POTENZA = {};
         required: true,
         noSpace: true,
         minlength:4,
+        maxlength: 20,
         },
         Password: {
         required: true,
         noSpace: true,
           minlength:8,
+          maxlength: 15,
         },
         confirmPassword:{
           required:true,
           minlength:8,
           noSpace: true,
+          maxlength: 15,
         
           equalTo: "#Password",
         
@@ -691,6 +697,7 @@ var POTENZA = {};
           alphabets:true,
           regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
         required: true,
+        maxlength: 100,
         },
         },
         
@@ -750,8 +757,8 @@ var POTENZA = {};
       //   });
         jQuery('#loginform').validate({
           rules:{
-                 username:{required:true},
-                 password:{required:true},
+                 username:{required:true, maxlength: 20,},
+                 password:{required:true, maxlength: 15},
           },
           submitHandler:function(form){
             form.submit();
@@ -764,32 +771,28 @@ var POTENZA = {};
                                 alphabets:true,
                                 regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
                                 minlength:3,
+                                maxlength:20,
                         },
                         email:{
                           required: true,
                           validate_email: true,
                           noSpace: true,
-                                
+                          maxlength:50,
                         },
                         phone:{
                           required: true,
 		  number: true,
 		  minlength: 10,
 		  maxlength: 10
+                        },
+                        message:{
+                          maxlength:700,
+                          regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
                         }
                 }
 
         });
-        jQuery('#loginform').validate({
-          rules:{
-                 username:{required:true},
-                 password:{required:true},
-          },
-          submitHandler:function(form){
-            form.submit();
-    }
-
-  });
+        
   jQuery('#editprofile').validate({
     rules:{
       firstname:{
@@ -797,15 +800,18 @@ var POTENZA = {};
       minlength:3,
       noSpace: true,
       alphabets:true,
+      maxlength: 10,
     },
 
            lastname:{required:true,
           minlength:3,
           noSpace: true,
           alphabets:true,
+          maxlength: 10,
           },
           address:{
             required:true,
+            maxlength: 100,
           
           noSpace: true,
           alphabets:true,
@@ -822,6 +828,7 @@ jQuery('#editpassword').validate({
 		oldpassword:{
 		  required:true,
       noSpace: true,
+      maxlength: 15,
      
     },
 
@@ -829,11 +836,13 @@ jQuery('#editpassword').validate({
           minlength:8,
           noSpace: true,
           notEqual:"oldpassword",
+          maxlength: 15,
           },
 		  confpassword:{
 			  required:8,
         noSpace: true,
 			  equalTo:"#newpassword",
+        maxlength: 15,
 		  },
 
     },

@@ -125,44 +125,48 @@ alert("Password Must match with confirmed password");
                                         <div class="form-group">
                                             <label class="form-label">First Name*</label>
                                             <input type="text" class="form-control" name="firstname"
-                                                placeholder="Enter First Name" value="<?php echo @$firstname; ?>"
-                                                required>
+                                                placeholder="Enter First Name" minlength="2" maxlength="20"
+                                                value="<?php echo @$firstname; ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Last Name*</label>
                                             <input type="text" class="form-control" name="lastname"
                                                 placeholder="Enter Last Name" value="<?php echo @$lastname; ?>"
-                                                required>
+                                                minlength="2" maxlength="20" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Username*</label>
-                                            <input type="text" class="form-control" name="username"
-                                                placeholder="Enter Username" value="<?php echo @$Username; ?>" required>
+                                            <input type="text" class="form-control" name="username" minlength="4"
+                                                maxlength="20" placeholder="Enter Username"
+                                                value="<?php echo @$Username; ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Email*</label>
                                             <input type="email" class="form-control" name="email"
-                                                placeholder="Enter Email" value="<?php echo @$email; ?>" required>
+                                                placeholder="Enter Email" minlength="0" maxlength="50"
+                                                value="<?php echo @$email; ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Role*</label>
-                                            <input type="text" class="form-control" placeholder="1-superAdmin 2- Admin"
-                                                name="role" value="<?php echo @$role; ?>" required>
+                                            <input type="number" class="form-control"
+                                                placeholder="1-superAdmin 2- Admin" name="role" min="1" max="2"
+                                                value="<?php echo @$role; ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Password*</label>
                                             <input type="password" class="form-control" id="password" name="password"
-                                                placeholder="Enter Password" required>
+                                                placeholder="Enter Password" minlength="8" required>
                                             <span style="color:red" id="error"></span>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Confirm Password*</label>
                                             <input type="password" class="form-control" name="confirmPassword"
-                                                placeholder="Confirm Password" required>
+                                                placeholder="Confirm Password" minlength="8" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Address*</label>
                                             <textarea class="form-control" name="address" placeholder="Enter Address"
+                                                minlength="0" maxlength="65535"
                                                 required><?php echo @$address; ?></textarea>
                                         </div>
 
