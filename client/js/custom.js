@@ -649,14 +649,14 @@ var POTENZA = {};
                   
         rules: {
         Firstname: {
-                
+                required:true,
                 minlength:2,
                 regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
                 alphabets:true,
                 maxlength: 20,
         },
         Lastname: {
-        
+          required:true,
         noSpace: true,
         alphabets:true,
         maxlength: 20,
@@ -664,7 +664,7 @@ var POTENZA = {};
         minlength: 2,
         },
         Email: {
-        
+          required:true,
         validate_email: true,
         noSpace: true,
         maxlength: 50,
@@ -672,19 +672,20 @@ var POTENZA = {};
         
         },
         Username: {
-        
+          required:true,
         noSpace: true,
         minlength:4,
         maxlength: 20,
         },
         Password: {
+          required:true,
         required: true,
         noSpace: true,
           minlength:8,
           
         },
         confirmPassword:{
-          
+          required:true,
           minlength:8,
           noSpace: true,
           
@@ -694,6 +695,7 @@ var POTENZA = {};
         },
         
         Address: {
+          required:true,
           alphabets:true,
           regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
         required:true,
@@ -704,24 +706,30 @@ var POTENZA = {};
         
         messages : {
          Firstname: {
-         minlength: "Name should be at least 3 characters long"
+         minlength: "Name should be at least 3 characters long",
+         required:"",
          },
         Lastname: {
-        minlength: "Lastname should be at least 3 characters long"
+        minlength: "Lastname should be at least 3 characters long",
+        required:"",
         },
         Email: {
-        required: "Please enter valid mail",
+        required: "",
+        
         
         },
         Username: {
-            minlength: "Name should be at least 4 characters"
+            minlength: "Name should be at least 4 characters",
+            required:"",
         },
         Password: {
         
-        minlength:"Password must be minimum 8 characters long"
+        minlength:"Password must be minimum 8 characters long",
+        required:"",
         },
         confirmPassword:{
-                equalTo:"Password must match Confirmed Password"
+                equalTo:"Password must match Confirmed Password",
+                required:"",
         },
         Address: {
         required:"Please fill out this fild"
@@ -786,10 +794,12 @@ var POTENZA = {};
 		  maxlength: 10
                         },
                         message:{
+                          
                           maxlength:700,
                           regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
                         }
-                }
+                },
+                message:{required:"",}
 
         });
         
@@ -817,6 +827,7 @@ var POTENZA = {};
           alphabets:true,
           }
     },
+    message:{required:"",},
     submitHandler:function(form){
       form.submit();
 }
