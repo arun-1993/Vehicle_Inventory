@@ -2,7 +2,7 @@
 
 include_once 'header.php';
 
-$selectvehicle = $mysqli->prepare("select * from vehicle v JOIN model_master m JOIN bodycolor c JOIN fuel_type f JOIN transmission t where v.model_id=m.model_id and v.exterior_color=c.color_id and v.fuel_type_id=f.fuel_type_id and v.transmission_id=t.transmission_id ORDER BY model_name");
+$selectvehicle = $mysqli->prepare("SELECT * from vehicle v JOIN model_master m JOIN bodycolor c JOIN fuel_type f JOIN transmission t WHERE v.model_id=m.model_id and v.exterior_color=c.color_id and v.fuel_type_id=f.fuel_type_id and v.transmission_id=t.transmission_id AND v.vehicle_status='Available' ORDER BY model_name");
 $selectvehicle->execute();
 $vehicle = $selectvehicle->get_result();
 
@@ -12,14 +12,14 @@ $vehicle = $selectvehicle->get_result();
     <div class="page-main">
 
         <!--aside open-->
-        <?php include 'sidebar.php'; ?>
+        <?php include 'sidebar.php';?>
         <!--aside closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php'; ?>
+                <?php include 'pageheader.php';?>
                 <!--End Page header-->
 
                 <!-- Row -->
@@ -30,7 +30,7 @@ $vehicle = $selectvehicle->get_result();
                                 <div class="card-title">
                                     <h2>Vehicle</h2>
                                     <h5>
-                                        <a href="<?=$root; ?>/addvehicle.php" style="color:blue;">
+                                        <a href="<?=$root;?>/addvehicle.php" style="color:blue;">
                                             ADD VEHICLE
                                         </a>
                                     </h5>
@@ -59,32 +59,32 @@ $vehicle = $selectvehicle->get_result();
                                         <tbody>
                                             <?php while ($row = $vehicle->fetch_assoc()): ?>
                                             <tr>
-                                                <td><img src="<?=$root; ?>/../../../client/images/car/<?=$row['vehicle_image']; ?>"
+                                                <td><img src="<?=$root;?>/../../../client/images/car/<?=$row['vehicle_image'];?>"
                                                         height="100" width="350" style="border-radius:12%"></td>
-                                                <td><?=$row['model_name']; ?></td>
-                                                <td><?=$row['color']; ?></td>
-                                                <td><?=$row['fuel_type']; ?></td>
-                                                <td><?=$row['transmission_type']; ?></td>
-                                                <td><?=$row['model_year']; ?></td>
-                                                <td><?=$row['seating_capacity']; ?></td>
-                                                <td><?=indMoneyFormat($row['vehicle_price']); ?></td>
-                                                <td><?=$row['vehicle_vin']; ?></td>
-                                                <td><?=$row['kms_driven'] == 0 ? 'New' : indNumberFormat($row['kms_driven']) . ' km'; ?>
+                                                <td><?=$row['model_name'];?></td>
+                                                <td><?=$row['color'];?></td>
+                                                <td><?=$row['fuel_type'];?></td>
+                                                <td><?=$row['transmission_type'];?></td>
+                                                <td><?=$row['model_year'];?></td>
+                                                <td><?=$row['seating_capacity'];?></td>
+                                                <td><?=indMoneyFormat($row['vehicle_price']);?></td>
+                                                <td><?=$row['vehicle_vin'];?></td>
+                                                <td><?=$row['kms_driven'] == 0 ? 'New' : indNumberFormat($row['kms_driven']) . ' km';?>
                                                 </td>
                                                 <td>
-                                                    <a href="<?=$root; ?>/vehicleedit.php?id=<?=$row['vehicle_id']; ?>"
+                                                    <a href="<?=$root;?>/vehicleedit.php?id=<?=$row['vehicle_id'];?>"
                                                         class="btn btn-success">EDIT</a>
                                                 </td>
                                                 <td>
-                                                    <a href="<?=$root; ?>/vehiclesold.php?id=<?=$row['vehicle_id']; ?>"
+                                                    <a href="<?=$root;?>/vehiclesold.php?id=<?=$row['vehicle_id'];?>"
                                                         class="btn btn-primary audit-confirmation">MARK SOLD</a>
                                                 </td>
                                                 <td>
-                                                    <a href="<?=$root; ?>/vehicledelete.php?id=<?=$row['vehicle_id']; ?>"
+                                                    <a href="<?=$root;?>/vehicledelete.php?id=<?=$row['vehicle_id'];?>"
                                                         class="btn btn-danger delete-confirmation">DELETE</a>
                                                 </td>
                                             </tr>
-                                            <?php endwhile; ?>
+                                            <?php endwhile;?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -97,7 +97,7 @@ $vehicle = $selectvehicle->get_result();
         </div><!-- end app-content-->
     </div>
 
-    <?php include 'footer.php'; ?>
+    <?php include 'footer.php';?>
 
 
     <script>

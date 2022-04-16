@@ -1,17 +1,57 @@
-<?php include 'header.php'; ?>
+<?php
+
+include 'header.php';
+
+$exist = false;
+
+if (isset($_POST['updatebtn'])) {
+    $mid         = $_POST['model_id'];
+    $bid         = $_POST['brand_id'];
+    $model       = $_POST['model_name'];
+    $description = $_POST["general_description"];
+
+    $updatemodel = $mysqli->prepare("UPDATE model_master SET  model_name=? , general_description=? WHERE model_id=?");
+    $updatemodel->bind_param('ssi', $model, $description, $mid);
+    $query_run = $updatemodel->execute();
+
+    if ($query_run) {
+
+        header("Location: model.php");
+    } else {
+        $exist = true;
+    }
+}
+
+if (isset($_GET['id'])) {
+    $mid = $_GET['id'];
+
+    //echo $name;
+    //echo $id;
+    $query = $mysqli->prepare("select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id and model_id= ? ");
+    $query->bind_param('i', $mid);
+    $query->execute();
+    $query_run     = $query->get_result();
+    $model_details = $query_run->fetch_assoc();
+    $brand         = $model_details['brand_id'];
+}
+
+$sql1    = "SELECT * FROM brand_master ORDER BY brand_name";
+$result1 = mysqli_query($conn, $sql1);
+
+?>
 
 <div class="page">
     <div class="page-main">
 
         <!--aside open-->
-        <?php include 'sidebar.php'; ?>
+        <?php include 'sidebar.php';?>
         <!--aside closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php'; ?>
+                <?php include 'pageheader.php';?>
                 <!--/app header-->
                 <!--Page header-->
 
@@ -33,74 +73,48 @@
                                 <h4 class="card-title">Edit Model</h4>
                             </div>
                             <div class="card-body">
-
+                                <?php if ($exist): ?>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>OOPS!</strong> The model you have entered already exists! Enter a different
+                                    name.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php endif;?>
                                 <div class="">
-
-                                    <?php
-
-if (isset($_GET['id'])) {
- $mid = $_GET['id'];
-
- //echo $name;
- //echo $id;
- $query = $mysqli->prepare("select * from model_master m JOIN brand_master b where m.brand_id=b.brand_id and model_id= ? ");
- $query->bind_param('i', $mid);
- $query->execute();
- $query_run = $query->get_result();
- $result    = $query_run->fetch_assoc();
- $name      = $result['model_name'];
-
- foreach ($query_run as $row) {
-  ?>
-
-
                                     <form method="POST" action="">
-                                        <!--<input type="hidden" name="edit_id" value="<?php //echo $row['model_id']; ?>">-->
                                         <div class="form-group">
                                             <label class="form-label">Brand Name</label>
                                             <select class="form-control" name="brand_id" required>
                                                 <option value=""> -- Select Brand -- </option>
-                                                <?php
-$sql1    = "SELECT * FROM brand_master ORDER BY brand_name";
-  $result1 = mysqli_query($conn, $sql1);
-  while ($row1 = mysqli_fetch_array($result1)) {
-   ?>
-                                                <option value="<?php echo $row1['brand_id']; ?>" <?php if ($name == $row1['brand_name']) {
-    echo "selected";
-   }
-   ?>>
+                                                <?php while ($row1 = mysqli_fetch_array($result1)): ?>
+                                                <option value="<?php echo $row1['brand_id']; ?>"
+                                                    <?=$brand == $row1['brand_id'] ? 'selected' : '';?>>
                                                     <?php echo $row1['brand_name']; ?>
                                                 </option>
-                                                <?php
-}
-  ?>
+                                                <?php endwhile;?>
                                             </select>
-
                                         </div>
+                                        <input type="hidden" name="model_id" value="<?=$model_details['model_id'];?>">
                                         <div class="form-group">
                                             <label class="form-label">Model Name</label>
                                             <input type="text" minlength="2" maxlength="20" class="form-control"
-                                                name="model_name" value="<?php echo $row['model_name']; ?>"
+                                                name="model_name" value="<?php echo $model_details['model_name']; ?>"
                                                 placeholder="Enter Model Name" required>
                                         </div>
-
                                         <div class="form-group">
                                             <label class="form-label">General Description</label>
                                             <textarea class="form-control" minlength="10" maxlength="65535"
                                                 name="general_description" placeholder="Enter a General Description"
-                                                required><?php echo $row['general_description']; ?></textarea>
+                                                required><?php echo $model_details['general_description']; ?></textarea>
                                         </div>
+                                        <a href="<?php echo $root; ?>/model.php"
+                                            class="btn btn-danger mt-4 mb-0">Cancel</a>
+                                        <button type="submit" name="updatebtn"
+                                            class="btn btn-primary mt-4 mb-0">Update</button>
+                                    </form>
                                 </div>
-                                <a href="<?php echo $root; ?>/model.php" class="btn btn-danger mt-4 mb-0">Cancel</a>
-                                <button type="submit" name="updatebtn" class="btn btn-primary mt-4 mb-0">Update</button>
-                                </form>
-                                <?php
-
- }
-}
-?>
-
-
                             </div>
                         </div>
                     </div>
@@ -109,41 +123,9 @@ $sql1    = "SELECT * FROM brand_master ORDER BY brand_name";
             </div>
         </div><!-- end app-content-->
     </div>
-
-    <?php
-
-if (isset($_POST['updatebtn'])) {
- //$id = $_POST['edit_id'];
- $bid         = $_POST['brand_id'];
- $model       = $_POST['model_name'];
- $description = $_POST["general_description"];
-
- $updatemodel = $mysqli->prepare("UPDATE model_master SET  model_name='$model', general_description='$description' WHERE model_id=$mid");
- $updatemodel->bind_param('ssi', $model, $description, $mid);
- $query_run = $updatemodel->execute();
-
- if ($query_run) {
-
-  ?>
-    <script>
-    window.location = "model.php"
-    </script>
-    <?php
-
- } else {
-  ?>
-    <script>
-    window.location = "model.php"
-    </script>
-    <?php
-
- }
-}
-
-?>
 </div>
 <!--Footer-->
-<?php include 'footer.php'; ?>
+<?php include 'footer.php';?>
 <!-- End Footer-->
 
 </body>

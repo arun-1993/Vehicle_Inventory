@@ -3,7 +3,7 @@
 if(isset($_GET['id']))
 {
 	$id = $_GET['id'];
-	$deletevehicle = $mysqli->prepare("delete from vehicle where vehicle_id = ?");
+	$deletevehicle = $mysqli->prepare("UPDATE vehicle SET vehicle_status = 'Sold'  where vehicle_id = ?");
 	$deletevehicle->bind_param('i',$id);
 	
 	$result =$deletevehicle->execute();

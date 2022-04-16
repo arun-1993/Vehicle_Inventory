@@ -41,6 +41,13 @@ inner-intro -->
 					</tr>
 				</thead>
 				<tbody>
+					<?php if(mysqli_num_rows($result) == 0): ?>
+					<tr style="color:black">
+						<td class="text-center" colspan="5">
+							No appointments have been scheduled by you yet. Go on, book an appointment!
+						</td>
+					</tr>
+					<?php else: ?>
 					<?php while($row=mysqli_fetch_assoc($result)) : ?>
 					<tr style="color:black">														
 						<td><?php echo $row['model_name']; ?></td>
@@ -68,6 +75,7 @@ inner-intro -->
 						</td>
 					</tr>
 					<?php endwhile; ?>
+					<?php endif; ?>
 				</tbody>
 			</table>
 		</div>

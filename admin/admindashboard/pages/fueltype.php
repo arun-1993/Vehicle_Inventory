@@ -1,6 +1,6 @@
-<?php include('header.php');?>
-
 <?php
+
+include('header.php');
 
 $sql = "select * from fuel_type";
 $selectresult = mysqli_query($conn,$sql);
@@ -53,10 +53,7 @@ $selectresult = mysqli_query($conn,$sql);
 														<td><?php echo $row['fuel_type']; ?></td>
 														<?php if($_SESSION['Role'] == 1) : ?>
 														<td>
-															<form action="editfueltype.php" method="post">
-																<input type="hidden" name="edit_id" value="<?php echo $row['fuel_type_id']; ?>">
-																<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
-															</form>
+															<a class="btn btn-success" href="editfueltype.php?id=<?=$row['fuel_type_id'];?>">EDIT </a>
 														</td>
 														<td>
 															<a href="<?php echo $root;?>/deletefueltype.php?id=<?php echo $row['fuel_type_id']?>" class="btn btn-danger delete-confirmation">DELETE</a>

@@ -622,12 +622,12 @@ var POTENZA = {};
     var re = new RegExp(regexp);
     return this.optional(element) || re.test(value);
   },
-  "Misplaced space please check."
+  ""
 );
 
         $.validator.addMethod("noSpace", function(value, element) { 
           return value.indexOf(" ") < 0 && value != ""; 
-        }, "Cannot use whitespace");
+        }, "");
         $.validator.addMethod("validate_email", function(value, element) {
         
         if (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value)) {
@@ -651,7 +651,7 @@ var POTENZA = {};
         Firstname: {
                 required:true,
                 minlength:2,
-                regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
+                noSpace: true,
                 alphabets:true,
                 maxlength: 20,
         },
@@ -696,7 +696,7 @@ var POTENZA = {};
         
         Address: {
           required:true,
-          alphabets:true,
+          
           regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
         required:true,
         maxlength: 100,
@@ -706,11 +706,11 @@ var POTENZA = {};
         
         messages : {
          Firstname: {
-         minlength: "Name should be at least 3 characters long",
+        // minlength: "Name should be at least 3 characters long",
          required:"",
          },
         Lastname: {
-        minlength: "Lastname should be at least 3 characters long",
+        //minlength: "Lastname should be at least 3 characters long",
         required:"",
         },
         Email: {
@@ -765,10 +765,10 @@ var POTENZA = {};
       //   });
         jQuery('#loginform').validate({
           rules:{
-                 username:{required:true, maxlength: 20,},
+                 username:{required:true, maxlength: 50,},
                  password:{required:true, maxlength: 15},
           },
-          message:{required:""},
+          messages:{required:""},
           submitHandler:function(form){
             form.submit();
     }
@@ -776,9 +776,9 @@ var POTENZA = {};
   });
  jQuery('#contactform').validate({
                 rules:{
-                        name:{  
+                        name:{   required: true,
                                 alphabets:true,
-                                regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
+                                
                                 minlength:2,
                                 maxlength:20,
                         },
@@ -797,10 +797,13 @@ var POTENZA = {};
                         message:{
                           
                           maxlength:700,
-                          regex:"^[^\s].+[a-zA-Z]+[a-zA-Z]+$",
+                          
                         }
                 },
-                message:{required:"",}
+                messages:{
+                  name:{required:""},
+                  phone:{minlength:"",maxlength:""},
+                }
 
         });
         
@@ -828,7 +831,10 @@ var POTENZA = {};
           alphabets:true,
           }
     },
-    message:{required:"",},
+    messages:{
+      firstname: {required:"",},
+      lastname: {required:"",},
+    },
     submitHandler:function(form){
       form.submit();
 }
@@ -857,6 +863,11 @@ jQuery('#editpassword').validate({
         
 		  },
 
+    },
+    messages:{
+      oldpassword:{required:"",},
+      newpassword:{required:"",},
+      confirmPassword:{required:"",},
     },
     submitHandler:function(form){
       form.submit();

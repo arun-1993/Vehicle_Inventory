@@ -17,7 +17,7 @@ use PHPMailer\PHPMailer\PHPMailer;
  * @param string $html_content The content of the email to be sent along with the html tags needed for formatting the email.
  * @return string|null Null indicates the email has been successfully sent. Returns an error message if unsuccessful.
  */
-function sendMail(string $subject, string $html_content): ?string
+function sendMail(string $subject, string $html_content, string $email = null): ?string
 {
     $mail = new PHPMailer(true);
 
@@ -36,6 +36,11 @@ function sendMail(string $subject, string $html_content): ?string
         $mail->addAddress('arun0306.r@gmail.com');
         $mail->addAddress('jitendrabhavsar469@gmail.com');
         $mail->addAddress('riyavora16@gmail.com');
+
+        if(!is_null($email))
+        {
+            $mail->addAddress($email);
+        }
 
         $mail->isHTML(true);
         $mail->Subject = $subject;
@@ -339,7 +344,7 @@ $cars   = array();
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?=$root;?>/editprofile.php?Username=<?=$_SESSION['Username'];?>">
+                                            <a href="<?=$root;?>/editprofile.php">
                                                 Edit Profile
                                             </a>
                                         </li>

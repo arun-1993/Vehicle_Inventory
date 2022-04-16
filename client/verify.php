@@ -40,7 +40,7 @@ if (isset($_GET['username']) & isset($_GET['msg'])) {
       $deleteused->bind_param('s', $email);
       $deleteused->execute();
      }
-     header("Location:$root/login.php");
+     header("Location:$root/login.php?request=verified");
 
     } else {
      $invalidotp = true;
@@ -94,8 +94,8 @@ if (true == $invalidotp) {
 } ?>
                             <div class="mb-3">
                                 <label class="form-label" for="email" name='otp'>OTP</label>
-                                <input id="name" class="form-control" type="text"
-                                    placeholder="Enter OTP Recived on mail" name="otp">
+                                <input id="name" class="form-control" type="password"
+                                    placeholder="Enter OTP Recived on mail" name="otp" minlength="5" maxlength="5" required>
                             </div>
 
                             <div class="d-grid">

@@ -1,62 +1,49 @@
-<?php include 'header.php'; ?>
-
 <?php
+
+include 'header.php';
+
+$msg = null;
+
 if ("POST" == $_SERVER["REQUEST_METHOD"] && isset($_FILES)) {
- $firstname       = $_POST["firstname"];
- $lastname        = $_POST["lastname"];
- $email           = $_POST["email"];
- $Username        = $_POST["username"];
- $password        = $_POST["password"];
- $confirmPassword = $_POST["confirmPassword"];
- $address         = $_POST["address"];
- $role            = $_POST['role'];
- $defaultimage    = 'avatardefault_92824.png';
+    $firstname       = $_POST["firstname"];
+    $lastname        = $_POST["lastname"];
+    $email           = $_POST["email"];
+    $Username        = $_POST["username"];
+    $password        = $_POST["password"];
+    $confirmPassword = $_POST["confirmPassword"];
+    $address         = $_POST["address"];
+    $role            = $_POST['role'];
+    $defaultimage    = 'avatardefault_92824.png';
 
- $checkUsername = "SELECT * FROM `user` WHERE username = '$Username'AND user_role_id in(1,2)";
- $userexists    = mysqli_query($conn, $checkUsername);
- $checkUsermail = "SELECT * FROM `user` WHERE email = '$email'AND user_role_id in(1,2)";
- $mailexists    = mysqli_query($conn, $checkUsermail);
+    $checkUsername = "SELECT * FROM `user` WHERE username = '$Username'AND user_role_id in(1,2)";
+    $userexists    = mysqli_query($conn, $checkUsername);
+    $checkUsermail = "SELECT * FROM `user` WHERE email = '$email'AND user_role_id in(1,2)";
+    $mailexists    = mysqli_query($conn, $checkUsermail);
 
- if (mysqli_num_rows($userexists) >= 1 && mysqli_num_rows($mailexists) >= 1) {
-  header("Location:$root/addemployee.php?msg=invalidboth");
+    if (mysqli_num_rows($userexists) >= 1 && mysqli_num_rows($mailexists) >= 1) {
+        $msg = 'invalidboth';
 
- } elseif (mysqli_num_rows($mailexists) >= 1) {
-  header("Location:$root/addemployee.php?msg=invalidmail");
- } elseif (mysqli_num_rows($userexists) >= 1) {
+    } elseif (mysqli_num_rows($mailexists) >= 1) {
+        $msg = 'invalidmail';
+    } elseif (mysqli_num_rows($userexists) >= 1) {
+        $msg = 'invalidusername';
+    } else {
+        $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
-  header("Location:$root/addemployee.php?msg=invalidusername");
- } else {
-  $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+        if ($password == $confirmPassword) {
 
-  if ($password == $confirmPassword) {
-
-   $insertinfo = $mysqli->prepare("INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` )
+            $insertinfo = $mysqli->prepare("INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` )
         VALUES (?, ?, ?, ?, ?, ?, ?,?)");
-   $insertinfo->bind_param('isssssss', $role, $firstname, $lastname, $email, $Username, $hashedpassword, $address, $defaultimage);
-   $insertinfo->execute();
+            $insertinfo->bind_param('isssssss', $role, $firstname, $lastname, $email, $Username, $hashedpassword, $address, $defaultimage);
+            $insertinfo->execute();
+            header("Location: employee.php");
 
-   // $insertinfo = "INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` )
-   // VALUES ($role, '$firstname', '$lastname', '$email', '$Username', '$hashedpassword', '$address','avatardefault_92824.png')";
-   // mysqli_query($conn,$insertinfo);
-   // $error = mysqli_error($conn);
+        } else {
 
-   ?>
+            $msg = "mismatch";
 
-
-<script>
-window.location = 'employee.php';
-</script>
-<?php
-
-  } else {
-
-   ?><script>
-alert("Password Must match with confirmed password");
-</script>
-<?php
-}
- }
-
+        }
+    }
 }
 
 ?>
@@ -65,14 +52,14 @@ alert("Password Must match with confirmed password");
     <div class="page-main">
 
         <!--sidebar open-->
-        <?php include 'sidebar.php'; ?>
+        <?php include 'sidebar.php';?>
         <!--sidebar closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php'; ?>
+                <?php include 'pageheader.php';?>
                 <!--/app header-->
 
 
@@ -93,33 +80,37 @@ alert("Password Must match with confirmed password");
                                 <h4 class="card-title">Add Employee</h4>
                             </div>
                             <div class="card-body">
-                                <?php if (isset($_GET['msg'])) {
- if ('invalidusername' == $_GET['msg']) { ?>
+                                <?php if (!is_null($msg)): ?>
+                                <?php if ('invalidusername' == $msg): ?>
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     <strong>OOPS!</strong> This username is already taken choose another one!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <?php
-} elseif ('invalidmail' == $_GET['msg']) { ?>
+                                <?php elseif ('invalidmail' == $msg): ?>
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     <strong>OOPS!</strong> This email is already taken choose another one!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <?php
-} elseif ('invalidboth' == $_GET['msg']) { ?>
+                                <?php elseif ('invalidboth' == $msg): ?>
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     <strong>OOPS!</strong> This username and email is already taken choose another one!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <?php
-}
-} ?>
+                                <?php elseif ('mismatch' == $msg): ?>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>OOPS!</strong> Your entered password does not match with confirm password!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php endif; ?>
+                                <?php endif; ?>
                                 <div class="">
                                     <form method="POST" action="" enctype="multipart/form-data" id="form">
                                         <div class="form-group">
@@ -166,7 +157,7 @@ alert("Password Must match with confirmed password");
                                         <div class="form-group">
                                             <label class="form-label">Address*</label>
                                             <textarea class="form-control" name="address" placeholder="Enter Address"
-                                                minlength="0" maxlength="65535"
+                                                minlength="5" maxlength="65535"
                                                 required><?php echo @$address; ?></textarea>
                                         </div>
 
@@ -200,7 +191,7 @@ form.addEventListener('submit', (e) => {
     }
 })
 </script>
-<?php include 'footer.php'; ?>
+<?php include 'footer.php';?>
 </body>
 
 </html>

@@ -1,38 +1,22 @@
-<?php include 'header.php'; ?>
 <?php
 
+include 'header.php';
+
+$exist = false;
 if (isset($_POST["fuel_type"])) {
- $ftype = $_POST["fuel_type"];
+    $ftype = $_POST["fuel_type"];
 
- if ('' != $ftype) {
-  $insertfueltype = $mysqli->prepare("INSERT INTO fuel_type(fuel_type) VALUES(?)");
-  $insertfueltype->bind_param('s', $ftype);
-  $insertresult = $insertfueltype->execute();
+    if ('' != $ftype) {
+        $insertfueltype = $mysqli->prepare("INSERT INTO fuel_type(fuel_type) VALUES(?)");
+        $insertfueltype->bind_param('s', $ftype);
+        $insertresult = $insertfueltype->execute();
 
-  // $insertfueltype = "insert into fuel_type(fuel_type) values('".$ftype."')"; // inserts Fuel type in DB
-  //echo $insertfueltype;
-  // die;
-  // $insertresult = mysqli_query($conn,$insertfueltype);
-
-  // echo "result = " . $insertresult;
-
-  if ($insertresult) {
-
-   ?>
-<script>
-window.location = "fueltype.php"
-</script>
-<?php
-
-  }
- } else {
-  ?>
-<script>
-window.location = "fueltype.php"
-</script>
-<?php
-
- }
+        if ($insertresult) {
+            header("Location: fueltype.php");
+        } else {
+            $exist = true;
+        }
+    }
 }
 ?>
 
@@ -40,14 +24,14 @@ window.location = "fueltype.php"
     <div class="page-main">
 
         <!--sidebar open-->
-        <?php include 'sidebar.php'; ?>
+        <?php include 'sidebar.php';?>
         <!--sidebar closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php'; ?>
+                <?php include 'pageheader.php';?>
                 <!--/app header-->
 
                 <div class="page-header">
@@ -68,7 +52,16 @@ window.location = "fueltype.php"
                                 <h4 class="card-title">Add Fuel Type</h4>
                             </div>
                             <div class="card-body">
-
+                                <?php if ($exist): ?>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>OOPS!</strong> The fuel type you have entered already exists! Enter a
+                                    different
+                                    fuel type.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php endif;?>
                                 <div class="">
                                     <form method="POST" action="">
                                         <div class="form-group">
@@ -91,7 +84,7 @@ window.location = "fueltype.php"
     </div>
 </div>
 <!--Footer-->
-<?php include 'footer.php'; ?>
+<?php include 'footer.php';?>
 <!-- End Footer-->
 </body>
 

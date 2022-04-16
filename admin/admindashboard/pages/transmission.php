@@ -1,6 +1,4 @@
-<?php include('header.php');?>
-
-<?php
+<?php include('header.php');
 
 $selecttransmission = $mysqli->prepare("select * from transmission") ;
 $selecttransmission->execute();
@@ -52,12 +50,9 @@ $selectresult = $selecttransmission->get_result();
 													<tr>														
 														<td><?php echo $row['transmission_id']; ?></td>
 														<td><?php echo $row['transmission_type']; ?></td>
-														<td>
 														<?php if($_SESSION['Role'] == 1) : ?>
-														<form action="transmissionedit.php" method="post">
-															<input type="hidden" name="edit_id" value="<?php echo $row['transmission_id']; ?>">
-														<button type="submit" name="edit_btn" class="btn btn-success">EDIT </button>
-														</form>
+														<td>
+															<a class="btn btn-success" href="<?=$root;?>/transmissionedit.php?id=<?=$row['transmission_id'];?>">EDIT </a>
 														</td>
 														<td>		
 															<a href="<?php echo $root;?>/transmissiondelete.php?id=<?php echo $row['transmission_id']; ?>" class="btn btn-danger delete-confirmation">DELETE</a>			

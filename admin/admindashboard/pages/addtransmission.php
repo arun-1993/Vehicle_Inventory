@@ -1,31 +1,24 @@
-<?php include 'header.php'; ?>
 <?php
+
+include 'header.php';
+
+$exist = false;
 
 if (isset($_POST["transmission_type"])) {
- $ttype = $_POST["transmission_type"];
+    $ttype = $_POST["transmission_type"];
 
- if ('' != $ttype) {
-  $inserttransmission = $mysqli->prepare("insert into transmission(transmission_type) values(?)");
-  $inserttransmission->bind_param('s', $ttype);
-  $insertresult = $inserttransmission->execute();
+    if ('' != $ttype) {
+        $inserttransmission = $mysqli->prepare("insert into transmission(transmission_type) values(?)");
+        $inserttransmission->bind_param('s', $ttype);
+        $insertresult = $inserttransmission->execute();
 
-  if ($insertresult) {
+        if ($insertresult) {
 
-   ?>
-<script>
-window.location = "transmission.php"
-</script>
-<?php
-
-  }
- } else {
-  ?>
-<script>
-window.location = "transmission.php"
-</script>
-<?php
-
- }
+            header("Location: transmission.php");
+        } else {
+            $exist = true;
+        }
+    }
 }
 ?>
 
@@ -33,14 +26,14 @@ window.location = "transmission.php"
     <div class="page-main">
 
         <!--sidebar open-->
-        <?php include 'sidebar.php'; ?>
+        <?php include 'sidebar.php';?>
         <!--sidebar closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php'; ?>
+                <?php include 'pageheader.php';?>
                 <!--/app header-->
 
                 <div class="page-header">
@@ -61,7 +54,15 @@ window.location = "transmission.php"
                                 <h4 class="card-title">Add Transmission</h4>
                             </div>
                             <div class="card-body">
-
+                                <?php if ($exist): ?>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>OOPS!</strong> The transmission type you have entered already exists! Enter a different
+                                    transmission type.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php endif;?>
                                 <div class="">
                                     <form method="POST" action="">
                                         <div class="form-group">
@@ -84,7 +85,7 @@ window.location = "transmission.php"
     </div>
 </div>
 <!--Footer-->
-<?php include 'footer.php'; ?>
+<?php include 'footer.php';?>
 <!-- End Footer-->
 </body>
 

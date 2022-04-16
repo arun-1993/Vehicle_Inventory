@@ -1,5 +1,8 @@
-<?php include 'header.php'; ?>
 <?php
+
+include 'header.php';
+
+$exist = false;
 
 if (isset($_POST["brand_name"])) {
     $brandname = $_POST["brand_name"];
@@ -13,13 +16,9 @@ if (isset($_POST["brand_name"])) {
         // $brandresult = mysqli_query($conn,$brandinsert);
 
         if ($brandresult) {
-
-            ?>
-<script>
-window.location = "brand.php"
-</script>
-<?php
-
+            header("Location: brand.php");
+        } else {
+            $exist = true;
         }
     }
 
@@ -30,14 +29,14 @@ window.location = "brand.php"
     <div class="page-main">
 
         <!--sidebar open-->
-        <?php include 'sidebar.php'; ?>
+        <?php include 'sidebar.php';?>
         <!--sidebar closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php'; ?>
+                <?php include 'pageheader.php';?>
                 <!--/app header-->
 
                 <div class="page-header">
@@ -54,7 +53,14 @@ window.location = "brand.php"
                                 <h4 class="card-title">Add Brand</h4>
                             </div>
                             <div class="card-body">
-
+                                <?php if($exist): ?>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>OOPS!</strong> The brand you have entered already exists! Enter a different name.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php endif; ?>
                                 <div class="">
                                     <form method="POST" action="">
                                         <div class="form-group">
@@ -78,7 +84,7 @@ window.location = "brand.php"
 </div>
 
 <!--Footer-->
-<?php include 'footer.php'; ?>
+<?php include 'footer.php';?>
 <!-- End Footer-->
 </body>
 

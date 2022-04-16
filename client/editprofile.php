@@ -78,21 +78,21 @@ break;
 		                    <div class="gray-form">
 		                        <div class="row">
 		                            <div class="mb-3 col-md-6">
-		                                <label class="form-label">First Name</label>
-		                                <input type="text" class="form-control" value="<?php echo $row['first_name']; ?>"
-		                                    name="firstname" required>
+		                                <label class="form-label">First Name*</label>
+		                                <input type="text" class="form-control" placeholder="First Name*" value="<?php echo $row['first_name']; ?>"
+		                                    name="firstname" minlength="2" maxlength="20" required>
 		                            </div>
 		                            <div class="mb-3 col-md-6">
-		                                <label class="form-label">Last Name</label>
-		                                <input type="text" class="form-control" value="<?php echo $row['last_name']; ?>"
-		                                    name="lastname" required>
+		                                <label class="form-label">Last Name*</label>
+		                                <input type="text" class="form-control" placeholder="Last Name*" value="<?php echo $row['last_name']; ?>"
+		                                    name="lastname" minlength="2" maxlength="20" required>
 		                            </div>
 		                        </div>
 
 		                        <div class="mb-3">
-		                            <label class="form-label">Address</label>
-		                            <input type="textarea" class="form-control" value="<?php echo $row['address']; ?>"
-		                                name="address" required>
+		                            <label class="form-label">Address*</label>
+		                            <textarea class="form-control" placeholder="Address*"
+		                                name="address" minlength="5" maxlength="65535" required><?php echo $row['address']; ?></textarea>
 		                        </div>
 		                        <div>
 		                            <button type="submit" class="button red">Edit Profile</button>
@@ -131,17 +131,17 @@ break;
 		                    <div class="gray-form">
 		                        <div class="row">
 		                            <div class="mb-3">
-		                                <label class="form-label">Current Password</label>
-		                                <input type="password" class="form-control" id="oldpassword" name="oldpassword">
+		                                <label class="form-label">Current Password*</label>
+		                                <input type="password" class="form-control" id="oldpassword" placeholder="password" name="oldpassword" minlength="8" required>
 		                            </div>
 		                            <div class="mb-3">
-		                                <label class="form-label">New Password</label>
-		                                <input type="password" class="form-control" id="newpassword" name="newpassword">
+		                                <label class="form-label">New Password*</label>
+		                                <input type="password" class="form-control" id="newpassword" placeholder="password" name="newpassword" minlength="8" required>
 		                            </div>
 
 		                            <div class="mb-3">
-		                                <label class="form-label">Confirm Password</label>
-		                                <input type="password" class="form-control" name="confpassword">
+		                                <label class="form-label">Confirm Password*</label>
+		                                <input type="password" class="form-control" name="confpassword" placeholder="password" minlength="8" required>
 		                            </div>
 		                            <div class="row">
 		                                <div class="mb-3 col-md-6">
@@ -169,11 +169,10 @@ break;
 		    </div>
 		    </div>
 
+		</section>
 
 
+	
+		<?php include 'footer.php'; ?>
 
-		    <?php include 'footer.php'; ?>
-
-		    </body>
-
-		    </html>
+		  

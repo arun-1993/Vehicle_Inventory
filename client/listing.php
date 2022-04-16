@@ -42,6 +42,11 @@ inner-intro -->
 @$min_price = strlen($_GET['minPrice']) == 0 ? 0 : $_GET['minPrice'];
 @$max_price = strlen($_GET['maxPrice']) == 0 ? 0 : $_GET['maxPrice'];
 
+$price_range = [min($min_price, $max_price), max($min_price, $max_price)];
+
+$min_price = $price_range[0];
+$max_price = $price_range[1];
+
 //find the total number of results stored in the database
 $query = "SELECT * FROM vehicle JOIN model_master USING (model_id) JOIN brand_master USING (brand_id) JOIN fuel_type USING (fuel_type_id) JOIN transmission USING (transmission_id) JOIN bodycolor ON bodycolor.color_id = vehicle.exterior_color ";
 
@@ -214,7 +219,7 @@ if (0 == $number_of_result) {
                                                         <div class="search">
                                                             <input type="number" class="form-control placeholder"
                                                                 name="minPrice" value=<?=$min_price; ?>
-                                                                placeholder=" --Minimum Price-- " min="0" max="500000"
+                                                                placeholder=" --Minimum Price-- " min="0" max="100000000"
                                                                 style="background-color: #fff;">
                                                         </div>
                                                     </div>
@@ -226,7 +231,7 @@ if (0 == $number_of_result) {
                                                         <div class="search">
                                                             <input type="number" class="form-control placeholder"
                                                                 name="maxPrice" value="<?=$max_price; ?>" placeholder="
-                                                                --Maximum Price-- " min="0" max="500000"
+                                                                --Maximum Price-- " min="0" max="100000000"
                                                                 style="background-color: #fff;">
                                                         </div>
                                                     </div>
@@ -284,9 +289,14 @@ if (0 == $number_of_result) {
 
                                     <span class="new-price"><?php echo indMoneyFormat($row['vehicle_price']); ?>
                                     </span>
+                                    <?php if($row['vehicle_status'] == 'Available'): ?>
                                     <a class="button red float-end"
                                         href="<?php echo $root; ?>/single.php?vehicle=<?php echo $row['vehicle_id']; ?>">Get
                                         Details</a>
+                                    <?php else: ?>
+                                    <a class="button red float-end"
+                                        href="<?php echo $root; ?>/single.php?vehicle=<?php echo $row['vehicle_id']; ?>" style="pointer-events: none;">Unavailable</a>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="car-list">
                                     <ul class="list-inline">

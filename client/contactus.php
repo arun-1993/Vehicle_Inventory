@@ -90,20 +90,24 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                             </p>
                             <div class="contact-form">
                                 <div class="mb-3">
+                                    <label class="form-label" for="name">Name* </label>
                                     <input id="contactform_name" type="text" placeholder="Name*" class="form-control"
-                                        name="name" required />
+                                        name="name" minlength="2" maxlength="30" required />
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label" for="email">Email* </label>
                                     <input id="contactform_email" type="email" placeholder="Email*" class="form-control"
-                                        name="email" required />
+                                        name="email" minlength="5" maxlength="50" required />
                                 </div>
                                 <div class="mb-3">
-                                    <input id="contactform_phone" type="text" placeholder="Phone*" class="form-control"
+                                    <label class="form-label" for="phone">Phone* </label>
+                                    <input id="contactform_phone" type="number" placeholder="Phone*" class="form-control"
                                         name="phone" required />
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label" for="message">Comment <small>(optional)</small> </label>
                                     <textarea id="contactform_message" class="form-control input-message"
-                                        placeholder="Comment*" rows="7" name="message">
+                                        placeholder="Comment" rows="7" name="message" minlength="5" maxlength="1000">
                                     </textarea>
                                 </div>
                                 <div class="d-grid">

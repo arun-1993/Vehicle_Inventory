@@ -23,9 +23,9 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
         if (mysqli_query($conn, $queryupdate)) {
             $sub = 'Password reset';
             $msg = "Greetings, <br> Your password has been reset, new password is '$newpassword'. <br> Kindly, change your password once you login with generated password. <br> This is System generated mail kindly do not reply. <br> Regards, <br> Team Autotrack.";
-            sendMail($sub, $msg);
+            sendMail($sub, $msg, $email);
 
-            header("Location: index.php");
+            header("Location: login.php?request=reset");
         }
     } else {
         $usernotexist = true;

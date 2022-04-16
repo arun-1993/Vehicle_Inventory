@@ -1,13 +1,15 @@
 <?php
-
 include 'header.php';
+
+if (isset($_SESSION['Loggedin'])) {
+    header("Location:$root/index.php");
+}
 
 $usernotexist        = false;
 $missmatchedpassword = false;
 $notverified         = false;
 
-if ("POST" == $_SERVER["REQUEST_METHOD"])
-{
+if ("POST" == $_SERVER["REQUEST_METHOD"]) {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
@@ -16,52 +18,32 @@ if ("POST" == $_SERVER["REQUEST_METHOD"])
     $result = $selectuserquery->get_result();
     $number = mysqli_num_rows($result); // fetches number of row in result
 
-    if (1 == $number)
-    {
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            if ('Verified' == $row['user_status'])
-            {
-                if (3 != $row['user_role_id'])
-                {
+    if (1 == $number) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            if ('Verified' == $row['user_status']) {
+                if (3 != $row['user_role_id']) {
                     header('HTTP/1.1 307 Temporary Redirect');
-                    header("Location: ../../../admin/");
-                }
-
-                elseif (password_verify($password, $row['password']))
-                {
+                    header("Location: $root/../admin/");
+                } elseif (password_verify($password, $row['password'])) {
                     $_SESSION['Loggedin'] = true;
                     $_SESSION['Username'] = $row['username'];
                     $_SESSION['userid']   = $row['user_id'];
                     $_SESSION['email']    = $row['email'];
                     $_SESSION['name']     = $row['first_name'] . ' ' . $row['last_name'];
 
-                    if (isset($_GET['loc']))
-                    {
-                        header("Location: ". $_GET['loc']);
-                    }
-                    
-                    else
-                    {
+                    if (isset($_GET['loc'])) {
+                        header("Location: " . $_GET['loc']);
+                    } else {
                         header("Location: index.php");
                     }
-                }
-                
-                else
-                {
+                } else {
                     $missmatchedpassword = true;
                 }
-            }
-            
-            else
-            {
+            } else {
                 $notverified = true;
             }
         }
-    }
-    
-    else
-    {
+    } else {
         $usernotexist = true;
     }
 }
@@ -103,14 +85,24 @@ login-form-start  -->
             <div class="col-lg-6 col-md-12">
                 <form action="" method="post" id="loginform">
                     <div class="gray-form clearfix">
+                        <?php if (isset($_GET['request'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php if ('verified' == $_GET['request']): ?>
+                            <strong>YAY!</strong> You have been verified! Please login to continue.
+                            <?php elseif ('reset' == $_GET['request']): ?>
+                            <strong>YAY!</strong> Your password has been reset successfully!<br />Please check your
+                            email for your new password
+                            <?php endif;?>
+                        </div>
+                        <?php endif;?>
                         <div class="mb-3">
                             <label class="form-label" for="name">Username* </label>
-                            <input id="name" class="form-control" type="text" placeholder="Username" name="username"
+                            <input id="name" class="form-control" type="text" placeholder="Username" name="username" minlength="4" maxlength="50"
                                 required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="Password">Password* </label>
-                            <input id="Password" class="form-control" type="password" placeholder="Password"
+                            <input id="Password" class="form-control" type="password" placeholder="Password" minlength="8"
                                 name="password" required>
                         </div>
                         <div class="d-grid">
