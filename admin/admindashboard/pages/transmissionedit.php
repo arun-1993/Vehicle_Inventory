@@ -5,29 +5,29 @@ include 'header.php';
 $exist = false;
 
 if (isset($_POST['updatebtn'])) {
-    $id           = $_POST['edit_id'];
-    $transmission = $_POST['transmission_type'];
+ $id           = $_POST['edit_id'];
+ $transmission = $_POST['transmission_type'];
 
-    $updatetransmission = $mysqli->prepare("UPDATE transmission SET transmission_type=? WHERE transmission_id=?");
-    $updatetransmission->bind_param('si', $transmission, $id);
+ $updatetransmission = $mysqli->prepare("UPDATE transmission SET transmission_type=? WHERE transmission_id=?");
+ $updatetransmission->bind_param('si', $transmission, $id);
 
-    $query_run = $updatetransmission->execute();
+ $query_run = $updatetransmission->execute();
 
-    if ($query_run) {
-        header("Location: transmission.php");
-    } else {
-        $exist = true;
-    }
+ if ($query_run) {
+  header("Location: transmission.php");
+ } else {
+  $exist = true;
+ }
 }
 
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+ $id = $_GET['id'];
 
-    $selecttransmission = $mysqli->prepare("SELECT * from transmission WHERE transmission_id= ? ");
-    $selecttransmission->bind_param('i', $id);
-    $selecttransmission->execute();
-    $query_run = $selecttransmission->get_result();
-	$transmission_detail = $query_run->fetch_array();
+ $selecttransmission = $mysqli->prepare("SELECT * from transmission WHERE transmission_id= ? ");
+ $selecttransmission->bind_param('i', $id);
+ $selecttransmission->execute();
+ $query_run           = $selecttransmission->get_result();
+ $transmission_detail = $query_run->fetch_array();
 }
 
 ?>
@@ -36,20 +36,20 @@ if (isset($_GET['id'])) {
     <div class="page-main">
 
         <!--aside open-->
-        <?php include 'sidebar.php';?>
+        <?php include 'sidebar.php'; ?>
         <!--aside closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php';?>
+                <?php include 'pageheader.php'; ?>
                 <!--/app header-->
                 <!--Page header-->
 
                 <div class="page-header">
                     <div class="page-leftheader">
-                        <h4 class="page-title">Edit Form</h4>
+                        <h4 class="page-title">Transmission</h4>
                     </div>
                 </div>
                 <!--End Page header-->
@@ -65,15 +65,16 @@ if (isset($_GET['id'])) {
                                 <h4 class="card-title">Edit Transmission</h4>
                             </div>
                             <div class="card-body">
-								<?php if ($exist): ?>
+                                <?php if ($exist): ?>
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <strong>OOPS!</strong> The transmission type you have entered already exists! Enter a different
+                                    <strong>OOPS!</strong> The transmission type you have entered already exists! Enter
+                                    a different
                                     transmission type.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <?php endif;?>
+                                <?php endif; ?>
                                 <div class="">
                                     <form method="POST" action="">
                                         <input type="hidden" name="edit_id"
@@ -100,7 +101,7 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 <!--Footer-->
-<?php include 'footer.php';?>
+<?php include 'footer.php'; ?>
 <!-- End Footer-->
 </body>
 

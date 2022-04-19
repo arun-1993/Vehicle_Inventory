@@ -16,7 +16,7 @@
 
                 <div class="page-header">
                     <div class="page-leftheader">
-                        <h4 class="page-title">Edit Form</h4>
+                        <h4 class="page-title">Color</h4>
                     </div>
                 </div>
                 <div class="row">

@@ -5,29 +5,29 @@ include 'header.php';
 $exist = false;
 
 if (isset($_POST['updatebtn'])) {
-    $colorid = $_POST['edit_id'];
-    $color   = $_POST['color'];
+ $colorid = $_POST['edit_id'];
+ $color   = $_POST['color'];
 
-    $colorupdate = $mysqli->prepare("UPDATE bodycolor SET color=? WHERE color_id= ?");
-    $colorupdate->bind_param('si', $color, $colorid);
+ $colorupdate = $mysqli->prepare("UPDATE bodycolor SET color=? WHERE color_id= ?");
+ $colorupdate->bind_param('si', $color, $colorid);
 
-    $query_run = $colorupdate->execute();
+ $query_run = $colorupdate->execute();
 
-    if ($query_run) {
+ if ($query_run) {
 
-        header("Location: bodycolor.php");
-    } else {
-        $exist = true;
-    }
+  header("Location: bodycolor.php");
+ } else {
+  $exist = true;
+ }
 }
 
 if (isset($_GET['id'])) {
-    $colorid     = $_GET['id'];
-    $colorselect = $mysqli->prepare("SELECT * from bodycolor WHERE color_id= ? ");
-    $colorselect->bind_param('i', $colorid);
-    $colorselect->execute();
-    $query_run = $colorselect->get_result();
-    $color     = $query_run->fetch_array();
+ $colorid     = $_GET['id'];
+ $colorselect = $mysqli->prepare("SELECT * from bodycolor WHERE color_id= ? ");
+ $colorselect->bind_param('i', $colorid);
+ $colorselect->execute();
+ $query_run = $colorselect->get_result();
+ $color     = $query_run->fetch_array();
 }
 
 ?>
@@ -36,19 +36,19 @@ if (isset($_GET['id'])) {
     <div class="page-main">
 
         <!--sidebar open-->
-        <?php include 'sidebar.php';?>
+        <?php include 'sidebar.php'; ?>
         <!--sidebar closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php';?>
+                <?php include 'pageheader.php'; ?>
                 <!--/app header-->
 
                 <div class="page-header">
                     <div class="page-leftheader">
-                        <h4 class="page-title">Edit Form</h4>
+                        <h4 class="page-title">Color</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -66,7 +66,7 @@ if (isset($_GET['id'])) {
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <?php endif;?>
+                                <?php endif; ?>
                                 <div class="">
                                     <form method="POST" action="">
                                         <input type="hidden" name="edit_id" value="<?php echo $color['color_id']; ?>">
@@ -92,7 +92,7 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 <!--Footer-->
-<?php include 'footer.php';?>
+<?php include 'footer.php'; ?>
 <!-- End Footer-->
 </body>
 

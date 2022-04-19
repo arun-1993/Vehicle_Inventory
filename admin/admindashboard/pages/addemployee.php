@@ -5,45 +5,45 @@ include 'header.php';
 $msg = null;
 
 if ("POST" == $_SERVER["REQUEST_METHOD"] && isset($_FILES)) {
-    $firstname       = $_POST["firstname"];
-    $lastname        = $_POST["lastname"];
-    $email           = $_POST["email"];
-    $Username        = $_POST["username"];
-    $password        = $_POST["password"];
-    $confirmPassword = $_POST["confirmPassword"];
-    $address         = $_POST["address"];
-    $role            = $_POST['role'];
-    $defaultimage    = 'avatardefault_92824.png';
+ $firstname       = $_POST["firstname"];
+ $lastname        = $_POST["lastname"];
+ $email           = $_POST["email"];
+ $Username        = $_POST["username"];
+ $password        = $_POST["password"];
+ $confirmPassword = $_POST["confirmPassword"];
+ $address         = $_POST["address"];
+ $role            = $_POST['role'];
+ $defaultimage    = 'avatardefault_92824.png';
 
-    $checkUsername = "SELECT * FROM `user` WHERE username = '$Username'AND user_role_id in(1,2)";
-    $userexists    = mysqli_query($conn, $checkUsername);
-    $checkUsermail = "SELECT * FROM `user` WHERE email = '$email'AND user_role_id in(1,2)";
-    $mailexists    = mysqli_query($conn, $checkUsermail);
+ $checkUsername = "SELECT * FROM `user` WHERE username LIKE  '$Username'";
+ $userexists    = mysqli_query($conn, $checkUsername);
+ $checkUsermail = "SELECT * FROM `user` WHERE email LIKE  '$email'";
+ $mailexists    = mysqli_query($conn, $checkUsermail);
 
-    if (mysqli_num_rows($userexists) >= 1 && mysqli_num_rows($mailexists) >= 1) {
-        $msg = 'invalidboth';
+ if (mysqli_num_rows($userexists) >= 1 && mysqli_num_rows($mailexists) >= 1) {
+  $msg = 'invalidboth';
 
-    } elseif (mysqli_num_rows($mailexists) >= 1) {
-        $msg = 'invalidmail';
-    } elseif (mysqli_num_rows($userexists) >= 1) {
-        $msg = 'invalidusername';
-    } else {
-        $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+ } elseif (mysqli_num_rows($mailexists) >= 1) {
+  $msg = 'invalidmail';
+ } elseif (mysqli_num_rows($userexists) >= 1) {
+  $msg = 'invalidusername';
+ } else {
+  $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
-        if ($password == $confirmPassword) {
+  if ($password == $confirmPassword) {
 
-            $insertinfo = $mysqli->prepare("INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` )
+   $insertinfo = $mysqli->prepare("INSERT INTO `user` (`user_role_id`, `first_name`, `last_name`, `email`, `username`, `password`, `address`,`user_image` )
         VALUES (?, ?, ?, ?, ?, ?, ?,?)");
-            $insertinfo->bind_param('isssssss', $role, $firstname, $lastname, $email, $Username, $hashedpassword, $address, $defaultimage);
-            $insertinfo->execute();
-            header("Location: employee.php");
+   $insertinfo->bind_param('isssssss', $role, $firstname, $lastname, $email, $Username, $hashedpassword, $address, $defaultimage);
+   $insertinfo->execute();
+   header("Location: employee.php");
 
-        } else {
+  } else {
 
-            $msg = "mismatch";
+   $msg = "mismatch";
 
-        }
-    }
+  }
+ }
 }
 
 ?>
@@ -52,14 +52,14 @@ if ("POST" == $_SERVER["REQUEST_METHOD"] && isset($_FILES)) {
     <div class="page-main">
 
         <!--sidebar open-->
-        <?php include 'sidebar.php';?>
+        <?php include 'sidebar.php'; ?>
         <!--sidebar closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php';?>
+                <?php include 'pageheader.php'; ?>
                 <!--/app header-->
 
 
@@ -191,7 +191,7 @@ form.addEventListener('submit', (e) => {
     }
 })
 </script>
-<?php include 'footer.php';?>
+<?php include 'footer.php'; ?>
 </body>
 
 </html>

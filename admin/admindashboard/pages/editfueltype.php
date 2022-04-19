@@ -5,28 +5,28 @@ include 'header.php';
 $exist = false;
 
 if (isset($_POST['updatebtn'])) {
-    $fueltypeid = $_POST['edit_id'];
-    $fuel       = $_POST['fuel_type'];
+ $fueltypeid = $_POST['edit_id'];
+ $fuel       = $_POST['fuel_type'];
 
-    $updatefueltype = $mysqli->prepare("UPDATE fuel_type SET fuel_type=? WHERE fuel_type_id= ?");
-    $updatefueltype->bind_param('si', $fuel, $fueltypeid);
-    $query_run = $updatefueltype->execute();
+ $updatefueltype = $mysqli->prepare("UPDATE fuel_type SET fuel_type=? WHERE fuel_type_id= ?");
+ $updatefueltype->bind_param('si', $fuel, $fueltypeid);
+ $query_run = $updatefueltype->execute();
 
-    if ($query_run) {
-        header("Location: fueltype.php");
-    } else {
-        $exist = true;
-    }
+ if ($query_run) {
+  header("Location: fueltype.php");
+ } else {
+  $exist = true;
+ }
 }
 
 if (isset($_GET['id'])) {
-    $fueltypeid = $_GET['id'];
+ $fueltypeid = $_GET['id'];
 
-    $selectfueltype = $mysqli->prepare("SELECT * from fuel_type  WHERE fuel_type_id= ? ");
-    $selectfueltype->bind_param('i', $fueltypeid);
-    $selectfueltype->execute();
-    $query_run = $selectfueltype->get_result();
-    $fuel_detail = $query_run->fetch_array();
+ $selectfueltype = $mysqli->prepare("SELECT * from fuel_type  WHERE fuel_type_id= ? ");
+ $selectfueltype->bind_param('i', $fueltypeid);
+ $selectfueltype->execute();
+ $query_run   = $selectfueltype->get_result();
+ $fuel_detail = $query_run->fetch_array();
 }
 
 ?>
@@ -35,19 +35,19 @@ if (isset($_GET['id'])) {
     <div class="page-main">
 
         <!--sidebar open-->
-        <?php include 'sidebar.php';?>
+        <?php include 'sidebar.php'; ?>
         <!--sidebar closed-->
 
         <div class="app-content main-content">
             <div class="side-app">
 
                 <!--app header-->
-                <?php include 'pageheader.php';?>
+                <?php include 'pageheader.php'; ?>
                 <!--/app header-->
 
                 <div class="page-header">
                     <div class="page-leftheader">
-                        <h4 class="page-title">Edit Form</h4>
+                        <h4 class="page-title">Fuel Type</h4>
                     </div>
                 </div>
 
@@ -66,10 +66,11 @@ if (isset($_GET['id'])) {
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <?php endif;?>
+                                <?php endif; ?>
                                 <div class="">
                                     <form method="POST" action="">
-                                        <input type="hidden" name="edit_id" value="<?php echo $fuel_detail['fuel_type_id']; ?>">
+                                        <input type="hidden" name="edit_id"
+                                            value="<?php echo $fuel_detail['fuel_type_id']; ?>">
                                         <div class="form-group">
                                             <label class="form-label">Fuel Type</label>
                                             <input type="text" class="form-control" minlength="2" maxlength="20"
@@ -92,7 +93,7 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 <!--Footer-->
-<?php include 'footer.php';?>
+<?php include 'footer.php'; ?>
 <!-- End Footer-->
 
 </body>

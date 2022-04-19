@@ -22,6 +22,7 @@ if (isset($_GET['username']) & isset($_GET['msg'])) {
    $selectotp->execute();
    $result1 = $selectotp->get_result();
    $result  = $result1->fetch_array();
+
    if (!$result) {
     header("Location:error-404.php");
     die;
@@ -95,7 +96,8 @@ if (true == $invalidotp) {
                             <div class="mb-3">
                                 <label class="form-label" for="email" name='otp'>OTP</label>
                                 <input id="name" class="form-control" type="password"
-                                    placeholder="Enter OTP Recived on mail" name="otp" minlength="5" maxlength="5" required>
+                                    placeholder="Enter OTP Recived on mail" name="otp" minlength="5" maxlength="5"
+                                    required>
                             </div>
 
                             <div class="d-grid">

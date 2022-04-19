@@ -1,4 +1,4 @@
-          <?php include 'header.php';?>
+          <?php include 'header.php'; ?>
           <?php
 
 $vehicleid = $_GET['vehicle'];
@@ -9,8 +9,8 @@ $selectvehiclequery->execute();
 $resultvehiclequery = $selectvehiclequery->get_result();
 $vehiclerow         = $resultvehiclequery->fetch_array();
 if (!$vehiclerow) {
-    include 'error-404.php';
-    die;
+ include 'error-404.php';
+ die;
 }
 $query2  = "SELECT * FROM vehicle JOIN model_master USING(model_id) JOIN brand_master USING(brand_id) JOIN transmission USING(transmission_id) ORDER BY RAND() LIMIT 5";
 $result2 = mysqli_query($conn, $query2);
@@ -67,8 +67,10 @@ $result2 = mysqli_query($conn, $query2);
                                   <img class="img-fluid" src="images/car/<?php echo $vehiclerow['vehicle_image']; ?>"
                                       alt="">
                               </div>
+                              <?php if ("Available" == $vehiclerow['vehicle_status']) { ?>
                               <button class="button red float mt-4" id="appointment_button" onclick="myfunction();">Book
                                   An Appointment</button>
+                              <?php } ?>
                           </div>
 
                       </div>
@@ -90,7 +92,7 @@ $result2 = mysqli_query($conn, $query2);
                                       <li> <span>Distance Driven</span> <strong
                                               class="text-end"><?php echo indNumberFormat($vehiclerow['kms_driven']) . ' km'; ?></strong>
                                       </li>
-                                      <?php endif;?>
+                                      <?php endif; ?>
                                       <li> <span>Exterior Color</span> <strong
                                               class="text-end"><?php echo $vehiclerow['color']; ?></strong></li>
                                       <li> <span>Seating capacity</span> <strong
@@ -127,7 +129,7 @@ $result2 = mysqli_query($conn, $query2);
 
                           <div class="row appointment" id="appointment" style="display: none;">
                               <div class="col-lg-8 col-sm-12 mb-lg-0 mb-1">
-
+                                  <?php if ("Available" == $vehiclerow['vehicle_status']) { ?>
 
                                   <div class="gray-form row">
                                       <form class="form-horizontal" id='appointment_form' role="form" method="post"
@@ -140,9 +142,11 @@ $result2 = mysqli_query($conn, $query2);
                                                       name="date" required>
                                               </div>
                                               <div class="mb-3">
-                                                <label class="form-label" for="comemnts">Additional comments for your appointment <small>( Optional )</small> :</label>
+                                                  <label class="form-label" for="comemnts">Additional comments for your
+                                                      appointment <small>( Optional )</small> :</label>
                                                   <textarea id="appointment_comments" class="form-control input-message"
-                                                      placeholder="Comments" rows="7" maxlength="65535" name="comments"></textarea>
+                                                      placeholder="Comments" rows="7" maxlength="65535"
+                                                      name="comments"></textarea>
                                               </div>
                                               <input type="hidden" name="vehicle_id" id="vehicle_id"
                                                   value="<?php echo $_GET['vehicle']; ?>" />
@@ -155,6 +159,7 @@ $result2 = mysqli_query($conn, $query2);
                                           </div>
                                       </form>
                                   </div>
+                                  <?php } ?>
                               </div>
                           </div>
 
@@ -217,7 +222,7 @@ $result2 = mysqli_query($conn, $query2);
                                           </div>
                                       </div>
                                   </div>
-                                  <?php endwhile;?>
+                                  <?php endwhile; ?>
                               </div>
                           </div>
                       </div>
@@ -236,13 +241,13 @@ $result2 = mysqli_query($conn, $query2);
 
           <script type="text/javascript">
 function myfunction() {
-    <?php if (isset($_SESSION['Loggedin']) == false) {?>
+    <?php if (isset($_SESSION['Loggedin']) == false) { ?>
 
     window.location = "login.php?loc=<?php echo $_SERVER['REQUEST_URI']; ?>";
 
     <?php
 } else {
-    ?>
+ ?>
 
     var x = document.getElementById("appointment");
 
@@ -259,12 +264,12 @@ function myfunction() {
     });
 
 
-    <?php }?>
+    <?php } ?>
 }
           </script>
 
           <!--=================================
-          footer --><?php include 'footer.php';?>
+          footer --><?php include 'footer.php'; ?>
 
           </body>
 

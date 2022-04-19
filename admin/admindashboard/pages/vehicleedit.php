@@ -1,5 +1,5 @@
-<?php include 'header.php'; ?>
-
+<?php include 'header.php';
+$error = false; ?>
 <div class="page">
     <div class="page-main">
 
@@ -17,7 +17,7 @@
 
                 <div class="page-header">
                     <div class="page-leftheader">
-                        <h4 class="page-title">Edit Form</h4>
+                        <h4 class="page-title">Vehicle</h4>
                     </div>
                 </div>
                 <!--End Page header-->
@@ -30,7 +30,7 @@
                     <div class="col-lg-12 col-xl-8 col-md-12 col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Edit Model</h4>
+                                <h4 class="card-title">Edit Vehicle</h4>
                             </div>
                             <div class="card-body">
 
@@ -53,12 +53,20 @@ if (isset($_GET['id'])) {
  $color     = $result['color'];
  $fuel      = $result['fuel_type'];
  $trans     = $result['transmission_type'];
+ if ($error): ?>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>OOPS!</strong> Some error Occured
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <?php endif;
  foreach ($query_run as $row) {
   ?>
 
 
                                     <form method="POST" action="" enctype="multipart/form-data">
-                                        <!--<input type="hidden" name="edit_id" value="<?php //echo $row['model_id'];; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ?>">-->
+                                        <!--<input type="hidden" name="edit_id" value="<?php //echo $row['model_id'];; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ?>">-->
                                         <div class="form-group">
                                             <label class="form-label">Model Name</label>
                                             <select class="form-control" name="model_id" required>
@@ -221,6 +229,7 @@ if (isset($_POST['updatebtn'])) {
  $year      = $_POST['model_year'];
  $cap       = $_POST['seating_capacity'];
  $vin       = $_POST['vehicle_vin'];
+ $price     = $_POST['vehicle_price'];
  $kms       = $_POST['kms_driven'];
  $desc      = $_POST['vehicle_description'];
  $image     = $_FILES["image"]["name"];
@@ -229,16 +238,16 @@ if (isset($_POST['updatebtn'])) {
  $rename    = 'upload' . date('ymd') . $random;
  $newname   = $rename . '.' . $extension;
  if (4 == !$_FILES['image']['error']) {
-  $updatevehicle = $mysqli->prepare("UPDATE vehicle SET model_id=?, exterior_color=?, fuel_type_id=?, transmission_id=?, model_year=?, seating_capacity=?, vehicle_vin=?, kms_driven=?, vehicle_description=?, vehicle_image=?  WHERE vehicle_id= ?");
-  $updatevehicle->bind_param('iiiiiisissi', $mid, $cid, $fid, $tid, $year, $cap, $vin, $kms, $desc, $newname, $vid);
+  $updatevehicle = $mysqli->prepare("UPDATE vehicle SET model_id=?, exterior_color=?, fuel_type_id=?, transmission_id=?, model_year=?, seating_capacity=?, vehicle_vin=?, vehicle_price=?,  kms_driven=?, vehicle_description=?, vehicle_image=?  WHERE vehicle_id= ?");
+  $updatevehicle->bind_param('iiiiiisiissi', $mid, $cid, $fid, $tid, $year, $cap, $vin, $price, $kms, $desc, $newname, $vid);
 
   //echo $query;
   //die;
   $query_run = $updatevehicle->execute();
   move_uploaded_file($_FILES['image']['tmp_name'], '../../../client/images/car/' . $newname); // image with new name is moved to a folder
  } else {
-  $updatevehicle = $mysqli->prepare("UPDATE vehicle SET model_id=?, exterior_color=?, fuel_type_id=?, transmission_id=?, model_year=?, seating_capacity=?, vehicle_vin=?, kms_driven=?, vehicle_description=?  WHERE vehicle_id= ?");
-  $updatevehicle->bind_param('iiiiiisisi', $mid, $cid, $fid, $tid, $year, $cap, $vin, $kms, $desc, $vid);
+  $updatevehicle = $mysqli->prepare("UPDATE vehicle SET model_id=?, exterior_color=?, fuel_type_id=?, transmission_id=?, model_year=?, seating_capacity=?, vehicle_vin=?, vehicle_price=?,kms_driven=?, vehicle_description=?  WHERE vehicle_id= ?");
+  $updatevehicle->bind_param('iiiiiisiisi', $mid, $cid, $fid, $tid, $year, $cap, $vin, $price, $kms, $desc, $vid);
 
   //echo $query;
   //die;
@@ -247,24 +256,16 @@ if (isset($_POST['updatebtn'])) {
   // $query = "UPDATE vehicle SET model_id='$mid', exterior_color='$cid', fuel_type_id='$fid', transmission_id='$tid', model_year='$year', seating_capacity='$cap', vehicle_vin='$vin', kms_driven='$kms', vehicle_description='$desc' WHERE vehicle_id= $vid";
   //echo $query;
   //die;
-  $query_run = mysqli_query($conn, $query);
+  //   $query_run = mysqli_query($conn, $query);
 
  }
 
  if ($query_run) {
 
-  ?>
-    <script>
-    window.location = "vehicle.php"
-    </script>
-    <?php
+  header("Location:vehicle.php");
 
  } else {
-  ?>
-    <script>
-    window.location = "vehicle.php"
-    </script>
-    <?php
+  $error = true;
 
  }
 }
