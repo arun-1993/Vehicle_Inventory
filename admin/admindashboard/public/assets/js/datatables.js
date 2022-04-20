@@ -25,6 +25,8 @@ $(function(e) {
 	});
 	$('#example2').DataTable({
 		responsive: true,
+		"ordering": false,
+		"aaSorting": [],
 		language: {
 			searchPlaceholder: 'Search...',
 			sSearch: '',

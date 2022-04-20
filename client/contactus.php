@@ -14,6 +14,7 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
 
     $insertcontact = $mysqli->prepare("INSERT INTO contact (name,email, phone, message) VALUES (?,?,?,?)");
     $insertcontact->bind_param('ssis', $name, $email, $phone, $message);
+    
     $result = $insertcontact->execute();
 
     $subject = 'Customer Submission';

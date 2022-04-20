@@ -24,7 +24,7 @@
 									</div>
 									<div class="card-body">
 										<div class="table-responsive">
-											<table class="table table-bordered text-nowrap" id="example1">
+											<table class="table table-bordered text-nowrap" id="example2">
 												<thead>
 													<tr>
 														<th class="wd-25p border-bottom-0">Name</th>
@@ -36,7 +36,7 @@
 												</thead>
 												<tbody>
 <?php
-	$selectcontact = $mysqli->prepare("select * from contact ");
+	$selectcontact = $mysqli->prepare("SELECT * from contact ORDER BY feedback_time DESC");
 	$selectcontact->execute();
 	$selectresult = $selectcontact->get_result();
 	

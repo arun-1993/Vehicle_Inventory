@@ -774,10 +774,20 @@ var POTENZA = {};
     }
 
   });
+
+  $.validator.addMethod(
+    "legalname",
+    function(value, element) {
+        return this.optional(element) ||/^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/.test(value);
+    },
+    ""
+);
  jQuery('#contactform').validate({
                 rules:{
                         name:{   required: true,
-                                alphabets:true,
+                          // noSpace: true,
+                          legalname:true,
+                          // alphabets:true,
                                 
                                 minlength:2,
                                 maxlength:20,
