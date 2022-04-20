@@ -641,6 +641,13 @@ var POTENZA = {};
           return this.optional(element) || value != param;
         }, "Both fields can not be same");
         
+        $.validator.addMethod(
+          "legalname",
+          function(value, element) {
+                return this.optional(element) ||/^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/.test(value);
+            },
+            ""
+        );
         
         $.validator.addMethod("alphabets", function(value, element) {
         return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
@@ -651,7 +658,7 @@ var POTENZA = {};
         Firstname: {
                 required:true,
                 minlength:2,
-                noSpace: true,
+                legalname:true,
                 alphabets:true,
                 maxlength: 20,
         },
@@ -775,13 +782,7 @@ var POTENZA = {};
 
   });
 
-  $.validator.addMethod(
-    "legalname",
-    function(value, element) {
-        return this.optional(element) ||/^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/.test(value);
-    },
-    ""
-);
+  
  jQuery('#contactform').validate({
                 rules:{
                         name:{   required: true,
