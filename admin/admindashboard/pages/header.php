@@ -1,13 +1,11 @@
 <?php
 
 session_start();
-ob_start();
-$root = "http://" . $_SERVER['SERVER_NAME'] . substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
 
 include_once '_dbconnect.php';
 include_once 'mail/login_credentials.php';
 include_once 'mail/vendor/autoload.php';
-
+$root = "http://" . $_SERVER['SERVER_NAME'] . substr(str_replace('\\', '/', realpath(dirname(__FILE__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -118,8 +116,8 @@ function indNumberFormat(string $number)
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+
+<!-- <html lang="en" dir="ltr"> -->
 
 <head>
 
@@ -135,19 +133,19 @@ function indNumberFormat(string $number)
     <!-- Title -->
     <title>AutoTrack</title>
 
+    
     <link href="../public/assets/css/bootstrap-datetimepicker.css" rel="stylesheet" />
-
     <link href="../public/assets/css/jquery.datetimepicker.min.css" rel="stylesheet" />
-
+    
     <!--Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
+    
     <!-- Bootstrap css -->
     <link href="../public/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
-
+    
     <!-- Style css -->
     <link href="../public/assets/css/style.css" rel="stylesheet" />
-
+    
     <!-- Dark css -->
     <link href="../public/assets/css/dark.css" rel="stylesheet" />
 

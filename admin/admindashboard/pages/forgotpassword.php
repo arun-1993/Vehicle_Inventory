@@ -1,7 +1,8 @@
+
+
 <?php
 
-include_once '_dbconnect.php';
-
+include_once 'header.php';
 $nocredentials = false;
 
 if ("POST" == $_SERVER["REQUEST_METHOD"]) {
@@ -27,7 +28,6 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
 
 ?>
 
-<body class="h-100vh page-style1 light-mode default-sidebar">
     <div class="page">
         <div class="page-single">
             <div class="p-5">
@@ -36,7 +36,7 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                         <div class="row justify-content-center">
                             <div class="col-lg-9 col-xl-8">
                                 <div class="card-group mb-0">
-                                    <div class="card p-4 page-content">
+                                    <div class="card p-4 page-content mt-0">
                                         <div class="card-body page-single-content">
                                             <div class="w-100">
                                                 <div class="">
@@ -96,7 +96,7 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
                                 </div>
                                 <div class="card text-white bg-primary py-5 d-md-down-none page-content mt-0">
                                     <div class="card-body text-center justify-content-center page-single-content">
-                                        <img src="<?=$root;?>../public/assets/images/pattern/login.png" alt="img">
+                                        <img src="<?=$root;?>/../public/assets/images/pattern/login.png" alt="img">
                                     </div>
                                 </div>
                             </div>
@@ -110,15 +110,15 @@ if ("POST" == $_SERVER["REQUEST_METHOD"]) {
         </div>
     </div>
     <!-- Jquery js-->
-    <?php include 'footer.php';?>
     <script>
-    function forgotpassword() {
-        var dialog =
+        function forgotpassword() {
+            var dialog =
             "A new generated password will be sent to your email. Kindly, change your password once you login with generated password.";
-        var check = confirm(dialog);
-        return check;
-    }
-    </script>
-</body>
+            var check = confirm(dialog);
+            return check;
+        }
+        </script>
 
-</html>
+
+
+<?php include 'footer.php';?>
