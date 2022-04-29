@@ -1,0 +1,1 @@
+sonar-scanner.bat -D"sonar.projectKey=Vehicle_Inventory" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=7504d1e3b975d595781309cb3e5b74bacf06ea31"
